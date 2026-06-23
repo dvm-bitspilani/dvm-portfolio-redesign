@@ -1,0 +1,113 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+
+.container {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.dvm_text {
+    position: absolute;
+    width: 100vw;
+    height: 35vh;
+    mask-image: url('../assests/texture.png');
+}
+
+.text {
+    position: absolute;
+    color: #6D6D6D;
+    font-family: "Orbitron";
+    left: 5.2%;
+    z-index: 1;
+    font-size: 0.8rem;
+}
+
+.visualMedia {
+    font-size: 1.2rem;
+    padding-left: 20px;
+}
+
+.heading {
+    position: absolute;
+    color: #FFFFFF;
+    font-family: "Orbitron";
+    z-index: 1;
+    font-size: 1.2rem;
+    left: 2%;
+    top: 5%;
+    left: 5%;
+}
+
+.logo {
+    position: absolute;
+    z-index: 1;
+
+}
+
+.lines {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+
+}
+
+.image_container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text_sub {
+    position: absolute;
+    color: #FFFFFF;
+    font-family: "Josefin Sans";
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    font-size: 1.5rem;
+    text-align: right;
+    bottom: 5%;
+    left: 5%;
+    align-items: flex-start;
+    line-height: 2.1rem;
+
+}
+
+.ham {
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    height: 2vw;
+    width: 2vw;
+    background-image: url('../assests/bg.png');
+}
+
+.about {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    color: #FFFFFF;
+    font-family: "Josefin Sans";
+    bottom: 7%;
+    right: 7%;
+    border: 1px solid #FFFFFF;
+    padding: 10px;
+    padding-top: -2px;
+    border-radius: 999px;
+}
