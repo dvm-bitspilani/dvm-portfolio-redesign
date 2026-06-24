@@ -1,0 +1,29 @@
+.container {
+    position: fixed;
+    top: 5%;
+    left: 4%;
+    right: 4%;
+    z-index: 100;
+    height: 80px;
+    background-color: transparent;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+
+.heading {
+    color: #FFFFFF;
+    font-family: "Orbitron";
+    z-index: 1;
+    font-size: 1.2rem;
+    
+}
+
+.ham {
+  
+    height: 2vw;
+    width: 2vw;
+    background-image: url('../assests/bg.png');
+}

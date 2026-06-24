@@ -1,0 +1,84 @@
+.container {
+    background-color: black;
+    width: 100vw;
+    height: 100vh;  
+    position: relative;
+}
+
+.image{
+    position: absolute;
+    max-width: 100%;
+    top: 15%;
+    object-fit: contain;
+}
+.text {
+    position: absolute;
+    color: #FFFFFF;
+    font-family: "Orbitron";
+    left: 5.2%;
+    bottom: 15%;
+    z-index: 1;
+    font-size: 0.7rem;
+    width: 90%;
+}
+
+.visualMedia {
+
+    padding-left: 2%;
+    z-index: 1;
+    font-size: 1rem;
+}
+
+.para{
+    position: absolute;
+    color: #FFFFFF;
+    font-family: "Orbitron";
+    font-size: 0.9rem;
+    bottom: 45%;
+    width: 30%;
+    right: 20%;
+}
+.para1{
+    position: absolute;
+    color: #FFFFFF;
+    font-family: "Orbitron";
+    font-size: 0.9rem;
+    bottom: 35%;
+    width: 30%;
+    right: 20%;
+}
+.para2{
+    position: absolute;
+    color: #FFFFFF;
+    font-family: "Orbitron";
+    font-size: 0.9rem;
+    bottom: 28%;
+    width: 30%;
+    right: 20%;
+}
+
+.project {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    color: #FFFFFF;
+    font-family: "Josefin Sans";
+    bottom: 7%;
+    right: 7%;
+    border: 1px solid #FFFFFF;
+    padding: 10px;
+    padding-top: -2px;
+    border-radius: 999px;
+}
+
+.lines {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+
+}

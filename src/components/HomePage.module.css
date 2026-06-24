@@ -13,6 +13,7 @@
     display: flex;
     align-items: center;
     position: relative;
+    
 }
 
 .dvm_text {
@@ -36,16 +37,6 @@
     padding-left: 20px;
 }
 
-.heading {
-    position: absolute;
-    color: #FFFFFF;
-    font-family: "Orbitron";
-    z-index: 1;
-    font-size: 1.2rem;
-    left: 2%;
-    top: 5%;
-    left: 5%;
-}
 
 .logo {
     position: absolute;
@@ -62,6 +53,16 @@
     width: 100%;
     height: 100%;
 
+}
+
+
+.bg {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../assests/bg_grad.png');
+    background-size: cover;
+    background-position: center;
 }
 
 .image_container {
@@ -88,14 +89,7 @@
 
 }
 
-.ham {
-    position: absolute;
-    right: 5%;
-    top: 5%;
-    height: 2vw;
-    width: 2vw;
-    background-image: url('../assests/bg.png');
-}
+
 
 .about {
     display: flex;

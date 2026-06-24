@@ -1,10 +1,17 @@
 import LandingPage from './components/HomePage'
-// import Gradient from './components/Gradient';
+import AboutPage from './components/About'
+import Navbar from './components/Navbar'
+import ArtWork from './components/ArtWork'
 const App = () => {
   return (
     <>
 
-      <LandingPage />
+      <Navbar />
+      
+        <LandingPage />
+        <AboutPage /> 
+        <ArtWork />
+
     </>
   )
 }

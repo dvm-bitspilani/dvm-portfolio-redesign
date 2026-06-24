@@ -1,0 +1,51 @@
+.container{
+    background-color: black;
+    width: 100vw;
+    height: 140vh;
+    position: relative;
+    overflow: hidden;
+}
+.image{
+    position: absolute;
+    width: 100vw;
+    top: 0%;
+    object-fit: contain;
+}
+
+.lines {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 140vh;
+
+}
+.line1{
+    position: absolute;
+    top: 20%;
+    width: 100%;
+}
+.line2{
+    position: absolute;
+    top: 20%;
+    height: fit-content;
+    height: 100vh;
+}
+
+.line3{
+    position: absolute;
+    top: 20%;
+    height: fit-content;
+    height: 100vh;
+    right: 0;
+}
+
+.line4{
+    position: absolute;
+    top: 33%;
+    height: fit-content;
+    height: 100vh;
+    right: 50%;
+}
