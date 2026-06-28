@@ -4,7 +4,7 @@ import logo from "../assests/logo1.png";
 const Ham = ({ onClose }) => {
   return (
     <div className={styles.body}>
-
+      
       {/* Close Button */}
       <button className={styles.closeBtn} onClick={onClose}>
         ✕

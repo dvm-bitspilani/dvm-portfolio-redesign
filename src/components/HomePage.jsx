@@ -1,19 +1,63 @@
 import dvm_text from "../assests/image.png"
 import styles from "./HomePage.module.css"
 import logo from "../assests/logo.png"
-import lines from "../assests/lines.png"
 import About from "./About"
+import bg3 from "../assests/bg_3.png"
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef, useEffect } from "react";
+import { gsap } from "gsap";
+gsap.registerPlugin(ScrollTrigger);
 const HomePage = () => {
+    const textureRef = useRef(null);
+    const gradientRef = useRef(null);
+    const containerRef = useRef(null);
+    const gradientPos = useRef({ x: 0, y: 0 });
 
+    useEffect(() => {
+        const updateMask = () => {
+            if (!textureRef.current) return;
+            const { x, y } = gradientPos.current;
+            const mask = `radial-gradient(circle 400px at ${x + 100}px ${y + 300}px, black 0%, transparent 100%)`;
+            textureRef.current.style.webkitMaskImage = mask;
+            textureRef.current.style.maskImage = mask;
+        };
+        updateMask(); // Initial call to set the mask
+        gsap.to(gradientPos.current, {
+            x: window.innerWidth * 1.5,
+            y: window.innerHeight * 1,
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top 10%",
+                end: "bottom -100%",
+                scrub: 1,
+                markers: true,
+            },
+            onUpdate: updateMask,
+        });
+
+
+    }, []);
+    useEffect(() => {
+        gsap.to(gradientRef.current, {
+            x: window.innerWidth * 2,
+            y: window.innerHeight * 1.2,
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top 10%",
+                end: "bottom -100%",
+                scrub: 1,
+
+            },
+        });
+    }, []);
     return (
         <>
             <div className={styles.container}>
-
-                <div className={styles.lines}>
-                    <img src={lines} alt="lines" />
-                </div>
+                <div className={styles.grid}></div>
+                <div style={{ backgroundImage: `url(${bg3})` }} ref={textureRef} className={styles.texture}></div>
+                
                 <img className={styles.dvm_text} src={dvm_text} alt="dvm_text" />
-               
+
                 <div className={styles.image_container}><img className={styles.logo} src={logo} alt="logo" /></div>
                 <div className={styles.text}>
                     <div>DEPARTMENT OF</div>
@@ -26,12 +70,12 @@ const HomePage = () => {
 
                 </div>
                 <button className={styles.about}>ABOUT US</button>
-
+                <div ref={gradientRef} className={styles.gradient}></div>
             </div >
-            <div className={styles.tp}>
+           
 
 
-            </div>
+          
         </>
     );
 };
