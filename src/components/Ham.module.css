@@ -1,0 +1,172 @@
+.body{
+    width:100vw;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    background:black;
+}
+.heading{
+    position: absolute;
+    color:white;
+    font-size:2rem;
+    top: 10%;
+    font-family: "Orbitron";
+    letter-spacing: 2rem;
+    font-weight: 300;
+}
+.dep{
+    position: absolute;
+    color:white;
+    font-size:0.8rem;
+    top: 50%;
+    left: 3%;
+    font-family: "Orbitron";
+}
+.vm{
+    position: absolute;
+    color:white;
+    font-size:0.8rem;
+    top: 50%;
+    right: 3%;
+    font-family: "Orbitron";
+}
+.container{
+    width:500px;
+    height:500px;
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    top: 25%;
+}
+
+/* SVG */
+.outerSvg{
+    position:absolute;
+    width:100%;
+    height:100%;
+    transform:rotate(-90deg); /* start drawing from top */
+}
+
+.outerStroke{
+    fill:none;
+    stroke:white;
+    stroke-width:30;
+
+    stroke-dasharray:754;
+    stroke-dashoffset:754;
+    animation:drawCircle 1.2s ease forwards;
+}
+
+/* Inner Ring */
+.inner_circle{
+    width:63%;
+    height:63%;
+    border:50px solid white;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:2;
+}
+
+.logo{
+    width:50%;
+    transform:scale(0);
+    animation:logoPop .6s ease forwards;
+    animation-delay:1.2s;
+}
+
+@keyframes drawCircle{
+    to{
+       
+        stroke-dashoffset:0%;
+    }
+}
+
+@keyframes logoPop{
+    from{
+        transform:scale(0);
+    }
+    to{
+        transform:scale(1);
+    }
+}
+
+.text_sub {
+    position: absolute;
+    color: #FFFFFF;
+    font-family: "Orbitron";
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    font-size: 1.8rem;
+    text-align: right;
+    bottom: 8%;
+    left: 3%;
+    align-items: flex-start;
+    line-height: 2.1rem;
+
+}
+
+.aboutUsText {
+    font-family: "Orbitron";
+    font-size: 1.2rem;
+    font-weight: 300;
+    position: absolute;
+    color: purple;
+    top: 8%;
+    z-index: 10;
+}
+.contactUsText {
+    font-family: "Orbitron";
+    font-size: 1.2rem;
+    font-weight: 300;
+    position: absolute;
+    color: purple;
+    bottom: 8%;
+    z-index: 10;
+}
+.projects {
+    font-family: "Orbitron";
+    font-size: 1.2rem;
+    font-weight: 300;
+    position: absolute;
+    color: purple;
+    bottom: 22%;
+    z-index: 10;
+}
+
+.team {
+    font-family: "Orbitron";
+    font-size: 1.2rem;
+    font-weight: 300;
+    position: absolute;
+    color: purple;
+    bottom: 50%;
+    left:18%;
+    transform:rotateZ(90deg);
+    z-index: 10;
+
+}
+
+
+.closeBtn {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+
+    background: transparent;
+    border: none;
+
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1001;
+}   
+.body {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: black;
+}

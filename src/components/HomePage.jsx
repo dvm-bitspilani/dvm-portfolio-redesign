@@ -2,7 +2,7 @@ import dvm_text from "../assests/image.png"
 import styles from "./HomePage.module.css"
 import logo from "../assests/logo.png"
 import lines from "../assests/lines.png"
-import gradient from "../assests/gradient.png"
+import About from "./About"
 const HomePage = () => {
 
     return (
@@ -25,8 +25,7 @@ const HomePage = () => {
                     <div>ANIMATE.</div>
 
                 </div>
-                <div className={styles.about}>ABOUT US</div>
-
+                <button className={styles.about}>ABOUT US</button>
 
             </div >
             <div className={styles.tp}>
