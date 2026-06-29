@@ -16,7 +16,9 @@ const About = () => {
         const updateMask = () => {
             if (!textureRef.current) return;
             const { x, y } = gradientPos.current;
-            const mask = `radial-gradient(circle 400px at ${x+300}px ${y+300}px, black 0%, transparent 100%)`;
+            const centerX = x + window.innerWidth * 0.2;
+            const centerY = y + window.innerHeight * 0.28;
+            const mask = `radial-gradient(circle 25vw at ${centerX}px ${centerY}px, black 0%, transparent 100%)`;
             textureRef.current.style.webkitMaskImage = mask;
             textureRef.current.style.maskImage = mask;
         };
@@ -29,7 +31,7 @@ const About = () => {
                 start: "top 10%",
                 end: "bottom -100%",
                 scrub: 1,
-               
+
             },
             onUpdate: updateMask,
         });
@@ -53,7 +55,7 @@ const About = () => {
     return (
         <div ref={containerRef} className={styles.container}>
             <div className={styles.grid}></div>
-            <div style={{ backgroundImage: `url(${bg3})` }}  ref={textureRef} className={styles.texture}></div>
+            <div style={{ backgroundImage: `url(${bg3})` }} ref={textureRef} className={styles.texture}></div>
 
             <img className={styles.image} src={about} alt="about" />
             <div className={styles.text}>
