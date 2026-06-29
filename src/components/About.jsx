@@ -29,7 +29,7 @@ const About = () => {
                 start: "top 10%",
                 end: "bottom -100%",
                 scrub: 1,
-                markers: true,
+               
             },
             onUpdate: updateMask,
         });
@@ -38,8 +38,8 @@ const About = () => {
     }, []);
     useEffect(() => {
         gsap.to(gradientRef.current, {
-            x: window.innerWidth * 2,
-            y: window.innerHeight * 1.2,
+            x: window.innerWidth * 1.5,
+            y: window.innerHeight * 1,
             scrollTrigger: {
                 trigger: containerRef.current,
                 start: "top 10%",
