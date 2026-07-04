@@ -35,7 +35,7 @@ const HomePage = () => {
         updateMask();
 
         gsap.to(gradientPos.current, {
-            x: -window.innerWidth * 1,
+            x: -window.innerWidth * 1.5,
             y: window.innerHeight,
             scrollTrigger: {
                 trigger: containerRef.current,

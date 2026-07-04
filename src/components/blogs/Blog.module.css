@@ -1,0 +1,144 @@
+
+.container {
+    background-color: black;
+    display: flex;
+    align-items: center;
+    position: relative;
+  
+    isolation: isolate;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    overflow: hidden;
+    perspective: 1000px;
+
+}
+.image{
+    position: absolute;
+    width: 60%;
+    height: auto;
+    object-fit: cover;
+    left: 20%;
+    top:5%;
+}
+.button{
+    position: absolute;
+    bottom: 10%;
+    left: 20%;
+    display: flex;
+    align-items: center;
+    font-family: 'Orbitron', sans-serif ;
+  
+    width: 60%;
+    height: 35px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    font-size: 0.9rem;
+    justify-content: center;
+    
+}
+.button span {
+    padding: 2px;
+    display: inline-block;
+    transform: scaleX(1.5);   /* Increase text width */
+    transform-origin: center;
+}
+.arrow{
+    
+    margin-left: 20px;
+    padding: 2px;
+    display: inline-block;
+    transform-origin: center;
+}
+
+.text {
+    position: absolute;
+    color: white;
+    font-family: "Orbitron";
+    left: 5.2%;
+    z-index: 99;
+    font-size: 0.6rem;
+
+    bottom: 2%;
+    
+}
+.visualMedia {
+    font-size: 1rem;
+    padding-left: 20px;
+}
+
+.projects {
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    color: #FFFFFF;
+    font-family: "Josefin Sans";
+    bottom: 2%;
+    right: 7%;
+    border: 1px solid #FFFFFF;
+    padding: 10px;
+    padding-top: -2px;
+    border-radius: 999px;
+    background-color: transparent;
+}
+
+
+.blogsShifted{
+    height: 100%;
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    display: flex;
+    width: 100%;
+    gap: 2%;
+}
+.blogs{
+    height: 100%;
+    position: absolute;
+    top: 30%;
+    left: 0%;
+    display: flex;
+    width: 100%;
+    gap: 2%;
+}
+
+.grid {
+    position: absolute;
+    inset: 0;
+    z-index: 997;
+    opacity: 0.6;
+    background:
+        repeating-linear-gradient(
+            to right,
+            rgba(255,255,255,.2) 0,
+            rgba(255,255,255,.2) 1px,
+            transparent 1px,
+            transparent 30px
+        )
+}
+
+.gradient{
+    position:absolute;
+    left:40%;
+    top:-10%;
+    width:40%;
+    height:60%;
+    z-index:999;
+    pointer-events:none;
+
+    background:
+        radial-gradient(
+            circle at 20% 40%,
+            rgba(180,250,255,.9) 0%,
+            rgba(60,210,230,.75) 35%,
+            rgba(20,90,100,.35) 60%,
+            transparent 85%
+        );
+
+    mix-blend-mode: color;
+}
+

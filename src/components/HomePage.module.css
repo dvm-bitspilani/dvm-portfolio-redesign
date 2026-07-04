@@ -6,26 +6,13 @@
 }
 
 
-.container {
-    background-color: black;
-    display: flex;
-    align-items: center;
-    position: relative;
-  
-    isolation: isolate;
-    width: 100vw;
-    height: 100vh;
-    background: black;
-    overflow: hidden;
-    perspective: 1000px;
 
-}
 
 .dvm_text {
     position: absolute;
     width: 100vw;
     height: 35vh;
-    z-index: 99;
+    z-index: 1000;
 }
 
 .text {
@@ -167,4 +154,18 @@
         );
 
     mix-blend-mode: color;
+}
+.container {
+    background-color: black;
+    display: flex;
+    align-items: center;
+    position: relative;
+  
+    isolation: isolate;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    overflow: hidden;
+    perspective: 1000px;
+
 }
