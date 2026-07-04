@@ -1,5 +1,5 @@
 import styles from "./Ham.module.css";
-import logo from "../assests/logo1.png";
+import logo from "../assests/logo.png";
 
 const Ham = ({ onClose }) => {
   return (

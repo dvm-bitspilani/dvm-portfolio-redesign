@@ -25,14 +25,14 @@ const About = () => {
         };
         updateMask(); // Initial call to set the mask
         gsap.to(gradientPos.current, {
-            x: window.innerWidth * 1.5,
+            x: window.innerWidth * 0.4,
             y: window.innerHeight * 1,
             scrollTrigger: {
                 trigger: containerRef.current,
-                start: "top 10%",
+                start: "top 50%",
                 end: "bottom -100%",
                 scrub: 1,
-
+                markers:true
             },
             onUpdate: updateMask,
         });
@@ -41,7 +41,7 @@ const About = () => {
     }, []);
     useEffect(() => {
         gsap.to(gradientRef.current, {
-            x: window.innerWidth * 1.5,
+            x: window.innerWidth * 0.4,
             y: window.innerHeight * 1,
             scrollTrigger: {
                 trigger: containerRef.current,

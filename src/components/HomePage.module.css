@@ -17,14 +17,14 @@
     height: 100vh;
     background: black;
     overflow: hidden;
-    
+    perspective: 1000px;
+
 }
 
 .dvm_text {
     position: absolute;
     width: 100vw;
     height: 35vh;
-    mask-image: url('../assests/texture.png');
     z-index: 99;
 }
 
@@ -47,7 +47,9 @@
 .logo {
     position: absolute;
     z-index: 1000;
-
+    transition: transform 0.15s ease-out;
+    transform-style: preserve-3d;
+    will-change: transform;
 }
 
 .lines {
@@ -98,6 +100,7 @@
 
 
 .about {
+    z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -124,8 +127,8 @@
     
     background-size: cover;
     background-position: center;
-    -webkit-mask-image: radial-gradient(circle 50vh at -9999px -9999px, black 0%, transparent 100%);
-    mask-image: radial-gradient(circle 50vh at -9999px -9999px, black 0%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle 40vw at -9999px -9999px, black 0%, transparent 100%);
+    mask-image: radial-gradient(circle 40vw at -9999px -9999px, black 0%, transparent 100%);
 }
 
 
@@ -133,31 +136,24 @@
 .grid {
     position: absolute;
     inset: 0;
-    z-index: 1;
-    opacity: 0.4;
+    z-index: 997;
+    opacity: 0.6;
     background:
         repeating-linear-gradient(
             to right,
             rgba(255,255,255,.2) 0,
             rgba(255,255,255,.2) 1px,
             transparent 1px,
-            transparent 60px
-        ),
-        repeating-linear-gradient(
-            to bottom,
-            rgba(255,255,255,.2) 0,
-            rgba(255,255,255,.2) 1px,
-            transparent 4px,
-            transparent 60px
-        );
+            transparent 30px
+        )
 }
 
 .gradient{
     position:absolute;
-    left:0;
-    top:20%;
-    width:60%;
-    height:90%;
+    left:40%;
+    top:-10%;
+    width:40%;
+    height:60%;
     z-index:999;
     pointer-events:none;
 

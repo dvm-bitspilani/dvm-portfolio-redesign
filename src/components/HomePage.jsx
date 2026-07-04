@@ -1,57 +1,67 @@
-import dvm_text from "../assests/image.png"
-import styles from "./HomePage.module.css"
-import logo from "../assests/logo.png"
-import About from "./About"
-import bg3 from "../assests/bg_3.png"
+import dvm_text from "../assests/image.png";
+import styles from "./HomePage.module.css";
+import logo from "../assests/logo.png";
+import About from "./About";
+
+import bg3 from "../assests/bg_3.png";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
+
 gsap.registerPlugin(ScrollTrigger);
+
 const HomePage = () => {
     const textureRef = useRef(null);
     const gradientRef = useRef(null);
     const containerRef = useRef(null);
+    const logoRef = useRef(null);
+
     const gradientPos = useRef({ x: 0, y: 0 });
 
     useEffect(() => {
         const updateMask = () => {
             if (!textureRef.current) return;
+
             const { x, y } = gradientPos.current;
-            const centerX = x + window.innerWidth * 0.1;
-            const centerY = y + window.innerHeight * 0.28;
-            const mask = `radial-gradient(circle 50vh at ${centerX}px ${centerY}px, black 0%, transparent 100%)`;
+            const centerX = x + window.innerWidth * 0.6;
+            const centerY = y + window.innerHeight * 0.2;
+
+            const mask = `radial-gradient(circle 40vw at ${centerX}px ${centerY}px, black 0%, transparent 100%)`;
+
             textureRef.current.style.webkitMaskImage = mask;
             textureRef.current.style.maskImage = mask;
         };
-        updateMask(); // Initial call to set the mask
+
+        updateMask();
+
         gsap.to(gradientPos.current, {
-            x: window.innerWidth * 1.5,
-            y: window.innerHeight * 1,
+            x: -window.innerWidth * 1,
+            y: window.innerHeight,
             scrollTrigger: {
                 trigger: containerRef.current,
                 start: "top 10%",
                 end: "bottom -100%",
                 scrub: 1,
-               
             },
             onUpdate: updateMask,
         });
-
-
     }, []);
+
     useEffect(() => {
         gsap.to(gradientRef.current, {
-            x: window.innerWidth * 1.5,
-            y: window.innerHeight * 1,
+            x: -window.innerWidth * 1.5,
+            y: window.innerHeight,
             scrollTrigger: {
                 trigger: containerRef.current,
                 start: "top 10%",
                 end: "bottom -100%",
                 scrub: 1,
-
             },
         });
     }, []);
+
+    
+
     return (
         <>
             <div className={styles.container}>
