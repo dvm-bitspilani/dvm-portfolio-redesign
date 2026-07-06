@@ -1,4 +1,4 @@
-import styles from "./BlogCard.module.css";
+import styles from "./BlogCard_grid.module.css";
 import data from "./BlogData";
 
 const BlogCard = ({ clickedCard, setClickedCard }) => {

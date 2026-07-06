@@ -24,10 +24,17 @@
     position: absolute;
     z-index: 3;
     max-width: 100%;
-    top: 10%;
+    top: 20%;
+    object-fit: contain;
+    left: 5%;
+}
+.image1 {
+    position: absolute;
+    z-index: 3;
+    max-width: 100%;
+    top: 15%;
     object-fit: contain;
 }
-
 .text {
     position: absolute;
     z-index: 3;

@@ -142,3 +142,11 @@
     mix-blend-mode: color;
 }
 
+
+.blogs:nth-child(n + 4) {
+  /* opacity: 0; */
+}
+
+.blogsShifted:nth-child(n + 4) {
+  /* opacity: 0; */
+}

@@ -1,0 +1,66 @@
+
+.container {
+    background-color: black;
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex-wrap: wrap;
+    isolation: isolate;
+    width: 100vw;
+    min-height: 100vh;
+    background: black;
+ 
+    perspective: 1000px;
+
+}
+.image{
+    position: absolute;
+    width: 60%;
+    height: auto;
+    object-fit: cover;
+    left: 20%;
+    top:5%;
+}
+
+.text {
+    position: absolute;
+    color: white;
+    font-family: "Orbitron";
+    left: 5.2%;
+    z-index: 99;
+    font-size: 0.6rem;
+
+    bottom: 2%;
+    
+}
+.visualMedia {
+    font-size: 1rem;
+    padding-left: 20px;
+}
+
+
+.blogs{
+    position: absolute;
+    top: 30%;
+    left: 15%;
+    width: 70%;           /* adjust to match your layout */
+    height: 105%;         /* let content define height since there are 2 rows */
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);  /* exactly 3 equal columns */
+    grid-auto-rows: auto;                    /* each row sized to its content */
+    gap: 24px;                               /* consistent spacing like in the Figma */
+}
+
+.blogsShifted{
+    position: absolute;
+    top: 30%;
+    left: 15%;
+    width: 70%;
+    height: auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
+    gap: 24px;
+}

@@ -15,7 +15,10 @@ const HomePage = () => {
     const gradientRef = useRef(null);
     const containerRef = useRef(null);
     const logoRef = useRef(null);
-
+    const dvm_Ref = useRef(null);
+    const dvm_textRef = useRef(null);
+    const code_ref = useRef(null);
+    const about_ref = useRef(null);
     const gradientPos = useRef({ x: 0, y: 0 });
 
     useEffect(() => {
@@ -60,28 +63,91 @@ const HomePage = () => {
         });
     }, []);
 
-    
+    useEffect(() => {
+        gsap.from(dvm_textRef.current, {
+  
+            y: -100,
+            opacity: 0,
+            duration: 1,
+        
+
+        });
+        
+    }, []);
+    useEffect(() => {
+        const tl = gsap.timeline();
+        tl.from(dvm_Ref.current, {
+
+            x: -100,
+            opacity: 0,
+            duration: 1,
+        
+
+        })
+        .from(code_ref.current.children, {
+            x: 100,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.2,
+            
+        })
+        .from(about_ref.current, {
+            x: -100,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.2,
+
+        })
+
+
+    }, []);
+
+    useEffect(() => {
+        const tl = gsap.timeline();
+        tl.to(logoRef.current, {
+            zIndex: 1000
+        }).from(logoRef.current, {
+            z: -1000,
+            opacity: 0,
+            duration: 1,
+            delay: 0.5
+        });
+
+    }, []);
+
+    useEffect(() => {
+        gsap.to(gradientRef.current, {
+            x: -window.innerWidth * 1.5,
+            y: window.innerHeight,
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top 10%",
+                end: "bottom -100%",
+                scrub: 1,
+            },
+        });
+    }, []);
 
     return (
         <>
             <div className={styles.container}>
                 <div className={styles.grid}></div>
                 <div style={{ backgroundImage: `url(${bg3})` }} ref={textureRef} className={styles.texture}></div>
-                
-                <img className={styles.dvm_text} src={dvm_text} alt="dvm_text" />
 
-                <div className={styles.image_container}><img className={styles.logo} src={logo} alt="logo" /></div>
-                <div className={styles.text}>
+                <img className={styles.dvm_text} src={dvm_text} ref={dvm_textRef} alt="dvm_text" />
+
+                <div ref={logoRef} className={styles.image_container}><img className={styles.logo} src={logo} alt="logo" /></div>
+                <div className={styles.text} ref={dvm_Ref}>
                     <div>DEPARTMENT OF</div>
                     <div className={styles.visualMedia}>VISUAL MEDIA</div>
                 </div>
-                <div className={styles.text_sub}>
+                <div className={styles.text_sub} ref={code_ref}>
                     <div>CODE.</div>
                     <div>DESIGN.</div>
                     <div>ANIMATE.</div>
 
                 </div>
-                <button className={styles.about}>ABOUT US</button>
+                <button ref={about_ref} className={styles.about}>ABOUT US</button>
                 <div ref={gradientRef} className={styles.gradient}></div>
             </div >
            

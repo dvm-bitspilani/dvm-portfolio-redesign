@@ -1,18 +1,22 @@
 .card {
     position: relative;
-    width: 22%;
-    min-width: 250px;
+    width: 100%;        /* fill the grid column */
+    height: 100%;        /* fill the grid row */
+    min-width: 0;         /* remove fixed min-width so it can shrink with the grid */
     border: 2px solid white;
     color: white;
     transition: all 0.2s ease;
     background: rgba(255,255,255,0.02);
-    height: 50%;
     z-index: 1000;
     overflow: hidden;
     transform: scaleX(1);
 }
+
+
 .card:hover {
-    height: 52%;
+    height: 105%;
+    width: 110%;
+    z-index:  2000;
 }
 .readMore {
     background-color: transparent;
