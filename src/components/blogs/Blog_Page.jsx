@@ -1,5 +1,5 @@
 import styles from "./Blog_Page.module.css";
-import blog from "../../assests/BLOG.png";
+import blog from "../../assests/BLOGS.png";
 import Card from "./Blog_grid";
 import { useState } from "react";
 

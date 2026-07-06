@@ -17,7 +17,7 @@ const App = () => {
       
       <AboutPage />
       <Blog />
-      <BlogPage />
+      {/* <BlogPage /> */}
       {isHamOpen && (
         <Ham onClose={() => setIsHamOpen(false)} />
       )}
