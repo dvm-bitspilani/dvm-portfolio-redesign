@@ -85,7 +85,7 @@ const HomePage = () => {
 
         })
         .from(code_ref.current.children, {
-            x: 100,
+            x: -100,
             opacity: 0,
             duration: 0.6,
             stagger: 0.2,

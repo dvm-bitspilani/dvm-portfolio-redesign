@@ -3,6 +3,7 @@ import blogCover from "../../assests/blog_cover.png";
 const blogData = [
   {
     id: 1,
+    display: true,
     title: "UI/UX Case Study Oasis App — Food Ordering",
     description: "Explore the inception and development of the design process of Oasis 2023 app..and crafted each............ A 5 min read",
     image: blogCover,
@@ -11,6 +12,7 @@ const blogData = [
   // Add more blog objects as needed
  {
     id: 2,
+    display: true,
     title: "UI/UX Case Study Oasis App — Food Ordering",
     description: "Explore the inception and development of the design process of Oasis 2023 app..and crafted each............ A 5 min read",
     image: blogCover,
@@ -18,6 +20,35 @@ const blogData = [
   },
   {
     id: 3,
+    display: true,
+    title: "UI/UX Case Study Oasis App — Food Ordering",
+    description: "Explore the inception and development of the design process of Oasis 2023 app..and crafted each............ A 5 min read",
+    image: blogCover,
+    bigdescription: "Explore the inception and development of the design process of Oasis 2023 app.. Discover how we conceptualized and crafted each feature, from food ordering to ticket booking, ensuring a seamless user experience with a vibrant and unique design aesthetic."
+  },
+  {
+    id: 4,
+    title: "UI/UX Case Study Oasis App — Food Ordering",
+    description: "Explore the inception and development of the design process of Oasis 2023 app..and crafted each............ A 5 min read",
+    image: blogCover,
+    bigdescription: "Explore the inception and development of the design process of Oasis 2023 app.. Discover how we conceptualized and crafted each feature, from food ordering to ticket booking, ensuring a seamless user experience with a vibrant and unique design aesthetic."
+  },
+  {
+    id: 5,
+    title: "UI/UX Case Study Oasis App — Food Ordering",
+    description: "Explore the inception and development of the design process of Oasis 2023 app..and crafted each............ A 5 min read",
+    image: blogCover,
+    bigdescription: "Explore the inception and development of the design process of Oasis 2023 app.. Discover how we conceptualized and crafted each feature, from food ordering to ticket booking, ensuring a seamless user experience with a vibrant and unique design aesthetic."
+  },
+  {
+    id: 6,
+    title: "UI/UX Case Study Oasis App — Food Ordering",
+    description: "Explore the inception and development of the design process of Oasis 2023 app..and crafted each............ A 5 min read",
+    image: blogCover,
+    bigdescription: "Explore the inception and development of the design process of Oasis 2023 app.. Discover how we conceptualized and crafted each feature, from food ordering to ticket booking, ensuring a seamless user experience with a vibrant and unique design aesthetic."
+  },
+  {
+    id: 7,
     title: "UI/UX Case Study Oasis App — Food Ordering",
     description: "Explore the inception and development of the design process of Oasis 2023 app..and crafted each............ A 5 min read",
     image: blogCover,

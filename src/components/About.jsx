@@ -18,6 +18,9 @@ const About = () => {
   const paraRef = useRef(null);
   const para1Ref = useRef(null);
   const para2Ref = useRef(null);
+  const dvmRef = useRef(null);
+  const btnRef = useRef(null);
+  
 
   useEffect(() => {
     const updateMask = () => {
@@ -80,28 +83,71 @@ const About = () => {
     });
   }, []);
   useEffect(() => {
-  [paraRef, para1Ref, para2Ref].forEach((ref) => {
-    const split = new SplitText(ref.current, {
-      type: "words",
-    });
-
-    gsap.from(split.words, {
+    gsap.from(dvmRef.current.children, {
+      x: -100,
       opacity: 0,
-    //   y: 20,
-      duration: 0.4,
-      stagger: 0.04,
-      ease: "power2.out",
+      duration: 1,
+      stagger: 0.4,
       scrollTrigger: {
-        trigger: ref.current,
-        start: "top 80%",
-        toggleActions: "play none none reverse",
-      
+        trigger: dvmRef.current,
+        start: "top 85%",
+        end: "top",
       },
     });
-  });
+  }, []);
 
-  return () => SplitText.revert();
-}, []);
+  useEffect(() => {
+    gsap.from(btnRef.current, {
+      x: 100,
+      opacity: 0,
+      duration: 1,
+
+      scrollTrigger: {
+        trigger: dvmRef.current,
+        start: "top 85%",
+        end: "top",
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    const refs = [paraRef, para1Ref, para2Ref];
+
+    const splits = refs.map(
+      (ref) =>
+        new SplitText(ref.current, {
+          type: "words",
+        }),
+    );
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: paraRef.current,
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+   
+      },
+    });
+
+    splits.forEach((split) => {
+      tl.from(
+        split.words,
+        {
+          opacity: 0,
+
+          y: 10,
+          duration: 0.1,
+          stagger: 0.04,
+          ease: "power2.out",
+         
+        },
+      );
+    });
+
+    return () => {
+      splits.forEach((split) => split.revert());
+    };
+  }, []);
 
   return (
     <div ref={containerRef} className={styles.container}>
@@ -119,7 +165,7 @@ const About = () => {
         src={about_outline}
         alt="about"
       />
-      <div className={styles.text}>
+      <div ref={dvmRef} className={styles.text}>
         <div>DEPARTMENT OF</div>
         <div className={styles.visualMedia}>VISUAL MEDIA</div>
       </div>
@@ -137,7 +183,9 @@ const About = () => {
         Despite generating traffic of over 5000 users on our apps and websites,
         we handle everything with ease.
       </p>
-      <div className={styles.project}>PROJECTS</div>
+      <div ref={btnRef} className={styles.project}>
+        PROJECTS
+      </div>
       <div ref={gradientRef} className={styles.gradient}></div>
     </div>
   );

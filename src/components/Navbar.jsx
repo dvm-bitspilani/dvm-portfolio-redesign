@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap";
 const Navbar = ({ onHamClick }) => {
   const logo = useRef(null);
-  const ham = useRef(null);
+  const hamRef = useRef(null);
   useEffect(() => {
     gsap.from(logo.current, {
       scrollTrigger: {
@@ -19,7 +19,7 @@ const Navbar = ({ onHamClick }) => {
     });
   }, []);
   useEffect(() => {
-    gsap.from(ham.current, {
+    gsap.from(hamRef.current, {
       scrollTrigger: {
         trigger: ham.current,
         start: "top top",
@@ -39,7 +39,7 @@ const Navbar = ({ onHamClick }) => {
       </div>
 
       <div className={styles.ham} onClick={onHamClick}>
-        <img ref={ham} src={ham} alt="ham" />
+        <img ref={hamRef} src={ham} alt="ham" />
       </div>
     </div>
   );

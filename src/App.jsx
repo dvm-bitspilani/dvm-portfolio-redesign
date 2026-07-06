@@ -1,26 +1,16 @@
-import { useState } from "react";
-
-import Navbar from "./components/Navbar";
-import LandingPage from "./components/HomePage";
-import AboutPage from "./components/About";
-import Ham from "./components/Ham";
-import Blog from "./components/blogs/Blog_Land";
-import BlogPage from "./components/blogs/Blog_Page";
+import { Routes, Route } from "react-router-dom";
+import Land from "./pages/landing";
+import ScrollToTop from "./components/ScrollToTop";
+import Blog from "./pages/Blog";
 const App = () => {
-  const [isHamOpen, setIsHamOpen] = useState(false);
-
   return (
     <>
-      <Navbar onHamClick={() => setIsHamOpen(true)} />
-
-      <LandingPage />
-      
-      <AboutPage />
-      <Blog />
-      {/* <BlogPage /> */}
-      {isHamOpen && (
-        <Ham onClose={() => setIsHamOpen(false)} />
-      )}
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Land />} />
+        <Route path="/blog" element={<Blog />} />
+        
+      </Routes>
     </>
   );
 };

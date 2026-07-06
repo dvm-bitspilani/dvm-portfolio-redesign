@@ -1,14 +1,16 @@
 import styles from "./BlogCard.module.css";
 import data from "./BlogData";
-
-const BlogCard = ({ clickedCard, setClickedCard }) => {
+import { Link } from "react-router-dom";
+const BlogCard = ({ limit , clickedCard, setClickedCard }) => {
   const handleClick = (id) => {
     setClickedCard((prev) => (prev === id ? null : id));
   };
 
   return (
     <>
-      {data.map((item) => (
+
+      {data.slice(0, limit).map((item) => (
+
         <div
           key={item.id}
           className={`${styles.card} ${
@@ -34,7 +36,7 @@ const BlogCard = ({ clickedCard, setClickedCard }) => {
             </div>
             {clickedCard === item.id && (
               <div >
-                <button className={styles.readMore}>READ AHEAD</button>
+                <Link to="/blog" className={styles.readMore}>READ AHEAD</Link>
               </div>
             )}
           </div>

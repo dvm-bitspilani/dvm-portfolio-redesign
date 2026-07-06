@@ -1,66 +1,77 @@
-
 .container {
-    background-color: black;
-    display: flex;
-    align-items: center;
-    position: relative;
-    flex-wrap: wrap;
-    isolation: isolate;
-    width: 100vw;
-    min-height: 100vh;
-    background: black;
- 
-    perspective: 1000px;
-
-}
-.image{
-    position: absolute;
-    width: 60%;
-    height: auto;
-    object-fit: cover;
-    left: 20%;
-    top:5%;
+  background-color: black;
+  position: relative;
+  min-height: 100vh;
+  width: 100vw;
 }
 
+.blogs {
+  position: relative;
+  margin-top: 40vh;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 0 15%;
+  
+}
+.container2 {
+  background-color: black;
+  position: relative;
+  height: fit-content;
+  width: 100vw;
+}
+.blogs [class*="clicked"] {
+  grid-column: 1 / -1;
+  order: -1;
+  width: 100%;
+}
+
+.blogImage {
+  position: absolute;
+  width: 50%;
+  height: auto;
+  object-fit: cover;
+  left: 25%;
+  top: 10%;
+}
+
+.blogOutImage {
+  position: absolute;
+  width: 60%;
+  height: auto;
+  object-fit: cover;
+  left: 20%;
+  top: 5%;
+}
 .text {
-    position: absolute;
-    color: white;
-    font-family: "Orbitron";
-    left: 5.2%;
-    z-index: 99;
-    font-size: 0.6rem;
-
-    bottom: 2%;
-    
+  position: relative;
+  width: 100%;
+  text-align: left;
+  margin-left: 15%;
+  margin-top: 4rem;
+  color: white;
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 2px;
 }
+
 .visualMedia {
-    font-size: 1rem;
-    padding-left: 20px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-left: 3%;
 }
 
-
-.blogs{
-    position: absolute;
-    top: 30%;
-    left: 15%;
-    width: 70%;           /* adjust to match your layout */
-    height: 105%;         /* let content define height since there are 2 rows */
-
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);  /* exactly 3 equal columns */
-    grid-auto-rows: auto;                    /* each row sized to its content */
-    gap: 24px;                               /* consistent spacing like in the Figma */
-}
-
-.blogsShifted{
-    position: absolute;
-    top: 30%;
-    left: 15%;
-    width: 70%;
-    height: auto;
-
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: auto;
-    gap: 24px;
+.projects {
+margin-left: 45%;
+margin-bottom: 2%;
+text-align: center;
+  position: relative;
+  display: block;
+ 
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border-radius: 999px;
+  font-family: "JetBrains Mono", monospace;
+  cursor: pointer;
 }

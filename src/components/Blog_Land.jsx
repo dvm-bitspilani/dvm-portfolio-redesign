@@ -1,12 +1,13 @@
 import styles from "./Blog.module.css";
-import blog from "../../assests/blog.png";
-import arrow from "../../assests/arrow.png";
-import Card from "./BlogCard";
-
-import bg3 from "../../assests/bg_3.png";
+import blogImg from "../assests/blog.png";
+import blogOutImg from "../assests/blog_out.png";
+import arrow from "../assests/arrow.png";
+import Card from "./blogs/BlogCard";
+import { Link } from "react-router-dom";
+import bg3 from "../assests/bg_3.png";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, use } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,7 +16,10 @@ const Blog = () => {
   const gradientRef = useRef(null);
   const containerRef = useRef(null);
   const logoRef = useRef(null);
-
+  const blog_out = useRef(null);
+  const blog = useRef(null);
+  const dvmRef = useRef(null);
+  const projectRef = useRef(null);
   const gradientPos = useRef({ x: 0, y: 0 });
 
   const [clickedCard, setClickedCard] = useState(null);
@@ -25,7 +29,7 @@ const Blog = () => {
       if (!textureRef.current) return;
 
       const { x, y } = gradientPos.current;
-      const centerX = x + window.innerWidth * 0.6;
+      const centerX = x + window.innerWidth * 0.4;
       const centerY = y + window.innerHeight * 0.2;
 
       const mask = `radial-gradient(circle 40vw at ${centerX}px ${centerY}px, black 0%, transparent 100%)`;
@@ -64,6 +68,57 @@ const Blog = () => {
     return () => ctx.revert();
   }, []);
 
+  useEffect(() => {
+    gsap.from(blog.current, {
+      y: 100,
+      opacity: 0,
+      duration: 1,
+      scrollTrigger: {
+        start: "top 85%",
+        trigger: blog.current,
+      },
+    });
+  }, []);
+  useEffect(() => {
+    gsap.from(blog_out.current, {
+      y: -100,
+      opacity: 0,
+      duration: 1,
+      scrollTrigger: {
+        start: "top 85%",
+        trigger: blog.current,
+      },
+    });
+  }, []);
+  useEffect(() => {
+    gsap.from(dvmRef.current.children, {
+      x: -100,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.4,
+
+      scrollTrigger: {
+        trigger: blog.current,
+        start: "top 40%",
+        end: "top",
+      },
+    });
+  }, []);
+  useEffect(() => {
+    gsap.from(projectRef.current, {
+      x: 100,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.4,
+
+      scrollTrigger: {
+        trigger: blog.current,
+        start: "top 20%",
+        end: "top",
+      },
+    });
+  }, []);
+
   return (
     <div ref={containerRef} className={styles.container}>
       <div className={styles.grid}></div>
@@ -72,24 +127,37 @@ const Blog = () => {
         ref={textureRef}
         className={styles.texture}
       ></div>
-      <img src={blog} alt="Blog" className={styles.image} />
+      <img ref={blog} src={blogImg} alt="Blog" className={styles.image} />
+      <img
+        ref={blog_out}
+        src={blogOutImg}
+        alt="Blog"
+        className={styles.image1}
+      />
 
-      <div className={styles.text}>
+      <div ref={dvmRef} className={styles.text}>
         <div>DEPARTMENT OF</div>
         <div className={styles.visualMedia}>VISUAL MEDIA</div>
       </div>
-      <button className={styles.button}>
+
+      <Link to="/blog" className={styles.button} state={{ selectedCard: clickedCard }}>
         <span>See All Posts</span>
         <img src={arrow} alt="Arrow" className={styles.arrow} />
-      </button>
-      <button className={styles.projects}>PROJECTS</button>
-      <div className={clickedCard ? styles.blogs : styles.blogsShifted} >
+      </Link>
 
-        <Card clickedCard={clickedCard}  setClickedCard={setClickedCard} />
+      <button ref={projectRef} className={styles.projects}>
+        PROJECTS
+      </button>
+
+      <div className={clickedCard ? styles.blogs : styles.blogsShifted}>
+        <Card  limit={3} clickedCard={clickedCard} setClickedCard={setClickedCard} />
       </div>
+      
+
       <div ref={gradientRef} className={styles.gradient}></div>
     </div>
   );
 };
 
 export default Blog;
+
