@@ -1,171 +1,193 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
-
-
-
 .dvm_text {
-    position: absolute;
-    width: 100vw;
-    height: 35vh;
-    z-index: 1000;
+  position: absolute;
+  width: 100vw;
+  height: 35vh;
+  z-index: 1000;
+  will-change: clip-path;
 }
 
 .text {
-    position: absolute;
-    color: #6D6D6D;
-    font-family: "Orbitron";
-    left: 5.2%;
-    z-index: 99;
-    font-size: 0.8rem;
-    
+  position: absolute;
+  color: #6d6d6d;
+  font-family: "Orbitron";
+  left: 5.2%;
+  z-index: 99;
+  font-size: 0.8rem;
 }
 
 .visualMedia {
-    font-size: 1.2rem;
-    padding-left: 20px;
+  font-size: 1.2rem;
+  padding-left: 20px;
 }
 
-
 .logo {
-    position: absolute;
-    z-index: 1000;
-    transition: transform 0.15s ease-out;
-    transform-style: preserve-3d;
-    will-change: transform;
+  position: absolute;
+  z-index: 1000;
+  transition: transform 0.15s ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* glow duplicate sits directly behind the real logo, animates its own drop-shadow */
+.logoGlow {
+  position: absolute;
+  z-index: 999;
+  pointer-events: none;
+  will-change: filter;
 }
 
 .lines {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
 }
 
-
 .bg {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background-image: url('../assests/bg_grad.png');
-    background-size: cover;
-    background-position: center;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../assests/bg_grad.png");
+  background-size: cover;
+  background-position: center;
 }
 
 .image_container {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 800px;
+  z-index: 1000;
 }
 
 .text_sub {
-    position: absolute;
-    color: #FFFFFF;
-    font-family: "Josefin Sans";
-    display: flex;
-    flex-direction: column;
-    z-index: 1;
-    font-size: 1.5rem;
-    text-align: right;
-    bottom: 5%;
-    left: 5%;
-    align-items: flex-start;
-    line-height: 2.1rem;
-
+  position: absolute;
+  color: #ffffff;
+  font-family: "Josefin Sans";
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  font-size: 1.5rem;
+  text-align: right;
+  bottom: 5%;
+  left: 5%;
+  align-items: flex-start;
+  line-height: 2.1rem;
 }
-
-
 
 .about {
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    color: #FFFFFF;
-    font-family: "Josefin Sans";
-    bottom: 7%;
-    right: 7%;
-    border: 1px solid #FFFFFF;
-    padding: 10px;
-    padding-top: -2px;
-    border-radius: 999px;
-    background-color: transparent;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  color: #ffffff;
+  font-family: "Josefin Sans";
+  bottom: 7%;
+  right: 7%;
+  border: 1px solid #ffffff;
+  padding: 10px;
+  padding-top: -2px;
+  border-radius: 999px;
+  background-color: transparent;
 }
-
-
-
 
 .texture {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-    
-    background-size: cover;
-    background-position: center;
-    -webkit-mask-image: radial-gradient(circle 40vw at -9999px -9999px, black 0%, transparent 100%);
-    mask-image: radial-gradient(circle 40vw at -9999px -9999px, black 0%, transparent 100%);
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+
+  background-size: cover;
+  background-position: center;
+  -webkit-mask-image: radial-gradient(
+    circle 40vw at -9999px -9999px,
+    black 0%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle 40vw at -9999px -9999px,
+    black 0%,
+    transparent 100%
+  );
 }
-
-
 
 .grid {
-    position: absolute;
-    inset: 0;
-    z-index: 997;
-    opacity: 0.6;
-    background:
-        repeating-linear-gradient(
-            to right,
-            rgba(255,255,255,.2) 0,
-            rgba(255,255,255,.2) 1px,
-            transparent 1px,
-            transparent 30px
-        )
+  position: absolute;
+  inset: 0;
+  z-index: 997;
+  opacity: 0.6;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.2) 0,
+    rgba(255, 255, 255, 0.2) 1px,
+    transparent 1px,
+    transparent 30px
+  );
 }
 
-.gradient{
-    position:absolute;
-    left:40%;
-    top:-10%;
-    width:40%;
-    height:60%;
-    z-index:999;
-    pointer-events:none;
+.gradient {
+  position: absolute;
+  left: 40%;
+  top: -10%;
+  width: 40%;
+  height: 60%;
+  z-index: 999;
+  pointer-events: none;
 
-    background:
-        radial-gradient(
-            circle at 20% 40%,
-            rgba(180,250,255,.9) 0%,
-            rgba(60,210,230,.75) 35%,
-            rgba(20,90,100,.35) 60%,
-            transparent 85%
-        );
+  background: radial-gradient(
+    circle at 20% 40%,
+    rgba(180, 250, 255, 0.9) 0%,
+    rgba(60, 210, 230, 0.75) 35%,
+    rgba(20, 90, 100, 0.35) 60%,
+    transparent 85%
+  );
 
-    mix-blend-mode: color;
+  mix-blend-mode: color;
 }
+
 .container {
-    background-color: black;
-    display: flex;
-    align-items: center;
-    position: relative;
-  
-    isolation: isolate;
-    width: 100vw;
-    height: 100vh;
-    background: black;
-    overflow: hidden;
-    perspective: 1000px;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  position: relative;
+  isolation: isolate;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+.line {
+  position: absolute;
+  height: 35vh;
+  width: 30px;
+  left: -10%;
+  z-index: 1001;
+  will-change: transform;
+}
+
+.line1 {
+  position: absolute;
+  height: 30px;
+  width: 50vw;
+  top: 10%;
+  left: 25%;
+  z-index: 1001;
 
 }
