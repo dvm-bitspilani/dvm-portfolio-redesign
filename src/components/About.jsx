@@ -61,6 +61,7 @@ const About = () => {
   useEffect(() => {
     gsap.from(about_ref.current, {
       y: 100,
+      x: -100,
       opacity: 0,
       duration: 1,
       scrollTrigger: {
@@ -73,6 +74,7 @@ const About = () => {
   useEffect(() => {
     gsap.from(about_outlineRef.current, {
       y: -100,
+      x: 100,
       opacity: 0,
       duration: 1,
       scrollTrigger: {
@@ -85,6 +87,8 @@ const About = () => {
   useEffect(() => {
     gsap.from(dvmRef.current.children, {
       x: -100,
+      y: 20,
+      rotate: -30,
       opacity: 0,
       duration: 1,
       stagger: 0.4,
@@ -135,7 +139,8 @@ const About = () => {
         {
           opacity: 0,
 
-          y: 10,
+          rotate: 20,
+          y: 20,
           duration: 0.1,
           stagger: 0.04,
           ease: "power2.out",

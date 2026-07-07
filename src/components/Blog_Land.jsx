@@ -21,7 +21,7 @@ const Blog = () => {
   const dvmRef = useRef(null);
   const projectRef = useRef(null);
   const gradientPos = useRef({ x: 0, y: 0 });
-
+  const blogsRef = useRef(null);
   const [clickedCard, setClickedCard] = useState(null);
 
   useEffect(() => {
@@ -118,6 +118,42 @@ const Blog = () => {
       },
     });
   }, []);
+useEffect(() => {
+  const cards = blogsRef.current.children;
+
+  const animations = [
+    {
+      x: -window.innerWidth * 0.2,
+      y: window.innerHeight * 0.2,
+      rotate: -20,
+    },
+    {
+      y: window.innerHeight * 0.25,
+      scale: 0.7,
+      rotate: 0,
+    },
+    {
+      x: window.innerWidth * 0.2,
+      y: window.innerHeight * 0.2,
+      rotate: 20,
+    },
+  ];
+
+  [...cards].forEach((card, i) => {
+    gsap.from(card, {
+      ...animations[i],
+      opacity: 0,
+      duration: 1.2,
+      
+      scrollTrigger: {
+        trigger: blogsRef.current,
+        start: "top 75%",
+        end: "top 40%",
+        scrub: 1,
+      },
+    });
+  });
+}, []);
 
   return (
     <div ref={containerRef} className={styles.container}>
@@ -149,7 +185,7 @@ const Blog = () => {
         PROJECTS
       </button>
 
-      <div className={clickedCard ? styles.blogs : styles.blogsShifted}>
+      <div ref={blogsRef} className={clickedCard ? styles.blogs : styles.blogsShifted}>
         <Card  limit={3} clickedCard={clickedCard} setClickedCard={setClickedCard} />
       </div>
       

@@ -104,6 +104,7 @@
     left: 15%;
     display: flex;
     width: 100%;
+    z-index: 1000;
     gap: 2%;
 }
 .blogs{
@@ -114,6 +115,7 @@
     display: flex;
     width: 100%;
     gap: 2%;
+    z-index: 1000;
 }
 .blogs,
 .blogsShifted {
