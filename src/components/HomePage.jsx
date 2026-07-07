@@ -78,12 +78,14 @@ const HomePage = () => {
         tl.to(lineRef.current, {
             x: window.innerWidth * 1.5,
             ease: "none",
+            duration: 1,
 
         }, 0)
         .to(dvm_textRef.current, {
             clipPath: "inset(0 0% 0 0)",
             webkitClipPath: "inset(0 0% 0 0)",
             ease: "none",
+            duration: 1,
 
         }, 0)
         .from(dvm_Ref.current, {
