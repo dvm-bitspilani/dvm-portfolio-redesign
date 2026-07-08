@@ -71,6 +71,7 @@ const Blog = () => {
   useEffect(() => {
     gsap.from(blog.current, {
       y: 100,
+      x: -20,
       opacity: 0,
       duration: 1,
       scrollTrigger: {
@@ -82,6 +83,7 @@ const Blog = () => {
   useEffect(() => {
     gsap.from(blog_out.current, {
       y: -100,
+      x: 20,
       opacity: 0,
       duration: 1,
       scrollTrigger: {
@@ -100,7 +102,7 @@ const Blog = () => {
       scrollTrigger: {
         trigger: blog.current,
         start: "top 40%",
-        end: "top",
+        end: "top 20%",
       },
     });
   }, []);

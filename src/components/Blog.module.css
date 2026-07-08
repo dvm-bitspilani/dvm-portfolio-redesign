@@ -38,7 +38,7 @@
     display: flex;
     align-items: center;
     font-family: 'Orbitron', sans-serif ;
-    z-index: 999;
+    z-index: 1009;
     width: 60%;
     height: 35px;
     border: 2px solid rgba(255, 255, 255, 0.2);

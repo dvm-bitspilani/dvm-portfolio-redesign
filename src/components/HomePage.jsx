@@ -15,6 +15,7 @@ const HomePage = () => {
   const gradientRef = useRef(null);
   const containerRef = useRef(null);
   const logoRef = useRef(null);
+  const logoFloatRef = useRef(null);
   const logoGlowRef = useRef(null);
   const dvm_Ref = useRef(null);
   const dvm_textRef = useRef(null);
@@ -66,91 +67,97 @@ const HomePage = () => {
     });
   }, []);
 
-useEffect(() => {
-  gsap.set(dvm_textRef.current, {
-    clipPath: "inset(0 100% 0 0)",
-    webkitClipPath: "inset(0 100% 0 0)",
-  });
+  useEffect(() => {
+    gsap.set(dvm_textRef.current, {
+      clipPath: "inset(0 100% 0 0)",
+      webkitClipPath: "inset(0 100% 0 0)",
+    });
 
-  const floatTween = gsap.to(logoRef.current, {
-    y: 10,
-    duration: 1,
-    yoyo: true,
-    repeat: -1,
-    ease: "power1.inOut",
-    paused: true,
-  });
-
-  const tl = gsap.timeline();
-
-  tl.to(
-    lineRef.current,
-    {
-      x: window.innerWidth * 1.5,
-      ease: "none",
+    const floatTween = gsap.to(logoFloatRef.current, {
+      y: 10,
       duration: 1,
-    },
-    0
-  )
-    .to(
-      dvm_textRef.current,
+      yoyo: true,
+      repeat: -1,
+      ease: "power1.inOut",
+      paused: true,
+    });
+
+    const tl = gsap.timeline();
+
+    tl.to(
+      lineRef.current,
       {
-        clipPath: "inset(0 0% 0 0)",
-        webkitClipPath: "inset(0 0% 0 0)",
+        x: window.innerWidth * 1.5,
         ease: "none",
         duration: 1,
       },
-      0
+      0,
     )
-    .add(() => floatTween.play(), 1)
-    .from(dvm_Ref.current, {
-      x: -100,
-      opacity: 0,
-    })
-    .from(code_ref.current.children, {
-      x: -100,
-      y: 20,
-      rotate: -30,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.3,
-    })
-    .from(about_ref.current, {
-      x: 100,
-      rotate: 30,
-      y: 20,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.3,
+      .to(
+        dvm_textRef.current,
+        {
+          clipPath: "inset(0 0% 0 0)",
+          webkitClipPath: "inset(0 0% 0 0)",
+          ease: "none",
+          duration: 1,
+        },
+        0,
+      )
+      .add(() => floatTween.play(), 1)
+      .from(dvm_Ref.current, {
+        x: -100,
+        opacity: 0,
+      })
+      .from(code_ref.current.children, {
+        x: 100,
+        y: 20,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.2,
+      })
+      .from(about_ref.current, {
+        x: -100,
+
+        y: 20,
+        opacity: 0,
+        duration: 0.3,
+        stagger: 0.3,
+      });
+
+    const floatScrollTrigger = ScrollTrigger.create({
+      trigger: containerRef.current,
+      start: "top top",
+      end: "bottom -100%",
+      onUpdate: (self) => {
+        if (self.progress > 0.001 && !floatTween.paused()) {
+          floatTween.pause();
+          gsap.set(logoFloatRef.current, { y: 0 });
+        } else if (self.progress <= 0.001 && floatTween.paused()) {
+          floatTween.play();
+        }
+      },
     });
 
-  ScrollTrigger.create({
-    trigger: containerRef.current,
-    start: "top top",
-    onEnter: () => floatTween.pause(),
-    onEnterBack: () => floatTween.play(),
-  });
-
-  return () => {
-    floatTween.kill();
-    ScrollTrigger.getAll().forEach((st) => st.kill());
-  };
-}, []);
-useEffect(() => {
-  gsap.to(logoRef.current, {
-    rotation: -30,
-    scale: 0.2,
-    y: window.innerHeight,
-    ease: "none",
-    scrollTrigger: {
-      trigger: containerRef.current,
-      start: "top 10%",
-      end: "bottom -100%",
-      scrub: true,
-    },
-  });
-}, []);
-
+    return () => {
+      floatTween.kill();
+      floatScrollTrigger.kill();
+      ScrollTrigger.getAll().forEach((st) => st.kill());
+    };
+  }, []);
+  useEffect(() => {
+    gsap.to(logoRef.current, {
+      rotation: -30,
+      scale: 0.2,
+      y: window.innerHeight,
+      ease: "none",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 10%",
+        end: "bottom -100%",
+        scrub: true,
+      },
+    });
+  }, []);
   // Logo reveal (top -> bottom) with glowing outline trace
   useEffect(() => {
     gsap.set(logoRef.current, {
@@ -203,8 +210,7 @@ useEffect(() => {
           ease: "power2.in",
         },
         1.2,
-      )
-    
+      );
   }, []);
 
   // Magnetic tilt on logo (cursor-follow)
@@ -264,14 +270,16 @@ useEffect(() => {
         <div ref={lineRef} className={styles.line}></div>
         <div ref={line1Ref} className={styles.line1}></div>
         <div ref={logoRef} className={styles.image_container}>
-          <img
-            className={styles.logoGlow}
-            src={logo}
-            ref={logoGlowRef}
-            alt=""
-            aria-hidden="true"
-          />
-          <img className={styles.logo} src={logo} alt="logo" />
+          <div ref={logoFloatRef} className={styles.logoFloatWrapper}>
+            <img
+              className={styles.logoGlow}
+              src={logo}
+              ref={logoGlowRef}
+              alt=""
+              aria-hidden="true"
+            />
+            <img className={styles.logo} src={logo} alt="logo" />
+          </div>
         </div>
         <div className={styles.text} ref={dvm_Ref}>
           <div>DEPARTMENT OF</div>
