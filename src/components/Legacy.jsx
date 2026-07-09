@@ -111,17 +111,24 @@ const Legacy = () => {
                     </defs>
 
                     {pairs.map(([fromKey, toKey], i) => {
-                        const from = centers[fromKey];
-                        const to = centers[toKey];
+                        let from = centers[fromKey];
+                        let to = centers[toKey];
                         const isHighlighted =
                             hoveredKey && (hoveredKey === fromKey || hoveredKey === toKey);
                         const isDimmed = hoveredKey && !isHighlighted;
 
                         if (!from || !to) return null;
 
+                        // Ensure the line always starts (grows) FROM the hovered circle,
+                        // regardless of the pair's original order in the array.
+                        if (isHighlighted && hoveredKey === toKey) {
+                            const temp = from;
+                            from = to;
+                            to = temp;
+                        }
+
                         return (
                             <g key={i}>
-                         
                                 <line
                                     x1={from.x}
                                     y1={from.y}
@@ -129,7 +136,7 @@ const Legacy = () => {
                                     y2={to.y}
                                     className={`${styles.baseLine} ${isDimmed ? styles.dimmed : ""}`}
                                 />
-                              
+
                                 <line
                                     x1={from.x}
                                     y1={from.y}
