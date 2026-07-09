@@ -33,15 +33,23 @@
   transition: transform 0.15s ease-out;
   transform-style: preserve-3d;
   will-change: transform;
+  object-fit: cover;
+  height: 55%; /* was 80% */
+  margin-top: 5%;
+  
 }
 
-/* glow duplicate sits directly behind the real logo, animates its own drop-shadow */
-.logoGlow {
+.logo1 {
   position: absolute;
-  z-index: 999;
-  pointer-events: none;
-  will-change: filter;
+  margin-right: 5%;
+  z-index: 1000;
+  transition: transform 0.15s ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
+  height: 40%; /* added — was unset, inheriting natural SVG size */
 }
+/* glow duplicate sits directly behind the real logo, animates its own drop-shadow */
+
 
 .lines {
   position: absolute;
@@ -66,7 +74,7 @@
   position: absolute;
   inset: 0;
 
-
+  top: -15%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -193,7 +201,6 @@
 .logoFloatWrapper {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
+
   will-change: transform;
 }
