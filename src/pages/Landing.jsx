@@ -5,6 +5,7 @@ import LandingPage from "../components/HomePage";
 import AboutPage from "../components/About";
 import Ham from "../components/Ham";
 import Blog from "../components/Blog_Land";
+import Legacy from "../components/Legacy";
 const Landing = () => {
   const [isHamOpen, setIsHamOpen] = useState(false);
 
@@ -18,6 +19,7 @@ const Landing = () => {
       <Blog />
 
       {isHamOpen && <Ham onClose={() => setIsHamOpen(false)} />}
+      <Legacy />
     </>
   );
 };

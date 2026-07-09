@@ -15,25 +15,25 @@ const App = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // if (loading) {
-  //   return (
-  //     <div
-  //       style={{
-  //         width: "100vw",
-  //         height: "100vh",
-  //         display: "flex",
-  //         justifyContent: "center",
-  //         alignItems: "center",
-  //         background: "#000",
-  //         color: "#fff",
-  //         fontSize: "2rem",
-  //         fontWeight: "bold",
-  //       }}
-  //     >
-  //       Loading...
-  //     </div>
-  //   );
-  // }
+  if (loading) {
+    return (
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          background: "#000",
+          color: "#fff",
+          fontSize: "2rem",
+          fontWeight: "bold",
+        }}
+      >
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <>
