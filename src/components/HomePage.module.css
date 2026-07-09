@@ -8,9 +8,11 @@
 .dvm_text {
   position: absolute;
   width: 100vw;
-  height: 35vh;
+  height: auto;
+  max-height: 50vh;
   z-index: 1000;
   will-change: clip-path;
+  object-fit: cover;
 }
 
 .text {
@@ -36,7 +38,6 @@
   object-fit: cover;
   height: 55%; /* was 80% */
   margin-top: 5%;
-  
 }
 
 .logo1 {
@@ -49,7 +50,6 @@
   height: 40%; /* added — was unset, inheriting natural SVG size */
 }
 /* glow duplicate sits directly behind the real logo, animates its own drop-shadow */
-
 
 .lines {
   position: absolute;
@@ -70,10 +70,10 @@
   background-position: center;
 }
 
-.image_container , .logoFloatWrapper{
+.image_container,
+.logoFloatWrapper {
   position: absolute;
   inset: 0;
-
   top: -15%;
   display: flex;
   justify-content: center;
@@ -112,6 +112,9 @@
   padding-top: -2px;
   border-radius: 999px;
   background-color: transparent;
+  font-size: 1rem;
+  white-space: nowrap;
+  cursor: pointer;
 }
 
 .texture {
@@ -198,9 +201,228 @@
   left: 25%;
   z-index: 1001;
 }
+
 .logoFloatWrapper {
   position: absolute;
   inset: 0;
-
   will-change: transform;
+}
+
+
+@media (max-width: 1200px) {
+  .text {
+    font-size: 0.72rem;
+  }
+
+  .visualMedia {
+    font-size: 1.05rem;
+  }
+
+  .text_sub {
+    font-size: 1.25rem;
+    line-height: 1.8rem;
+  }
+
+  .about {
+    font-size: 0.9rem;
+    padding: 9px 14px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .image_container,
+  .logoFloatWrapper {
+    top: -12%;
+  }
+
+  .logo {
+    height: 48%;
+  }
+
+  .logo1 {
+    height: 34%;
+    margin-right: 3%;
+  }
+
+  .text {
+    left: 6%;
+    font-size: 0.68rem;
+  }
+
+  .visualMedia {
+    font-size: 1rem;
+    padding-left: 16px;
+  }
+
+  .text_sub {
+    left: 6%;
+    bottom: 6%;
+    font-size: 1.1rem;
+    line-height: 1.6rem;
+  }
+
+  .about {
+    right: 6%;
+    bottom: 8%;
+    font-size: 0.85rem;
+    padding: 8px 14px;
+  }
+
+  .gradient {
+    width: 55%;
+    height: 45%;
+    left: 30%;
+  }
+}
+
+@media (max-width: 768px) {
+  .image_container,
+  .logoFloatWrapper {
+    top: -8%;
+  }
+
+  .logo {
+    height: 40%;
+    margin-top: 0;
+  }
+
+  .logo1 {
+    height: 28%;
+    margin-right: 6%;
+    margin-bottom: 3%;
+  }
+
+  .text {
+    left: 6%;
+    top: 4%;
+    font-size: 0.6rem;
+  }
+
+  .visualMedia {
+    font-size: 0.9rem;
+    padding-left: 12px;
+  }
+
+  .text_sub {
+    left: 6%;
+    bottom: 16%;
+    font-size: 1rem;
+    line-height: 1.4rem;
+  }
+
+  .about {
+    left: 6%;
+    right: auto;
+    bottom: 6%;
+    font-size: 0.8rem;
+    padding: 8px 16px;
+  }
+
+  .line1 {
+    width: 70vw;
+  }
+
+  .gradient {
+    width: 70%;
+    height: 35%;
+    left: 15%;
+    top: -5%;
+  }
+}
+
+/* ---- Mobile phones ---- */
+@media (max-width: 480px) {
+  .container {
+    height: 100svh; /* avoids mobile browser chrome jump */
+  }
+
+  .image_container,
+  .logoFloatWrapper {
+    top: -4%;
+  }
+
+  .logo {
+    height: 32%;
+  }
+
+  .logo1 {
+    height: 22%;
+    margin-right: 8%;
+  }
+
+  .text {
+    left: 6%;
+    top: 3%;
+    font-size: 0.5rem;
+  }
+
+  .visualMedia {
+    font-size: 0.75rem;
+    padding-left: 10px;
+  }
+
+  .text_sub {
+    left: 6%;
+    bottom: 18%;
+    font-size: 0.8rem;
+    line-height: 1.15rem;
+  }
+
+  .about {
+    left: 6%;
+    right: auto;
+    bottom: 6%;
+    font-size: 0.72rem;
+    padding: 7px 14px;
+  }
+
+  .line {
+    width: 18px;
+  }
+
+  .line1 {
+    width: 85vw;
+    top: 8%;
+    left: 10%;
+  }
+
+  .gradient {
+    width: 90%;
+    height: 28%;
+    left: 5%;
+    top: -3%;
+  }
+
+  .grid {
+    background-size: 20px 20px;
+  }
+}
+
+/* ---- Very small phones ---- */
+@media (max-width: 360px) {
+  .text {
+    font-size: 0.45rem;
+  }
+
+  .text_sub {
+    font-size: 0.7rem;
+    line-height: 1rem;
+  }
+
+  .about {
+    font-size: 0.65rem;
+    padding: 6px 12px;
+  }
+  .logo1{
+    margin-right: 10%;
+  }
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .logo,
+  .logo1,
+  .logoFloatWrapper {
+    transition: none;
+  }
 }

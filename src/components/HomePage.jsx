@@ -120,12 +120,11 @@ const HomePage = () => {
 
     const tl = gsap.timeline({ delay: 0.3 });
 
-    // Phase 1 — logo alone, enlarged, tracing the outline while the fill sweeps in
+   
     tl.to(path1, { strokeDashoffset: 0, ease: "none", duration: 0.8}, 0)
 
       .to(path2, { strokeDashoffset: 0, ease: "none", duration: 0.8 }, 0.15)
 
-      // Phase 2 — logo settles back down to its normal size
       .to(
         logoFloatRef.current,
         { scale: 1, duration: 0.7, ease: "power3.inOut" },

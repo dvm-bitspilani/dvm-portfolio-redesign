@@ -1,4 +1,3 @@
-
 .container {
     background-color: black;
     display: flex;
@@ -168,4 +167,232 @@
     background-position: center;
     -webkit-mask-image: radial-gradient(circle 40vw at -9999px -9999px, black 0%, transparent 100%);
     mask-image: radial-gradient(circle 40vw at -9999px -9999px, black 0%, transparent 100%);
+}
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   Desktop packs the title art, the "See All Posts" button and
+   three cards side-by-side inside one 100vh viewport. That much
+   horizontal content can't survive a phone-width screen, so at
+   768px the container stops being a fixed-height stage and
+   becomes a normal scrolling page: title art shrinks and moves
+   up, the button/PROJECTS controls drop into the flow, and the
+   three cards stack into a vertical, scrollable list instead of
+   a cramped row.
+   ============================================================ */
+
+/* ---- Small laptops / large tablets (landscape) ---- */
+@media (max-width: 1200px) {
+  .image {
+    width: 56%;
+    left: 22%;
+  }
+
+  .image1 {
+    width: 66%;
+    left: 17%;
+  }
+
+  .button {
+    width: 68%;
+    left: 16%;
+    font-size: 0.82rem;
+  }
+
+  .text {
+    font-size: 0.55rem;
+  }
+
+  .projects {
+    font-size: 0.9rem;
+  }
+}
+
+/* ---- Tablets (portrait) ---- */
+@media (max-width: 1024px) {
+  .image {
+    width: 62%;
+    left: 19%;
+    top: 6%;
+  }
+
+  .image1 {
+    width: 72%;
+    left: 14%;
+    top: 2%;
+  }
+
+  .button {
+    width: 76%;
+    left: 12%;
+    bottom: 8%;
+    height: 32px;
+    font-size: 0.78rem;
+  }
+
+  .text {
+    font-size: 0.5rem;
+  }
+
+  .visualMedia {
+    font-size: 0.9rem;
+  }
+
+  .projects {
+    right: 5%;
+    bottom: 8%;
+    font-size: 0.85rem;
+    padding: 8px 14px;
+  }
+
+  .blogs,
+  .blogsShifted {
+    top: 34%;
+    left: 0;
+    gap: 1.5%;
+  }
+}
+
+/* ---- Mobile landscape / small tablets: switch to a stacked flow ---- */
+@media (max-width: 768px) {
+  .container {
+    height: auto;
+    min-height: 100vh;
+    display: block;
+    padding: 6% 5% 8%;
+  }
+
+  .image {
+    position: relative;
+    width: 78%;
+    left: 0;
+    top: 0;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .image1 {
+    position: absolute;
+    width: 88%;
+    left: 6%;
+    top: 2%;
+  }
+
+  .text {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    margin-top: 4%;
+    font-size: 0.6rem;
+  }
+
+  .visualMedia {
+    font-size: 0.85rem;
+  }
+
+  .button {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    margin-top: 5%;
+    font-size: 0.85rem;
+  }
+
+  .projects {
+    position: relative;
+    right: 0;
+    bottom: 0;
+    margin: 5% auto 0;
+    width: fit-content;
+    font-size: 0.85rem;
+    padding: 9px 16px;
+  }
+
+  .blogs,
+  .blogsShifted {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: auto;
+    width: 100%;
+    margin-top: 6%;
+    flex-direction: column;
+    align-items: center;
+    gap: 6%;
+  }
+
+  .gradient {
+    width: 100%;
+    height: 35%;
+    left: 0;
+    top: 0;
+  }
+}
+
+/* ---- Mobile phones ---- */
+@media (max-width: 480px) {
+  .container {
+    padding: 8% 6% 10%;
+  }
+
+  .image {
+    width: 88%;
+  }
+
+  .image1 {
+    width: 96%;
+    left: 2%;
+  }
+
+  .text {
+    font-size: 0.55rem;
+  }
+
+  .visualMedia {
+    font-size: 0.78rem;
+  }
+
+  .button {
+    height: 38px;
+    font-size: 0.75rem;
+  }
+
+  .button span {
+    transform: scaleX(1.15);
+  }
+
+  .arrow {
+    margin-left: 12px;
+  }
+
+  .projects {
+    font-size: 0.75rem;
+    padding: 8px 14px;
+  }
+
+  .grid {
+    background-size: 20px 20px;
+  }
+}
+
+/* ---- Very small phones ---- */
+@media (max-width: 360px) {
+  .text {
+    font-size: 0.5rem;
+  }
+
+  .visualMedia {
+    font-size: 0.72rem;
+  }
+
+  .button {
+    font-size: 0.68rem;
+  }
+
+  .projects {
+    font-size: 0.68rem;
+    padding: 7px 12px;
+  }
 }
