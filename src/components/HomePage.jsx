@@ -121,9 +121,9 @@ const HomePage = () => {
     const tl = gsap.timeline({ delay: 0.3 });
 
     // Phase 1 — logo alone, enlarged, tracing the outline while the fill sweeps in
-    tl.to(path1, { strokeDashoffset: 0, ease: "none", duration: 2.2 }, 0)
+    tl.to(path1, { strokeDashoffset: 0, ease: "none", duration: 0.8}, 0)
 
-      .to(path2, { strokeDashoffset: 0, ease: "none", duration: 2.2 }, 0.15)
+      .to(path2, { strokeDashoffset: 0, ease: "none", duration: 0.8 }, 0.15)
 
       // Phase 2 — logo settles back down to its normal size
       .to(
@@ -307,7 +307,7 @@ const HomePage = () => {
                 d="M514.363 0L449.662 46.9073V400.33L211.083 583.915L0 432.68V507.892L211.083 659.936L514.363 423.783V0Z"
                 fill="none"
                 stroke="#ECECEC"
-                strokeWidth="3"
+                strokeWidth="2"
                 strokeLinejoin="round"
               />
             </svg>
@@ -336,7 +336,7 @@ const HomePage = () => {
                 d="M406.771 0L211.842 152.787L106.325 78.415V142.278L211.842 221.502L354.413 109.942V276.472L211.842 384.799L62.0224 276.472V45.2704L0 0V304.766L211.842 455.129L406.771 304.766V0Z"
                 fill="none"
                 stroke="#ECECEC"
-                strokeWidth="3"
+                strokeWidth="2"
                 strokeLinejoin="round"
               />
             </svg>

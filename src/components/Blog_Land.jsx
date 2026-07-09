@@ -150,7 +150,7 @@ useEffect(() => {
       scrollTrigger: {
         trigger: blogsRef.current,
         start: "top 75%",
-        end: "top 40%",
+        end: "top 30%",
         scrub: 1,
       },
     });
