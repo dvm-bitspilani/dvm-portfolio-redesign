@@ -20,7 +20,7 @@ const About = () => {
   const para2Ref = useRef(null);
   const dvmRef = useRef(null);
   const btnRef = useRef(null);
-  
+  const footerRef = useRef(null);
 
   useEffect(() => {
     const updateMask = () => {
@@ -93,7 +93,7 @@ const About = () => {
       duration: 1,
       stagger: 0.4,
       scrollTrigger: {
-        trigger: dvmRef.current,
+        trigger: footerRef.current,
         start: "top 85%",
         end: "top",
       },
@@ -107,7 +107,7 @@ const About = () => {
       duration: 1,
 
       scrollTrigger: {
-        trigger: dvmRef.current,
+        trigger: footerRef.current,
         start: "top 85%",
         end: "top",
       },
@@ -163,17 +163,10 @@ const About = () => {
         className={styles.texture}
       ></div>
 
+      
       <img ref={about_ref} className={styles.image} src={about} alt="about" />
-      <img
-        ref={about_outlineRef}
-        className={styles.image1}
-        src={about_outline}
-        alt="about"
-      />
-      <div ref={dvmRef} className={styles.text}>
-        <div>DEPARTMENT OF</div>
-        <div className={styles.visualMedia}>VISUAL MEDIA</div>
-      </div>
+      <img ref={about_outlineRef} className={styles.image1} src={about_outline} alt="about" />
+
       <p ref={paraRef} className={styles.para}>
         The Department of Visual Media plays an instrumental role in building
         the software that is the backbone of all the three fests of BITS Pilani
@@ -188,9 +181,17 @@ const About = () => {
         Despite generating traffic of over 5000 users on our apps and websites,
         we handle everything with ease.
       </p>
-      <div ref={btnRef} className={styles.project}>
-        PROJECTS
+
+      <div ref={footerRef} className={styles.footer}>
+        <div ref={dvmRef} className={styles.text}>
+          <div>DEPARTMENT OF</div>
+          <div className={styles.visualMedia}>VISUAL MEDIA</div>
+        </div>
+        <div ref={btnRef} className={styles.project}>
+          PROJECTS
+        </div>
       </div>
+
       <div ref={gradientRef} className={styles.gradient}></div>
     </div>
   );

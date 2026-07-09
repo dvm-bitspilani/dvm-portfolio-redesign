@@ -1,49 +1,13 @@
 import styles from "./Ham.module.css";
-import logo from "../assests/logo.png";
-
+import projects from "../assests/ham/projects.svg"
+import about from "../assests/ham/about.svg"
 const Ham = ({ onClose }) => {
   return (
     <div className={styles.body}>
-      
-      {/* Close Button */}
-      <button className={styles.closeBtn} onClick={onClose}>
-        ✕
-      </button>
-
-      <div className={styles.heading}>DVM</div>
-
-      <div className={styles.dep}>DEPARTMENT OF</div>
-
-      <div className={styles.vm}>VISUAL MEDIA</div>
-
-      <div className={styles.text_sub}>
-        <div>DESIGN.</div>
-        <div>EDIT.</div>
-        <div>CODE.</div>
+      <div className={styles.container_ham}>
+          <img src={projects} alt="projects" className={styles.projects} />
+          <img src={about} alt="about" className={styles.projects} />
       </div>
-
-      <div className={styles.container}>
-        <div className={styles.aboutUsText}>ABOUT US</div>
-        <div className={styles.contactUsText}>CONTACT US</div>
-        <div className={styles.projects}>PROJECTS</div>
-        <div className={styles.team}>TEAM</div>
-
-        {/* Outer Ring */}
-        <svg className={styles.outerSvg} viewBox="0 0 300 300">
-          <circle
-            className={styles.outerStroke}
-            cx="150"
-            cy="150"
-            r="120"
-          />
-        </svg>
-
-        {/* Inner Ring */}
-        <div className={styles.inner_circle}>
-          <img src={logo} alt="DVM Logo" className={styles.logo} />
-        </div>
-      </div>
-
     </div>
   );
 };

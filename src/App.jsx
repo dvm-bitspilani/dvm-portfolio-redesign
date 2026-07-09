@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Land from "./pages/Landing";
 import ScrollToTop from "./components/ScrollToTop";
 import Blog from "./pages/Blog";
-
+import Ham from "./components/Ham";
 const App = () => {
   const [loading, setLoading] = useState(true);
 
@@ -15,25 +15,25 @@ const App = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  if (loading) {
-    return (
-      <div
-        style={{
-          width: "100vw",
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          background: "#000",
-          color: "#fff",
-          fontSize: "2rem",
-          fontWeight: "bold",
-        }}
-      >
-        Loading...
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div
+  //       style={{
+  //         width: "100vw",
+  //         height: "100vh",
+  //         display: "flex",
+  //         justifyContent: "center",
+  //         alignItems: "center",
+  //         background: "#000",
+  //         color: "#fff",
+  //         fontSize: "2rem",
+  //         fontWeight: "bold",
+  //       }}
+  //     >
+  //       Loading...
+  //     </div>
+  //   );
+  // }
 
   return (
     <>
@@ -41,6 +41,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Land />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/ham" element={<Ham />} />
       </Routes>
     </>
   );

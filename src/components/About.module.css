@@ -34,21 +34,6 @@
     top: 15%;
     object-fit: contain;
 }
-.text {
-    position: absolute;
-    z-index: 3;
-    color: #FFFFFF;
-    font-family: "Orbitron";
-    left: 5.2%;
-    bottom: 15%;
-    font-size: 0.7rem;
-    width: 90%;
-}
-
-.visualMedia {
-    padding-left: 2%;
-    font-size: 1rem;
-}
 
 .para {
     position: absolute;
@@ -72,6 +57,7 @@
     right: 20%;
 }
 
+
 .para2 {
     position: absolute;
     z-index: 3;
@@ -83,21 +69,48 @@
     right: 20%;
 }
 
+
+
+.footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 7%;
+    z-index: 3;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 0 7% 0 5.2%;
+}
+
+.text {
+    color: #FFFFFF;
+    font-family: "Orbitron";
+    font-size: 0.7rem;
+    max-width: 65%;
+}
+
+.visualMedia {
+    padding-left: 2%;
+    font-size: 1rem;
+}
+
 .project {
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    z-index: 3;
     color: #FFFFFF;
     font-family: "Josefin Sans";
-    bottom: 7%;
-    right: 7%;
     border: 1px solid #FFFFFF;
-    padding: 10px;
+    padding: 10px 18px;
     border-radius: 999px;
     cursor: pointer;
+    white-space: nowrap;
 }
+
 .grid {
     position: absolute;
     inset: 0;
@@ -141,16 +154,7 @@
     mix-blend-mode: color;
 }
 
-/* ============================================================
-   RESPONSIVE BREAKPOINTS
-   The desktop layout leans on the .image / .image1 artwork
-   occupying the left half and the paragraphs stacked in the
-   right 30% column. That column collapses fast on narrow
-   screens, so below 1024px the paragraphs widen and drop
-   under the artwork instead of sitting beside it.
-   ============================================================ */
 
-/* ---- Small laptops / large tablets (landscape) ---- */
 @media (max-width: 1200px) {
   .para,
   .para1,
@@ -158,6 +162,10 @@
     width: 34%;
     right: 8%;
     font-size: 0.82rem;
+  }
+
+  .footer {
+    bottom: 5%;
   }
 
   .text {
@@ -186,8 +194,12 @@
     font-size: 0.78rem;
   }
 
+  .footer {
+    bottom: 5%;
+    padding: 0 6% 0 6%;
+  }
+
   .text {
-    bottom: 12%;
     font-size: 0.6rem;
   }
 
@@ -196,8 +208,6 @@
   }
 
   .project {
-    right: 6%;
-    bottom: 6%;
     font-size: 0.85rem;
     padding: 9px 14px;
   }
@@ -213,7 +223,7 @@
   .container {
     height: auto;
     min-height: 100vh;
-    padding: 18vh 6% 12% 6%;
+    padding: 18vh 6% 8% 6%;
   }
 
   .image {
@@ -232,19 +242,6 @@
     max-width: 80%;
   }
 
-  .text {
-    position: relative;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    margin-top: 6%;
-    font-size: 0.7rem;
-  }
-
-  .visualMedia {
-    font-size: 1rem;
-  }
-
   .para,
   .para1,
   .para2 {
@@ -257,14 +254,26 @@
     margin-top: 6%;
   }
 
-  .project {
+  .footer {
     position: relative;
+    left: 0;
     right: 0;
     bottom: 0;
     margin-top: 8%;
-    width: fit-content;
-    font-size: 0.85rem;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 0;
+  }
+
+  .visualMedia {
+    font-size: 1rem;
+  }
+
+  .project {
     padding: 10px 20px;
+    font-size: 0.85rem;
   }
 
   .gradient {
@@ -278,28 +287,42 @@
 /* ---- Mobile phones ---- */
 @media (max-width: 480px) {
   .container {
-    padding: 16vh 6% 14% 6%;
+    padding: 16vh 6% 10% 6%;
   }
 
-  .image,
   .image1 {
+    margin-top: 28%;
+  }
+
+  .image {
+    margin-top: 15%;
     max-width: 90%;
-  }
-
-  .text {
-    font-size: 0.6rem;
-  }
-
-  .visualMedia {
-    font-size: 0.85rem;
   }
 
   .para,
   .para1,
   .para2 {
-    font-size: 0.78rem;
+    font-size: 1rem;
     line-height: 1.25rem;
-    margin-top: 5%;
+    margin-top: 10%;
+  }
+
+  .para {
+    margin-top: 20%;
+  }
+
+  .footer {
+    margin-top: 10%;
+    gap: 14px;
+  }
+
+  .text {
+    font-size: 0.6rem;
+    max-width: 100%;
+  }
+
+  .visualMedia {
+    font-size: 0.85rem;
   }
 
   .project {
@@ -314,6 +337,18 @@
 
 /* ---- Very small phones ---- */
 @media (max-width: 360px) {
+  .image {
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+
+  .image1 {
+    position: absolute;
+    top: 8%;
+    left: 5%;
+  }
+
   .text {
     font-size: 0.55rem;
   }
@@ -327,6 +362,15 @@
   .para2 {
     font-size: 0.72rem;
     line-height: 1.15rem;
+    margin-top: 10%;
+  }
+
+  .para {
+    margin-top: 20%;
+  }
+
+  .footer {
+    margin-top: 10%;
   }
 
   .project {
