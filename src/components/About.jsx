@@ -2,9 +2,10 @@ import styles from "./About.module.css";
 import about from "../assests/about_main.png";
 import about_outline from "../assests/about_outline.png";
 import { SplitText } from "gsap/SplitText";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import bg3 from "../assests/bg_3.png";
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
