@@ -46,22 +46,22 @@ const Logo = ({ triggerSelector = "#hero-container" }) => {
       paused: true,
     });
 
-    const tl = gsap.timeline({ delay: 0.3 });
+    const tl = gsap.timeline({ delay: 0.1 });
 
     tl.to(path1, { strokeDashoffset: 0, ease: "none", duration: 0.8 }, 0)
       .to(path2, { strokeDashoffset: 0, ease: "none", duration: 0.8 }, 0.15)
       .to(
         logoFloatRef.current,
-        { scale: 1, duration: 0.7, ease: "power3.inOut" },
+        { scale: 1, duration: 0.3, ease: "power3.inOut"  , },
         "-=0.35",
       )
       .to(
         [logoSvg1Ref.current, logoSvg2Ref.current],
-        { autoAlpha: 0, duration: 0.4, ease: "power1.inOut" },
+        { autoAlpha: 0, duration: 0.5, ease: "power1.inOut" },
       )
       .to(
         logoImgRef.current,
-        { autoAlpha: 1, duration: 0.4, ease: "power1.inOut" },
+        { autoAlpha: 1, duration: 0.4, ease: "power1.inOut" , },
         "<",
       )
       .add(() => floatTween.play());
@@ -103,14 +103,16 @@ const Logo = ({ triggerSelector = "#hero-container" }) => {
     const tween = gsap.to(el, {
       scale: 0.3,
       rotateY: 360,
-      x: -window.innerWidth * 0.35,
+      
+      rotateZ: 360,
+      x: -window.innerWidth * 0.4,  
       ease: "none",
       scrollTrigger: {
         trigger: triggerSelector,
         start: "top%",
         endTrigger: "#about-container",
         end: "bottom bottom",
-        scrub: 2,
+        scrub: 3,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
           const scrolled = self.progress > 0.001;

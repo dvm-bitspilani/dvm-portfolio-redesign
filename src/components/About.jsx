@@ -88,8 +88,7 @@ const About = () => {
   useEffect(() => {
     gsap.from(dvmRef.current.children, {
       x: -100,
-      y: 20,
-      rotate: -30,
+  
       opacity: 0,
       duration: 1,
       stagger: 0.4,

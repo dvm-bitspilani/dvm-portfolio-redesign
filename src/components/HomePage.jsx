@@ -81,7 +81,7 @@ const HomePage = () => {
       { autoAlpha: 0 },
     );
 
-    const tl = gsap.timeline({ delay: 0.3 });
+    const tl = gsap.timeline({ delay: 0.5 });
 
     tl.to(
         [gridRef.current, textureRef.current, gradientRef.current],
@@ -104,8 +104,8 @@ const HomePage = () => {
         "<",
       )
       .from(dvm_Ref.current, { x: -100, opacity: 0 })
-      .from(code_ref.current.children, { x: 100, y: 20, opacity: 0, duration: 0.6, stagger: 0.2 })
-      .from(about_ref.current, { x: -100, y: 20, opacity: 0, duration: 0.3, stagger: 0.3 });
+      .from(code_ref.current.children, { x: -100, opacity: 0, duration: 0.6, stagger: 0.2 })
+      .from(about_ref.current, { x: 100,  opacity: 0, duration: 0.3, stagger: 0.3 });
 
     return () => {
       tl.kill();
