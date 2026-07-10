@@ -12,6 +12,11 @@ import bg3 from "../assests/bg_3.png";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
+
+// If your circles are a fixed pixel size, set it here instead of measuring.
+// Set to null to fall back to measuring each ref's bounding box.
+const FIXED_CIRCLE_RADIUS = null;
+
 const Legacy = () => {
   const containerRef = useRef(null);
   const textureRef = useRef(null);
@@ -30,7 +35,7 @@ const Legacy = () => {
   const [centers, setCenters] = useState(null);
   const [hoveredKey, setHoveredKey] = useState(null);
 
-  // Returns the center x/y of `el`, relative to `wrapperRef.current`
+  // Returns the center x/y (and radius) of `el`, relative to `wrapperRef.current`
   const getCenter = (el) => {
     if (!el || !wrapperRef.current) return null;
 
@@ -40,6 +45,7 @@ const Legacy = () => {
     return {
       x: rect.left + rect.width / 2 - wrapperRect.left,
       y: rect.top + rect.height / 2 - wrapperRect.top,
+      r: FIXED_CIRCLE_RADIUS ?? rect.width / 2,
     };
   };
 
@@ -67,6 +73,7 @@ const Legacy = () => {
       onUpdate: updateMask,
     });
   }, []);
+
   useEffect(() => {
     gsap.to(gradientRef.current, {
       x: window.innerWidth * 0.4,
@@ -79,7 +86,6 @@ const Legacy = () => {
       },
     });
   }, []);
- 
 
   useEffect(() => {
     const calculate = () => {
@@ -172,46 +178,80 @@ const Legacy = () => {
               <stop offset="0%" stopColor="#4facfe" />
               <stop offset="100%" stopColor="#00c6ff" />
             </linearGradient>
+
+            {centers && (
+              <mask
+                id="circleMask"
+                maskUnits="userSpaceOnUse"
+                x="0"
+                y="0"
+                width="100%"
+                height="100%"
+              >
+                {/* white = visible, black = hidden */}
+                <rect x="0" y="0" width="100%" height="100%" fill="white" />
+                {circleList.map(({ key }) => {
+                  const c = centers[key];
+                  if (!c) return null;
+                  return (
+                    <circle
+                      key={key}
+                      cx={c.x}
+                      cy={c.y}
+                      r={c.r}
+                      fill="black"
+                    />
+                  );
+                })}
+              </mask>
+            )}
           </defs>
 
-          {pairs.map(([fromKey, toKey], i) => {
-            let from = centers[fromKey];
-            let to = centers[toKey];
-            const isHighlighted =
-              hoveredKey && (hoveredKey === fromKey || hoveredKey === toKey);
-            const isDimmed = hoveredKey && !isHighlighted;
+          <g mask={centers ? "url(#circleMask)" : undefined}>
+            {pairs.map(([fromKey, toKey], i) => {
+              let from = centers[fromKey];
+              let to = centers[toKey];
+              const isHighlighted =
+                hoveredKey &&
+                (hoveredKey === fromKey || hoveredKey === toKey);
+              const isDimmed = hoveredKey && !isHighlighted;
 
-            if (!from || !to) return null;
+              if (!from || !to) return null;
 
-            // Ensure the line always starts (grows) FROM the hovered circle,
-            // regardless of the pair's original order in the array.
-            if (isHighlighted && hoveredKey === toKey) {
-              const temp = from;
-              from = to;
-              to = temp;
-            }
+              // Ensure the line always starts (grows) FROM the hovered circle,
+              // regardless of the pair's original order in the array.
+              if (isHighlighted && hoveredKey === toKey) {
+                const temp = from;
+                from = to;
+                to = temp;
+              }
 
-            return (
-              <g key={i}>
-                <line
-                  x1={from.x}
-                  y1={from.y}
-                  x2={to.x}
-                  y2={to.y}
-                  className={`${styles.baseLine} ${isDimmed ? styles.dimmed : ""}`}
-                />
+              return (
+                <g key={i}>
+                  <line
+                    x1={from.x}
+                    y1={from.y}
+                    x2={to.x}
+                    y2={to.y}
+                    className={`${styles.baseLine} ${
+                      isDimmed ? styles.dimmed : ""
+                    }`}
+                  />
 
-                <line
-                  x1={from.x}
-                  y1={from.y}
-                  x2={to.x}
-                  y2={to.y}
-                  pathLength="1"
-                  className={`${styles.overlayLine} ${isHighlighted ? styles.active : ""}`}
-                />
-              </g>
-            );
-          })}
+                  <line
+                    x1={from.x}
+                    y1={from.y}
+                    x2={to.x}
+                    y2={to.y}
+                    pathLength="1"
+                    className={`${styles.overlayLine} ${
+                      isHighlighted ? styles.active : ""
+                    }`}
+                  />
+                </g>
+              );
+            })}
+          </g>
         </svg>
 
         {circleList.map(({ key, ref, className, img }) => {

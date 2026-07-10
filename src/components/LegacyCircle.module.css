@@ -21,3 +21,17 @@
     border: 1px solid #33E7FF;
     transition: border 0.3s;
 }
+
+.overlay {
+    position: relative;
+   max-width: 40%;
+   max-height: 20%;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+    margin-left: 10%;
+    margin-top: -10%;
+}

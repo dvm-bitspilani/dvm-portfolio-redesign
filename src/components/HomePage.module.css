@@ -1,428 +1,426 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  overflow-x: hidden;
-}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
 
-.dvm_text {
-  position: absolute;
-  width: 100vw;
-  height: auto;
-  max-height: 50vh;
-  z-index: 1000;
-  will-change: clip-path;
-  object-fit: cover;
-}
+  .dvm_text {
+    position: absolute;
+    width: 100vw;
+    height: auto;
+    max-height: 50vh;
+    z-index: 1000;
+    will-change: clip-path;
+    object-fit: cover;
+  }
 
-.text {
-  position: absolute;
-  color: #6d6d6d;
-  font-family: "Orbitron";
-  left: 5.2%;
-  z-index: 99;
-  font-size: 0.8rem;
-}
-
-.visualMedia {
-  font-size: 1.2rem;
-  padding-left: 20px;
-}
-
-.logo {
-  position: absolute;
-  z-index: 1000;
-  transition: transform 0.15s ease-out;
-  transform-style: preserve-3d;
-  will-change: transform;
-  object-fit: cover;
-  height: 55%; /* was 80% */
-  margin-top: 5%;
-}
-
-.logo1 {
-  position: absolute;
-  margin-right: 5%;
-  z-index: 1000;
-  transition: transform 0.15s ease-out;
-  transform-style: preserve-3d;
-  will-change: transform;
-  height: 40%; /* added — was unset, inheriting natural SVG size */
-}
-/* glow duplicate sits directly behind the real logo, animates its own drop-shadow */
-
-.lines {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.bg {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  background-image: url("../assests/bg_grad.png");
-  background-size: cover;
-  background-position: center;
-}
-
-.image_container,
-.logoFloatWrapper {
-  position: absolute;
-  inset: 0;
-  top: -15%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  perspective: 800px;
-  z-index: 1000;
-}
-
-.text_sub {
-  position: absolute;
-  color: #ffffff;
-  font-family: "Josefin Sans";
-  display: flex;
-  flex-direction: column;
-  z-index: 1005;
-  font-size: 1.5rem;
-  text-align: right;
-  bottom: 5%;
-  left: 5%;
-  align-items: flex-start;
-  line-height: 2.1rem;
-}
-
-.about {
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  color: #ffffff;
-  font-family: "Josefin Sans";
-  bottom: 7%;
-  right: 7%;
-  border: 1px solid #ffffff;
-  padding: 10px;
-  padding-top: -2px;
-  border-radius: 999px;
-  background-color: transparent;
-  font-size: 1rem;
-  white-space: nowrap;
-  cursor: pointer;
-}
-
-.texture {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-
-  background-size: cover;
-  background-position: center;
-  -webkit-mask-image: radial-gradient(
-    circle 40vw at -9999px -9999px,
-    black 0%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    circle 40vw at -9999px -9999px,
-    black 0%,
-    transparent 100%
-  );
-}
-
-.grid {
-  position: absolute;
-  inset: 0;
-  z-index: 997;
-  opacity: 0.6;
-  background: repeating-linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0.2) 0,
-    rgba(255, 255, 255, 0.2) 1px,
-    transparent 1px,
-    transparent 30px
-  );
-}
-
-.gradient {
-  position: absolute;
-  left: 40%;
-  top: -10%;
-  width: 40%;
-  height: 60%;
-  z-index: 999;
-  pointer-events: none;
-
-  background: radial-gradient(
-    circle at 20% 40%,
-    rgba(180, 250, 255, 0.9) 0%,
-    rgba(60, 210, 230, 0.75) 35%,
-    rgba(20, 90, 100, 0.35) 60%,
-    transparent 85%
-  );
-
-  mix-blend-mode: color;
-}
-
-.container {
-  background-color: black;
-  display: flex;
-  align-items: center;
-  position: relative;
-  isolation: isolate;
-  width: 100vw;
-  height: 100vh;
-  background: black;
-  overflow: hidden;
-  perspective: 1000px;
-}
-
-.line {
-  position: absolute;
-  height: 35vh;
-  width: 30px;
-  left: -10%;
-  z-index: 1001;
-  will-change: transform;
-}
-
-.line1 {
-  position: absolute;
-  height: 30px;
-  width: 50vw;
-  top: 10%;
-  left: 25%;
-  z-index: 1001;
-}
-
-.logoFloatWrapper {
-  position: absolute;
-  inset: 0;
-  will-change: transform;
-}
-
-
-@media (max-width: 1200px) {
   .text {
-    font-size: 0.72rem;
+    position: absolute;
+    color: #6d6d6d;
+    font-family: "Orbitron";
+    left: 5.2%;
+    z-index: 99;
+    font-size: 0.8rem;
   }
 
   .visualMedia {
-    font-size: 1.05rem;
-  }
-
-  .text_sub {
-    font-size: 1.25rem;
-    line-height: 1.8rem;
-  }
-
-  .about {
-    font-size: 0.9rem;
-    padding: 9px 14px;
-  }
-}
-
-@media (max-width: 1024px) {
-  .image_container,
-  .logoFloatWrapper {
-    top: -12%;
+    font-size: 1.2rem;
+    padding-left: 20px;
   }
 
   .logo {
-    height: 48%;
+    position: absolute;
+    z-index: 1000;
+    transition: transform 0.15s ease-out;
+    transform-style: preserve-3d;
+    will-change: transform;
+    object-fit: cover;
+    height: 55%;
+    margin-top: 5%;
   }
 
   .logo1 {
-    height: 34%;
-    margin-right: 3%;
-  }
-
-  .text {
-    left: 6%;
-    font-size: 0.68rem;
-  }
-
-  .visualMedia {
-    font-size: 1rem;
-    padding-left: 16px;
-  }
-
-  .text_sub {
-    left: 6%;
-    bottom: 6%;
-    font-size: 1.1rem;
-    line-height: 1.6rem;
-  }
-
-  .about {
-    right: 6%;
-    bottom: 8%;
-    font-size: 0.85rem;
-    padding: 8px 14px;
-  }
-
-  .gradient {
-    width: 55%;
-    height: 45%;
-    left: 30%;
-  }
-}
-
-@media (max-width: 768px) {
-  .image_container,
-  .logoFloatWrapper {
-    top: -8%;
-  }
-
-  .logo {
+    position: absolute;
+    margin-right: 5%;
+    z-index: 1000;
+    transition: transform 0.15s ease-out;
+    transform-style: preserve-3d;
+    will-change: transform;
     height: 40%;
-    margin-top: 0;
   }
 
-  .logo1 {
-    height: 28%;
-    margin-right: 6%;
-    margin-bottom: 3%;
+  .lines {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
   }
 
-  .text {
-    left: 6%;
-    top: 4%;
-    font-size: 0.6rem;
-  }
-
-  .visualMedia {
-    font-size: 0.9rem;
-    padding-left: 12px;
-  }
-
-  .text_sub {
-    left: 6%;
-    bottom: 16%;
-    font-size: 1rem;
-    line-height: 1.4rem;
-  }
-
-  .about {
-    left: 6%;
-    right: auto;
-    bottom: 6%;
-    font-size: 0.8rem;
-    padding: 8px 16px;
-  }
-
-  .line1 {
-    width: 70vw;
-  }
-
-  .gradient {
-    width: 70%;
-    height: 35%;
-    left: 15%;
-    top: -5%;
-  }
-}
-
-/* ---- Mobile phones ---- */
-@media (max-width: 480px) {
-  .container {
-    height: 100svh; /* avoids mobile browser chrome jump */
+  .bg {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../assests/bg_grad.png");
+    background-size: cover;
+    background-position: center;
   }
 
   .image_container,
   .logoFloatWrapper {
-    top: -4%;
-  }
-
-  .logo {
-    height: 32%;
-  }
-
-  .logo1 {
-    height: 22%;
-    margin-right: 8%;
-  }
-
-  .text {
-    left: 6%;
-    top: 3%;
-    font-size: 0.5rem;
-  }
-
-  .visualMedia {
-    font-size: 0.75rem;
-    padding-left: 10px;
+    position: absolute;
+    inset: 0;
+    top: -15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 800px;
+    overflow: hidden;
+    z-index: 1000;
   }
 
   .text_sub {
-    left: 6%;
-    bottom: 18%;
-    font-size: 0.8rem;
-    line-height: 1.15rem;
+    position: absolute;
+    color: #ffffff;
+    font-family: "Josefin Sans";
+    display: flex;
+    flex-direction: column;
+    z-index: 1005;
+    font-size: 1.5rem;
+    text-align: right;
+    bottom: 5%;
+    left: 5%;
+    align-items: flex-start;
+    line-height: 2.1rem;
+    overflow: hidden;
   }
 
   .about {
-    left: 6%;
-    right: auto;
-    bottom: 6%;
-    font-size: 0.72rem;
-    padding: 7px 14px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    color: #ffffff;
+    font-family: "Josefin Sans";
+    bottom: 7%;
+    right: 7%;
+    border: 1px solid #ffffff;
+    padding: 10px;
+    padding-top: -2px;
+    border-radius: 999px;
+    background-color: transparent;
+    font-size: 1rem;
+    white-space: nowrap;
+    cursor: pointer;
   }
 
-  .line {
-    width: 18px;
-  }
+  .texture {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
 
-  .line1 {
-    width: 85vw;
-    top: 8%;
-    left: 10%;
-  }
-
-  .gradient {
-    width: 90%;
-    height: 28%;
-    left: 5%;
-    top: -3%;
+    background-size: cover;
+    background-position: center;
+    -webkit-mask-image: radial-gradient(
+      circle 40vw at -9999px -9999px,
+      black 0%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      circle 40vw at -9999px -9999px,
+      black 0%,
+      transparent 100%
+    );
   }
 
   .grid {
-    background-size: 20px 20px;
-  }
-}
-
-/* ---- Very small phones ---- */
-@media (max-width: 360px) {
-  .text {
-    font-size: 0.45rem;
-  }
-
-  .text_sub {
-    font-size: 0.7rem;
-    line-height: 1rem;
+    position: absolute;
+    inset: 0;
+    z-index: 997;
+    opacity: 0.6;
+    background: repeating-linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.2) 0,
+      rgba(255, 255, 255, 0.2) 1px,
+      transparent 1px,
+      transparent 30px
+    );
   }
 
-  .about {
-    font-size: 0.65rem;
-    padding: 6px 12px;
-  }
-  .logo1{
-    margin-right: 10%;
-  }
-}
+  .gradient {
+    position: absolute;
+    left: 40%;
+    top: -10%;
+    width: 40%;
+    height: 60%;
+    z-index: 999;
+    pointer-events: none;
 
-/* ---- Reduced motion ---- */
-@media (prefers-reduced-motion: reduce) {
-  .logo,
-  .logo1,
+    background: radial-gradient(
+      circle at 20% 40%,
+      rgba(180, 250, 255, 0.9) 0%,
+      rgba(60, 210, 230, 0.75) 35%,
+      rgba(20, 90, 100, 0.35) 60%,
+      transparent 85%
+    );
+
+    mix-blend-mode: color;
+  }
+
+  .container {
+    background-color: black;
+    display: flex;
+    align-items: center;
+    position: relative;
+    isolation: isolate;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    overflow: hidden;
+    perspective: 1000px;
+  }
+
+  .line {
+    position: absolute;
+    height: 35vh;
+    width: 30px;
+    left: -10%;
+    z-index: 1001;
+    will-change: transform;
+  }
+
+  .line1 {
+    position: absolute;
+    height: 30px;
+    width: 50vw;
+    top: 10%;
+    left: 25%;
+    z-index: 1001;
+  }
+
   .logoFloatWrapper {
-    transition: none;
+    position: absolute;
+    inset: 0;
+    will-change: transform;
   }
-}
+
+  @media (max-width: 1200px) {
+    .text {
+      font-size: 0.72rem;
+    }
+
+    .visualMedia {
+      font-size: 1.05rem;
+    }
+
+    .text_sub {
+      font-size: 1.25rem;
+      line-height: 1.8rem;
+    }
+
+    .about {
+      font-size: 0.9rem;
+      padding: 9px 14px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .image_container,
+    .logoFloatWrapper {
+      top: -12%;
+    }
+
+    .logo {
+      height: 48%;
+    }
+
+    .logo1 {
+      height: 34%;
+      margin-right: 3%;
+    }
+
+    .text {
+      left: 6%;
+      font-size: 0.68rem;
+    }
+
+    .visualMedia {
+      font-size: 1rem;
+      padding-left: 16px;
+    }
+
+    .text_sub {
+      left: 6%;
+      bottom: 6%;
+      font-size: 1.1rem;
+      line-height: 1.6rem;
+    }
+
+    .about {
+      right: 6%;
+      bottom: 8%;
+      font-size: 0.85rem;
+      padding: 8px 14px;
+    }
+
+    .gradient {
+      width: 55%;
+      height: 45%;
+      left: 30%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .image_container,
+    .logoFloatWrapper {
+      top: -8%;
+    }
+
+    .logo {
+      height: 40%;
+      margin-top: 0;
+    }
+
+    .logo1 {
+      height: 28%;
+      margin-right: 6%;
+      margin-bottom: 3%;
+    }
+
+    .text {
+      left: 6%;
+      top: 4%;
+      font-size: 0.6rem;
+    }
+
+    .visualMedia {
+      font-size: 0.9rem;
+      padding-left: 12px;
+    }
+
+    .text_sub {
+      left: 6%;
+      bottom: 16%;
+      font-size: 1rem;
+      line-height: 1.4rem;
+    }
+
+    .about {
+      left: 6%;
+      right: auto;
+      bottom: 6%;
+      font-size: 0.8rem;
+      padding: 8px 16px;
+    }
+
+    .line1 {
+      width: 70vw;
+    }
+
+    .gradient {
+      width: 70%;
+      height: 35%;
+      left: 15%;
+      top: -5%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      height: 100svh;
+    }
+
+    .image_container,
+    .logoFloatWrapper {
+      top: -4%;
+    }
+
+    .logo {
+      height: 32%;
+    }
+
+    .logo1 {
+      height: 22%;
+      margin-right: 8%;
+    }
+
+    .text {
+      left: 6%;
+      top: 3%;
+      font-size: 0.5rem;
+    }
+
+    .visualMedia {
+      font-size: 0.75rem;
+      padding-left: 10px;
+    }
+
+    .text_sub {
+      left: 6%;
+      bottom: 18%;
+      font-size: 0.8rem;
+      line-height: 1.15rem;
+    }
+
+    .about {
+      left: 6%;
+      right: auto;
+      bottom: 6%;
+      font-size: 0.72rem;
+      padding: 7px 14px;
+    }
+
+    .line {
+      width: 18px;
+    }
+
+    .line1 {
+      width: 85vw;
+      top: 8%;
+      left: 10%;
+    }
+
+    .gradient {
+      width: 90%;
+      height: 28%;
+      left: 5%;
+      top: -3%;
+    }
+
+    .grid {
+      background-size: 20px 20px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .text {
+      font-size: 0.45rem;
+    }
+
+    .text_sub {
+      font-size: 0.7rem;
+      line-height: 1rem;
+    }
+
+    .about {
+      font-size: 0.65rem;
+      padding: 6px 12px;
+    }
+
+    .logo1 {
+      margin-right: 10%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo,
+    .logo1,
+    .logoFloatWrapper {
+      transition: none;
+    }
+  }

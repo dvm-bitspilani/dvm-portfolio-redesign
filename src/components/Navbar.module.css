@@ -27,4 +27,5 @@
     height: 2vw;
     width: 2vw;
     background-image: url('../assests/bg.png');
+    overflow: hidden;
 }

@@ -16,15 +16,15 @@ const HomePage = () => {
   const gridRef = useRef(null);
   const logoRef = useRef(null);
   const logoFloatRef = useRef(null);
-  const logoSvg1Ref = useRef(null); // wrapper <svg> for Vector.svg
-  const logoSvg2Ref = useRef(null); // wrapper <svg> for Vector1.svg
-  const logoImgRef = useRef(null); // imported logo image, swapped in after settle
-  const logoPath1Ref = useRef(null); // "Vector.svg" stroke path
-  const logoPath2Ref = useRef(null); // "Vector1.svg" stroke path
-  const logoFill1Ref = useRef(null); // "Vector.svg" filled copy (clipped)
-  const logoFill2Ref = useRef(null); // "Vector1.svg" filled copy (clipped)
-  const logoClip1Ref = useRef(null); // reveal rect for fill 1
-  const logoClip2Ref = useRef(null); // reveal rect for fill 2
+  const logoSvg1Ref = useRef(null);
+  const logoSvg2Ref = useRef(null);
+  const logoImgRef = useRef(null);
+  const logoPath1Ref = useRef(null);
+  const logoPath2Ref = useRef(null);
+  const logoFill1Ref = useRef(null);
+  const logoFill2Ref = useRef(null);
+  const logoClip1Ref = useRef(null);
+  const logoClip2Ref = useRef(null);
   const dvm_Ref = useRef(null);
   const dvm_textRef = useRef(null);
   const code_ref = useRef(null);
@@ -34,36 +34,41 @@ const HomePage = () => {
   const gradientPos = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    const updateMask = () => {
-      if (!textureRef.current) return;
+  const updateMask = () => {
+    if (!textureRef.current) return;
 
-      const { x, y } = gradientPos.current;
-      const centerX = x + window.innerWidth * 0.6;
-      const centerY = y + window.innerHeight * 0.2;
+    const { x, y } = gradientPos.current;
+    const centerX = x + window.innerWidth * 0.6;
+    const centerY = y + window.innerHeight * 0.2;
 
-      const mask = `radial-gradient(circle 40vw at ${centerX}px ${centerY}px, black 0%, transparent 100%)`;
+    const mask = `radial-gradient(circle 40vw at ${centerX}px ${centerY}px, black 0%, transparent 100%)`;
 
-      textureRef.current.style.webkitMaskImage = mask;
-      textureRef.current.style.maskImage = mask;
-    };
+    textureRef.current.style.webkitMaskImage = mask;
+    textureRef.current.style.maskImage = mask;
+  };
 
-    updateMask();
+  updateMask();
 
-    gsap.to(gradientPos.current, {
-      x: -window.innerWidth * 1.5,
-      y: window.innerHeight,
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top 10%",
-        end: "bottom -100%",
-        scrub: 1,
-      },
-      onUpdate: updateMask,
-    });
-  }, []);
+  const tween = gsap.to(gradientPos.current, {
+    x: -window.innerWidth * 1.5,
+    y: window.innerHeight,
+    scrollTrigger: {
+      trigger: containerRef.current,
+      start: "top 10%",
+      end: "bottom -100%",
+      scrub: 1,
+    },
+    onUpdate: updateMask,
+  });
+
+  return () => {
+    tween.scrollTrigger && tween.scrollTrigger.kill();
+    tween.kill();
+  };
+}, []);
 
   useEffect(() => {
-    gsap.to(gradientRef.current, {
+    const tween = gsap.to(gradientRef.current, {
       x: -window.innerWidth * 1.5,
       y: window.innerHeight,
       scrollTrigger: {
@@ -73,10 +78,13 @@ const HomePage = () => {
         scrub: 1,
       },
     });
+
+    return () => {
+      tween.scrollTrigger && tween.scrollTrigger.kill();
+      tween.kill();
+    };
   }, []);
 
-  // Intro sequence: logo alone (enlarged) traces + fills -> shrinks back ->
-  // crossfades into the imported logo image -> page reveals
   useEffect(() => {
     const path1 = logoPath1Ref.current;
     const path2 = logoPath2Ref.current;
@@ -87,13 +95,12 @@ const HomePage = () => {
     const length1 = path1.getTotalLength();
     const length2 = path2.getTotalLength();
 
-    // ---- initial state: only the enlarged logo is visible ----
     gsap.set(path1, { strokeDasharray: length1, strokeDashoffset: length1 });
     gsap.set(path2, { strokeDasharray: length2, strokeDashoffset: length2 });
-    gsap.set(clip1, { attr: { height: 0 } }); // viewBox height: 660
-    gsap.set(clip2, { attr: { height: 0 } }); // viewBox height: 456
+    gsap.set(clip1, { attr: { height: 0 } });
+    gsap.set(clip2, { attr: { height: 0 } });
     gsap.set(logoFloatRef.current, { scale: 1.35 });
-    gsap.set(logoImgRef.current, { autoAlpha: 0 }); // imported logo hidden until swap
+    gsap.set(logoImgRef.current, { autoAlpha: 0 });
     gsap.set(dvm_textRef.current, {
       clipPath: "inset(0 100% 0 0)",
       webkitClipPath: "inset(0 100% 0 0)",
@@ -120,18 +127,13 @@ const HomePage = () => {
 
     const tl = gsap.timeline({ delay: 0.3 });
 
-   
-    tl.to(path1, { strokeDashoffset: 0, ease: "none", duration: 0.8}, 0)
-
+    tl.to(path1, { strokeDashoffset: 0, ease: "none", duration: 0.8 }, 0)
       .to(path2, { strokeDashoffset: 0, ease: "none", duration: 0.8 }, 0.15)
-
       .to(
         logoFloatRef.current,
         { scale: 1, duration: 0.7, ease: "power3.inOut" },
         "-=0.35",
       )
-
-      // Phase 2.5 — once settled, crossfade the traced SVGs into the imported logo image
       .to(
         [logoSvg1Ref.current, logoSvg2Ref.current],
         { autoAlpha: 0, duration: 0.4, ease: "power1.inOut" },
@@ -141,8 +143,6 @@ const HomePage = () => {
         { autoAlpha: 1, duration: 0.4, ease: "power1.inOut" },
         "<",
       )
-
-      // Phase 3 — the rest of the page reveals as the logo settles
       .to(
         [gridRef.current, textureRef.current, gradientRef.current],
         { autoAlpha: 1, duration: 0.6, ease: "power1.out" },
@@ -203,14 +203,16 @@ const HomePage = () => {
     });
 
     return () => {
+      tl.kill();
       floatTween.kill();
       floatScrollTrigger.kill();
-      ScrollTrigger.getAll().forEach((st) => st.kill());
     };
   }, []);
 
   useEffect(() => {
-    gsap.to(logoRef.current, {
+    gsap.set(logoRef.current, { scale: 1, y: 0 });
+
+    const tween = gsap.to(logoRef.current, {
       scale: 0,
       y: window.innerHeight,
       ease: "none",
@@ -221,12 +223,22 @@ const HomePage = () => {
         scrub: true,
       },
     });
+
+    const refreshId = requestAnimationFrame(() => ScrollTrigger.refresh());
+
+    return () => {
+      cancelAnimationFrame(refreshId);
+      tween.scrollTrigger && tween.scrollTrigger.kill();
+      tween.kill();
+      gsap.set(logoRef.current, { scale: 1, y: 0, clearProps: "transform" });
+    };
   }, []);
 
-  // Magnetic tilt on logo (cursor-follow)
   useEffect(() => {
     const logoEl = logoRef.current;
     if (!logoEl) return;
+
+    const clamp = gsap.utils.clamp(-6, 6);
 
     const handleMouseMove = (e) => {
       const rect = logoEl.getBoundingClientRect();
@@ -236,10 +248,10 @@ const HomePage = () => {
       const deltaY = (e.clientY - centerY) / rect.height;
 
       gsap.to(logoEl, {
-        rotateY: deltaX * 20,
-        rotateX: -deltaY * 20,
+        rotateY: clamp(deltaX * 8),
+        rotateX: clamp(-deltaY * 6),
         transformPerspective: 800,
-        duration: 0.4,
+        duration: 0.5,
         ease: "power2.out",
       });
     };
@@ -340,7 +352,6 @@ const HomePage = () => {
               />
             </svg>
 
-            {/* Imported logo image — same class/positioning as the first svg, swapped in after settle */}
             <img
               ref={logoImgRef}
               src={logo}
