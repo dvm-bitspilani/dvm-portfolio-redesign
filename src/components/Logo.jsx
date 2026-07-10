@@ -110,7 +110,7 @@ const Logo = ({ triggerSelector = "#hero-container" }) => {
         start: "top 10%",
         endTrigger: "#about-container",
         end: "bottom bottom",
-        scrub: 1,
+        scrub: 2,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
           const scrolled = self.progress > 0.001;
@@ -145,7 +145,10 @@ const Logo = ({ triggerSelector = "#hero-container" }) => {
   }, [triggerSelector]);
 
   // Keep it visually pinned on screen for the entire Home→About span, then
-  // release it automatically right where About ends.
+  // release it automatically right where About ends. invalidateOnRefresh +
+  // the load/font refreshes below stop it from unpinning early due to a
+  // stale height measurement of #about-container (images/fonts/SplitText
+  // all shift its height after first paint).
   useEffect(() => {
     const el = logoRef.current;
 
@@ -153,13 +156,28 @@ const Logo = ({ triggerSelector = "#hero-container" }) => {
       trigger: triggerSelector,
       start: "top top",
       endTrigger: "#about-container",
-      end: "bottom bottom",
+      end: "25% top",
       pin: el,
       pinSpacing: false,
       anticipatePin: 1,
+      invalidateOnRefresh: true,
     });
 
-    return () => pinTrigger.kill();
+    const refreshId = requestAnimationFrame(() => ScrollTrigger.refresh());
+    const handleLoad = () => ScrollTrigger.refresh();
+    window.addEventListener("load", handleLoad);
+
+    let fontsCancelled = false;
+    document.fonts?.ready.then(() => {
+      if (!fontsCancelled) ScrollTrigger.refresh();
+    });
+
+    return () => {
+      fontsCancelled = true;
+      cancelAnimationFrame(refreshId);
+      window.removeEventListener("load", handleLoad);
+      pinTrigger.kill();
+    };
   }, [triggerSelector]);
 
   useEffect(() => {
