@@ -29,8 +29,13 @@ const Legacy = () => {
   const img1Ref = useRef(null);
   const img2Ref = useRef(null);
   const img3Ref = useRef(null);
-
+  const headerRef = useRef(null);
+  const headerFillRef = useRef(null);
+  const footerRef = useRef(null);
+  const footerConRef = useRef(null);
+  const footerBtnRef = useRef(null);
   const gradientPos = useRef({ x: 0, y: 0 });
+  const lineRefs = useRef([]);
 
   const [centers, setCenters] = useState(null);
   const [hoveredKey, setHoveredKey] = useState(null);
@@ -86,6 +91,117 @@ const Legacy = () => {
       },
     });
   }, []);
+
+  useEffect(() => {
+    gsap.from(headerRef.current, {
+      y: -100,
+      x: 100,
+      opacity: 0,
+      duration: 1,
+      scrollTrigger: {
+        trigger: headerRef.current,
+        start: "top 85%",
+        end: "top",
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    gsap.from(headerFillRef.current, {
+      y: 100,
+      x: -100,
+      opacity: 0,
+      duration: 1,
+      scrollTrigger: {
+        trigger: headerRef.current,
+        start: "top 85%",
+        end: "top",
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 10%",
+        end: "top",
+      },
+    });
+
+    tl.from(footerConRef.current.children, {
+      x: -100,
+      opacity: 0,
+      duration: 0.6,
+      stagger: 0.2,
+    }).from(footerBtnRef.current.children, {
+      x: 100,
+      opacity: 0,
+      duration: 0.6,
+      stagger: 0.2,
+    });
+
+    return () => {
+      tl.scrollTrigger?.kill();
+      tl.kill();
+    };
+  }, []);
+
+  // Circles appear one by one, then lines draw in to connect them
+  useEffect(() => {
+    if (!centers) return; // wait until circle positions (and <line> elements) exist
+
+    const circleOrder = [
+      googleRef.current,
+      microsoftRef.current,
+      metaRef.current,
+      imcRef.current,
+      img1Ref.current,
+      img2Ref.current,
+      img3Ref.current,
+    ].filter(Boolean);
+
+    const validLines = lineRefs.current.filter(Boolean);
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: wrapperRef.current,
+        start: "top 96%",
+        end: "top 20%",
+        toggleActions: "play none none reverse",
+      },
+    });
+
+    tl.set(circleOrder, { opacity: 0, scale: 0.5, transformOrigin: "center center" })
+      .set(validLines, { strokeDasharray: 1, strokeDashoffset: 1, opacity: 0 })
+      .to(circleOrder, {
+        opacity: 1,
+        scale: 1,
+        duration: 0.45,
+        stagger: 0.15,
+        ease: "back.out(1.7)",
+      })
+      .to(
+        validLines,
+        {
+          opacity: 1,
+          strokeDashoffset: 0,
+          duration: 0.7,
+          stagger: 0.05,
+          ease: "power2.out",
+        },
+        "-=0.15" // start lines slightly before the last circle finishes
+      )
+      .set(validLines, { strokeDasharray: "0.02 0.015" }) // switch to dashed once fully drawn
+      // NEW: hand control back to CSS classes (.dimmed / .circleDimmed) so hover works again
+      .set(circleOrder, { clearProps: "opacity,scale" })
+      .set(validLines, { clearProps: "opacity" });
+
+    return () => {
+      tl.scrollTrigger?.kill();
+      tl.kill();
+    };
+  }, [centers]);
 
   useEffect(() => {
     const calculate = () => {
@@ -150,8 +266,18 @@ const Legacy = () => {
       ></div>
 
       <div className={styles.header}>
-        <img src={header} alt="Header" className={styles.headerOuterImage} />
-        <img src={header_fill} alt="Header" className={styles.headerImage} />
+        <img
+          src={header}
+          alt="Header"
+          ref={headerRef}
+          className={styles.headerOuterImage}
+        />
+        <img
+          src={header_fill}
+          alt="Header"
+          ref={headerFillRef}
+          className={styles.headerImage}
+        />
       </div>
 
       <div className={styles.circleWrapper} ref={wrapperRef}>
@@ -194,13 +320,7 @@ const Legacy = () => {
                   const c = centers[key];
                   if (!c) return null;
                   return (
-                    <circle
-                      key={key}
-                      cx={c.x}
-                      cy={c.y}
-                      r={c.r}
-                      fill="black"
-                    />
+                    <circle key={key} cx={c.x} cy={c.y} r={c.r} fill="black" />
                   );
                 })}
               </mask>
@@ -229,10 +349,14 @@ const Legacy = () => {
               return (
                 <g key={i}>
                   <line
+                    ref={(el) => (lineRefs.current[i] = el)}
                     x1={from.x}
                     y1={from.y}
                     x2={to.x}
                     y2={to.y}
+                    pathLength="1"
+                    strokeDasharray="1"
+                    strokeDashoffset="1"
                     className={`${styles.baseLine} ${
                       isDimmed ? styles.dimmed : ""
                     }`}
@@ -272,12 +396,12 @@ const Legacy = () => {
         })}
       </div>
 
-      <div className={styles.footer}>
-        <div className={styles.footerContent}>
+      <div ref={footerRef} className={styles.footer}>
+        <div className={styles.footerContent} ref={footerConRef}>
           <h2>DEPARTMENT OF</h2>
           <h1 className={styles.vm}>VISUAL MEDIA</h1>
         </div>
-        <div className={styles.footerActions}>
+        <div ref={footerBtnRef} className={styles.footerActions}>
           <button className={styles.footerButton}>ARTWORKS</button>
           <img className={styles.arrow} src={arrow} alt="Arrow" />
         </div>

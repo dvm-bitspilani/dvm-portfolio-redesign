@@ -11,15 +11,16 @@ const Landing = () => {
 
   return (
     <>
-      <Navbar onHamClick={() => setIsHamOpen(true)} />
+        <Navbar onHamClick={() => setIsHamOpen(true)} />
 
-      <LandingPage />
+        <LandingPage />
 
-      <AboutPage />
-      <Blog />
+        <AboutPage />
+        <Blog />
 
       {isHamOpen && <Ham onClose={() => setIsHamOpen(false)} />}
       <Legacy />
+   
     </>
   );
 };
