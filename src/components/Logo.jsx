@@ -144,11 +144,7 @@ const Logo = ({ triggerSelector = "#hero-container" }) => {
     };
   }, [triggerSelector]);
 
-  // Keep it visually pinned on screen for the entire Home→About span, then
-  // release it automatically right where About ends. invalidateOnRefresh +
-  // the load/font refreshes below stop it from unpinning early due to a
-  // stale height measurement of #about-container (images/fonts/SplitText
-  // all shift its height after first paint).
+
   useEffect(() => {
     const el = logoRef.current;
 

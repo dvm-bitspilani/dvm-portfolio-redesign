@@ -4,6 +4,7 @@ import header from "../assests/Legacy/header.svg";
 import header_fill from "../assests/Legacy/header_fill.svg";
 import arrow from "../assests/Legacy/arrow.png";
 import LegacyCircle from "./LegacyCircle";
+import LegacyCard from "./LegacyCard";
 import google from "../assests/Legacy/google.png";
 import microsoft from "../assests/Legacy/microsoft.png";
 import meta from "../assests/Legacy/meta.png";
@@ -37,8 +38,20 @@ const Legacy = () => {
   const gradientPos = useRef({ x: 0, y: 0 });
   const lineRefs = useRef([]);
 
+  // key -> DOM node, used only to measure position for the overlay
+  const circleDomRefs = useRef({});
+
   const [centers, setCenters] = useState(null);
   const [hoveredKey, setHoveredKey] = useState(null);
+
+  // Which card is open, and where/how big the shared overlay should be
+  const [openKey, setOpenKey] = useState(null);
+  const [overlayPos, setOverlayPos] = useState({
+    left: 0,
+    top: 0,
+    anchor: "left",
+    width: 0,
+  });
 
   // Returns the center x/y (and radius) of `el`, relative to `wrapperRef.current`
   const getCenter = (el) => {
@@ -53,6 +66,79 @@ const Legacy = () => {
       r: FIXED_CIRCLE_RADIUS ?? rect.width / 2,
     };
   };
+
+  // Positions + sizes the single shared overlay based on the clicked
+  // circle's real on-screen center.
+  // - width is a fixed px value (computed once here) so every card is
+  //   identical, regardless of its own content.
+  // - if the circle is in the right half of the screen, the overlay
+  //   opens to its LEFT instead of the right, so it never covers the circle.
+  const positionOverlay = (key) => {
+    const el = circleDomRefs.current[key];
+    if (!el) return;
+
+    const rect = el.getBoundingClientRect();
+    const circleCenterX = rect.left + rect.width / 2;
+    const circleCenterY = rect.top + rect.height / 2;
+
+    const overlayWidth = Math.min(600, window.innerWidth * 0.9);
+    const overlayHeight = Math.min(window.innerHeight * 0.8, 500);
+    const margin = 16;
+    const gap = 24; // space between the circle and the card when placed beside it
+
+    const isRightHalf = circleCenterX > window.innerWidth / 2;
+
+    let left;
+    let anchor; // "left" = `left` is the card's left edge, "right" = `left` is the card's right edge
+
+    if (isRightHalf) {
+      left = circleCenterX - gap;
+      anchor = "right";
+    } else {
+      left = circleCenterX + gap;
+      anchor = "left";
+    }
+
+    // Clamp horizontally so the card never runs off either screen edge
+    if (anchor === "right") {
+      left = Math.min(
+        Math.max(left, overlayWidth + margin),
+        window.innerWidth - margin
+      );
+    } else {
+      left = Math.min(
+        Math.max(left, margin),
+        window.innerWidth - overlayWidth - margin
+      );
+    }
+
+    // Vertically center on the circle, clamped to viewport
+    let top = circleCenterY - overlayHeight / 2;
+    top = Math.min(
+      Math.max(top, margin),
+      window.innerHeight - overlayHeight - margin
+    );
+
+    setOverlayPos({ left, top, anchor, width: overlayWidth });
+  };
+
+  const toggleKey = (key) => {
+    setOpenKey((prev) => {
+      const next = prev === key ? null : key;
+      if (next) requestAnimationFrame(() => positionOverlay(next));
+      return next;
+    });
+  };
+
+  const closeOverlay = () => setOpenKey(null);
+
+  // Reposition the open card on resize
+  useEffect(() => {
+    if (!openKey) return;
+    const onResize = () => positionOverlay(openKey);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [openKey]);
 
   useEffect(() => {
     const updateMask = () => {
@@ -193,7 +279,6 @@ const Legacy = () => {
         "-=0.15" // start lines slightly before the last circle finishes
       )
       .set(validLines, { strokeDasharray: "0.02 0.015" }) // switch to dashed once fully drawn
-      // NEW: hand control back to CSS classes (.dimmed / .circleDimmed) so hover works again
       .set(circleOrder, { clearProps: "opacity,scale" })
       .set(validLines, { clearProps: "opacity" });
 
@@ -314,7 +399,6 @@ const Legacy = () => {
                 width="100%"
                 height="100%"
               >
-                {/* white = visible, black = hidden */}
                 <rect x="0" y="0" width="100%" height="100%" fill="white" />
                 {circleList.map(({ key }) => {
                   const c = centers[key];
@@ -338,8 +422,6 @@ const Legacy = () => {
 
               if (!from || !to) return null;
 
-              // Ensure the line always starts (grows) FROM the hovered circle,
-              // regardless of the pair's original order in the array.
               if (isHighlighted && hoveredKey === toKey) {
                 const temp = from;
                 from = to;
@@ -383,18 +465,45 @@ const Legacy = () => {
           return (
             <div
               key={key}
-              ref={ref}
+              ref={(el) => {
+                ref.current = el;
+                circleDomRefs.current[key] = el;
+              }}
               className={`${className} ${styles.circleBase} ${
                 isDimmedCircle ? styles.circleDimmed : ""
               }`}
               onMouseEnter={() => setHoveredKey(key)}
               onMouseLeave={() => setHoveredKey(null)}
+              onClick={() => toggleKey(key)}
             >
               <LegacyCircle img={img} />
             </div>
           );
         })}
       </div>
+
+      {/* Single shared overlay for every circle. It never lives inside a
+          circle's own positioning box, so opening it can't shift that box,
+          and its width is fixed in px from JS so every card is identical. */}
+      {openKey && (
+        <div className={styles.backdrop} onClick={closeOverlay}>
+          <div
+            className={`${styles.overlay} ${
+              overlayPos.anchor === "right"
+                ? styles.anchorRight
+                : styles.anchorLeft
+            }`}
+            style={{
+              left: overlayPos.left,
+              top: overlayPos.top,
+              width: overlayPos.width,
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <LegacyCard onClose={closeOverlay} />
+          </div>
+        </div>
+      )}
 
       <div ref={footerRef} className={styles.footer}>
         <div className={styles.footerContent} ref={footerConRef}>

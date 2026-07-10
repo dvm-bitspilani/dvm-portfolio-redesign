@@ -213,3 +213,44 @@
     -webkit-mask-image: radial-gradient(circle 50vh at -9999px -9999px, black 0%, transparent 100%);
     mask-image: radial-gradient(circle 50vh at -9999px -9999px, black 0%, transparent 100%);
 }
+
+/* ----- Shared card overlay (added) ----- */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 2000;
+}
+
+/* width/left/top are set inline from JS in Legacy.jsx so every card
+   gets the exact same fixed pixel width, and the correct anchored position */
+.overlay {
+  position: fixed;
+  z-index: 2001;
+  animation: overlayIn 0.2s ease-out;
+}
+
+/* Circle is in the left half: card's LEFT edge sits at `left` */
+.overlay.anchorLeft {
+  transform: translateX(100%);
+  transform: translateY(50%);
+
+
+}
+
+/* Circle is in the right half: card's RIGHT edge sits at `left`,
+   so the card renders to the left of the circle instead of on top of it */
+.overlay.anchorRight {
+  transform: translateX(-90%);
+  
+}
+
+@keyframes overlayIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
