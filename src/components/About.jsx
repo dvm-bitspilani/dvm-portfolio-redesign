@@ -156,7 +156,7 @@ const About = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className={styles.container}>
+    <div id="about-container" ref={containerRef} className={styles.container}>
       <div className={styles.grid}></div>
       <div
         style={{ backgroundImage: `url(${bg3})` }}

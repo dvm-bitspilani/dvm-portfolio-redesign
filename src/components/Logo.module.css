@@ -1,0 +1,73 @@
+.image_container,
+.logoFloatWrapper {
+    width: 100%;
+  position: fixed;
+  inset: 0;
+  top: -5%;
+  left: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 800px;
+  overflow: hidden;
+  z-index: 1000;
+  pointer-events: none; /* let clicks pass through to page content */
+}
+
+.image_container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  
+}
+.logo {
+  position: absolute;
+  z-index: 1000;
+  transition: transform 0.15s ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
+  object-fit: cover;
+  height: 55%;
+  width: fit-content;
+  margin-top: 5%;
+  transform: scaleX(1.1);
+}
+
+.logo1 {
+  position: absolute;
+  margin-right: 5%;
+  z-index: 1000;
+  transition: transform 0.15s ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
+  height: 40%;
+}
+
+@media (max-width: 1024px) {
+  .image_container, .logoFloatWrapper { top: -12%; }
+  .logo { height: 62%; }
+  .logo1 { height: 34%; margin-right: 3%; }
+}
+@media (max-width: 768px) {
+  .image_container, .logoFloatWrapper { top: -8%; }
+  .logo { height: 52%; margin-top: 0; }
+  .logo1 { height: 28%; margin-right: 6%; margin-bottom: 3%; }
+}
+@media (max-width: 480px) {
+  .image_container, .logoFloatWrapper { top: -4%; }
+  .logo { height: 42%; }
+  .logo1 { height: 22%; margin-right: 8%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo, .logo1, .logoFloatWrapper { transition: none; }
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+}
