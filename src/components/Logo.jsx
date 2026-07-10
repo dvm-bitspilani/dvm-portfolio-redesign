@@ -107,7 +107,7 @@ const Logo = ({ triggerSelector = "#hero-container" }) => {
       ease: "none",
       scrollTrigger: {
         trigger: triggerSelector,
-        start: "top 10%",
+        start: "top%",
         endTrigger: "#about-container",
         end: "bottom bottom",
         scrub: 2,
