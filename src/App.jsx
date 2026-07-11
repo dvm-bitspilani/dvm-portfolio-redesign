@@ -4,6 +4,7 @@ import Land from "./pages/Landing";
 import ScrollToTop from "./components/ScrollToTop";
 import Blog from "./pages/Blog";
 import Ham from "./components/Ham";
+import Projects from "./pages/Projects";
 const App = () => {
   const [loading, setLoading] = useState(true);
 
@@ -42,6 +43,7 @@ const App = () => {
         <Route path="/" element={<Land />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/ham" element={<Ham />} />
+        <Route path="/projects" element={<Projects />} />
       </Routes>
     </>
   );
