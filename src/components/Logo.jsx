@@ -3,10 +3,12 @@ import logo from "../assests/logo.png";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
+import { X } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Logo = ({ triggerSelector = "#hero-container" }) => {
+  const x_move = window.innerWidth > 768 ? -window.innerWidth * 0.4 : 0;
   const logoRef = useRef(null);
   const logoFloatRef = useRef(null);
   const logoSvg1Ref = useRef(null);
@@ -52,16 +54,17 @@ const Logo = ({ triggerSelector = "#hero-container" }) => {
       .to(path2, { strokeDashoffset: 0, ease: "none", duration: 0.8 }, 0.15)
       .to(
         logoFloatRef.current,
-        { scale: 1, duration: 0.3, ease: "power3.inOut"  , },
+        { scale: 1, duration: 0.3, ease: "power3.inOut" },
         "-=0.35",
       )
-      .to(
-        [logoSvg1Ref.current, logoSvg2Ref.current],
-        { autoAlpha: 0, duration: 0.5, ease: "power1.inOut" },
-      )
+      .to([logoSvg1Ref.current, logoSvg2Ref.current], {
+        autoAlpha: 0,
+        duration: 0.5,
+        ease: "power1.inOut",
+      })
       .to(
         logoImgRef.current,
-        { autoAlpha: 1, duration: 0.4, ease: "power1.inOut" , },
+        { autoAlpha: 1, duration: 0.4, ease: "power1.inOut" },
         "<",
       )
       .add(() => floatTween.play());
@@ -103,9 +106,9 @@ const Logo = ({ triggerSelector = "#hero-container" }) => {
     const tween = gsap.to(el, {
       scale: 0.3,
       rotateY: 360,
-      
+
       rotateZ: 360,
-      x: -window.innerWidth * 0.4,  
+      x: x_move,
       ease: "none",
       scrollTrigger: {
         trigger: triggerSelector,
@@ -123,6 +126,12 @@ const Logo = ({ triggerSelector = "#hero-container" }) => {
             }
           }
         },
+      },
+      onComplete: () => {
+        gsap.set(el, { zIndex: 2 });
+      },
+      onReverseComplete: () => {
+        gsap.set(el, { zIndex: 1000 });
       },
     });
 
@@ -145,7 +154,6 @@ const Logo = ({ triggerSelector = "#hero-container" }) => {
       });
     };
   }, [triggerSelector]);
-
 
   useEffect(() => {
     const el = logoRef.current;

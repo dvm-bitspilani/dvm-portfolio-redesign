@@ -27,7 +27,7 @@
 }
 
 .blogImageGroup {
-  position: absolute;
+
   inset: 0;
   z-index: 1001;
   pointer-events: none;
