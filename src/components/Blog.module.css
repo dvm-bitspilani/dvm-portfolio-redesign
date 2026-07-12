@@ -396,3 +396,26 @@
     padding: 7px 12px;
   }
 }
+.footer {
+  position: absolute;
+  inset: 0;
+  z-index: 998; /* below .text/.projects's own z-index, just a stacking context */
+  pointer-events: none; /* clicks pass through to page except children below */
+}
+@media (max-width: 768px) {
+
+  .footer {
+    position: relative;
+    inset: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 5%;
+    gap: 4%;
+  }
+}
+
+.footer > * {
+  pointer-events: auto;
+}
