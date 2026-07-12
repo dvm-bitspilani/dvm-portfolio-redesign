@@ -104,8 +104,11 @@ const BlogPage = () => {
       },
     });
   }, []);
+  console.log(window.innerWidth, window.innerHeight);
   return (
+
     <>
+    
       <div className={styles.navbar}>
         <Link to="/" className={styles.back}>
           Back To Portfolio
@@ -125,11 +128,22 @@ const BlogPage = () => {
           ref={textureRef2}
           className={styles.texture2}
         ></div>
-        <img src={blog} alt="Blog" ref={blogRef} className={styles.blogImage} />
-        <img src={blog_out} alt="Blog Out" className={styles.blogOutImage} />
+        <div className={styles.blogImageGroup}>
+          <img src={blog_out} alt="Blog Outx" className={styles.blogOutImage} />
+          <img
+            src={blog}
+            alt="Blog"
+            ref={blogRef}
+            className={styles.blogImage}
+          />
+        </div>
 
         <div className={styles.blogs}>
-          <Card clickedCard={clickedCard} setClickedCard={setClickedCard} />
+          <Card
+            clickedCard={clickedCard}
+            setClickedCard={setClickedCard}
+            landingPage={false}
+          />
         </div>
       </div>
       <div className={styles.container2}>

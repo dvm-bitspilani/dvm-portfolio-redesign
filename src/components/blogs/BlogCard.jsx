@@ -1,11 +1,11 @@
 import styles from "./BlogCard.module.css";
 import data from "./BlogData";
 import { Link } from "react-router-dom";
-const BlogCard = ({ limit , clickedCard, setClickedCard }) => {
+const BlogCard = ({ limit , clickedCard, setClickedCard , landingPage }) => {
   const handleClick = (id) => {
     setClickedCard((prev) => (prev === id ? null : id));
   };
-
+  if(landingPage === null) landingPage = true;
   return (
     <>
 
@@ -23,11 +23,11 @@ const BlogCard = ({ limit , clickedCard, setClickedCard }) => {
             <div className={styles.cardTitle}>{item.title}</div>
             {clickedCard === item.id && (
               <div className={styles.cardMeta}>
-                <span className={styles.by}>by Sunpreet Singh Brar</span>
+                <span className={styles.by}>by {item.author}</span>
                 <br />
                 <div>
-                  <span>31st Dec 2023</span>
-                  <span className={styles.con}>5 minute read</span>
+                  <span>{item.date}</span>
+                  <span className={styles.con}>{item.readTime} minute read</span>
                 </div>
               </div>
             )}
@@ -36,7 +36,7 @@ const BlogCard = ({ limit , clickedCard, setClickedCard }) => {
             </div>
             {clickedCard === item.id && (
               <div >
-                <Link to="/blog" className={styles.readMore}>READ AHEAD</Link>
+                {landingPage ? <Link to="/blog" className={styles.readMore}>READ AHEAD</Link> : <a href={item.link} className={styles.readMore}>FULL BLOG</a>}
               </div>
             )}
           </div>
