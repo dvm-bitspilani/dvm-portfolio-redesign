@@ -28,7 +28,9 @@ const Ham = ({ onClose }) => {
 
       <div className={styles.container}>
         <div className={styles.aboutUsText}>ABOUT US</div>
+        <Link to="/contactus">
         <div className={styles.contactUsText}>CONTACT US</div>
+        </Link>
        <Link to="/projects">
           <div className={styles.projects}>PROJECTS</div>
         </Link>
