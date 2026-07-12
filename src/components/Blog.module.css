@@ -62,6 +62,20 @@
     transform-origin: center;
 }
 
+/* ---- Footer wrapper: groups DEPARTMENT OF / VISUAL MEDIA text + PROJECTS
+   button so they can be repositioned or reflowed together, instead of
+   independently absolute-positioned across every breakpoint. ---- */
+.footer {
+  position: absolute;
+  inset: 0;
+  z-index: 998;
+  pointer-events: none;
+}
+
+.footer > * {
+  pointer-events: auto;
+}
+
 .text {
     position: absolute;
     color: white;
@@ -169,28 +183,17 @@
     mask-image: radial-gradient(circle 40vw at -9999px -9999px, black 0%, transparent 100%);
 }
 
-/* ============================================================
-   RESPONSIVE BREAKPOINTS
-   Desktop packs the title art, the "See All Posts" button and
-   three cards side-by-side inside one 100vh viewport. That much
-   horizontal content can't survive a phone-width screen, so at
-   768px the container stops being a fixed-height stage and
-   becomes a normal scrolling page: title art shrinks and moves
-   up, the button/PROJECTS controls drop into the flow, and the
-   three cards stack into a vertical, scrollable list instead of
-   a cramped row.
-   ============================================================ */
-
-/* ---- Small laptops / large tablets (landscape) ---- */
 @media (max-width: 1200px) {
   .image {
     width: 56%;
     left: 22%;
+  
   }
 
   .image1 {
     width: 66%;
     left: 17%;
+    
   }
 
   .button {
@@ -206,9 +209,12 @@
   .projects {
     font-size: 0.9rem;
   }
+  .blogs , .blogsShifted{
+    left: 5%;
+  }
+
 }
 
-/* ---- Tablets (portrait) ---- */
 @media (max-width: 1024px) {
   .image {
     width: 62%;
@@ -232,6 +238,7 @@
 
   .text {
     font-size: 0.5rem;
+    bottom: 4%;
   }
 
   .visualMedia {
@@ -240,7 +247,7 @@
 
   .projects {
     right: 5%;
-    bottom: 8%;
+    bottom: 4%;
     font-size: 0.85rem;
     padding: 8px 14px;
   }
@@ -248,12 +255,11 @@
   .blogs,
   .blogsShifted {
     top: 34%;
-    left: 0;
+    left: 3%;
     gap: 1.5%;
   }
 }
 
-/* ---- Mobile landscape / small tablets: switch to a stacked flow ---- */
 @media (max-width: 768px) {
   .container {
     height: auto;
@@ -278,18 +284,6 @@
     top: 2%;
   }
 
-  .text {
-    position: relative;
-    left: 0;
-    bottom: 0;
-    margin-top: 4%;
-    font-size: 0.6rem;
-  }
-
-  .visualMedia {
-    font-size: 0.85rem;
-  }
-
   .button {
     position: relative;
     left: 0;
@@ -298,16 +292,6 @@
     height: 40px;
     margin-top: 5%;
     font-size: 0.85rem;
-  }
-
-  .projects {
-    position: relative;
-    right: 0;
-    bottom: 0;
-    margin: 5% auto 0;
-    width: fit-content;
-    font-size: 0.85rem;
-    padding: 9px 16px;
   }
 
   .blogs,
@@ -323,6 +307,39 @@
     gap: 6%;
   }
 
+  .footer {
+    position: relative;
+    inset: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 5%;
+    gap: 4%;
+  }
+
+  .text {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    font-size: 0.6rem;
+    text-align: center;
+  }
+
+  .visualMedia {
+    font-size: 0.85rem;
+    padding-left: 0;
+  }
+
+  .projects {
+    position: relative;
+    right: 0;
+    bottom: 0;
+    width: fit-content;
+    font-size: 0.85rem;
+    padding: 9px 16px;
+  }
+
   .gradient {
     width: 100%;
     height: 35%;
@@ -331,7 +348,6 @@
   }
 }
 
-/* ---- Mobile phones ---- */
 @media (max-width: 480px) {
   .container {
     padding: 8% 6% 10%;
@@ -344,6 +360,11 @@
   .image1 {
     width: 96%;
     left: 2%;
+  }
+
+  .footer {
+    margin-top: 4%;
+    gap: 3%;
   }
 
   .text {
@@ -379,6 +400,11 @@
 
 /* ---- Very small phones ---- */
 @media (max-width: 360px) {
+  .footer {
+    margin-top: 3%;
+    gap: 2.5%;
+  }
+
   .text {
     font-size: 0.5rem;
   }
@@ -395,27 +421,4 @@
     font-size: 0.68rem;
     padding: 7px 12px;
   }
-}
-.footer {
-  position: absolute;
-  inset: 0;
-  z-index: 998; /* below .text/.projects's own z-index, just a stacking context */
-  pointer-events: none; /* clicks pass through to page except children below */
-}
-@media (max-width: 768px) {
-
-  .footer {
-    position: relative;
-    inset: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin-top: 5%;
-    gap: 4%;
-  }
-}
-
-.footer > * {
-  pointer-events: auto;
 }
