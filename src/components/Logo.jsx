@@ -106,7 +106,7 @@ const Logo = ({ triggerSelector = "#hero-container" }) => {
     const tween = gsap.to(el, {
       scale: 0.3,
       rotateY: 360,
-
+      y: window.innerHeight < 768 ? 20 : 0,
       rotateZ: 360,
       x: x_move,
       ease: "none",
