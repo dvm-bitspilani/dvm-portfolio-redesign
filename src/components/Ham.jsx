@@ -1,7 +1,7 @@
 import styles from "./Ham.module.css";
 import d from "../assests/ham/D.svg";
 import m from "../assests/ham/M.svg";
-import arrow from "../assests/legacy/arrow.png";
+import arrow from "../assests/Legacy/arrow.png";
 import { Link } from "react-router-dom";
 const Ham = ({ onClose }) => {
   return (
