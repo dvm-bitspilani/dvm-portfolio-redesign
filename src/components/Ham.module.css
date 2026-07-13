@@ -1,172 +1,374 @@
-.body{
-    width:100vw;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    background:black;
-}
-.heading{
-    position: absolute;
-    color:white;
-    font-size:2rem;
-    top: 10%;
-    font-family: "Orbitron";
-    letter-spacing: 2rem;
-    font-weight: 300;
-}
-.dep{
-    position: absolute;
-    color:white;
-    font-size:0.8rem;
-    top: 50%;
-    left: 3%;
-    font-family: "Orbitron";
-}
-.vm{
-    position: absolute;
-    color:white;
-    font-size:0.8rem;
-    top: 50%;
-    right: 3%;
-    font-family: "Orbitron";
-}
-.container{
-    width:500px;
-    height:500px;
-    position:relative;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    top: 25%;
-}
-
-/* SVG */
-.outerSvg{
-    position:absolute;
-    width:100%;
-    height:100%;
-    transform:rotate(-90deg); /* start drawing from top */
-}
-
-.outerStroke{
-    fill:none;
-    stroke:white;
-    stroke-width:30;
-
-    stroke-dasharray:754;
-    stroke-dashoffset:754;
-    animation:drawCircle 1.2s ease forwards;
-}
-
-/* Inner Ring */
-.inner_circle{
-    width:63%;
-    height:63%;
-    border:50px solid white;
-    border-radius:50%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:2;
-}
-
-.logo{
-    width:50%;
-    transform:scale(0);
-    animation:logoPop .6s ease forwards;
-    animation-delay:1.2s;
-}
-
-@keyframes drawCircle{
-    to{
-       
-        stroke-dashoffset:0%;
-    }
-}
-
-@keyframes logoPop{
-    from{
-        transform:scale(0);
-    }
-    to{
-        transform:scale(1);
-    }
-}
-
-.text_sub {
-    position: absolute;
-    color: #FFFFFF;
-    font-family: "Orbitron";
-    display: flex;
-    flex-direction: column;
-    z-index: 1;
-    font-size: 1.8rem;
-    text-align: right;
-    bottom: 8%;
-    left: 3%;
-    align-items: flex-start;
-    line-height: 2.1rem;
-
-}
-
-.aboutUsText {
-    font-family: "Orbitron";
-    font-size: 1.2rem;
-    font-weight: 300;
-    position: absolute;
-    color: purple;
-    top: 8%;
-    z-index: 10;
-}
-.contactUsText {
-    font-family: "Orbitron";
-    font-size: 1.2rem;
-    font-weight: 300;
-    position: absolute;
-    color: purple;
-    bottom: 8%;
-    z-index: 10;
-}
-.projects {
-    font-family: "Orbitron";
-    font-size: 1.2rem;
-    font-weight: 300;
-    position: absolute;
-    color: purple;
-    bottom: 22%;
-    z-index: 10;
-}
-
-.team {
-    font-family: "Orbitron";
-    font-size: 1.2rem;
-    font-weight: 300;
-    position: absolute;
-    color: purple;
-    bottom: 50%;
-    left:18%;
-    transform:rotateZ(90deg);
-    z-index: 10;
-
-}
-
-
-.closeBtn {
-    position: absolute;
-    top: 30px;
-    right: 30px;
-
-    background: transparent;
-    border: none;
-
-    color: white;
-    font-size: 2rem;
-    cursor: pointer;
-    z-index: 1001;
-}   
 .body {
+  width: 100vw;
+  max-height: 100vh;
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  background: black;
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: black;
+  animation: bodyIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
+
+@keyframes bodyIntro {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive scalable stage that holds all logo segments */
+.logoWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1 / 1;
+  top: 10%;
+  left: 2%;
+}
+
+.segmentSvg {
+  position: absolute;
+  pointer-events: none;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  transform-box: fill-box;
+  animation: segmentIntro 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.segmentSvg:hover {
+  transform: scale(1.045);
+}
+
+@keyframes segmentIntro {
+  from {
+    opacity: 0;
+    transform: scale(0.75) translateY(18px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+.segment {
+  fill: url(#hamHoverGradient);
+  cursor: pointer;
+  pointer-events: visiblePainted;
+  transition: filter 0.4s ease;
+}
+
+.segmentSvg:hover .segment {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.35))
+    drop-shadow(0 0 22px rgba(120, 200, 255, 0.25));
+}
+
+/* Overlay path: fills in via a growing clip-path — smoother & more reliable than mask-size */
+.segmentFill {
+  fill: white;
+  pointer-events: none;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.segmentSvg:hover .segmentFill {
+  clip-path: inset(0 0 0 0);
+}
+
+.blog {
+  width: 9%;
+  height: 41%;
+  top: 9%;
+  left: 5.5%;
+  animation-delay: 0.15s;
+}
+
+.about {
+  width: 41%;
+  height: 28%;
+  top: 40%;
+  left: 36%;
+  animation-delay: 0.25s;
+}
+
+.projects {
+  width: 9%;
+  height: 57%;
+  top: 0%;
+  left: 68%;
+  animation-delay: 0.35s;
+}
+
+.legacy {
+  width: 60%;
+  height: 25%;
+  top: 35%;
+  left: 5%;
+  animation-delay: 0.05s;
+}
+
+.contact {
+  width: 30%;
+  height: 31%;
+  top: 39.5%;
+  left: 6%;
+  animation-delay: 0.45s;
+}
+
+.team {
+  width: 41%;
+  height: 24%;
+  top: 12.5%;
+  left: 24%;
+  animation-delay: 0.2s;
+}
+
+.artwork {
+  width: 8%;
+  height: 50%;
+  top: 4%;
+  left: 57%;
+  animation-delay: 0.3s;
+}
+
+.d {
+  height: 10%;
+  width: auto;
+  position: absolute;
+  left: 15%;
+  top: 40%;
+  opacity: 0;
+  animation: dropIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+.m {
+  height: 10%;
+  width: auto;
+  position: absolute;
+  right: 15%;
+  top: 40%;
+  opacity: 0;
+  animation: dropIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+@keyframes dropIn {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.arrow {
+  height: 5%;
+  width: auto;
+  position: absolute;
+  left: 5%;
+  top: 5%;
+  cursor: pointer;
+  z-index: 1001;
+  opacity: 0;
+  transition: transform 0.3s ease;
+  animation: fadeSettle 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+}
+
+.arrow:hover {
+  transform: rotateZ(90deg) scale(1.15);
+}
+
+@keyframes fadeSettle {
+  from {
+    opacity: 0;
+    transform: rotateZ(70deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotateZ(90deg);
+  }
+}
+
+/* Labels layer */
+.labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.label {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: clamp(4px, 0.6vw, 10px);
+  color: white;
+  font-family: "Orbitron";
+  font-weight: 300;
+  font-size: clamp(0.6rem, 1.3vw, 1rem);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: letter-spacing 0.4s ease;
+}
+
+.dot {
+  position: relative;
+  width: clamp(14px, 1.6vw, 20px);
+  height: clamp(14px, 1.6vw, 20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.dot::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30%;
+  height: 30%;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: border-color 0.4s ease, background 0.4s ease;
+}
+
+.line {
+  height: 1px;
+  width: clamp(50px, 9vw, 130px);
+  background: rgba(255, 255, 255, 0.35);
+  flex-shrink: 0;
+  transition: background 0.5s ease;
+}
+
+.text {
+  display: inline-block;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.4s ease;
+  transform-origin: left center;
+}
+
+.left {
+  left: 4%;
+  flex-direction: row;
+  opacity: 0;
+  animation: labelIntroLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.right {
+  right: 4%;
+  flex-direction: row-reverse;
+  opacity: 0;
+  animation: labelIntroRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.right .text {
+  transform-origin: right center;
+}
+
+@keyframes labelIntroLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes labelIntroRight {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.artworkPos {
+  top: 30%;
+  left: 57%;
+  animation-delay: 0.55s;
+}
+.blogsPos {
+  top: 34%;
+  left: 20%;
+  animation-delay: 0.6s;
+}
+.legacyPos {
+  top: 53%;
+  left: 18%;
+  animation-delay: 0.5s;
+}
+.contactPos {
+  top: 70%;
+  left: 23%;
+  animation-delay: 0.65s;
+}
+.teamPos {
+  top: 40%;
+  right: 55%;
+  animation-delay: 0.5s;
+}
+.projectsPos {
+  top: 45%;
+  right: 20%;
+  animation-delay: 0.55s;
+}
+.aboutPos {
+  top: 60%;
+  right: 25%;
+  animation-delay: 0.6s;
+}
+
+/* Cross-link: hovering a segment highlights its matching label */
+.body:has(.legacy .segment:hover) .legacyPos .line { background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent); }
+.body:has(.legacy .segment:hover) .legacyPos .text { transform: scale(1.12); text-shadow: 0 0 12px rgba(255, 255, 255, 0.5); }
+.body:has(.legacy .segment:hover) .legacyPos { letter-spacing: 0.08em; }
+.body:has(.legacy .segment:hover) .legacyPos .dot,
+.body:has(.legacy .segment:hover) .legacyPos .dot::after { border-color: white; box-shadow: 0 0 8px rgba(255, 255, 255, 0.6); }
+
+.body:has(.artwork .segment:hover) .artworkPos .line { background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent); }
+.body:has(.artwork .segment:hover) .artworkPos .text { transform: scale(1.12); text-shadow: 0 0 12px rgba(255, 255, 255, 0.5); }
+.body:has(.artwork .segment:hover) .artworkPos { letter-spacing: 0.08em; }
+.body:has(.artwork .segment:hover) .artworkPos .dot,
+.body:has(.artwork .segment:hover) .artworkPos .dot::after { border-color: white; box-shadow: 0 0 8px rgba(255, 255, 255, 0.6); }
+
+.body:has(.blog .segment:hover) .blogsPos .line { background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent); }
+.body:has(.blog .segment:hover) .blogsPos .text { transform: scale(1.12); text-shadow: 0 0 12px rgba(255, 255, 255, 0.5); }
+.body:has(.blog .segment:hover) .blogsPos { letter-spacing: 0.08em; }
+.body:has(.blog .segment:hover) .blogsPos .dot,
+.body:has(.blog .segment:hover) .blogsPos .dot::after { border-color: white; box-shadow: 0 0 8px rgba(255, 255, 255, 0.6); }
+
+.body:has(.contact .segment:hover) .contactPos .line { background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent); }
+.body:has(.contact .segment:hover) .contactPos .text { transform: scale(1.12); text-shadow: 0 0 12px rgba(255, 255, 255, 0.5); }
+.body:has(.contact .segment:hover) .contactPos { letter-spacing: 0.08em; }
+.body:has(.contact .segment:hover) .contactPos .dot,
+.body:has(.contact .segment:hover) .contactPos .dot::after { border-color: white; box-shadow: 0 0 8px rgba(255, 255, 255, 0.6); }
+
+.body:has(.team .segment:hover) .teamPos .line { background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent); }
+.body:has(.team .segment:hover) .teamPos .text { transform: scale(1.12); text-shadow: 0 0 12px rgba(255, 255, 255, 0.5); }
+.body:has(.team .segment:hover) .teamPos { letter-spacing: 0.08em; }
+.body:has(.team .segment:hover) .teamPos .dot,
+.body:has(.team .segment:hover) .teamPos .dot::after { border-color: white; box-shadow: 0 0 8px rgba(255, 255, 255, 0.6); }
+
+.body:has(.projects .segment:hover) .projectsPos .line { background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent); }
+.body:has(.projects .segment:hover) .projectsPos .text { transform: scale(1.12); text-shadow: 0 0 12px rgba(255, 255, 255, 0.5); }
+.body:has(.projects .segment:hover) .projectsPos { letter-spacing: 0.08em; }
+.body:has(.projects .segment:hover) .projectsPos .dot,
+.body:has(.projects .segment:hover) .projectsPos .dot::after { border-color: white; box-shadow: 0 0 8px rgba(255, 255, 255, 0.6); }
+
+.body:has(.about .segment:hover) .aboutPos .line { background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent); }
+.body:has(.about .segment:hover) .aboutPos .text { transform: scale(1.12); text-shadow: 0 0 12px rgba(255, 255, 255, 0.5); }
+.body:has(.about .segment:hover) .aboutPos { letter-spacing: 0.08em; }
+.body:has(.about .segment:hover) .aboutPos .dot,
+.body:has(.about .segment:hover) .aboutPos .dot::after { border-color: white; box-shadow: 0 0 8px rgba(255, 255, 255, 0.6); }

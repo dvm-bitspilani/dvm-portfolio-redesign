@@ -345,7 +345,7 @@ const Legacy = () => {
   ];
 
   return (
-    <div className={styles.container} ref={containerRef}>
+    <div className={styles.container} ref={containerRef} id="legacy">
       <div className={styles.grid}></div>
       <div
         style={{ backgroundImage: `url(${bg3})` }}
