@@ -20,4 +20,25 @@
 .circle:hover {
   border: 1px solid #33e7ff;
   transition: border 0.3s;
-}   
+}
+
+@media (max-width: 1024px) {
+  .circle {
+    height: 64px;
+    width: 64px;
+  }
+}
+
+@media (max-width: 768px) {
+  .circle {
+    height: 54px;
+    width: 54px;
+  }
+}
+
+@media (max-width: 480px) {
+  .circle {
+    height: 44px;
+    width: 44px;
+  }
+}

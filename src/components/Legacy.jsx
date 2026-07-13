@@ -19,6 +19,9 @@ gsap.registerPlugin(ScrollTrigger);
 const FIXED_CIRCLE_RADIUS = null;
 
 const Legacy = () => {
+  let x = window.innerWidth > 1420 ? window.innerWidth * 0.8 : window.innerWidth * 0.8;
+  x = window.innerWidth < 1024 ? window.innerWidth * 0.3 : window.innerWidth * 0.4;
+  x = window.innerWidth < 900 ? window.innerWidth * 0.2  : window.innerWidth * 0.4;
   const containerRef = useRef(null);
   const textureRef = useRef(null);
   const gradientRef = useRef(null);
@@ -111,7 +114,7 @@ const Legacy = () => {
         window.innerWidth - overlayWidth - margin
       );
     }
-
+    
     // Vertically center on the circle, clamped to viewport
     let top = circleCenterY - overlayHeight / 2;
     top = Math.min(
@@ -153,7 +156,7 @@ const Legacy = () => {
     };
     updateMask(); // Initial call to set the mask
     gsap.to(gradientPos.current, {
-      x: window.innerWidth * 0.4,
+      
       y: window.innerHeight * 1,
       scrollTrigger: {
         trigger: containerRef.current,

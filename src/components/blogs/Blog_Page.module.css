@@ -1,5 +1,3 @@
-
-
 .blogs {
   position: relative;
   margin-top: 50vh;
@@ -7,18 +5,37 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   padding: 0 15%;
-  
+  width: 100%;
+  box-sizing: border-box;
 }
+
+/* Prevent grid items from overflowing their track */
+.blogs > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
 .container2 {
   background-color: black;
   position: relative;
   height: fit-content;
   width: 100vw;
 }
+
 .blogs [class*="clicked"] {
   grid-column: 1 / -1;
   order: -1;
   width: 100%;
+}
+
+.blogImageGroup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1001;
+  pointer-events: none;
 }
 
 .blogImage {
@@ -28,7 +45,6 @@
   object-fit: cover;
   left: 25%;
   top: 15%;
-  z-index: 1001;
 }
 
 .blogOutImage {
@@ -38,8 +54,8 @@
   object-fit: cover;
   left: 20%;
   top: 10%;
-  z-index: 1001;
 }
+
 .text {
   position: relative;
   width: 100%;
@@ -58,12 +74,11 @@
 }
 
 .projects {
-margin-left: 45%;
-margin-bottom: 2%;
-text-align: center;
+  margin-left: 45%;
+  margin-bottom: 2%;
+  text-align: center;
   position: relative;
   display: block;
- 
   background: transparent;
   border: 1px solid white;
   color: white;
@@ -79,12 +94,10 @@ text-align: center;
   z-index: 2;
   pointer-events: none;
 
-  background-size: 100vw 100vh;   /* set to your actual desired tile size */
+  background-size: 100vw 100vh;
   background-repeat: repeat;
-  background-position: 0 0;
-
-
   background-position: center;
+
   -webkit-mask-image: radial-gradient(
     circle 30vw at -9999px -9999px,
     black 0%,
@@ -96,8 +109,6 @@ text-align: center;
     transparent 100%
   );
 }
-
-
 
 .gradient {
   position: absolute;
@@ -123,17 +134,14 @@ text-align: center;
   background-color: black;
   display: flex;
   align-items: center;
-
   isolation: isolate;
-
-
   overflow: hidden;
   perspective: 1000px;
-  
   position: relative;
   min-height: 100vh;
   width: 100vw;
 }
+
 .texture2 {
   position: absolute;
   inset: 0;
@@ -156,29 +164,29 @@ text-align: center;
   );
 }
 
-.back{
+.back {
   z-index: 1002;
   padding-left: 5%;
   text-decoration: none;
   color: white;
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
 }
 
 .navbar {
   position: fixed;
   top: 1%;
-  left: 0; 
+  left: 0;
   height: 10vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100vw;
   z-index: 1002;
-    background-color: transparent;
+  background-color: transparent;
   -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px); 
-  
+  backdrop-filter: blur(5px);
 }
+
 .logo {
   height: 4vh;
   width: auto;
@@ -186,11 +194,166 @@ text-align: center;
   margin-right: 5%;
 }
 
-.ham_nav{
+.ham_nav {
   height: 4vh;
   width: auto;
   z-index: 1005;
-
   padding-right: 5%;
 }
 
+/* ---------- Media Queries (deduplicated) ---------- */
+
+@media (min-width: 1440px) {
+  .blogImage {
+    top: 5%;
+    width: 60%;
+    left: 20%;
+  }
+  .blogOutImage {
+    top: 3%;
+    width: 60%;
+    left: 20%;
+  }
+  .blogImageGroup {
+    top: 5%;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .blogImage {
+    top: 8%;
+    width: 70%;
+    left: 15%;
+  }
+  .blogOutImage {
+    top: 6%;
+    width: 60%;
+    left: 20%;
+  }
+  .blogImageGroup {
+    top: 5%;
+  }
+  .blogs {
+    left: -5%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .blogs {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 8%;
+    gap: 16px;
+  }
+
+  .blogImage {
+    width: 60%;
+    left: 20%;
+    top: 17%;
+  }
+
+  .blogOutImage {
+    width: 70%;
+    left: 15%;
+    top: 15%;
+  }
+
+  .blogImageGroup {
+    top: 0;
+  }
+
+  .projects {
+    margin-left: 35%;
+  }
+}
+
+/* Large phones / small tablets */
+@media (max-width: 768px) {
+  .blogs {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 6%;
+    gap: 12px;
+  }
+
+  .blogImage {
+    width: 75%;
+    left: 12.5%;
+  }
+
+  .blogOutImage {
+    width: 85%;
+    left: 7.5%;
+  }
+
+  .text {
+    margin-left: 8%;
+    margin-top: 3rem;
+  }
+
+  .visualMedia {
+    font-size: 1rem;
+  }
+
+  .projects {
+    margin-left: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .logo {
+    margin-right: 8%;
+  }
+
+  .ham_nav {
+    padding-right: 8%;
+  }
+}
+
+/* Phones */
+@media (max-width: 480px) {
+  .blogs {
+    grid-template-columns: 1fr;
+    padding: 0 6%;
+    gap: 20px;
+  }
+
+  .blogImage {
+    width: 90%;
+    left: 5%;
+    top: 8%;
+  }
+
+  .blogOutImage {
+    width: 95%;
+    left: 2.5%;
+    top: 6%;
+  }
+
+  .blogImageGroup {
+    top: 2%;
+  }
+
+  .text {
+    margin-left: 6%;
+    margin-top: 2rem;
+  }
+
+  .back {
+    padding-left: 4%;
+    font-size: 0.85rem;
+  }
+
+  .logo {
+    height: 3.2vh;
+    margin-right: 4%;
+  }
+
+  .ham_nav {
+    height: 3.2vh;
+    padding-right: 4%;
+  }
+
+  .gradient {
+    left: 20%;
+    width: 60%;
+  }
+}
