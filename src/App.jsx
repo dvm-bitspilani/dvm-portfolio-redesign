@@ -11,8 +11,15 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
 
+  // The location currently rendered by <Routes>. This lags behind
+  // `location` while "fadeOut" plays, so the outgoing page stays mounted
+  // (and visible) long enough to actually animate off screen.
   const [displayLocation, setDisplayLocation] = useState(location);
-  const [transitionStage, setTransitionStage] = useState("fadeIn");
+
+  // "idle" -> no animation class at all (this is the resting state)
+  // "fadeOut" -> outgoing page blurring/shrinking away
+  // "fadeIn" -> incoming page blurring/growing into place
+  const [stage, setStage] = useState("idle");
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -23,16 +30,26 @@ const App = () => {
 
   useEffect(() => {
     if (location.pathname !== displayLocation.pathname) {
-      setTransitionStage("fadeOut");
+      setStage("fadeOut");
     }
   }, [location, displayLocation]);
 
+  // Only react to the wrapper's own animation finishing, not anything
+  // bubbling up from children (Ham's segment/label animations, etc.).
   const handleAnimationEnd = (e) => {
     if (e.target !== e.currentTarget) return;
 
-    if (transitionStage === "fadeOut") {
+    if (stage === "fadeOut") {
       setDisplayLocation(location);
-      setTransitionStage("fadeIn");
+      setStage("fadeIn");
+    } else if (stage === "fadeIn") {
+      // Critical: drop the animation class entirely once it's done.
+      // animation-fill-mode: both otherwise leaves transform/filter
+      // "active" on this wrapper forever (even at resting values like
+      // scale(1) / blur(0)), which creates a containing block that
+      // traps any position: fixed descendant — e.g. Navbar — inside
+      // this wrapper instead of the viewport.
+      setStage("idle");
     }
   };
 
@@ -56,11 +73,18 @@ const App = () => {
     );
   }
 
+  const stageClass =
+    stage === "fadeOut"
+      ? styles.fadeOut
+      : stage === "fadeIn"
+      ? styles.fadeIn
+      : "";
+
   return (
     <>
       <ScrollToTop />
       <div
-        className={`${styles.pageTransition} ${styles[transitionStage]}`}
+        className={`${styles.pageTransition} ${stageClass}`}
         onAnimationEnd={handleAnimationEnd}
       >
         <Routes location={displayLocation}>
