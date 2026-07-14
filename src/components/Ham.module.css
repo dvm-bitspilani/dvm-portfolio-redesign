@@ -526,9 +526,9 @@
   }
   .logoWrapper {
     left: 5%;
-    width: 80%;
-    height: 80%;
-    top: 20%;
+    width: 50%;
+    height: 50%;
+    top: 30%;
   }
 }
 
@@ -548,4 +548,303 @@
     height: 65%;
     top: 20%;
   } 
+}
+@media ((max-width: 800px) and (min-height: 900px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 80%;
+    height: 80%;
+    top: 20%;
+  } 
+}
+@media ((max-width: 600px) and (min-height: 600px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 80%;
+    height:   100%;
+    top: 20%;
+  } 
+}
+@media ((max-width: 500px) and (min-height: 600px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 80%;
+    height:   70%;
+    top: 20%;
+  } 
+}
+/* ============================================================
+   EXTENDED RESPONSIVE GRID
+   Append this block to the end of Ham.module.css.
+   Nothing above is modified — these are additive breakpoints
+   filling in the width x height matrix around your existing
+   800/600/500 (width) x 600/700/800/900 (height) rules.
+   ============================================================ */
+
+/* ---------- max-width: 800px tier ---------- */
+@media ((max-width: 800px) and (min-height: 1000px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 80%;
+    height: 85%;
+    top: 20%;
+  }
+}
+@media ((max-width: 800px) and (min-height: 1100px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 80%;
+    height: 75%;
+    top: 15%;
+  }
+}
+@media ((max-width: 800px) and (max-height: 599px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 50%;
+    height: 45%;
+    top: 28%;
+  }
+}
+
+/* ---------- max-width: 700px tier ---------- */
+@media (max-width: 700px) {
+  .logoWrapper {
+    left: 5%;
+    width: 55%;
+    height: 55%;
+    top: 28%;
+  }
+}
+@media ((max-width: 700px) and (min-height: 600px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 78%;
+    height: 68%;
+    top: 20%;
+  }
+}
+@media ((max-width: 700px) and (min-height: 700px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 78%;
+    height: 68%;
+    top: 20%;
+  }
+}
+@media ((max-width: 700px) and (min-height: 800px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 78%;
+    height: 63%;
+    top: 20%;
+  }
+}
+@media ((max-width: 700px) and (min-height: 900px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 78%;
+    height: 78%;
+    top: 20%;
+  }
+}
+@media ((max-width: 700px) and (min-height: 1000px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 78%;
+    height: 83%;
+    top: 20%;
+  }
+}
+
+/* ---------- max-width: 600px tier ---------- */
+@media (max-width: 600px) {
+  .logoWrapper {
+    left: 5%;
+    width: 52%;
+    height: 52%;
+    top: 28%;
+  }
+}
+@media ((max-width: 600px) and (min-height: 700px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 80%;
+    height: 95%;
+    top: 20%;
+  }
+}
+@media ((max-width: 600px) and (min-height: 800px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 80%;
+    height: 90%;
+    top: 20%;
+  }
+}
+@media ((max-width: 600px) and (min-height: 900px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 80%;
+    height: 100%;
+    top: 15%;
+  }
+}
+@media ((max-width: 600px) and (min-height: 1000px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 80%;
+    height: 85%;
+    top: 15%;
+  }
+}
+@media ((max-width: 600px) and (max-height: 599px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 50%;
+    height: 42%;
+    top: 30%;
+  }
+}
+
+/* ---------- max-width: 500px tier ---------- */
+@media (max-width: 500px) {
+  .logoWrapper {
+    left: 5%;
+    width: 50%;
+    height: 50%;
+    top: 28%;
+  }
+}
+@media ((max-width: 500px) and (min-height: 700px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 80%;
+    height: 75%;
+    top: 20%;
+  }
+}
+@media ((max-width: 500px) and (min-height: 800px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 80%;
+    height: 68%;
+    top: 20%;
+  }
+}
+@media ((max-width: 500px) and (min-height: 900px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 80%;
+    height: 82%;
+    top: 20%;
+  }
+}
+@media ((max-width: 500px) and (min-height: 1000px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 80%;
+    height: 88%;
+    top: 15%;
+  }
+}
+@media ((max-width: 500px) and (max-height: 599px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 48%;
+    height: 40%;
+    top: 30%;
+  }
+}
+
+/* ---------- max-width: 400px tier (small phones) ---------- */
+@media (max-width: 400px) {
+  .logoWrapper {
+    left: 5%;
+    width: 48%;
+    height: 48%;
+    top: 30%;
+  }
+}
+@media ((max-width: 400px) and (min-height: 600px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 80%;
+    height: 75%;
+    top: 22%;
+  }
+}
+@media ((max-width: 400px) and (min-height: 700px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 80%;
+    height: 72%;
+    top: 20%;
+  }
+}
+@media ((max-width: 400px) and (min-height: 800px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 80%;
+    height: 65%;
+    top: 20%;
+  }
+}
+@media ((max-width: 400px) and (min-height: 900px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 80%;
+    height: 78%;
+    top: 20%;
+  }
+}
+@media ((max-width: 400px) and (min-height: 1000px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 80%;
+    height: 85%;
+    top: 15%;
+  }
+}
+
+/* ---------- max-width: 350px tier (very small phones) ---------- */
+@media (max-width: 350px) {
+  .logoWrapper {
+    left: 5%;
+    width: 46%;
+    height: 46%;
+    top: 30%;
+  }
+}
+@media ((max-width: 350px) and (min-height: 600px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 82%;
+    height: 60%;
+    top: 24%;
+  }
+}
+@media ((max-width: 350px) and (min-height: 700px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 82%;
+    height: 68%;
+    top: 20%;
+  }
+}
+@media ((max-width: 350px) and (min-height: 800px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 82%;
+    height: 62%;
+    top: 20%;
+  }
+}
+@media ((max-width: 350px) and (min-height: 900px)) {
+  .logoWrapper {
+    left: 5%;
+    width: 82%;
+    height: 75%;
+    top: 20%;
+  }
 }

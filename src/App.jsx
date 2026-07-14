@@ -10,10 +10,7 @@ import styles from "./App.module.css";
 const App = () => {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
-
-  // The location currently rendered by <Routes>. This lags behind
-  // `location` while "fadeOut" plays, so the outgoing page stays mounted
-  // (and visible) long enough to actually animate off screen.
+  
   const [displayLocation, setDisplayLocation] = useState(location);
 
   // "idle" -> no animation class at all (this is the resting state)
