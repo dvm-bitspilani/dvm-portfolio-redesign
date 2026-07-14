@@ -424,9 +424,15 @@
   .headerImage {
     max-width: 96%;
     margin-left: 2%;
-    margin-bottom: 10%;
   }
 
+  /* Collapse the wide desktop fan-out into a centered CLUSTER instead
+     of one long vertical line: flex-wrap lets circles fall into 2-3
+     rows, and each circle gets its own small translate nudge below so
+     the cluster reads as organic/scattered rather than a rigid grid
+     or a straight column. The JS still measures real DOM rects via
+     getBoundingClientRect, so the connecting-line math keeps working
+     automatically regardless of how CSS lays things out. */
   .circleWrapper {
     width: 100%;
     margin: 6% auto 0;
@@ -493,7 +499,6 @@
     right: 5%;
     bottom: auto;
     margin: 40px 0;
-    scale: 0.7;
   }
 
   .footerContent {
@@ -517,14 +522,21 @@
   .overlay {
     left: 50% !important;
     top: 50% !important;
-    width: min(100  vw, 380px) !important;
-    height: 80vh;
+    width: 100vw !important;
+    max-height: 100vh;
     transform: translate(-50%, -50%) !important;
   }
 
   .overlay.anchorLeft,
   .overlay.anchorRight {
     animation: cardInCenter 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .google{
+    margin-bottom: 10%;
+  }
+  .meta{
+    margin-left: 2%;
+    margin-bottom: 20%;
   }
 
   @keyframes cardInCenter {
@@ -540,13 +552,21 @@
 }
 
 @media (max-width: 420px) {
-  .circleBase:nth-of-type(1) { transform: translate(0, -6px) scale(0.98); }
-  .circleBase:nth-of-type(2) { transform: translate(8px, 10px) scale(0.98); }
-  .circleBase:nth-of-type(3) { transform: translate(-10px, -8px) scale(0.98); }
-  .circleBase:nth-of-type(4) { transform: translate(3px, 5px) scale(0.98); }
-  .circleBase:nth-of-type(5) { transform: translate(-6px, 8px) scale(0.98); }
-  .circleBase:nth-of-type(6) { transform: translate(10px, -10px) scale(0.98); }
-  .circleBase:nth-of-type(7) { transform: translate(-5px, 3px) scale(0.98); }
+  .circleBase:nth-of-type(1) { transform: translate(0, -6px)  }
+  .circleBase:nth-of-type(2) { transform: translate(8px, 10px) }
+  .circleBase:nth-of-type(3) { transform: translate(-10px, -8px)}
+  .circleBase:nth-of-type(4) { transform: translate(3px, 5px) }
+  .circleBase:nth-of-type(5) { transform: translate(-6px, 8px)  }
+  .circleBase:nth-of-type(6) { transform: translate(10px, -10px) }
+  .circleBase:nth-of-type(7) { transform: translate(-5px, 3px)  }
+
+  .circleBase:nth-of-type(1).circleFocused { transform: translate(0, -6px) }
+  .circleBase:nth-of-type(2).circleFocused { transform: translate(8px, 10px) }
+  .circleBase:nth-of-type(3).circleFocused { transform: translate(-10px, -8px) }
+  .circleBase:nth-of-type(4).circleFocused { transform: translate(3px, 5px) }
+  .circleBase:nth-of-type(5).circleFocused { transform: translate(-6px, 8px) }
+  .circleBase:nth-of-type(6).circleFocused { transform: translate(10px, -10px)  }
+  .circleBase:nth-of-type(7).circleFocused { transform: translate(-5px, 3px); }
 
   .circleWrapper {
     gap: 20px 16px;
