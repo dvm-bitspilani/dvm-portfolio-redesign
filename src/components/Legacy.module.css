@@ -4,7 +4,8 @@
     width: 100vw;
     height: 100vh;
     background: black;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 .header {
   width: 100%;
@@ -214,43 +215,155 @@
     mask-image: radial-gradient(circle 50vh at -9999px -9999px, black 0%, transparent 100%);
 }
 
-/* ----- Shared card overlay (added) ----- */
+/* ----- Shared card overlay ----- */
 
 .backdrop {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.55);
   z-index: 2000;
+  animation: backdropIn 0.25s ease-out;
 }
 
-/* width/left/top are set inline from JS in Legacy.jsx so every card
-   gets the exact same fixed pixel width, and the correct anchored position */
-.overlay {
-  position: fixed;
-  z-index: 2001;
-  animation: overlayIn 0.2s ease-out;
-}
-
-/* Circle is in the left half: card's LEFT edge sits at `left` */
-.overlay.anchorLeft {
-  transform: translateX(100%);
-  transform: translateY(50%);
-
-
-}
-
-/* Circle is in the right half: card's RIGHT edge sits at `left`,
-   so the card renders to the left of the circle instead of on top of it */
-.overlay.anchorRight {
-  transform: translateX(-90%);
-  
-}
-
-@keyframes overlayIn {
+@keyframes backdropIn {
   from {
     opacity: 0;
   }
   to {
     opacity: 1;
   }
+}
+
+.overlay {
+  position: fixed;
+  z-index: 2001;
+}
+
+.overlay.anchorLeft {
+  animation: cardInLeft 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.overlay.anchorRight {
+  animation: cardInRight 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes cardInLeft {
+  from {
+    opacity: 0;
+    transform: translateY(50%) scale(0.92) translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(50%) scale(1) translateX(0);
+  }
+}
+
+@keyframes cardInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-90%) scale(0.92) translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-90%) scale(1) translateX(0);
+  }
+}
+
+/* ----- Focus / dimming overlay for branch view ----- */
+
+.focusBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1001; /* below circleWrapper's 1002, so the focused circle
+                    and its branches stay lit above this layer */
+  background: radial-gradient(
+    circle at 50% 45%,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    backdrop-filter 0.35s ease;
+}
+
+.focusBackdropVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.circleFocused {
+  filter: drop-shadow(0 0 24px rgba(79, 172, 254, 0.65));
+  transform: scale(1.06);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.4s ease;
+}
+
+/* ----- Branch lines (tree-like connectors to names) ----- */
+
+.branchLine {
+  fill: none;
+  stroke: url(#branchGradient);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ----- Branch name labels ----- */
+
+.branchLabel {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(10, 14, 20, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 8px 16px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  overflow: hidden;
+  isolation: isolate;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease,
+    transform 0.2s ease;
+}
+
+.branchLabel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  transform: scaleX(0);
+  transform-origin: left;
+  z-index: -1;
+  transition: transform 0.35s ease;
+}
+
+.branchLabel:hover::before {
+  transform: scaleX(1);
+}
+
+.branchLabel:hover {
+  border-color: rgba(79, 172, 254, 0.7);
+  box-shadow: 0 0 22px rgba(79, 172, 254, 0.35);
+  transform: translate(-50%, -50%) scale(1.04);
+}
+
+.branchName {
+  font-family: "Orbitron";
+  font-size: 0.75rem;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.75);
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+.branchLabel:hover .branchName {
+  color: #000000;
 }
