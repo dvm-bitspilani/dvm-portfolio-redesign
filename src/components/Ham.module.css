@@ -701,6 +701,7 @@
   }
   .legacyPos{
     left: 15%;
+    top: 10%;
   }
   .contactPos{
     left: 18%;
@@ -893,8 +894,8 @@
     scale: 0.8;
   } 
   .aboutPos{
-    top: 60%;
-    left: 50%;
+    top: 55%;
+    left: 55%;
     scale: 0.8;
   } 
 }
@@ -918,8 +919,8 @@
     top:55%;
   }
   .aboutPos{
-    top: 50%  ;
-    left: 65%;
+    top: 45%  ;
+    left: 70%;
     scale: 0.8;
   }
   .labels{
