@@ -894,7 +894,7 @@
   } 
   .aboutPos{
     top: 60%;
-    left: 40%;
+    left: 45%;
     scale: 0.8;
   } 
 }
@@ -918,8 +918,8 @@
     top:55%;
   }
   .aboutPos{
-    top: 55%  ;
-    left: 50%;
+    top: 50%  ;
+    left: 55%;
     scale: 0.8;
   }
   .labels{
