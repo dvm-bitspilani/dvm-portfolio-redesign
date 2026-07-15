@@ -721,11 +721,6 @@ const Legacy = () => {
             })}
           </g>
         </svg>
-
-        {/* Branch lines for the currently focused company — smooth single
-            curves growing out of the circle, like branches extending from
-            a trunk. One <path> per person in COMPANY_PEOPLE[branchKey] —
-            fully dynamic, so adding names adds branches automatically. */}
         {branchKey && branchNodes.length > 0 && (
           <svg
             className={styles.branchSvg}

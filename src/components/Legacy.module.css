@@ -5,7 +5,6 @@
     height: 100vh;
     background: black;
     overflow-x: hidden;
-    overflow-y: hidden;
 }
 .header {
   width: 100%;
@@ -368,21 +367,7 @@
   color: #000000;
 }
 
-/* =========================================================
-   RESPONSIVE — phone through laptop
-   Strategy:
-   - Fluid clamp()-based scaling for header/footer/text so
-     proportions stay consistent across all sizes (no sudden
-     jumps in typography or spacing).
-   - A hard breakpoint at 700px collapses the free-form desktop
-     circle layout into a single centered vertical stack — the
-     wide fan-out graph doesn't translate to a phone screen, so
-     it needs a structurally different layout, not just scaling.
-   - The card overlay is forced to a centered, size-capped box
-     on phones (overriding the JS-computed left/anchor position
-     with !important), instead of anchoring next to a branch
-     label that may not even be visible in the stacked layout.
-   ========================================================= */
+
 
 @media (max-width: 1024px) {
   .headerOuterImage,
@@ -426,13 +411,7 @@
     margin-left: 2%;
   }
 
-  /* Collapse the wide desktop fan-out into a centered CLUSTER instead
-     of one long vertical line: flex-wrap lets circles fall into 2-3
-     rows, and each circle gets its own small translate nudge below so
-     the cluster reads as organic/scattered rather than a rigid grid
-     or a straight column. The JS still measures real DOM rects via
-     getBoundingClientRect, so the connecting-line math keeps working
-     automatically regardless of how CSS lays things out. */
+
   .circleWrapper {
     width: 100%;
     margin: 6% auto 0;
@@ -457,11 +436,6 @@
   .img3 {
     position: static;
   }
-
-  /* Bigger circles than before, and each one nudged slightly off-grid
-     (translate first, so scale doesn't amplify the offset) so the
-     cluster reads as organic/scattered across ~4 rows rather than a
-     straight line or a perfect grid. */
   .circleBase {
     transform: translate(0, 0) scale(0.78);
   }

@@ -611,49 +611,49 @@
 @media (max-width: 700px) {
   .logoWrapper {
     left: 5%;
-    width: 55%;
-    height: 55%;
-    top: 28%;
+    width: 60%;
+    height: 100%;
+    top: 20%;
   }
 }
 @media ((max-width: 700px) and (min-height: 600px)) {
   .logoWrapper {
     left: 5%;
     width: 78%;
-    height: 68%;
-    top: 20%;
+    height: 100%;
+    top: 15%;
   }
 }
 @media ((max-width: 700px) and (min-height: 700px)) {
   .logoWrapper {
     left: 5%;
     width: 78%;
-    height: 68%;
-    top: 20%;
+    height: 100%;
+    top: 15%;
   }
 }
 @media ((max-width: 700px) and (min-height: 800px)) {
   .logoWrapper {
     left: 5%;
     width: 78%;
-    height: 63%;
-    top: 20%;
+    height: 100%;
+    top: 15%;
   }
 }
 @media ((max-width: 700px) and (min-height: 900px)) {
   .logoWrapper {
     left: 5%;
     width: 78%;
-    height: 78%;
-    top: 20%;
+    height: 100%;
+    top: 15%;
   }
 }
 @media ((max-width: 700px) and (min-height: 1000px)) {
   .logoWrapper {
     left: 5%;
     width: 78%;
-    height: 83%;
-    top: 20%;
+    height: 100%;
+    top: 15%;
   }
 }
 
@@ -662,8 +662,30 @@
   .logoWrapper {
     left: 5%;
     width: 52%;
-    height: 52%;
-    top: 28%;
+    height: 70%;
+    top: 25%;
+  }
+  .blogsPos{
+    left: 12%;
+    top: 45%;
+  }
+  .legacyPos{
+    left: 10%;
+    top: 55%;
+  }
+  .contactPos{
+    left: 10%;
+    top: 60%;
+  }
+  .aboutPos{
+    right: 17%;
+    top: 60%;
+  }
+  .projectsPos{
+    right: 10%;
+  }
+  .artworkPos{
+    top: 35%;
   }
 }
 @media ((max-width: 600px) and (min-height: 700px)) {
@@ -671,7 +693,26 @@
     left: 5%;
     width: 80%;
     height: 95%;
-    top: 20%;
+    top: 5%;
+    scale: 0.6;
+  }
+  .blogsPos{
+    left: 12%;
+  }
+  .legacyPos{
+    left: 15%;
+  }
+  .contactPos{
+    left: 18%;
+  }
+  .aboutPos{
+    right: 17%;
+  }
+  .projectsPos{
+    right: 10%;
+  }
+  .artworkPos{
+    top: 35%;
   }
 }
 @media ((max-width: 600px) and (min-height: 800px)) {
@@ -721,7 +762,7 @@
     left: 5%;
     width: 80%;
     height: 75%;
-    top: 20%;
+    top: 19%;
   }
 }
 @media ((max-width: 500px) and (min-height: 800px)) {
@@ -759,19 +800,46 @@
 
 /* ---------- max-width: 400px tier (small phones) ---------- */
 @media (max-width: 400px) {
+  .labels{
+    scale: 0.8;
+  }
   .logoWrapper {
     left: 5%;
     width: 48%;
     height: 48%;
     top: 30%;
   }
+  .blogsPos{
+    top: 40%;
+  }
+  .teamPos{
+    top: 42%;
+  }
+  .artworkPos{
+    top: 40%;
+    left: 60%;
+  }
+  .projectsPos{
+    left: 55%;
+  }
+  .contactPos{
+    top: 56%;
+    left: 0;
+  }
 }
 @media ((max-width: 400px) and (min-height: 600px)) {
   .logoWrapper {
-    left: 5%;
+    left: 3%;
     width: 80%;
     height: 75%;
-    top: 22%;
+    top: 15%;
+    scale: 0.5;
+  }
+  .blogsPos{
+    left: 8%;
+  }
+  .labels{
+    left: -3%;
   }
 }
 @media ((max-width: 400px) and (min-height: 700px)) {
@@ -779,7 +847,11 @@
     left: 5%;
     width: 80%;
     height: 72%;
-    top: 20%;
+    top: 15%;
+  }
+  .contactPos{
+    top: 55%;
+    left: 10%;
   }
 }
 @media ((max-width: 400px) and (min-height: 800px)) {
@@ -813,15 +885,25 @@
     left: 5%;
     width: 46%;
     height: 46%;
-    top: 30%;
+    top: 32%;
   }
+  .contactPos{
+    top: 60%;
+    left: -3%;
+    scale: 0.8;
+  } 
+  .aboutPos{
+    top: 60%;
+    left: 40%;
+    scale: 0.8;
+  } 
 }
 @media ((max-width: 350px) and (min-height: 600px)) {
   .logoWrapper {
     left: 5%;
     width: 82%;
     height: 60%;
-    top: 24%;
+    top: 22%;
   }
 }
 @media ((max-width: 350px) and (min-height: 700px)) {
@@ -829,7 +911,19 @@
     left: 5%;
     width: 82%;
     height: 68%;
-    top: 20%;
+    top: 16%;
+  }
+  .contactPos{
+    left: 3%;
+    top:55%;
+  }
+  .aboutPos{
+    top: 55%  ;
+    left: 50%;
+    scale: 0.8;
+  }
+  .labels{
+    top: -3%;
   }
 }
 @media ((max-width: 350px) and (min-height: 800px)) {
