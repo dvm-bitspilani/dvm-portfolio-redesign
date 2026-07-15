@@ -4,6 +4,7 @@
   import arrow from "../assests/Legacy/arrow.png";
   import { Link } from "react-router-dom";
   const Ham = ({ onClose }) => {
+    console.log(window.innerWidth , window.innerHeight)
     return (
       <div className={styles.body}>
         <img
