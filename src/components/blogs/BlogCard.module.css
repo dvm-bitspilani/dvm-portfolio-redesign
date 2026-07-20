@@ -149,8 +149,174 @@
         flex-direction: column;
         width: 100%;
         gap: 1.5rem;
-        height: 100%;
+        min-height: 100%;
+        z-index: 10000;
+    }.card {
+    position: relative;
+    width: clamp(300px, 23vw, 380px);
+    height: clamp(420px, 35vh, 560px);
+    border: 2px solid white;
+    color: white;
+    transition: all 0.2s ease;
+    background: rgba(255,255,255,0.02);
+    z-index: 1000;
+    transform-origin: top left;
+    transform: scaleX(1);
+    overflow: hidden;
+}
+.card:hover {
+    scale: 1.05;
+    z-index: 1001;
+}
+.readMore {
+    background-color: transparent;
+    border: none;
+    font-family: 'JetBrains Mono';
+    color: rgba(198, 249, 78, 1);
+    margin-left: 60%;
+    cursor: pointer;
+    z-index: 1111;
+    text-decoration: none;
+}
+
+.cardImage {
+    height: 50%;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+}
+
+.cardTitle {
+    font-family: "Orbitron", sans-serif;
+    font-size: clamp(1rem, 1.4vw, 1.5rem);
+    font-weight: bold;
+    width: 80%;
+    padding: 1rem 1rem 0;
+}
+
+.cardMeta {
+    padding: 0.75rem 1rem;
+    color: #9fdfff;
+    font-size: clamp(0.75rem, 0.9vw, 0.95rem);
+}
+
+.cardDescription {
+    padding: 0 1rem 1rem;
+    padding-top: 1rem;
+    color: #ccc;
+    font-size: clamp(0.85rem, 1vw, 1rem);
+}
+
+.clicked {
+    transition: width 0.5s ease, height 0.5s ease;
+    width: min(90vw, 900px);
+    height: auto;
+    min-height: clamp(420px, 35vh, 560px);
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 3rem);
+    padding: clamp(1rem, 2vw, 2rem);
+    border: none;
+    z-index: 1001;
+    background: rgba(255,255,255,0.03);
+}
+
+.clicked::before {
+    content: "";
+    position: absolute;
+    inset: -40px;
+    z-index: -1;
+    border-radius: 24px;
+    background: radial-gradient(
+        circle at center,
+        rgba(0,255,255,0.35) 0%,
+        rgba(0,150,255,0.2) 40%,
+        rgba(100,0,255,0.12) 70%,
+        transparent 100%
+    );
+    filter: blur(50px);
+}
+
+.clicked .cardImage {
+    flex: 0 0 45%;
+    width: 45%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.clicked .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.clicked .cardTitle {
+    padding: 0;
+    margin: 0;
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
+    width: 100%;
+}
+
+.clicked .cardMeta {
+    padding: 0;
+}
+
+.clicked .cardDescription {
+    padding: 0;
+    width: 100%;
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+}
+.clicked .by{
+    transform: scaleX(1.2);
+}
+.clicked .con{
+    margin-left: 20px;
+}
+
+@media (max-width: 1024px) {
+    .card {
+        width: 30%;
     }
+
+    .clicked {
+        width: 95%;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .card {
+        width: 90%;
+        min-width: auto;
+    }
+
+    .clicked {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        min-height: auto;
+        gap: 1.5rem;
+        z-index: 10000;
+        align-items: stretch;
+    }
+
+    .clicked .cardImage {
+        width: 100%;
+        flex: none;
+    }
+
+    .clicked .content {
+        width: 100%;
+    }
+
+    .clicked .cardTitle {
+        font-size: 1.5rem;
+    }
+}
 
     .clicked .cardImage {
         width: 100%;
