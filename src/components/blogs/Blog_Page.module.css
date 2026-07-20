@@ -9,6 +9,7 @@
   box-sizing: border-box;
 }
 
+
 /* Prevent grid items from overflowing their track */
 .blogs > * {
   min-width: 0;

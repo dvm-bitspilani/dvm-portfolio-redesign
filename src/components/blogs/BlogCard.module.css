@@ -1,6 +1,6 @@
 .card {
     position: relative;
-    width: clamp(300px, 24vw, 380px);
+    width: clamp(300px, 23vw, 380px);
     height: clamp(420px, 35vh, 560px);
     border: 2px solid white;
     color: white;
@@ -10,6 +10,7 @@
     z-index: 1000;
     transform-origin: top left;
     transform: scaleX(1);
+    overflow: hidden;
 }
 .card:hover {
     scale: 1.05;
@@ -27,7 +28,7 @@
 }
 
 .cardImage {
-    height: 60%;
+    height: 50%;
     width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
