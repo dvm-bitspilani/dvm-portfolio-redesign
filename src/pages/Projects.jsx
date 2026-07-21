@@ -4,7 +4,8 @@ export default function Projects(){
 return(
     <div>
         <Navbar />
-        <h1>Projects</h1>
+        <
+
         
     </div>
 )

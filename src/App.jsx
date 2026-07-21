@@ -5,6 +5,8 @@ import ScrollToTop from "./components/ScrollToTop";
 import Blog from "./pages/Blog";
 import Ham from "./components/Ham";
 import Projects from "./pages/Projects";
+import ContactUs from "./pages/ContactUs";
+
 const App = () => {
   const [loading, setLoading] = useState(true);
 
