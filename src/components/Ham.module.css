@@ -91,6 +91,8 @@
   left: 18%;
   width: 800px;
   height: 500px;
+  scale: 1.2;
+  left:22%;
 }
 
 
@@ -297,12 +299,11 @@
 .label.isHovered .dot,
 .label.isHovered .dot::after {
   border-color: white;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
-@media (min-width: 568px) {
+/* @media (min-width: 568px) {
   .logoWrapper {
-    scale: 1.2;
+
     left: 20%;
   }
-}
+} */
