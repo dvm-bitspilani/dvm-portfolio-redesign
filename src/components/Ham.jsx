@@ -1,6 +1,6 @@
 import styles from "./Ham.module.css";
 import logo from "../assests/logo.png";
-
+import {Link} from "react-router-dom";
 const Ham = ({ onClose }) => {
   return (
     <div className={styles.body}>
@@ -23,7 +23,11 @@ const Ham = ({ onClose }) => {
       </div>
 
       <div className={styles.container}>
+        
         <div className={styles.aboutUsText}>ABOUT US</div>
+        <Link to="/contactus" className={styles.contactUsText}>CONTACT US</Link>
+        <div className={styles.projects}>PROJECTS</div>
+        <div className={styles.team}>TEAM</div>
         <div className={styles.contactUsText}>CONTACT US</div>
         <div className={styles.projects}>PROJECTS</div>
         <div className={styles.team}>TEAM</div>
