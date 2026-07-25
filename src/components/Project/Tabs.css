@@ -1,0 +1,37 @@
+.filter-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 0 auto 40px;
+  padding: 6px;
+  width: fit-content;
+  max-width: calc(100% - 32px);
+  
+}
+
+.filter-tabs__tab {
+  padding: 9px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.filter-tabs__tab:hover {
+  color: black;
+  background-color:white
+}
+
+.filter-tabs__tab--active {
+  color:black;
+  background-color:white
+}

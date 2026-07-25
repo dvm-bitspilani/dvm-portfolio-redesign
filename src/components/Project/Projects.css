@@ -1,0 +1,41 @@
+
+.proj-page {
+  --proj-bg: #05070d;
+  --proj-bg-elevated: #0d1220;
+  --proj-bg-card: #10182b;
+  --proj-border: rgba(140, 180, 255, 0.14);
+  --proj-border-strong: rgba(140, 180, 255, 0.32);
+  --proj-accent: #45e6ff;
+  --proj-accent-2: #5b7cfa;
+  --proj-warm: #ffb454;
+  --proj-text: #eaf3ff;
+  --proj-text-dim: #8b98b8;
+  --proj-font-display: "Orbitron", "Segoe UI", sans-serif;
+
+  position: relative;
+  min-height: 100vh;
+
+  color: white;
+  padding-bottom: 3rem;
+}
+
+.proj-page *,
+.proj-page *::before,
+.proj-page *::after {
+  box-sizing: border-box;
+}
+
+.proj-page__title {
+
+  font-weight: 800;
+  font-size: clamp(40px, 9vw, 92px);
+  letter-spacing: 0.06em;
+  text-align: center;
+  margin: 48px 0 28px;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #ffffff 0%, #b9c9ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 44px rgba(91, 124, 250, 0.35);
+}

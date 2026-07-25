@@ -1,0 +1,23 @@
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 22px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.project-grid__empty {
+  text-align: center;
+  color:  #8b98b8;
+  padding: 60px 20px;
+  font-size: 17px;
+}
+
+@media (max-width: 720px) {
+  .project-grid {
+    padding: 0 18px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 14px;
+  }
+}

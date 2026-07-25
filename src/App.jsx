@@ -6,6 +6,7 @@ import Blog from "./pages/Blog";
 import Ham from "./components/Ham";
 import Projects from "./pages/Projects";
 import ContactUs from "./pages/ContactUs";
+import ProjectPage from "./components/Project/ProjectPage";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -47,6 +48,7 @@ const App = () => {
         <Route path="/ham" element={<Ham />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/projects/:name" element={<ProjectPage />} />
       </Routes>
     </>
   );
