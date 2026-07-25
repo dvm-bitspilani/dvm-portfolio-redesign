@@ -8,7 +8,7 @@ import github from "../assests/icons/github.png";
 import insta from "../assests/icons/twitter.png";
 import link from "../assests/icons/linkedin.png";
 import dribble from "../assests/icons/dribble.svg";
-
+import Nav from "./Navbar";  
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -366,8 +366,7 @@ export default function TeamPage() {
       <div className={styles.progressBar} ref={progressRef} />
 
       <div className={styles.preloader} ref={preloaderRef}>
-        <div className={styles.preloaderLine}>$ fetching --team</div>
-        <div className={styles.preloaderLine}>$ rendering --humans</div>
+        <div className={styles.preloaderLine}>fetching team</div>
       </div>
 
       <div className={styles.cursorDot} ref={cursorRef} />
@@ -384,10 +383,7 @@ export default function TeamPage() {
         </div>
 
         <div className={styles.heroInner}>
-          <p className={styles.heroEyebrow}>
-            // bits-dvm.org / people
-            <span className={styles.heroEyebrowLine} aria-hidden="true" />
-          </p>
+
           <h1 className={styles.heroTitle} ref={heroTitleRef} aria-label="The Team">
             {"WE ARE DVM".split("").map((ch, i) => (
               <span className={styles.heroLetterWrap} key={i}>
@@ -395,9 +391,7 @@ export default function TeamPage() {
               </span>
             ))}
           </h1>
-          <p className={styles.heroSub}>
-            the humans who build, break, and ship bits-dvm — sorted by department, stamped by year.
-          </p>
+
         </div>
         <button className={styles.scrollCue} onClick={scrollToTeam} aria-label="Scroll to team">
           <span className={styles.scrollCueLine} />
@@ -510,7 +504,10 @@ function MemberCard({ member }) {
   ];
 
   return (
+    <>
+    <Nav />
     <div className={styles.memberCard}>
+
       <div className={styles.memberCardInner}>
         <div className={styles.memberImage}>
           <img src={member.PhotoLink} alt={member.name} loading="lazy" />
@@ -528,6 +525,7 @@ function MemberCard({ member }) {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

@@ -36,9 +36,13 @@ const Navbar = ({ onHamClick }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.heading} ref={logo}>
+      <Link
+        to="/"
+        className={styles.heading}
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      >
         DVM
-      </div>
+      </Link>
 
       <div
         ref={hamRef}
