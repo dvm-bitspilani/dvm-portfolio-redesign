@@ -161,20 +161,6 @@ const Blog = () => {
         className={styles.image1}
       />
 
-      {/*
-        .blogs/.blogsShifted (the card row) and .button ("See All Posts")
-        used to be two independently `position: absolute` elements —
-        the row guessed `top: 30%` + a forced `height: 100%`, the button
-        guessed `bottom: 10%`. The forced height made every card stretch
-        to fill the full container height (flex default `align-items:
-        stretch`), so the row was effectively as tall as the viewport —
-        of course it collided with a button positioned by a separate guess.
-
-        Now both live in one flow container (.contentColumn): it's
-        positioned once, the card row sizes to its own natural content
-        height, and the button sits after it in normal flow with `gap` —
-        so it can never overlap the cards, however tall they render.
-      */}
       <div className={styles.contentColumn}>
         <div
           ref={blogsRef}

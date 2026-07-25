@@ -63,6 +63,8 @@
     cursor: pointer;
     font-size: 0.9rem;
     justify-content: center;
+    overflow: hidden;
+    margin-top: 20px;
 
 }
 .button span {
