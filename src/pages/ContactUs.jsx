@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import Navbar from "../components/Navbar";
 import "../components/ContactUs.css";
+import ContactUsHeading from "../assests/CONTACTUS.png"
 
 const NAME_REGEX = /^(\w|\s)\D+$/;
 const PHONE_REGEX = /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
@@ -73,15 +74,15 @@ export default function ContactUs() {
       <Navbar />
 
       <div className="contact-page">
-        <h1 className="contact-page__title">Contact Us</h1>
+        <img src={ContactUsHeading} className="contact-heading" style={{ width: "80%", height: "auto", margin: "2rem", paddingLeft:"10rem" }} />
 
         <form ref={formRef} className="contact-form" onSubmit={handleSubmit}>
           <input
             ref={nameRef}
             type="text"
             name="name"
-            placeholder="Full name"
-            className="contact-form__input"
+            placeholder="Name"
+            className="contact-form-input"
             autoComplete="name"
           />
           <input
@@ -89,15 +90,15 @@ export default function ContactUs() {
             type="email"
             name="email"
             placeholder="Email"
-            className="contact-form__input"
+            className="contact-form-input"
             autoComplete="email"
           />
           <input
             ref={numberRef}
             type="tel"
             name="number"
-            placeholder="Phone number"
-            className="contact-form__input"
+            placeholder="Mobile Number"
+            className="contact-form-input"
             autoComplete="tel"
           />
           <textarea
@@ -108,7 +109,7 @@ export default function ContactUs() {
             rows={5}
           />
 
-          <button type="submit" className="contact-form__submit">
+          <button type="submit" className="contact-form-submit">
             Submit
           </button>
         </form>

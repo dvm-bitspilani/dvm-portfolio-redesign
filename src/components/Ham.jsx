@@ -59,7 +59,7 @@ const SEGMENTS = [
   },
   {
     key: "contact",
-    to: "/",
+    to: "/contactus",
     viewBox: "0 0 143 154",
     path: "M0.5 51.1657V0.972656L141.862 102.288L141.286 152.689L0.5 51.1657Z",
     box: { top: 68, left: 16, width: 30, height: 28 },
