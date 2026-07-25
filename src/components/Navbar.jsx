@@ -1,12 +1,14 @@
 import styles from "./Navbar.module.css";
-import ham from "../assests/ham.png";
+import ham from "../assests/hamBtn.png";
 import { useRef, useEffect } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap";
 import { Link } from "react-router-dom";
+
 const Navbar = ({ onHamClick }) => {
   const logo = useRef(null);
   const hamRef = useRef(null);
+
   useEffect(() => {
     gsap.from(logo.current, {
       scrollTrigger: {
@@ -19,6 +21,7 @@ const Navbar = ({ onHamClick }) => {
       opacity: 0,
     });
   }, []);
+
   useEffect(() => {
     gsap.from(hamRef.current, {
       scrollTrigger: {
@@ -37,12 +40,21 @@ const Navbar = ({ onHamClick }) => {
         DVM
       </div>
 
-      <div ref={hamRef} className={styles.ham} onClick={onHamClick}>
-        <Link to="/ham" className={styles.ham} onClick={onHamClick}>
-          <span className={styles.bar}></span>
-          <span className={`${styles.bar} ${styles.middle}`}></span>
-          <span className={styles.bar}></span>
-        </Link>
+      <div
+        ref={hamRef}
+        className={styles.ham}
+        onClick={onHamClick}
+        role="button"
+        aria-label="Open menu"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onHamClick();
+          }
+        }}
+      >
+        <img src={ham} alt="Menu" className={styles.hamIcon} />
       </div>
     </div>
   );

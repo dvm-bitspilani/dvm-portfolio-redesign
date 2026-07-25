@@ -3,23 +3,18 @@
     top: 5%;
     left: 4%;
     right: 4%;
-    z-index: 100;
+    z-index: 1000;
     height: 80px;
     background-color: transparent;
-    z-index: 1000;
     display: flex;
     justify-content: space-between;
-    
-    
 }
-
 
 .heading {
     color: #FFFFFF;
     font-family: "Orbitron";
     z-index: 1;
     font-size: 1.2rem;
-    
 }
 
 .ham {
@@ -28,73 +23,35 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 7px;
   cursor: pointer;
   text-decoration: none;
   transition: transform 0.3s ease;
 }
 
-.bar {
-  width: 4px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.9);
-  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+.hamIcon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  pointer-events: none; /* clicks/keyboard go to the .ham wrapper, not the image */
 }
 
-/* Increasing heights */
-.bar:nth-child(1) {
-  height: 16px;
-}
-
-.bar:nth-child(2) {
-  height: 24px;
-}
-
-.bar:nth-child(3) {
-  height: 32px;
-}
-
-/* Blue gradient middle bar */
-.middle {
-  background: linear-gradient(
-    to top,
-    #38bdf8 0%,
-    #60a5fa 45%,
-    #2563eb 100%
-  );
-  box-shadow: 0 0 10px rgba(59, 130, 246, 0.45);
-}
-
-/* Hover animation */
+/* Hover animation — icon lifts and glows slightly instead of bars growing */
 .ham:hover {
   transform: translateY(-2px);
 }
 
-.ham:hover .bar:nth-child(1) {
-  height: 22px;
-}
-
-.ham:hover .bar:nth-child(2) {
-  height: 30px;
-}
-
-.ham:hover .bar:nth-child(3) {
-  height: 38px;
-}
-
-/* Slight stagger */
-.ham:hover .bar:nth-child(1) {
-  transition-delay: 0s;
-}
-
-.ham:hover .bar:nth-child(2) {
-  transition-delay: 0.04s;
-}
-
-.ham:hover .bar:nth-child(3) {
-  transition-delay: 0.08s;
+.ham:hover .hamIcon {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.45));
 }
 
 .ham:active {
   transform: scale(0.95);
+}
+
+.ham:focus-visible {
+  outline: 2px solid rgba(96, 165, 250, 0.8);
+  outline-offset: 4px;
+  border-radius: 8px;
 }

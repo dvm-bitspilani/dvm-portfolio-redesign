@@ -25,14 +25,14 @@
     max-width: 100%;
     top: 20%;
     object-fit: contain;
-    left: 5%;
+    left: 4%;
 }
 .image1 {
     position: absolute;
     z-index: 3;
     max-width: 100%;
     top: 15%;
-    left: 5%;
+    left:0%;
     object-fit: contain;
 }
 

@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import Land from "./pages/Landing";
 import ScrollToTop from "./components/ScrollToTop";
 import Blog from "./pages/Blog";
-import Ham from "./components/Ham";
 import About from "./components/About";
 import styles from "./App.module.css";
 import TeamPage from "./components/Team";
@@ -78,7 +77,6 @@ const App = () => {
         <Routes location={displayLocation}>
           <Route path="/" element={<Land />} />
           <Route path="/blog" element={<Blog />} />
-          <Route path="/ham" element={<Ham />} />
           <Route path="/about" element={<About />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/team" element={<TeamPage />} />

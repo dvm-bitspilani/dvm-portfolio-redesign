@@ -142,14 +142,15 @@ const Ham = ({ onClose }) => {
           style={{ animationDelay: "0.2s" }}
           alt="M"
         />
-        <Link to="/">
+
           <img
             src={arrow}
             className={styles.arrow}
             style={{ animationDelay: "0.6s" }}
             alt="Arrow"
+            onClick={() => onClose()}
           />
-        </Link>
+   
 
         <div className={styles.logoWrapper}>
           <svg width="0" height="0" style={{ position: "absolute" }}>

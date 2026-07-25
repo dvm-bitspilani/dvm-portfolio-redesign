@@ -8,7 +8,7 @@ import logo from "../../assests/logo.png";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Link } from "react-router-dom";
-import ham from "../../assests/ham.png";
+import ham from "../../assests/hamBtn.png";
 gsap.registerPlugin(ScrollTrigger);
 
 const BlogPage = () => {
