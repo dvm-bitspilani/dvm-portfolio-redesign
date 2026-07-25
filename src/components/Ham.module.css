@@ -211,22 +211,18 @@
   padding-right: 4px;
   flex-direction: row;
   animation: labelFadeLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-  overflow: hidden;
 }
 .label.left .text {
   transform-origin: left center;
-  overflow: hidden;
 }
 
 .label.right {
   padding-left: 4px;
   flex-direction: row-reverse;
   animation: labelFadeRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-  overflow: hidden;
 }
 .label.right .text {
   transform-origin: right center;
-  overflow: hidden;
 }
 
 @keyframes labelFadeLeft {
