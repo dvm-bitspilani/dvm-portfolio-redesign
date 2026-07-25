@@ -6,159 +6,6 @@
     color: white;
     transition: all 0.2s ease;
     background: rgba(255,255,255,0.02);
-    
-    z-index: 1000;
-    transform-origin: top left;
-    transform: scaleX(1);
-    overflow: hidden;
-}
-.card:hover {
-    scale: 1.05;
-    z-index: 1001;
-}
-.readMore {
-    background-color: transparent;
-    border: none;
-    font-family: 'JetBrains Mono';
-    color: rgba(198, 249, 78, 1);
-    margin-left: 60%;
-    cursor: pointer;
-    z-index: 1111;
-    text-decoration: none;
-}
-
-.cardImage {
-    height: 50%;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    display: block;
-}
-
-.cardTitle {
-    font-family: "Orbitron", sans-serif;
-    font-size: clamp(1rem, 1.4vw, 1.5rem);
-    font-weight: bold;
-    width: 80%  ;
-    padding: 1rem 1rem 0;
-}
-
-.cardMeta {
-    padding: 0.75rem 1rem;
-    color: #9fdfff;
-    font-size: clamp(0.75rem, 0.9vw, 0.95rem);
-   
-}
-
-.cardDescription {
-
-    padding: 0 1rem 1rem;
-    padding-top: 1rem;
-    color: #ccc;
-    font-size: clamp(0.85rem, 1vw, 1rem);
-   
-}
-
-
-.clicked {
-    transition: width 0.5s ease;
-    width: min(90vw, 900px);
-    display: flex;
-    align-items: center;
-    gap: clamp(1rem, 3vw, 3rem);
-    padding: clamp(1rem, 2vw, 2rem);
-    border: none;
-    z-index: 1001;
-    background: rgba(255,255,255,0.03);
- 
-}
-
-.clicked::before {
-    content: "";
-    position: absolute;
-    inset: -40px;
-    z-index: -1;
-    border-radius: 24px;
-    background: radial-gradient(
-        circle at center,
-        rgba(0,255,255,0.35) 0%,
-        rgba(0,150,255,0.2) 40%,
-        rgba(100,0,255,0.12) 70%,
-        transparent 100%
-    );
-    filter: blur(50px);
-}
-
-.clicked .cardImage {
-    flex: 0 0 45%;
-    width: 45%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-}
-
-.clicked .content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1rem;
-}
-
-.clicked .cardTitle {
-    padding: 0;
-    margin: 0;
-    font-size: clamp(1.2rem, 2.5vw, 2rem);
-    width: 100%;
-}
-
-.clicked .cardMeta {
-    padding: 0;
-}
-
-.clicked .cardDescription {
-    padding: 0;
-    width: 100%;
-    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
-}
-.clicked .by{
-    transform: scaleX(1.2);
-}
-.clicked .con{
-    margin-left: 20px;
-}
-
-@media (max-width: 1024px) {
-    .card {
-        width: 30%;
-    }
-
-    .clicked {
-        width: 95%;
-    }
-}
-
-
-@media (max-width: 768px) {
-
-    .card {
-        width: 90%;
-        min-width: auto;
-    }
-
-    .clicked {
-        flex-direction: column;
-        width: 100%;
-        gap: 1.5rem;
-        min-height: 100%;
-        z-index: 10000;
-    }.card {
-    position: relative;
-    width: clamp(300px, 23vw, 380px);
-    height: clamp(420px, 35vh, 560px);
-    border: 2px solid white;
-    color: white;
-    transition: all 0.2s ease;
-    background: rgba(255,255,255,0.02);
     z-index: 1000;
     transform-origin: top left;
     transform: scaleX(1);
@@ -277,9 +124,11 @@
     margin-left: 20px;
 }
 
+/* ---- 1024px: 3-up grid gets tighter, cards shrink proportionally ---- */
 @media (max-width: 1024px) {
     .card {
         width: 30%;
+        height: clamp(360px, 32vh, 480px);
     }
 
     .clicked {
@@ -287,11 +136,13 @@
     }
 }
 
+/* ---- 768px: single-column stacked cards, meaningfully smaller than desktop ---- */
 @media (max-width: 768px) {
 
     .card {
         width: 90%;
         min-width: auto;
+        height: clamp(320px, 42vh, 420px);
     }
 
     .clicked {
@@ -318,16 +169,77 @@
     }
 }
 
-    .clicked .cardImage {
-        width: 100%;
-        flex: none;
+/* ---- 480px: phones — cards shrink further so they never crowd the
+   button/footer below them, text sizes step down to match ---- */
+@media (max-width: 480px) {
+    .card {
+        width: 92%;
+        height: clamp(260px, 36vh, 340px);
     }
 
-    .clicked .content {
-        width: 100%;
+    .cardTitle {
+        font-size: clamp(0.9rem, 4vw, 1.15rem);
+        padding: 0.75rem 0.75rem 0;
+    }
+
+    .cardMeta {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    .cardDescription {
+        padding: 0 0.75rem 0.75rem;
+        padding-top: 0.5rem;
+        font-size: 0.8rem;
+    }
+
+    .clicked {
+        padding: 1rem;
+        gap: 1rem;
     }
 
     .clicked .cardTitle {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
+    }
+
+    .clicked .cardDescription {
+        font-size: 0.85rem;
+    }
+
+    .readMore {
+        margin-left: 0;
+        font-size: 0.85rem;
+    }
+}
+
+/* ---- 360px: very small phones — smallest card footprint ---- */
+@media (max-width: 360px) {
+    .card {
+        width: 94%;
+        height: clamp(220px, 32vh, 300px);
+    }
+
+    .cardTitle {
+        font-size: 0.85rem;
+        padding: 0.6rem 0.6rem 0;
+    }
+
+    .cardMeta {
+        font-size: 0.7rem;
+        padding: 0.4rem 0.6rem;
+    }
+
+    .cardDescription {
+        font-size: 0.75rem;
+        padding: 0 0.6rem 0.6rem;
+        padding-top: 0.4rem;
+    }
+
+    .clicked .cardTitle {
+        font-size: 1.1rem;
+    }
+
+    .clicked .cardDescription {
+        font-size: 0.8rem;
     }
 }

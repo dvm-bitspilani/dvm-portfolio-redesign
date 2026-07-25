@@ -121,7 +121,6 @@ const Legacy = () => {
   const headerFillRef = useRef(null);
   const footerRef = useRef(null);
   const footerConRef = useRef(null);
-  const footerBtnRef = useRef(null);
   const gradientPos = useRef({ x: 0, y: 0 });
 
   // Refs to the connecting-graph lines (base + gradient overlay pair)
@@ -457,12 +456,7 @@ const Legacy = () => {
       opacity: 0,
       duration: 0.6,
       stagger: 0.2,
-    }).from(footerBtnRef.current.children, {
-      x: 100,
-      opacity: 0,
-      duration: 0.6,
-      stagger: 0.2,
-    });
+    })
 
     return () => {
       tl.scrollTrigger?.kill();
@@ -807,10 +801,7 @@ const Legacy = () => {
           <h2>DEPARTMENT OF</h2>
           <h1 className={styles.vm}>VISUAL MEDIA</h1>
         </div>
-        <div ref={footerBtnRef} className={styles.footerActions}>
-          <button className={styles.footerButton}>ARTWORKS</button>
-          <img className={styles.arrow} src={arrow} alt="Arrow" />
-        </div>
+
       </div>
       <div ref={gradientRef} className={styles.gradient}></div>
     </div>

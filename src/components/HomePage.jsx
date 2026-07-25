@@ -131,9 +131,7 @@ const HomePage = () => {
           <div>DESIGN.</div>
           <div>ANIMATE.</div>
         </div>
-        <button ref={about_ref} className={styles.about}>
-          ABOUT US
-        </button>
+  
         <div ref={gradientRef} className={styles.gradient}></div>
       </div>
 

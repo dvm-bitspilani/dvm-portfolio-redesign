@@ -32,47 +32,34 @@
     z-index: 3;
     max-width: 100%;
     top: 15%;
+    left: 5%;
     object-fit: contain;
 }
 
-.para {
+/* ---- paragraphs ----
+   One positioned flow container instead of three independently
+   absolute-positioned blocks. Each .paragraph is normal flow, spaced by
+   `gap`, so the group's total height always matches its real content —
+   no more guessed `bottom` offsets that break when text wraps differently.
+*/
+.paraGroup {
     position: absolute;
     z-index: 3;
+    right: 20%;
+    bottom: 20%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6em;
+}
+
+.paragraph {
+    margin: 0;
     color: #FFFFFF;
     font-family: "Orbitron";
     font-size: 0.9rem;
-    bottom: 45%;
-    width: 30%;
-    right: 20%;
     overflow: hidden;
 }
-
-.para1 {
-    position: absolute;
-    z-index: 3;
-    color: #FFFFFF;
-    font-family: "Orbitron";
-    font-size: 0.9rem;
-    bottom: 35%;
-    width: 30%;
-    right: 20%;
-    overflow: hidden;
-}
-
-
-.para2 {
-    position: absolute;
-    z-index: 3;
-    color: #FFFFFF;
-    font-family: "Orbitron";
-    font-size: 0.9rem;
-    bottom: 28%;
-    width: 30%;
-    right: 20%;
-    overflow: hidden;
-}
-
-
 
 .footer {
     position: absolute;
@@ -163,11 +150,12 @@
 
 
 @media (max-width: 1200px) {
-  .para,
-  .para1,
-  .para2 {
+  .paraGroup {
     width: 34%;
     right: 8%;
+  }
+
+  .paragraph {
     font-size: 0.82rem;
   }
 
@@ -190,14 +178,16 @@
 
   .image1 {
     top: 10%;
+    left: 3%;
     max-width: 55%;
   }
 
-  .para,
-  .para1,
-  .para2 {
+  .paraGroup {
     width: 42%;
     right: 5%;
+  }
+
+  .paragraph {
     font-size: 0.78rem;
   }
 
@@ -249,16 +239,18 @@
     max-width: 80%;
   }
 
-  .para,
-  .para1,
-  .para2 {
+  .paraGroup {
     position: relative;
     right: 0;
     bottom: 0;
     width: 100%;
+    margin-top: 10%;
+    gap: 1.1em;
+  }
+
+  .paragraph {
     font-size: 0.85rem;
     line-height: 1.4rem;
-    margin-top: 4%;
   }
 
   .footer {
@@ -306,16 +298,14 @@
     max-width: 90%;
   }
 
-  .para,
-  .para1,
-  .para2 {
-    font-size: 1rem;
-    line-height: 1.25rem;
-    margin-top: 7%;
+  .paraGroup {
+    margin-top: 28%;
+    gap: 1em;
   }
 
-  .para {
-    margin-top: 20%;
+  .paragraph {
+    font-size: 1rem;
+    line-height: 1.25rem;
   }
 
   .footer {
@@ -364,16 +354,14 @@
     font-size: 0.75rem;
   }
 
-  .para,
-  .para1,
-  .para2 {
-    font-size: 0.72rem;
-    line-height: 1.15rem;
-    margin-top: 7%;
+  .paraGroup {
+    margin-top: 24%;
+    gap: 0.9em;
   }
 
-  .para {
-    margin-top: 16%;
+  .paragraph {
+    font-size: 0.72rem;
+    line-height: 1.15rem;
   }
 
   .footer {

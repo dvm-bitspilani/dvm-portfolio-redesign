@@ -1,5 +1,5 @@
 import styles from "./Navbar.module.css";
-import ham from "../assests/ham.png"
+import ham from "../assests/ham.png";
 import { useRef, useEffect } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap";
@@ -22,16 +22,14 @@ const Navbar = ({ onHamClick }) => {
   useEffect(() => {
     gsap.from(hamRef.current, {
       scrollTrigger: {
-        trigger: ham.current,
+        trigger: logo.current,
         start: "top top",
-        end: "bottom top",
         scrub: true,
       },
-      y: -20,
+      y: -5,
       opacity: 0,
     });
   }, []);
-  
 
   return (
     <div className={styles.container}>
@@ -39,9 +37,11 @@ const Navbar = ({ onHamClick }) => {
         DVM
       </div>
 
-      <div className={styles.ham} onClick={onHamClick}>
-        <Link to="/ham">
-          <img ref={hamRef} src={ham} alt="ham" />
+      <div ref={hamRef} className={styles.ham} onClick={onHamClick}>
+        <Link to="/ham" className={styles.ham} onClick={onHamClick}>
+          <span className={styles.bar}></span>
+          <span className={`${styles.bar} ${styles.middle}`}></span>
+          <span className={styles.bar}></span>
         </Link>
       </div>
     </div>

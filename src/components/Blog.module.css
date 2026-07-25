@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     position: relative;
-  
+
     isolation: isolate;
     width: 100vw;
     height: 100vh;
@@ -30,9 +30,26 @@
     left: 20%;
     top:5%;
 }
-.button{
+
+/* ---- Content column wrapper: groups the blog card row + "See All
+   Posts" button in a single flow container so the button can never
+   overlap the cards, no matter how tall the card row renders. Replaces
+   the old approach of independently absolute-positioning .blogs/
+   .blogsShifted (top: 30%, forced height: 100%) and .button
+   (bottom: 10%) against the viewport. ---- */
+.contentColumn {
     position: absolute;
-    bottom: 10%;
+    top: 30%;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 4%;
+}
+
+.button{
+    position: relative;
     left: 20%;
     display: flex;
     align-items: center;
@@ -46,7 +63,7 @@
     cursor: pointer;
     font-size: 0.9rem;
     justify-content: center;
-    
+
 }
 .button span {
     padding: 2px;
@@ -55,7 +72,7 @@
     transform-origin: center;
 }
 .arrow{
-    
+
     margin-left: 20px;
     padding: 2px;
     display: inline-block;
@@ -85,7 +102,7 @@
     font-size: 0.6rem;
 
     bottom: 2%;
-    
+
 }
 .visualMedia {
     font-size: 1rem;
@@ -111,9 +128,7 @@
 
 
 .blogsShifted{
-    height: 100%;
-    position: absolute;
-    top: 30%;
+    position: relative;
     left: 15%;
     display: flex;
     width: 100%;
@@ -121,9 +136,7 @@
     gap: 2%;
 }
 .blogs{
-    height: 100%;
-    position: absolute;
-    top: 30%;
+    position: relative;
     left: 0%;
     display: flex;
     width: 100%;
@@ -176,7 +189,7 @@
     inset: 0;
     z-index: 2;
     pointer-events: none;
-    
+
     background-size: cover;
     background-position: center;
     -webkit-mask-image: radial-gradient(circle 40vw at -9999px -9999px, black 0%, transparent 100%);
@@ -187,13 +200,13 @@
   .image {
     width: 56%;
     left: 22%;
-  
+
   }
 
   .image1 {
     width: 66%;
     left: 17%;
-    
+
   }
 
   .button {
@@ -231,7 +244,6 @@
   .button {
     width: 76%;
     left: 12%;
-    bottom: 8%;
     height: 32px;
     font-size: 0.78rem;
   }
@@ -252,9 +264,13 @@
     padding: 8px 14px;
   }
 
+  .contentColumn {
+    top: 34%;
+    gap: 1.5%;
+  }
+
   .blogs,
   .blogsShifted {
-    top: 34%;
     left: 3%;
     gap: 1.5%;
   }
@@ -284,10 +300,15 @@
     top: 2%;
   }
 
-  .button {
+  .contentColumn {
     position: relative;
+    top: 0;
     left: 0;
-    bottom: 0;
+    gap: 6%;
+  }
+
+  .button {
+    left: 0;
     width: 100%;
     height: 40px;
     margin-top: 5%;
@@ -296,8 +317,6 @@
 
   .blogs,
   .blogsShifted {
-    position: relative;
-    top: 0;
     left: 0;
     height: auto;
     width: 100%;

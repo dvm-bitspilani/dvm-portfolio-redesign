@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import bg3 from "../assests/bg_3.png";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRef, useEffect, useState, use } from "react";
+import { useRef, useEffect, useState } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,7 +19,6 @@ const Blog = () => {
   const blog_out = useRef(null);
   const blog = useRef(null);
   const dvmRef = useRef(null);
-  const projectRef = useRef(null);
   const gradientPos = useRef({ x: 0, y: 0 });
   const blogsRef = useRef(null);
   const [clickedCard, setClickedCard] = useState(null);
@@ -80,6 +79,7 @@ const Blog = () => {
       },
     });
   }, []);
+
   useEffect(() => {
     gsap.from(blog_out.current, {
       y: -100,
@@ -92,6 +92,7 @@ const Blog = () => {
       },
     });
   }, []);
+
   useEffect(() => {
     gsap.from(dvmRef.current.children, {
       x: -100,
@@ -106,20 +107,7 @@ const Blog = () => {
       },
     });
   }, []);
-  useEffect(() => {
-    gsap.from(projectRef.current, {
-      x: 100,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.4,
 
-      scrollTrigger: {
-        trigger: blog.current,
-        start: "top 20%",
-        end: "top",
-      },
-    });
-  }, []);
   useEffect(() => {
     const cards = blogsRef.current.children;
 
@@ -173,35 +161,47 @@ const Blog = () => {
         className={styles.image1}
       />
 
-      <div
-        ref={blogsRef}
-        className={clickedCard ? styles.blogs : styles.blogsShifted}
-      >
-        <Card
-          limit={3}
-          clickedCard={clickedCard}
-          setClickedCard={setClickedCard}
-        />
-      </div>
+      {/*
+        .blogs/.blogsShifted (the card row) and .button ("See All Posts")
+        used to be two independently `position: absolute` elements —
+        the row guessed `top: 30%` + a forced `height: 100%`, the button
+        guessed `bottom: 10%`. The forced height made every card stretch
+        to fill the full container height (flex default `align-items:
+        stretch`), so the row was effectively as tall as the viewport —
+        of course it collided with a button positioned by a separate guess.
 
-      <Link
-        to="/blog"
-        className={styles.button}
-        state={{ selectedCard: clickedCard }}
-      >
-        <span>See All Posts</span>
-        <img src={arrow} alt="Arrow" className={styles.arrow} />
-      </Link>
+        Now both live in one flow container (.contentColumn): it's
+        positioned once, the card row sizes to its own natural content
+        height, and the button sits after it in normal flow with `gap` —
+        so it can never overlap the cards, however tall they render.
+      */}
+      <div className={styles.contentColumn}>
+        <div
+          ref={blogsRef}
+          className={clickedCard ? styles.blogs : styles.blogsShifted}
+        >
+          <Card
+            limit={3}
+            clickedCard={clickedCard}
+            setClickedCard={setClickedCard}
+          />
+        </div>
+
+        <Link
+          to="/blog"
+          className={styles.button}
+          state={{ selectedCard: clickedCard }}
+        >
+          <span>See All Posts</span>
+          <img src={arrow} alt="Arrow" className={styles.arrow} />
+        </Link>
+      </div>
 
       <div className={styles.footer}>
         <div ref={dvmRef} className={styles.text}>
           <div>DEPARTMENT OF</div>
           <div className={styles.visualMedia}>VISUAL MEDIA</div>
         </div>
-
-        <button ref={projectRef} className={styles.projects}>
-          PROJECTS
-        </button>
       </div>
 
       <div ref={gradientRef} className={styles.gradient}></div>

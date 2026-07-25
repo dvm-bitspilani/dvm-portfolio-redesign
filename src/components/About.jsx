@@ -20,7 +20,6 @@ const About = () => {
   const para1Ref = useRef(null);
   const para2Ref = useRef(null);
   const dvmRef = useRef(null);
-  const btnRef = useRef(null);
   const footerRef = useRef(null);
 
   useEffect(() => {
@@ -100,19 +99,7 @@ const About = () => {
     });
   }, []);
 
-  useEffect(() => {
-    gsap.from(btnRef.current, {
-      x: 100,
-      opacity: 0,
-      duration: 1,
 
-      scrollTrigger: {
-        trigger: footerRef.current,
-        start: "top 85%",
-        end: "top",
-      },
-    });
-  }, []);
 
   useEffect(() => {
     const refs = [paraRef, para1Ref, para2Ref];
@@ -167,29 +154,41 @@ const About = () => {
       <img ref={about_ref} className={styles.image} src={about} alt="about" />
       <img ref={about_outlineRef} className={styles.image1} src={about_outline} alt="about" />
 
-      <p ref={paraRef} className={styles.para}>
-        The Department of Visual Media plays an instrumental role in building
-        the software that is the backbone of all the three fests of BITS Pilani
-        - Oasis and APOGEE.
-      </p>
-      <p ref={para1Ref} className={styles.para1}>
-        DVM is responsible for creating and maintaining the Websites,
-        Applications (iOS & Android), Teasers, Trailers & Promotional Videos of
-        the three fests.
-      </p>
-      <p ref={para2Ref} className={styles.para2}>
-        Despite generating traffic of over 5000 users on our apps and websites,
-        we handle everything with ease.
-      </p>
+      {/*
+        All three paragraphs used to be independently `position: absolute`
+        with hand-guessed `bottom` percentages — that only holds up as long
+        as every paragraph happens to wrap to the exact number of lines you
+        eyeballed it at. Any longer copy, narrower viewport, or font metric
+        shift and they start overlapping.
+
+        Instead: one flow container (.paraGroup) is positioned/sized once,
+        and the paragraphs stack via normal flow + flex `gap`, so spacing
+        is always based on each paragraph's *actual* rendered height —
+        overlap becomes structurally impossible.
+      */}
+      <div className={styles.paraGroup}>
+        <p ref={paraRef} className={styles.paragraph}>
+          The Department of Visual Media plays an instrumental role in building
+          the software that is the backbone of all the three fests of BITS Pilani
+          - Oasis and APOGEE.
+        </p>
+        <p ref={para1Ref} className={styles.paragraph}>
+          DVM is responsible for creating and maintaining the Websites,
+          Applications (iOS & Android), Teasers, Trailers & Promotional Videos of
+          the three fests.
+        </p>
+        <p ref={para2Ref} className={styles.paragraph}>
+          Despite generating traffic of over 5000 users on our apps and websites,
+          we handle everything with ease.
+        </p>
+      </div>
 
       <div ref={footerRef} className={styles.footer}>
         <div ref={dvmRef} className={styles.text}>
           <div>DEPARTMENT OF</div>
           <div className={styles.visualMedia}>VISUAL MEDIA</div>
         </div>
-        <div ref={btnRef} className={styles.project}>
-          PROJECTS
-        </div>
+
       </div>
 
       <div ref={gradientRef} className={styles.gradient}></div>
