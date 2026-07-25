@@ -120,42 +120,42 @@ const Blog = () => {
       },
     });
   }, []);
-useEffect(() => {
-  const cards = blogsRef.current.children;
+  useEffect(() => {
+    const cards = blogsRef.current.children;
 
-  const animations = [
-    {
-      x: -window.innerWidth * 0.2,
-      y: window.innerHeight * 0.2,
-      rotate: -20,
-    },
-    {
-      y: window.innerHeight * 0.25,
-      scale: 0.7,
-      rotate: 0,
-    },
-    {
-      x: window.innerWidth * 0.2,
-      y: window.innerHeight * 0.2,
-      rotate: 20,
-    },
-  ];
-
-  [...cards].forEach((card, i) => {
-    gsap.from(card, {
-      ...animations[i],
-      opacity: 0,
-      duration: 1.2,
-      
-      scrollTrigger: {
-        trigger: blogsRef.current,
-        start: "top 75%",
-        end: "top 30%",
-        scrub: 1,
+    const animations = [
+      {
+        x: -window.innerWidth * 0.2,
+        y: window.innerHeight * 0.2,
+        rotate: -20,
       },
+      {
+        y: window.innerHeight * 0.25,
+        scale: 0.7,
+        rotate: 0,
+      },
+      {
+        x: window.innerWidth * 0.2,
+        y: window.innerHeight * 0.2,
+        rotate: 20,
+      },
+    ];
+
+    [...cards].forEach((card, i) => {
+      gsap.from(card, {
+        ...animations[i],
+        opacity: 0,
+        duration: 1.2,
+
+        scrollTrigger: {
+          trigger: blogsRef.current,
+          start: "top 75%",
+          end: "top 30%",
+          scrub: 1,
+        },
+      });
     });
-  });
-}, []);
+  }, []);
 
   return (
     <div ref={containerRef} className={styles.container}>
@@ -173,24 +173,36 @@ useEffect(() => {
         className={styles.image1}
       />
 
-      <div ref={dvmRef} className={styles.text}>
-        <div>DEPARTMENT OF</div>
-        <div className={styles.visualMedia}>VISUAL MEDIA</div>
+      <div
+        ref={blogsRef}
+        className={clickedCard ? styles.blogs : styles.blogsShifted}
+      >
+        <Card
+          limit={3}
+          clickedCard={clickedCard}
+          setClickedCard={setClickedCard}
+        />
       </div>
 
-      <Link to="/blog" className={styles.button} state={{ selectedCard: clickedCard }}>
+      <Link
+        to="/blog"
+        className={styles.button}
+        state={{ selectedCard: clickedCard }}
+      >
         <span>See All Posts</span>
         <img src={arrow} alt="Arrow" className={styles.arrow} />
       </Link>
 
-      <button ref={projectRef} className={styles.projects}>
-        PROJECTS
-      </button>
+      <div className={styles.footer}>
+        <div ref={dvmRef} className={styles.text}>
+          <div>DEPARTMENT OF</div>
+          <div className={styles.visualMedia}>VISUAL MEDIA</div>
+        </div>
 
-      <div ref={blogsRef} className={clickedCard ? styles.blogs : styles.blogsShifted}>
-        <Card  limit={3} clickedCard={clickedCard} setClickedCard={setClickedCard} />
+        <button ref={projectRef} className={styles.projects}>
+          PROJECTS
+        </button>
       </div>
-      
 
       <div ref={gradientRef} className={styles.gradient}></div>
     </div>
@@ -198,4 +210,3 @@ useEffect(() => {
 };
 
 export default Blog;
-

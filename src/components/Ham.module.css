@@ -1,172 +1,309 @@
-.body{
-    width:100vw;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    background:black;
-}
-.heading{
-    position: absolute;
-    color:white;
-    font-size:2rem;
-    top: 10%;
-    font-family: "Orbitron";
-    letter-spacing: 2rem;
-    font-weight: 300;
-}
-.dep{
-    position: absolute;
-    color:white;
-    font-size:0.8rem;
-    top: 50%;
-    left: 3%;
-    font-family: "Orbitron";
-}
-.vm{
-    position: absolute;
-    color:white;
-    font-size:0.8rem;
-    top: 50%;
-    right: 3%;
-    font-family: "Orbitron";
-}
-.container{
-    width:500px;
-    height:500px;
-    position:relative;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    top: 25%;
-}
-
-/* SVG */
-.outerSvg{
-    position:absolute;
-    width:100%;
-    height:100%;
-    transform:rotate(-90deg); /* start drawing from top */
-}
-
-.outerStroke{
-    fill:none;
-    stroke:white;
-    stroke-width:30;
-
-    stroke-dasharray:754;
-    stroke-dashoffset:754;
-    animation:drawCircle 1.2s ease forwards;
-}
-
-/* Inner Ring */
-.inner_circle{
-    width:63%;
-    height:63%;
-    border:50px solid white;
-    border-radius:50%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:2;
-}
-
-.logo{
-    width:50%;
-    transform:scale(0);
-    animation:logoPop .6s ease forwards;
-    animation-delay:1.2s;
-}
-
-@keyframes drawCircle{
-    to{
-       
-        stroke-dashoffset:0%;
-    }
-}
-
-@keyframes logoPop{
-    from{
-        transform:scale(0);
-    }
-    to{
-        transform:scale(1);
-    }
-}
-
-.text_sub {
-    position: absolute;
-    color: #FFFFFF;
-    font-family: "Orbitron";
-    display: flex;
-    flex-direction: column;
-    z-index: 1;
-    font-size: 1.8rem;
-    text-align: right;
-    bottom: 8%;
-    left: 3%;
-    align-items: flex-start;
-    line-height: 2.1rem;
-
-}
-
-.aboutUsText {
-    font-family: "Orbitron";
-    font-size: 1.2rem;
-    font-weight: 300;
-    position: absolute;
-    color: purple;
-    top: 8%;
-    z-index: 10;
-}
-.contactUsText {
-    font-family: "Orbitron";
-    font-size: 1.2rem;
-    font-weight: 300;
-    position: absolute;
-    color: purple;
-    bottom: 8%;
-    z-index: 10;
-}
-.projects {
-    font-family: "Orbitron";
-    font-size: 1.2rem;
-    font-weight: 300;
-    position: absolute;
-    color: purple;
-    bottom: 22%;
-    z-index: 10;
-}
-
-.team {
-    font-family: "Orbitron";
-    font-size: 1.2rem;
-    font-weight: 300;
-    position: absolute;
-    color: purple;
-    bottom: 50%;
-    left:18%;
-    transform:rotateZ(90deg);
-    z-index: 10;
-
-}
-
-
-.closeBtn {
-    position: absolute;
-    top: 30px;
-    right: 30px;
-
-    background: transparent;
-    border: none;
-
-    color: white;
-    font-size: 2rem;
-    cursor: pointer;
-    z-index: 1001;
-}   
 .body {
+  width: 100vw;
+  height: 100vh;
+  /* overflow: ; */
+  background: black;
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: black;
+  animation: bodyIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
+
+@keyframes bodyIntro {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.stage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center center;
+  /* width, height, and transform (translate + scale) are set inline from JS */
+}
+
+.d {
+  height: 10%;
+  width: auto;
+  position: absolute;
+  left: 15%;
+  top: 40%;
+  opacity: 0;
+  animation: dropIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.m {
+  height: 10%;
+  width: auto;
+  position: absolute;
+  right: 15%;
+  top: 40%;
+  opacity: 0;
+  animation: dropIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+@keyframes dropIn {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.arrow {
+  height: 5%;
+  width: auto;
+  position: absolute;
+  left: 0%;
+  top: 5%;
+  cursor: pointer;
+  z-index: 1001;
+  opacity: 0;
+  transition: transform 0.3s ease;
+  animation: fadeSettle 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+}
+
+.arrow:hover {
+  transform: rotateZ(90deg) scale(1.15);
+}
+
+@keyframes fadeSettle {
+  from {
+    opacity: 0;
+    transform: rotateZ(70deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotateZ(90deg);
+  }
+}
+
+.logoWrapper {
+  position: absolute;
+  top: 15%;
+  left: 18%;
+  width: 800px;
+  height: 500px;
+  scale: 1.2;
+  left:22%;
+}
+
+
+.segmentGroup {
+  position: absolute;
+
+}
+
+.segmentGroup.isHovered {
+  z-index: 50;
+}
+
+.segmentGroup a {
+  position: absolute;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+}
+
+.segmentSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  transform-box: fill-box;
+  animation: segmentIntro 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes segmentIntro {
+  from {
+    opacity: 0;
+    transform: scale(0.75) translateY(18px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+.segment {
+  fill: url(#hamHoverGradient);
+  cursor: pointer;
+  pointer-events: visiblePainted; /* only the painted pixels of the wedge are hit-testable */
+  transition:
+    filter 0.4s ease,
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.segment.isHovered {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.35))
+    drop-shadow(0 0 22px rgba(120, 200, 255, 0.25));
+  /* transform: scale(1.045); */
+}
+
+.segmentFill {
+  fill: white;
+  pointer-events: none;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.segmentFill.isHovered {
+  clip-path: inset(0 0 0 0);
+}
+
+
+.labelLayer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* re-enabled per-label below */
+  z-index: 100; /* always above every .segmentGroup */
+}
+
+.label {
+  position: absolute;
+  top: 50%;
+  --tx: 0px;
+  --ox: 0px;
+  --oy: 0px;
+  display: flex;
+  align-items: center;
+  gap: clamp(4px, 0.6vw, 10px);
+  color: white;
+  font-family: "Orbitron";
+  font-weight: 300;
+  font-size: clamp(0.5rem, 1.1vw, 1rem);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  cursor: pointer;
+  pointer-events: auto; /* the label text itself is the exact hit target */
+  opacity: 0;
+  transition: letter-spacing 0.4s ease;
+}
+
+.label.left {
+  padding-right: 4px;
+  flex-direction: row;
+  animation: labelFadeLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.label.left .text {
+  transform-origin: left center;
+}
+
+.label.right {
+  padding-left: 4px;
+  flex-direction: row-reverse;
+  animation: labelFadeRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.label.right .text {
+  transform-origin: right center;
+}
+
+@keyframes labelFadeLeft {
+  from {
+    opacity: 0;
+    transform: translate(calc(var(--tx) + var(--ox) - 16px), calc(-50% + var(--oy)));
+  }
+  to {
+    opacity: 1;
+    transform: translate(calc(var(--tx) + var(--ox)), calc(-50% + var(--oy)));
+  }
+}
+
+@keyframes labelFadeRight {
+  from {
+    opacity: 0;
+    transform: translate(calc(var(--tx) + var(--ox) + 16px), calc(-50% + var(--oy)));
+  }
+  to {
+    opacity: 1;
+    transform: translate(calc(var(--tx) + var(--ox)), calc(-50% + var(--oy)));
+  }
+}
+
+.dot {
+  position: relative;
+  width: clamp(12px, 1.4vw, 20px);
+  height: clamp(12px, 1.4vw, 20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.dot::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30%;
+  height: 30%;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition:
+    border-color 0.4s ease,
+    background 0.4s ease;
+}
+
+.line {
+  height: 1px;
+  width: clamp(20px, 5.5vw, 130px);
+  background: rgba(255, 255, 255, 0.35);
+  flex-shrink: 0;
+  transition: background 0.5s ease;
+}
+
+.text {
+  display: inline-block;
+  transition:
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    text-shadow 0.4s ease;
+}
+
+.label.isHovered .line {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.9),
+    transparent
+  );
+}
+
+.label.isHovered .text {
+  transform: scale(1.12);
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+}
+
+.label.isHovered {
+  letter-spacing: 0.08em;
+}
+
+.label.isHovered .dot,
+.label.isHovered .dot::after {
+  border-color: white;
+}
+
+/* @media (min-width: 568px) {
+  .logoWrapper {
+
+    left: 20%;
+  }
+} */

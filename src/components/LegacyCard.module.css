@@ -2,12 +2,10 @@
   position: relative;
   width: 80%; /* fills .overlay, whose width is a fixed px value set in Legacy.jsx — identical for every card */
   min-height: 30%;
-  max-height: 80%;
   overflow: hidden;
   font-family: "Orbitron", sans-serif;
   color: #fff;
   padding: 6px 0;
-
 }
 
 .header {
@@ -110,4 +108,75 @@
   border: 1px solid #33e7ff;
   border-radius: 50%;
   background: black;
+}
+
+/* ---------- Tablet / small desktop ---------- */
+@media (max-width: 768px) {
+  .card {
+    width: 90%;
+  }
+
+  .body {
+    gap: 20px;
+  }
+
+  .imageContainer {
+    width: 90px;
+    height: 180px;
+  }
+
+  .quote {
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+}
+
+/* ---------- Phones: stack + expand height ---------- */
+@media (max-width: 480px) {
+  .card {
+    width: 92%;
+  }
+
+  .header {
+    padding-left: 6px;
+    padding-top: 16px;
+  }
+  .name {
+    font-size: 1.1rem;
+  }
+
+  .body {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 16px 0;
+    gap: 16px;
+  }
+
+  .imageContainer {
+    width: 130px;
+    height: 130px;
+    aspect-ratio: 1 / 1;
+    padding-left: 0;
+  }
+
+  .description {
+    padding: 0 16px;
+  }
+
+  .role {
+    font-size: 1rem;
+  }
+  .prevRole {
+    font-size: 0.75rem;
+    margin-bottom: 10px;
+  }
+  .quote {
+    font-size: 0.78rem;
+    line-height: 1.55;
+  }
+
+  .footerDivider {
+    margin-top: 12px;
+  }
 }

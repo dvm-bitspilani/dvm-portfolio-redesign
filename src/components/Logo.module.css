@@ -48,19 +48,17 @@
 }
 
 @media (max-width: 1024px) {
-  .image_container, .logoFloatWrapper { top: -12%; }
-  .logo { height: 62%; }
-  .logo1 { height: 34%; margin-right: 3%; }
+  .logo { height: 48%; }
+  .logo1 { height: 34%; }
 }
 @media (max-width: 768px) {
-  .image_container, .logoFloatWrapper { top: -8%; }
-  .logo { height: 52%; margin-top: 0; }
-  .logo1 { height: 28%; margin-right: 6%; margin-bottom: 3%; }
+  .logo { height: 40%; scale: 0.8; }
+  .logo1 { height: 28%; scale: 0.8; }
 }
 @media (max-width: 480px) {
-  .image_container, .logoFloatWrapper { top: -4%; }
-  .logo { height: 42%; }
-  .logo1 { height: 22%; margin-right: 8%; }
+  .logo { height: 30%; scale: 0.6; }
+  .logo1 { height: 20%; scale: 0.6; }
+
 }
 @media (prefers-reduced-motion: reduce) {
   .logo, .logo1, .logoFloatWrapper { transition: none; }

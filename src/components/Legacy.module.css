@@ -128,7 +128,7 @@
 }
 
 .circleBase {
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
   cursor: pointer;
 }
 
@@ -214,43 +214,340 @@
     mask-image: radial-gradient(circle 50vh at -9999px -9999px, black 0%, transparent 100%);
 }
 
-/* ----- Shared card overlay (added) ----- */
+/* ----- Shared card overlay ----- */
 
 .backdrop {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.55);
   z-index: 2000;
+  animation: backdropIn 0.25s ease-out;
 }
 
-/* width/left/top are set inline from JS in Legacy.jsx so every card
-   gets the exact same fixed pixel width, and the correct anchored position */
-.overlay {
-  position: fixed;
-  z-index: 2001;
-  animation: overlayIn 0.2s ease-out;
-}
-
-/* Circle is in the left half: card's LEFT edge sits at `left` */
-.overlay.anchorLeft {
-  transform: translateX(100%);
-  transform: translateY(50%);
-
-
-}
-
-/* Circle is in the right half: card's RIGHT edge sits at `left`,
-   so the card renders to the left of the circle instead of on top of it */
-.overlay.anchorRight {
-  transform: translateX(-90%);
-  
-}
-
-@keyframes overlayIn {
+@keyframes backdropIn {
   from {
     opacity: 0;
   }
   to {
     opacity: 1;
+  }
+}
+
+.overlay {
+  position: fixed;
+  z-index: 2001;
+}
+
+.overlay.anchorLeft {
+  animation: cardInLeft 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.overlay.anchorRight {
+  animation: cardInRight 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes cardInLeft {
+  from {
+    opacity: 0;
+    transform: translateY(50%) scale(0.92) translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(50%) scale(1) translateX(0);
+  }
+}
+
+@keyframes cardInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-90%) scale(0.92) translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-90%) scale(1) translateX(0);
+  }
+}
+
+/* ----- Focus / dimming overlay for branch view ----- */
+
+.focusBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1001; /* below circleWrapper's 1002, so the focused circle
+                    and its branches stay lit above this layer */
+  background: radial-gradient(
+    circle at 50% 45%,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    backdrop-filter 0.35s ease;
+}
+
+.focusBackdropVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.circleFocused {
+  filter: drop-shadow(0 0 24px rgba(79, 172, 254, 0.65));
+  transform: scale(1.06);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.4s ease;
+}
+
+/* ----- Branch lines (tree-like connectors to names) ----- */
+
+.branchLine {
+  fill: none;
+  stroke: url(#branchGradient);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ----- Branch name labels ----- */
+
+.branchLabel {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(10, 14, 20, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 8px 16px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  overflow: hidden;
+  isolation: isolate;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease,
+    transform 0.2s ease;
+}
+
+.branchLabel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  transform: scaleX(0);
+  transform-origin: left;
+  z-index: -1;
+  transition: transform 0.35s ease;
+}
+
+.branchLabel:hover::before {
+  transform: scaleX(1);
+}
+
+.branchLabel:hover {
+  border-color: rgba(79, 172, 254, 0.7);
+  box-shadow: 0 0 22px rgba(79, 172, 254, 0.35);
+  transform: translate(-50%, -50%) scale(1.04);
+}
+
+.branchName {
+  font-family: "Orbitron";
+  font-size: 0.75rem;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.75);
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+.branchLabel:hover .branchName {
+  color: #000000;
+}
+
+
+
+@media (max-width: 1024px) {
+  .headerOuterImage,
+  .headerImage {
+    margin-left: 6%;
+  }
+
+  .footerContent {
+    font-size: clamp(0.4rem, 1vw, 0.5rem);
+  }
+
+  .footerButton {
+    height: 34px;
+    font-size: 0.85rem;
+  }
+
+  .branchName {
+    font-size: 0.7rem;
+  }
+
+  .branchLabel {
+    padding: 7px 14px;
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    overflow-y: auto;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .header {
+    margin-top: 8%;
+    max-height: none;
+  }
+
+  .headerOuterImage,
+  .headerImage {
+    max-width: 96%;
+    margin-left: 2%;
+  }
+
+
+  .circleWrapper {
+    width: 100%;
+    margin: 6% auto 0;
+    height: auto;
+    min-height: auto;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    gap: 26px 20px;
+    max-width: 230px;
+    padding: 24px 0 56px;
+  }
+
+  .google,
+  .microsoft,
+  .meta,
+  .imc,
+  .img1,
+  .img2,
+  .img3 {
+    position: static;
+  }
+  .circleBase {
+    transform: translate(0, 0) scale(0.78);
+  }
+
+  .circleBase:nth-of-type(1) { transform: translate(0, -8px) scale(0.78); }
+  .circleBase:nth-of-type(2) { transform: translate(10px, 14px) scale(0.78); }
+  .circleBase:nth-of-type(3) { transform: translate(-12px, -10px) scale(0.78); }
+  .circleBase:nth-of-type(4) { transform: translate(4px, 6px) scale(0.78); }
+  .circleBase:nth-of-type(5) { transform: translate(-8px, 10px) scale(0.78); }
+  .circleBase:nth-of-type(6) { transform: translate(12px, -12px) scale(0.78); }
+  .circleBase:nth-of-type(7) { transform: translate(-6px, 4px) scale(0.78); }
+
+  .circleBase:nth-of-type(1).circleFocused { transform: translate(0, -8px) scale(0.86); }
+  .circleBase:nth-of-type(2).circleFocused { transform: translate(10px, 14px) scale(0.86); }
+  .circleBase:nth-of-type(3).circleFocused { transform: translate(-12px, -10px) scale(0.86); }
+  .circleBase:nth-of-type(4).circleFocused { transform: translate(4px, 6px) scale(0.86); }
+  .circleBase:nth-of-type(5).circleFocused { transform: translate(-8px, 10px) scale(0.86); }
+  .circleBase:nth-of-type(6).circleFocused { transform: translate(12px, -12px) scale(0.86); }
+  .circleBase:nth-of-type(7).circleFocused { transform: translate(-6px, 4px) scale(0.86); }
+
+  .branchLabel {
+    padding: 6px 12px;
+  }
+
+  .branchName {
+    font-size: 0.65rem;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    position: relative;
+    left: 5%;
+    right: 5%;
+    bottom: auto;
+    margin: 40px 0;
+  }
+
+  .footerContent {
+    font-size: clamp(0.45rem, 1.6vw, 0.55rem);
+  }
+
+  .vm {
+    margin-left: 12%;
+  }
+
+  .footerActions {
+    align-self: flex-start;
+  }
+
+  /* Force the card overlay to a centered, capped-size box on phones,
+     regardless of the anchorLeft/anchorRight math computed in JS
+     (that math assumes a branch label positioned somewhere across a
+     wide desktop canvas, which no longer applies once circles are
+     stacked). !important is intentional here — this overrides the
+     inline left/top/width styles React sets. */
+  .overlay {
+    left: 50% !important;
+    top: 50% !important;
+    width: 100vw !important;
+    max-height: 100vh;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .overlay.anchorLeft,
+  .overlay.anchorRight {
+    animation: cardInCenter 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .google{
+    margin-bottom: 10%;
+  }
+  .meta{
+    margin-left: 2%;
+    margin-bottom: 20%;
+  }
+
+  @keyframes cardInCenter {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .circleBase:nth-of-type(1) { transform: translate(0, -6px)  }
+  .circleBase:nth-of-type(2) { transform: translate(8px, 10px) }
+  .circleBase:nth-of-type(3) { transform: translate(-10px, -8px)}
+  .circleBase:nth-of-type(4) { transform: translate(3px, 5px) }
+  .circleBase:nth-of-type(5) { transform: translate(-6px, 8px)  }
+  .circleBase:nth-of-type(6) { transform: translate(10px, -10px) }
+  .circleBase:nth-of-type(7) { transform: translate(-5px, 3px)  }
+
+  .circleBase:nth-of-type(1).circleFocused { transform: translate(0, -6px) }
+  .circleBase:nth-of-type(2).circleFocused { transform: translate(8px, 10px) }
+  .circleBase:nth-of-type(3).circleFocused { transform: translate(-10px, -8px) }
+  .circleBase:nth-of-type(4).circleFocused { transform: translate(3px, 5px) }
+  .circleBase:nth-of-type(5).circleFocused { transform: translate(-6px, 8px) }
+  .circleBase:nth-of-type(6).circleFocused { transform: translate(10px, -10px)  }
+  .circleBase:nth-of-type(7).circleFocused { transform: translate(-5px, 3px); }
+
+  .circleWrapper {
+    gap: 20px 16px;
+    max-width: 200px;
+  }
+
+  .overlay {
+    width: min(94vw, 340px) !important;
   }
 }
