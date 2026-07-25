@@ -19,10 +19,8 @@ gsap.registerPlugin(ScrollTrigger);
 const FIXED_CIRCLE_RADIUS = null;
 
 // EDIT THESE with the real names for each company/branch.
-// Add/remove as many names as you want per company — branches and
-// connecting lines are generated dynamically from this list's length.
 const COMPANY_PEOPLE = {
-  google: ["Person One", "Person Two", "Person Three" , "Person Four"],
+  google: ["Person One", "Person Two", "Person Three", "Person Four"],
   microsoft: ["Person One", "Person Two", "Person Three"],
   meta: ["Person One", "Person Two", "Person Three"],
   imc: ["Person One", "Person Two", "Person Three"],
@@ -32,9 +30,8 @@ const COMPANY_PEOPLE = {
 };
 
 // Static — defined once, outside the component, so its reference never
-// changes across renders. This matters: effects that key off "which pairs
-// exist" must NOT depend on a value that's recreated on every hover/click
-// re-render, or they'll re-fire constantly and cause flicker.
+// changes across renders (must not depend on state that re-renders on
+// every hover/click, or the line effects will re-fire constantly).
 const CONNECTION_PAIRS = [
   ["google", "microsoft"],
   ["google", "meta"],
@@ -52,18 +49,13 @@ const CONNECTION_PAIRS = [
   ["img2", "img3"],
 ];
 
-// Computes where each person's branch should end.
-// - Direction is purely horizontal-based: circles on the right half of the
-//   screen branch OUT to the left, circles on the left branch out to the
-//   right — so branches always grow into open space.
-// - Each branch is an ELBOW connector (angled segment, then a flat run),
-//   not a smooth curve: it fans out vertically from the circle, then
-//   straightens out horizontally to reach its label. A branch level with
-//   the circle (t === 0) is just a straight horizontal line, matching the
-//   reference sketch.
-// - Vertical fan spacing auto-shrinks if there isn't enough room, so
-//   branches never overlap even with many names.
-// - Fully dynamic: works for ANY number of names in COMPANY_PEOPLE[key].
+// How long (ms) to wait after the mouse leaves a circle/label before
+// collapsing the branch — gives the user time to move the cursor from
+// the circle to one of its fanned-out names without it closing on them.
+const CLOSE_DELAY =10;
+
+// Computes where each person's branch should end. See previous version
+// for the full reasoning — unchanged.
 const computeBranchNodes = (key, center, wrapperSize) => {
   if (!center || !wrapperSize) return [];
   const people = COMPANY_PEOPLE[key] || [];
@@ -72,12 +64,8 @@ const computeBranchNodes = (key, center, wrapperSize) => {
 
   const margin = 28;
   const isRightHalf = center.x > wrapperSize.width / 2;
-  const dirSign = isRightHalf ? -1 : 1; // -1 = branch goes left, 1 = branch goes right
+  const dirSign = isRightHalf ? -1 : 1;
 
-  // Vertical spacing between adjacent branch endpoints. Shrinks
-  // automatically if the ideal spacing would run past the wrapper edges.
-  // Bumped up from 46 -> 64 so labels don't crowd together once there
-  // are more than 3 names.
   const availableVertical = Math.max(0, wrapperSize.height - margin * 2);
   let vSpread = 64;
   let totalSpread = (n - 1) * vSpread;
@@ -86,33 +74,20 @@ const computeBranchNodes = (key, center, wrapperSize) => {
     totalSpread = availableVertical;
   }
 
-  // Horizontal distance the branch travels away from the circle.
   const maxHorizontal = isRightHalf
     ? center.x - margin
     : wrapperSize.width - margin - center.x;
   const desiredHorizontal = Math.min(200, Math.max(100, wrapperSize.width * 0.13));
   const horizontal = Math.max(70, Math.min(desiredHorizontal, maxHorizontal));
 
-  // Where along the horizontal run the elbow bend sits (0 = at the
-  // circle, 1 = at the label). A smaller fraction gives a longer flat
-  // run, closer to the reference sketch.
   const bendFraction = 0.4;
-
-  // Minimum vertical offset every branch must have, even the middle one.
-  // Without this, a branch whose fan position lands exactly at t === 0
-  // ends up perfectly level with the circle's own row — origin, bend,
-  // and end all collinear — which visually gets swallowed by the circle
-  // and reads as a missing line. This guarantees every branch always
-  // has a real, visible bend.
   const minOffset = 18;
 
   return people.map((person, i) => {
-    const t = n === 1 ? 0 : i / (n - 1) - 0.5; // -0.5 .. 0.5, fan position
+    const t = n === 1 ? 0 : i / (n - 1) - 0.5;
 
     let rawOffset = t * totalSpread;
     if (Math.abs(rawOffset) < minOffset) {
-      // Push it off-axis by at least minOffset, keeping a stable
-      // direction (alternate above/below) instead of collapsing to 0.
       rawOffset = i % 2 === 0 ? minOffset : -minOffset;
     }
 
@@ -122,9 +97,6 @@ const computeBranchNodes = (key, center, wrapperSize) => {
     let endX = center.x + dirSign * horizontal;
     endX = Math.min(Math.max(endX, margin), wrapperSize.width - margin);
 
-    // The bend point shares the branch's final height (endY) but sits
-    // partway along the horizontal distance — this is what creates the
-    // angled-then-flat "elbow" look instead of a smooth curve.
     let bendX = center.x + dirSign * horizontal * bendFraction;
     bendX = Math.min(Math.max(bendX, margin), wrapperSize.width - margin);
     const bendY = endY;
@@ -134,9 +106,6 @@ const computeBranchNodes = (key, center, wrapperSize) => {
 };
 
 const Legacy = () => {
-  let x = window.innerWidth > 1420 ? window.innerWidth * 0.8 : window.innerWidth * 0.8;
-  x = window.innerWidth < 1024 ? window.innerWidth * 0.3 : window.innerWidth * 0.4;
-  x = window.innerWidth < 900 ? window.innerWidth * 0.2  : window.innerWidth * 0.4;
   const containerRef = useRef(null);
   const textureRef = useRef(null);
   const gradientRef = useRef(null);
@@ -162,24 +131,22 @@ const Legacy = () => {
   // key -> DOM node, used only to measure position for the overlay
   const circleDomRefs = useRef({});
 
-  // DOM nodes for the currently-open branch (lines + labels), used for
-  // the entrance/exit animation. Reset every time branchKey changes so
-  // stale refs from a previous (possibly differently-sized) name list
-  // never leak in.
   const branchLineRefs = useRef([]);
   const branchLabelRefs = useRef([]);
 
+  // Pending "collapse the branch" timer.
+  const closeTimeoutRef = useRef(null);
+
   const [centers, setCenters] = useState(null);
   const [wrapperSize, setWrapperSize] = useState(null);
+
+  // Which circle is currently hovered — drives the connector-line
+  // highlight/dim effect. Independent of branchKey/openKey.
   const [hoveredKey, setHoveredKey] = useState(null);
 
-  // Which company's branches are currently fanned out (first click)
   const [branchKey, setBranchKey] = useState(null);
-  // True while the close animation is playing, so we can keep branch
-  // nodes mounted just long enough to fade/collapse smoothly.
   const [closingBranch, setClosingBranch] = useState(false);
 
-  // Which card is open, and where/how big the shared overlay should be
   const [openKey, setOpenKey] = useState(null);
   const [selectedPerson, setSelectedPerson] = useState(null);
   const [overlayPos, setOverlayPos] = useState({
@@ -191,7 +158,13 @@ const Legacy = () => {
 
   const focusKey = branchKey || openKey;
 
-  // Returns the center x/y (and radius) of `el`, relative to `wrapperRef.current`
+  const clearCloseTimeout = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+  };
+
   const getCenter = (el) => {
     if (!el || !wrapperRef.current) return null;
 
@@ -205,9 +178,6 @@ const Legacy = () => {
     };
   };
 
-  // Positions + sizes the shared card overlay based on a viewport rect
-  // (the clicked name label's bounding box), fixed-width so every card
-  // is identical, and flipped to the opposite side if it'd run offscreen.
   const positionOverlayFromRect = (rect) => {
     const circleCenterX = rect.left + rect.width / 2;
     const circleCenterY = rect.top + rect.height / 2;
@@ -251,40 +221,69 @@ const Legacy = () => {
     setOverlayPos({ left, top, anchor, width: overlayWidth });
   };
 
-  // First click on a circle: fan its branches out. Second click on the
-  // same circle (or on the dark overlay) collapses them again.
-  const toggleKey = (key) => {
-    if (branchKey === key) {
-      closeAll();
-      return;
-    }
-    // Clear stale refs BEFORE switching branchKey, so a company with a
-    // different number of names never reuses leftover ref slots.
+  // Opens (fans out) a company's branch on hover. Ignored while a card
+  // is open, so a stray hover elsewhere doesn't yank the branch out from
+  // under an open card.
+  const openBranch = (key) => {
+    if (openKey) return;
+    clearCloseTimeout();
+    if (branchKey === key) return;
     branchLineRefs.current = [];
     branchLabelRefs.current = [];
-    setOpenKey(null);
-    setSelectedPerson(null);
     setBranchKey(key);
   };
 
-  // Click on a branch's name label: open the card, anchored to that label.
+  // Click on a circle: toggle fallback for touch devices (no real hover).
+  const handleCircleClick = (key) => {
+    if (branchKey === key && !openKey) {
+      closeAll();
+    } else {
+      openBranch(key);
+    }
+  };
+
+  const scheduleCloseBranch = () => {
+    if (openKey) return;
+    clearCloseTimeout();
+    closeTimeoutRef.current = setTimeout(() => {
+      closeAll();
+    }, CLOSE_DELAY);
+  };
+
+  const cancelScheduledClose = () => {
+    clearCloseTimeout();
+  };
+
   const openPerson = (key, person, e) => {
+    cancelScheduledClose();
     positionOverlayFromRect(e.currentTarget.getBoundingClientRect());
     setSelectedPerson(person);
     setOpenKey(key);
   };
 
   const closeAll = () => {
+    clearCloseTimeout();
     if (!branchKey && !openKey) return;
 
-    const targets = [...branchLineRefs.current, ...branchLabelRefs.current].filter(Boolean);
-    if (targets.length) {
+    const lines = branchLineRefs.current.filter(Boolean);
+    const labels = branchLabelRefs.current.filter(Boolean);
+
+    if (lines.length || labels.length) {
       setClosingBranch(true);
-      gsap.to(targets, {
-        opacity: 0,
-        scale: 0.9,
-        duration: 0.25,
-        ease: "power2.in",
+
+      // Re-measure each line's real length so we can retract it back to
+      // "fully offset" — i.e. run the entrance draw-in animation
+      // backwards, instead of just fading/scaling the whole branch out
+      // as one flat blob.
+      const lengths = lines.map((line) => {
+        try {
+          return line.getTotalLength();
+        } catch {
+          return 0;
+        }
+      });
+
+      const tl = gsap.timeline({
         onComplete: () => {
           setBranchKey(null);
           setOpenKey(null);
@@ -292,6 +291,24 @@ const Legacy = () => {
           setClosingBranch(false);
         },
       });
+
+      tl.to(labels, {
+        opacity: 0,
+        scale: 0.9,
+        y: 4,
+        duration: 0.2,
+        stagger: -0.05,
+        ease: "power2.in",
+      }).to(
+        lines,
+        {
+          strokeDashoffset: (i) => lengths[i],
+          duration: 0.4,
+          stagger: -0.1,
+          ease: "power2.in",
+        },
+        "-=0.05"
+      );
     } else {
       setBranchKey(null);
       setOpenKey(null);
@@ -299,24 +316,11 @@ const Legacy = () => {
     }
   };
 
-  // Branch endpoints for the currently open company (recomputed whenever
-  // circle positions or viewport size change). Dynamic length — driven
-  // entirely by COMPANY_PEOPLE[branchKey].length.
   const branchNodes =
     branchKey && centers && wrapperSize
       ? computeBranchNodes(branchKey, centers[branchKey], wrapperSize)
       : [];
 
-  // Grow the branch lines out of the circle, like branches extending from
-  // a trunk: each path's REAL length is measured with getTotalLength()
-  // (robust for any curve shape — straight, gentle, or sharp — unlike the
-  // pathLength="1" attribute trick, which can fail to render certain
-  // curves in some browsers). Runs in useLayoutEffect so the dash setup
-  // is committed before the browser paints — no flash of a fully-drawn
-  // line before it animates in.
-  //
-  // All lines now animate out SIMULTANEOUSLY (stagger removed) and the
-  // whole entrance is faster than before.
   useLayoutEffect(() => {
     if (!branchKey || closingBranch) return;
 
@@ -332,8 +336,6 @@ const Legacy = () => {
       }
     });
 
-    // Instantly set every line to "zero length visible" (fully offset)
-    // before anything paints.
     gsap.set(lines, {
       strokeDasharray: (i) => lengths[i],
       strokeDashoffset: (i) => lengths[i],
@@ -362,7 +364,6 @@ const Legacy = () => {
     return () => tl.kill();
   }, [branchKey, branchNodes.length, closingBranch, wrapperSize, centers]);
 
-  // Reposition the open card if the window resizes.
   useEffect(() => {
     if (!openKey) return;
     const onResize = () => {
@@ -372,6 +373,10 @@ const Legacy = () => {
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, [openKey, selectedPerson]);
+
+  useEffect(() => {
+    return () => clearCloseTimeout();
+  }, []);
 
   useEffect(() => {
     const updateMask = () => {
@@ -384,9 +389,8 @@ const Legacy = () => {
       textureRef.current.style.webkitMaskImage = mask;
       textureRef.current.style.maskImage = mask;
     };
-    updateMask(); // Initial call to set the mask
+    updateMask();
     gsap.to(gradientPos.current, {
-      
       y: window.innerHeight * 1,
       scrollTrigger: {
         trigger: containerRef.current,
@@ -466,9 +470,8 @@ const Legacy = () => {
     };
   }, []);
 
-  // Circles appear one by one, then lines draw in to connect them
   useEffect(() => {
-    if (!centers) return; // wait until circle positions (and <line> elements) exist
+    if (!centers) return;
 
     const circleOrder = [
       googleRef.current,
@@ -509,9 +512,9 @@ const Legacy = () => {
           stagger: 0.05,
           ease: "power2.out",
         },
-        "-=0.15" // start lines slightly before the last circle finishes
+        "-=0.15"
       )
-      .set(validLines, { strokeDasharray: "0.02 0.015" }) // switch to dashed once fully drawn
+      .set(validLines, { strokeDasharray: "0.02 0.015" })
       .set(circleOrder, { clearProps: "opacity,scale" })
       .set(validLines, { clearProps: "opacity" });
 
@@ -545,8 +548,7 @@ const Legacy = () => {
 
   // Coordinate-resolved pairs for the SVG graph. CONNECTION_PAIRS itself
   // never changes identity, so this only swaps between the same stable
-  // reference and an empty array — it does NOT create a fresh array on
-  // every hover/click re-render.
+  // reference and an empty array.
   const pairs = centers ? CONNECTION_PAIRS : [];
 
   const circleList = [
@@ -564,27 +566,11 @@ const Legacy = () => {
     { key: "img3", ref: img3Ref, className: styles.img3, img: meta },
   ];
 
-  // Hides ALL connecting graph lines the INSTANT a circle is focused
-  // (branch fanned out or card open) — no fade, no waiting on the branch
-  // entrance animation, it just disappears immediately on click. Uses
-  // useLayoutEffect + gsap.set so it's committed before paint, in the
-  // same frame the click triggers focusKey. Reopening (focusKey -> null)
-  // still fades back in smoothly for a softer close.
-  useLayoutEffect(() => {
-    const lines = lineRefs.current.filter(Boolean);
-    if (!lines.length) return;
-
-    if (focusKey) {
-      gsap.set(lines, { opacity: 0 });
-    } else {
-      gsap.to(lines, {
-        opacity: 1,
-        duration: 0.4,
-        ease: "power2.out",
-        overwrite: "auto",
-      });
-    }
-  }, [focusKey]);
+  // Lines dim to a faint state whenever ANY circle is hovered or
+  // focused (branch open / card open) — they never fully disappear now,
+  // just fade to "very light" so the graph stays visible in the
+  // background instead of vanishing.
+  const isAnyActive = Boolean(hoveredKey || focusKey);
 
   return (
     <div className={styles.container} ref={containerRef} id="legacy">
@@ -610,9 +596,6 @@ const Legacy = () => {
         />
       </div>
 
-      {/* Dims everything behind the active circle. Sits BELOW circleWrapper
-          in z-index, so the focused circle + branches stay bright on top
-          of it without needing any portal/fixed-coordinate math. */}
       <div
         className={`${styles.focusBackdrop} ${
           focusKey ? styles.focusBackdropVisible : ""
@@ -670,24 +653,11 @@ const Legacy = () => {
             {pairs.map(([fromKey, toKey], i) => {
               let from = centers[fromKey];
               let to = centers[toKey];
-
-              // Hover highlight is ONLY active when nothing is focused
-              // (i.e. no branch/card is open) — clicking never triggers
-              // the gradient overlay line, only hover does.
-              const isHighlighted =
-                !focusKey &&
-                hoveredKey &&
-                (hoveredKey === fromKey || hoveredKey === toKey);
-              const isHoverDimmed =
-                !focusKey && hoveredKey && !isHighlighted;
+              // All lines fade uniformly on hover/focus now — no
+              // exception for lines touching the hovered circle.
+              const isFaded = isAnyActive;
 
               if (!from || !to) return null;
-
-              if (isHighlighted && hoveredKey === toKey) {
-                const temp = from;
-                from = to;
-                to = temp;
-              }
 
               return (
                 <g key={i}>
@@ -701,7 +671,7 @@ const Legacy = () => {
                     strokeDasharray="1"
                     strokeDashoffset="1"
                     className={`${styles.baseLine} ${
-                      isHoverDimmed ? styles.dimmed : ""
+                      isFaded ? styles.dimmed : ""
                     }`}
                   />
 
@@ -713,7 +683,7 @@ const Legacy = () => {
                     y2={to.y}
                     pathLength="1"
                     className={`${styles.overlayLine} ${
-                      isHighlighted ? styles.active : ""
+                      isFaded ? styles.dimmed : ""
                     }`}
                   />
                 </g>
@@ -757,7 +727,6 @@ const Legacy = () => {
           </svg>
         )}
 
-        {/* Name labels at each branch tip — one per person, dynamic count */}
         {branchKey &&
           branchNodes.map((node, i) => (
             <button
@@ -770,6 +739,8 @@ const Legacy = () => {
                 top: node.y,
                 zIndex: 1501,
               }}
+              onMouseEnter={cancelScheduledClose}
+              onMouseLeave={scheduleCloseBranch}
               onClick={(e) => {
                 e.stopPropagation();
                 openPerson(branchKey, node.person, e);
@@ -795,9 +766,15 @@ const Legacy = () => {
                 isDimmedCircle ? styles.circleDimmed : ""
               } ${isFocused ? styles.circleFocused : ""}`}
               style={{ zIndex: isFocused ? 1502 : undefined }}
-              onMouseEnter={() => setHoveredKey(key)}
-              onMouseLeave={() => setHoveredKey(null)}
-              onClick={() => toggleKey(key)}
+              onMouseEnter={() => {
+                setHoveredKey(key);
+                openBranch(key);
+              }}
+              onMouseLeave={() => {
+                setHoveredKey(null);
+                scheduleCloseBranch();
+              }}
+              onClick={() => handleCircleClick(key)}
             >
               <LegacyCircle img={img} />
             </div>
@@ -805,7 +782,6 @@ const Legacy = () => {
         })}
       </div>
 
-      {/* Card overlay — opens once a branch name is clicked */}
       {openKey && (
         <div className={styles.backdrop} onClick={closeAll}>
           <div

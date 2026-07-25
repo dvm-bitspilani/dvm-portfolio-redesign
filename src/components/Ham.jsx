@@ -70,7 +70,7 @@ const SEGMENTS = [
   },
   {
     key: "team",
-    to: "/",
+    to: "/team",
     viewBox: "0 0 164 121",
     path: "M0.5 77.2672V42.7672L57.5312 82.9551L162.881 0.392578L134.565 59.8255L57.5273 120.103L0.5 77.2672Z",
     box: { top: 23, left: 24, width: 41, height: 25 },

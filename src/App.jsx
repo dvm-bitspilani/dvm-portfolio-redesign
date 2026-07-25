@@ -6,17 +6,15 @@ import Blog from "./pages/Blog";
 import Ham from "./components/Ham";
 import About from "./components/About";
 import styles from "./App.module.css";
+import TeamPage from "./components/Team";
 
 import ContactUs from "./pages/ContactUs";
 const App = () => {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
-  
+
   const [displayLocation, setDisplayLocation] = useState(location);
 
-  // "idle" -> no animation class at all (this is the resting state)
-  // "fadeOut" -> outgoing page blurring/shrinking away
-  // "fadeIn" -> incoming page blurring/growing into place
   const [stage, setStage] = useState("idle");
 
   useEffect(() => {
@@ -32,8 +30,6 @@ const App = () => {
     }
   }, [location, displayLocation]);
 
-  // Only react to the wrapper's own animation finishing, not anything
-  // bubbling up from children (Ham's segment/label animations, etc.).
   const handleAnimationEnd = (e) => {
     if (e.target !== e.currentTarget) return;
 
@@ -41,12 +37,6 @@ const App = () => {
       setDisplayLocation(location);
       setStage("fadeIn");
     } else if (stage === "fadeIn") {
-      // Critical: drop the animation class entirely once it's done.
-      // animation-fill-mode: both otherwise leaves transform/filter
-      // "active" on this wrapper forever (even at resting values like
-      // scale(1) / blur(0)), which creates a containing block that
-      // traps any position: fixed descendant — e.g. Navbar — inside
-      // this wrapper instead of the viewport.
       setStage("idle");
     }
   };
@@ -75,8 +65,8 @@ const App = () => {
     stage === "fadeOut"
       ? styles.fadeOut
       : stage === "fadeIn"
-      ? styles.fadeIn
-      : "";
+        ? styles.fadeIn
+        : "";
 
   return (
     <>
@@ -91,7 +81,8 @@ const App = () => {
           <Route path="/ham" element={<Ham />} />
           <Route path="/about" element={<About />} />
           <Route path="/contactus" element={<ContactUs />} />
-      </Routes>
+          <Route path="/team" element={<TeamPage />} />
+        </Routes>
       </div>
     </>
   );

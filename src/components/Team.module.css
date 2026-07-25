@@ -1,0 +1,717 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root {
+  --bg: #050506;
+  --surface: #101014;
+  --surface-2: #16161c;
+  --line: #1e1e24;
+  --line-soft: #17171c;
+  --accent: #5b8cff;
+  --accent-glow: #8b5cf6;
+  --signal: #ff8a5b;
+  --text: #f4f4f6;
+  --muted: #8a8a93;
+  --radius: 8px;
+  --radius-lg: 14px;
+}
+
+.teamPage {
+  background-color: var(--bg);
+  background-image: radial-gradient(circle at 1px 1px, rgba(244, 244, 246, 0.05) 1px, transparent 0);
+  background-size: 26px 26px;
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  width: 100%;
+  overflow-x: clip;
+  position: relative;
+}
+
+.teamPage * {
+  box-sizing: border-box;
+}
+
+/* ---------- scroll progress bar ---------- */
+.progressBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-glow));
+  z-index: 250;
+}
+
+/* ---------- preloader ---------- */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.preloaderLine {
+  font-family: "JetBrains Mono", monospace;
+  color: var(--accent);
+  opacity: 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+/* ---------- film grain overlay ---------- */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- custom cursor ---------- */
+.cursorDot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 50%;
+  background: var(--accent-glow);
+  pointer-events: none;
+  z-index: 300;
+  mix-blend-mode: difference;
+}
+
+@media (pointer: coarse) {
+  .cursorDot {
+    display: none;
+  }
+}
+
+/* ---------- hero ---------- */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.heroBg {
+  position: absolute;
+  inset: -5%;
+  background-image: url("./assets/img/team.jpg");
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(100%) brightness(0.55);
+  will-change: transform, filter;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, rgba(5, 5, 6, 0.15) 0%, rgba(5, 5, 6, 0.94) 78%),
+    linear-gradient(180deg, rgba(91, 140, 255, 0.07), transparent 45%);
+}
+
+.heroReadout {
+  position: absolute;
+  top: 6%;
+  right: 6%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.heroReadoutDivider {
+  width: 14px;
+  height: 1px;
+  background: var(--line);
+}
+
+.heroInner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 6%;
+}
+
+.heroEyebrow {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "JetBrains Mono", monospace;
+  color: var(--accent);
+  letter-spacing: 1px;
+  margin-bottom: 22px;
+  font-size: 0.85rem;
+}
+
+.heroEyebrowLine {
+  display: block;
+  width: 46px;
+  height: 1px;
+  margin-top: 10px;
+  background: linear-gradient(90deg, var(--signal), var(--accent));
+  transform-origin: left center;
+}
+
+.heroTitle {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.6rem, 9vw, 7rem);
+  letter-spacing: 2px;
+  margin: 0;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-shadow: 0 12px 44px rgba(0, 0, 0, 0.55);
+  will-change: transform;
+}
+
+.heroLetterWrap {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.heroLetter {
+  display: inline-block;
+  will-change: transform;
+}
+
+.heroSub {
+  font-family: "Inter", sans-serif;
+  color: var(--muted);
+  max-width: 480px;
+  margin: 22px auto 0;
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.scrollCue {
+  position: absolute;
+  bottom: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.scrollCueLine {
+  width: 1px;
+  height: 30px;
+  background: linear-gradient(var(--signal), transparent);
+  animation: scrollPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { transform: scaleY(0.4); opacity: 0.4; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+/* ---------- marquee (secondary department nav) ---------- */
+.marqueeWrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  background: rgba(5, 5, 6, 0.55);
+  backdrop-filter: blur(8px);
+  padding: 14px 0;
+  opacity: 0;
+}
+
+.marqueeTrack {
+  display: flex;
+  width: max-content;
+  gap: 40px;
+  will-change: transform;
+}
+
+.marqueeItem {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  transition: color 0.25s ease;
+}
+
+.marqueeItem:hover {
+  color: var(--accent);
+}
+
+.marqueeDot {
+  color: var(--signal);
+}
+
+/* ---------- filter bar ---------- */
+.teamSection {
+  position: relative;
+  background: var(--bg);
+  padding-bottom: 12vh;
+}
+
+.filterWrap {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(5, 5, 6, 0.78);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  padding: 22px 8%;
+  transition: padding 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filterWrap.isStuck {
+  padding: 12px 8%;
+  box-shadow: 0 12px 30px -18px rgba(0, 0, 0, 0.8);
+}
+
+.filterTerminal {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.terminalDots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.terminalDots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+.terminalDots span:nth-child(1) { background: #ff5f57aa; }
+.terminalDots span:nth-child(2) { background: #febc2eaa; }
+.terminalDots span:nth-child(3) { background: #28c840aa; }
+
+@media (max-width: 640px) {
+  .terminalDots {
+    display: none;
+  }
+}
+
+.deptTabs {
+  position: relative;
+  display: flex;
+  gap: 4px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px;
+}
+
+.deptPill {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  height: calc(100% - 8px);
+  width: 80px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+  box-shadow: 0 6px 18px -6px rgba(91, 140, 255, 0.6);
+  border-radius: 999px;
+  z-index: 0;
+}
+
+.deptTab {
+  position: relative;
+  z-index: 1;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: "JetBrains Mono", monospace;
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.deptTab.active {
+  color: #050506;
+  font-weight: 500;
+}
+
+.deptTab:hover:not(.active) {
+  color: var(--text);
+}
+
+.statLine {
+  margin-left: auto;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.statNumber {
+  color: var(--signal);
+  font-weight: 500;
+}
+
+.deptSelectMobile {
+  display: none;
+}
+
+/* ---------- year blocks ---------- */
+.teamContainer {
+  padding: 4vh 8% 0;
+}
+
+.teamYearBlock {
+  position: relative;
+}
+
+.ghostYear {
+  position: absolute;
+  top: -4vh;
+  left: -1vw;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 11vw;
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(244, 244, 246, 0.07);
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+  opacity: 0;
+}
+
+.teamYearHeading {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--accent);
+  letter-spacing: 2px;
+  margin: 9vh 0 3vh;
+  font-size: 1.4rem;
+}
+
+.yearTick {
+  width: 34px;
+  height: 2px;
+  background: var(--signal);
+  display: inline-block;
+}
+
+.teamMembersGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 32px 24px;
+}
+
+/* ---------- member card ---------- */
+.memberCard {
+  display: flex;
+}
+
+.memberCardInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.memberImage {
+  width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line-soft);
+  filter: grayscale(100%) brightness(0.65);
+  transition: filter 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+  position: relative;
+}
+
+.memberImage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(91, 140, 255, 0.28), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.memberImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.memberCard:hover .memberImage {
+  filter: grayscale(0%) brightness(1);
+  border-color: var(--accent);
+  box-shadow: 0 18px 40px -18px rgba(91, 140, 255, 0.55);
+  transform: translateY(-4px);
+}
+
+.memberCard:hover .memberImage::after {
+  opacity: 1;
+}
+
+.memberName {
+  font-family: "Space Grotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 0.95rem;
+  margin-top: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.memberDesignation {
+  font-family: "JetBrains Mono", monospace;
+  color: var(--muted);
+  font-size: 0.78rem;
+  margin-top: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.memberLinks {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+  min-height: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.memberCard:hover .memberName,
+.memberCard:hover .memberDesignation,
+.memberCard:hover .memberLinks {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Bug fix: touch devices have no :hover, so without this, name/role/links
+   would be permanently invisible (and links permanently unclickable) on
+   phones and tablets. Always show them there instead of gating on hover. */
+@media (max-width: 1024px), (pointer: coarse) {
+  .memberName,
+  .memberDesignation,
+  .memberLinks {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.memberLink img {
+  width: 18px;
+  height: 18px;
+  opacity: 0.6;
+  filter: brightness(0) invert(1);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.memberLink:hover img {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* ---------- skeletons ---------- */
+@keyframes shimmer {
+  0% { background-position: -800px 0; }
+  100% { background-position: 800px 0; }
+}
+
+.placeholderHeading {
+  height: 34px;
+  width: 200px;
+  border-radius: 8px;
+  margin: 9vh 0 3vh;
+  background-image: linear-gradient(to right, var(--surface) 0%, var(--surface-2) 20%, var(--surface) 40%, var(--surface) 100%);
+  background-repeat: no-repeat;
+  background-size: 1200px 100px;
+  animation: shimmer 1.5s linear infinite;
+}
+
+.memberPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.placeholderImg {
+  width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: var(--radius);
+  border: 1px solid var(--line-soft);
+  background-image: linear-gradient(to right, var(--surface) 0%, var(--surface-2) 20%, var(--surface) 40%, var(--surface) 100%);
+  background-repeat: no-repeat;
+  background-size: 1200px 400px;
+  animation: shimmer 1.5s linear infinite;
+}
+
+.placeholderLine {
+  width: 70%;
+  height: 14px;
+  border-radius: 4px;
+  background-image: linear-gradient(to right, var(--surface) 0%, var(--surface-2) 20%, var(--surface) 40%, var(--surface) 100%);
+  background-repeat: no-repeat;
+  background-size: 1200px 100px;
+  animation: shimmer 1.5s linear infinite;
+}
+
+.placeholderLine.short {
+  width: 45%;
+  height: 10px;
+}
+
+.errorMessage {
+  text-align: center;
+  color: var(--muted);
+  font-family: "JetBrains Mono", monospace;
+  padding: 10vh 0;
+}
+
+/* ---------- back to top ---------- */
+.backToTop {
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  z-index: 40;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.backToTop:hover {
+  background: var(--accent);
+  box-shadow: 0 10px 30px -10px rgba(91, 140, 255, 0.6);
+  transform: translateY(-3px);
+}
+
+.crossLine {
+  position: absolute;
+  background: var(--text);
+  border-radius: 50px;
+}
+
+.crossLineV {
+  width: 2px;
+  height: 40%;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.crossLineH {
+  height: 2px;
+  width: 40%;
+  top: 50%;
+  left: 30%;
+  transform: translateY(-50%);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1024px) {
+  .teamMembersGrid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+  .ghostYear {
+    font-size: 18vw;
+  }
+}
+
+@media (max-width: 640px) {
+  .deptTabs {
+    display: none;
+  }
+  .statLine {
+    display: none;
+  }
+  .deptSelectMobile {
+    display: block;
+    width: 100%;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-family: "JetBrains Mono", monospace;
+    text-transform: uppercase;
+  }
+  .teamMembersGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 14px;
+  }
+  .heroTitle {
+    letter-spacing: 0;
+  }
+  .marqueeItem {
+    font-size: 0.85rem;
+  }
+  .ghostYear {
+    display: none;
+  }
+  .heroReadout {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollCueLine {
+    animation: none;
+  }
+  .preloaderLine {
+    opacity: 1;
+  }
+}

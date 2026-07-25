@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import LandingPage from "../components/HomePage";
-import Ham from "../components/Ham";
 import Blog from "../components/Blog_Land";
 import Legacy from "../components/Legacy";
 
@@ -30,7 +29,7 @@ const Landing = () => {
 
       <LandingPage />
       <Blog />
-
+      
       <Legacy />
     </>
   );
