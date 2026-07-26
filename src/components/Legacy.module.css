@@ -406,17 +406,21 @@
      circles much closer to full size so it doesn't read as "shrunk". */
   .circleWrapper {
     width: 100%;
-    margin: 6% auto 0;
+    margin: 0 auto;
     height: auto;
-    min-height: auto;
+    min-height: 100vh;
     display: flex;
     flex-flow: row wrap;
     align-items: center;
     justify-content: center;
-    align-content: center;
-    gap: 36px 28px;
+    /* space-evenly (rather than center) spreads the wrapped rows across
+       the full min-height instead of bunching them in the middle, so the
+       section actually occupies the full 100vh instead of leaving black
+       space above/below a centered cluster. */
+    align-content: space-evenly;
+    gap: 80px 40px;
     max-width: 340px;
-    padding: 32px 0 72px;
+    padding: 48px 0 64px;
   }
 
   .google,
@@ -432,21 +436,21 @@
     transform: translate(0, 0) scale(0.95);
   }
 
-  .circleBase:nth-of-type(1) { transform: translate(0, -8px) scale(0.95); }
-  .circleBase:nth-of-type(2) { transform: translate(10px, 14px) scale(0.95); }
-  .circleBase:nth-of-type(3) { transform: translate(-12px, -10px) scale(0.95); }
-  .circleBase:nth-of-type(4) { transform: translate(4px, 6px) scale(0.95); }
-  .circleBase:nth-of-type(5) { transform: translate(-8px, 10px) scale(0.95); }
-  .circleBase:nth-of-type(6) { transform: translate(12px, -12px) scale(0.95); }
-  .circleBase:nth-of-type(7) { transform: translate(-6px, 4px) scale(0.95); }
+  .circleBase:nth-of-type(1) { transform: translate(-6px, -34px) scale(0.95); }
+  .circleBase:nth-of-type(2) { transform: translate(14px, 24px) scale(0.95); }
+  .circleBase:nth-of-type(3) { transform: translate(-18px, 6px) scale(0.95); }
+  .circleBase:nth-of-type(4) { transform: translate(8px, -20px) scale(0.95); }
+  .circleBase:nth-of-type(5) { transform: translate(-10px, 32px) scale(0.95); }
+  .circleBase:nth-of-type(6) { transform: translate(16px, -8px) scale(0.95); }
+  .circleBase:nth-of-type(7) { transform: translate(-4px, 18px) scale(0.95); }
 
-  .circleBase:nth-of-type(1).circleFocused { transform: translate(0, -8px) scale(1.03); }
-  .circleBase:nth-of-type(2).circleFocused { transform: translate(10px, 14px) scale(1.03); }
-  .circleBase:nth-of-type(3).circleFocused { transform: translate(-12px, -10px) scale(1.03); }
-  .circleBase:nth-of-type(4).circleFocused { transform: translate(4px, 6px) scale(1.03); }
-  .circleBase:nth-of-type(5).circleFocused { transform: translate(-8px, 10px) scale(1.03); }
-  .circleBase:nth-of-type(6).circleFocused { transform: translate(12px, -12px) scale(1.03); }
-  .circleBase:nth-of-type(7).circleFocused { transform: translate(-6px, 4px) scale(1.03); }
+  .circleBase:nth-of-type(1).circleFocused { transform: translate(-6px, -34px) scale(1.03); }
+  .circleBase:nth-of-type(2).circleFocused { transform: translate(14px, 24px) scale(1.03); }
+  .circleBase:nth-of-type(3).circleFocused { transform: translate(-18px, 6px) scale(1.03); }
+  .circleBase:nth-of-type(4).circleFocused { transform: translate(8px, -20px) scale(1.03); }
+  .circleBase:nth-of-type(5).circleFocused { transform: translate(-10px, 32px) scale(1.03); }
+  .circleBase:nth-of-type(6).circleFocused { transform: translate(16px, -8px) scale(1.03); }
+  .circleBase:nth-of-type(7).circleFocused { transform: translate(-4px, 18px) scale(1.03); }
 
   .branchLabel {
     padding: 5px 10px;
@@ -519,7 +523,7 @@
 }
 
 @media (max-width: 420px) {
-  .circleBase:nth-of-type(1) { transform: translate(0, -6px) scale(0.85); }
+  .circleBase:nth-of-type(1) { transform: translate(0, 20px) scale(0.85); }
   .circleBase:nth-of-type(2) { transform: translate(8px, 10px) scale(0.85); }
   .circleBase:nth-of-type(3) { transform: translate(-10px, -8px) scale(0.85); }
   .circleBase:nth-of-type(4) { transform: translate(3px, 5px) scale(0.85); }
@@ -536,7 +540,7 @@
   .circleBase:nth-of-type(7).circleFocused { transform: translate(-5px, 3px) scale(0.93); }
 
   .circleWrapper {
-    gap: 28px 22px;
+    gap: 48px 24px;
     max-width: 280px;
   }
 
