@@ -1,83 +1,55 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import styles from "./Preloader.module.css";
+import logo from "../assests/Vector.svg"
+import logo1 from "../assests/Vector1.svg"
+export default function Preloader({ onFinish }) {
+  const [exit, setExit] = useState(false);
 
-export default function Loader() {
-  const loaderContainerRef = useRef(null);
-  const pentagonRef = useRef(null);
-
-  const [fontsLoaded, setFontsLoaded] = useState(false);
-
-  const loaderDestroying = useRef(false);
-  const destroyerTriggerTime = useRef(null);
-
-  // Load Font
   useEffect(() => {
-    const font = new FontFaceObserver("Jaapokki subtract");
+    let settled = false;
 
-    font.load().then(() => {
-      document.documentElement.classList.add("fonts-loaded");
-      setFontsLoaded(true);
-    });
-  }, []);
-
-  // Call this when all images are loaded
-  const allImagesLoaded = () => {
-    console.log("ALL IMAGES LOADED");
-
-    const loaderContainer = loaderContainerRef.current;
-    const pentagon = pentagonRef.current;
-
-    if (!loaderContainer || !pentagon) return;
-
-    const handleAnimationEnd = () => {
-      if (
-        destroyerTriggerTime.current !== null &&
-        loaderDestroying.current
-      ) {
-        loaderContainer.style.display = "none";
-      }
+    const finishLoading = () => {
+      if (settled) return;
+      settled = true;
+      setTimeout(() => {
+        setExit(true);
+      }, 2500);
     };
 
-    const handleAnimationIteration = () => {
-      if (!loaderDestroying.current) {
-        destroyerTriggerTime.current = Math.round(Date.now() / 1000);
-        console.log(destroyerTriggerTime.current);
+    if (document.readyState === "complete") {
+      finishLoading();
+    } else {
+      window.addEventListener("load", finishLoading, { once: true });
+    }
 
-        loaderDestroying.current = true;
-        loaderContainer.style.animation = "2s loader-disappear forwards";
-        pentagon.style.animation = "none";
-      }
-    };
-
-    loaderContainer.addEventListener("animationend", handleAnimationEnd);
-    loaderContainer.addEventListener(
-      "animationiteration",
-      handleAnimationIteration
-    );
+    // Hard safety net: guarantees the loader can never hang
+    // indefinitely even if `load` somehow never fires.
+    const safetyTimer = setTimeout(finishLoading, 4000);
 
     return () => {
-      loaderContainer.removeEventListener(
-        "animationend",
-        handleAnimationEnd
-      );
-      loaderContainer.removeEventListener(
-        "animationiteration",
-        handleAnimationIteration
-      );
+      clearTimeout(safetyTimer);
+      window.removeEventListener("load", finishLoading);
     };
-  };
+  }, []);
 
-  // Example: simulate all images loaded
   useEffect(() => {
-    if (fontsLoaded) {
-      allImagesLoaded();
-    }
-  }, [fontsLoaded]);
+    if (!exit) return;
+
+    const timer = setTimeout(() => {
+      onFinish();
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [exit]);
 
   return (
-    <div className="loaderContainer" ref={loaderContainerRef}>
-      <div className="loader">
-        <div className="pentagon" ref={pentagonRef}></div>
+    <div className={`${styles.loader} ${exit ? styles.exit : ""}`}>
+      <div className={styles.logo}>
+        <img src={logo} alt="logo" className={styles.vector} />
+        <img src={logo1} alt="logo1" className={styles.vector1} />
       </div>
+
+
     </div>
   );
 }
