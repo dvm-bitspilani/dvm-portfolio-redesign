@@ -13,7 +13,7 @@ import dribble from "../assests/icons/dribble.svg";
 // already carries its own `team` (Frontend/AppDev/Video/Design/Backend) and
 // `batch` (year) fields, so we don't need to reverse-engineer them from a
 // folder name anymore.
-import teamMembersRaw from "./TeamInfo.json ";
+import teamMembersRaw from "./TeamInfo.json";
 
 gsap.registerPlugin(ScrollTrigger);
 
