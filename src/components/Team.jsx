@@ -8,7 +8,7 @@ import github from "../assests/icons/github.png";
 import insta from "../assests/icons/twitter.png";
 import link from "../assests/icons/linkedin.png";
 import dribble from "../assests/icons/dribble.svg";
-import Nav from "./Navbar";  
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -97,7 +97,6 @@ export default function TeamPage() {
   const cursorRef = useRef(null);
   const preloaderRef = useRef(null);
   const progressRef = useRef(null);
-  const marqueeTrackRef = useRef(null);
   const statRef = useRef(null);
 
   // ---- landing sequence: preloader -> hero reveal (page-load only, no scroll tie-in) ----
@@ -113,7 +112,6 @@ export default function TeamPage() {
             `.${styles.heroEyebrow}`,
             `.${styles.heroSub}`,
             `.${styles.scrollCue}`,
-            `.${styles.marqueeWrap}`,
             `.${styles.heroReadout}`,
           ],
           { opacity: 1, x: 0, y: 0, yPercent: 0, rotate: 0 }
@@ -130,7 +128,6 @@ export default function TeamPage() {
       gsap.set(`.${styles.heroLetter}`, { yPercent: 120, opacity: 0, rotate: 4 });
       gsap.set(`.${styles.heroSub}`, { opacity: 0, y: 14 });
       gsap.set(`.${styles.scrollCue}`, { opacity: 0 });
-      gsap.set(`.${styles.marqueeWrap}`, { opacity: 0, y: 16 });
       gsap.set(`.${styles.heroReadout}`, { opacity: 0, x: 10 });
 
       const boot = gsap.timeline();
@@ -166,7 +163,6 @@ export default function TeamPage() {
           ease: "power4.out",
         }, 0.32)
         .to(`.${styles.heroSub}`, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 0.95)
-        .to(`.${styles.marqueeWrap}`, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 1.05)
         .to(`.${styles.scrollCue}`, { opacity: 1, duration: 0.6 }, 1.2);
 
       // quiet ambient life once landed — time-based, never scroll-linked
@@ -192,24 +188,6 @@ export default function TeamPage() {
         end: "max",
         onUpdate: (self) => gsap.set(progressRef.current, { scaleX: self.progress }),
       });
-    }, rootRef);
-    return () => ctx.revert();
-  }, []);
-
-  // ---- infinite department marquee ----
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const track = marqueeTrackRef.current;
-      if (!track) return;
-      const width = track.scrollWidth / 2;
-      gsap.set(track, { x: 0 });
-      const tween = gsap.to(track, {
-        x: -width,
-        duration: 22,
-        ease: "none",
-        repeat: -1,
-      });
-      return () => tween.kill();
     }, rootRef);
     return () => ctx.revert();
   }, []);
@@ -397,20 +375,6 @@ export default function TeamPage() {
           <span className={styles.scrollCueLine} />
           <span>scroll</span>
         </button>
-
-        <div className={styles.marqueeWrap} aria-hidden="true">
-          <div className={styles.marqueeTrack} ref={marqueeTrackRef}>
-            {[...DEPARTMENTS, ...DEPARTMENTS].map((d, i) => (
-              <button
-                key={i}
-                className={styles.marqueeItem}
-                onClick={() => changeDept(DEPARTMENTS.indexOf(d))}
-              >
-                {d} <span className={styles.marqueeDot}>•</span>
-              </button>
-            ))}
-          </div>
-        </div>
       </header>
 
       <section className={styles.teamSection} ref={containerRef}>
@@ -504,10 +468,7 @@ function MemberCard({ member }) {
   ];
 
   return (
-    <>
-    <Nav />
     <div className={styles.memberCard}>
-
       <div className={styles.memberCardInner}>
         <div className={styles.memberImage}>
           <img src={member.PhotoLink} alt={member.name} loading="lazy" />
@@ -525,7 +486,6 @@ function MemberCard({ member }) {
         </div>
       </div>
     </div>
-    </>
   );
 }
 

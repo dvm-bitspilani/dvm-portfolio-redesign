@@ -401,6 +401,9 @@
   }
 
 
+  /* Circle section was cramped into a tiny 230px box with heavily
+     scaled-down (0.78x) circles — grown to a wider, taller box with
+     circles much closer to full size so it doesn't read as "shrunk". */
   .circleWrapper {
     width: 100%;
     margin: 6% auto 0;
@@ -411,9 +414,9 @@
     align-items: center;
     justify-content: center;
     align-content: center;
-    gap: 26px 20px;
-    max-width: 230px;
-    padding: 24px 0 56px;
+    gap: 36px 28px;
+    max-width: 340px;
+    padding: 32px 0 72px;
   }
 
   .google,
@@ -426,31 +429,38 @@
     position: static;
   }
   .circleBase {
-    transform: translate(0, 0) scale(0.78);
+    transform: translate(0, 0) scale(0.95);
   }
 
-  .circleBase:nth-of-type(1) { transform: translate(0, -8px) scale(0.78); }
-  .circleBase:nth-of-type(2) { transform: translate(10px, 14px) scale(0.78); }
-  .circleBase:nth-of-type(3) { transform: translate(-12px, -10px) scale(0.78); }
-  .circleBase:nth-of-type(4) { transform: translate(4px, 6px) scale(0.78); }
-  .circleBase:nth-of-type(5) { transform: translate(-8px, 10px) scale(0.78); }
-  .circleBase:nth-of-type(6) { transform: translate(12px, -12px) scale(0.78); }
-  .circleBase:nth-of-type(7) { transform: translate(-6px, 4px) scale(0.78); }
+  .circleBase:nth-of-type(1) { transform: translate(0, -8px) scale(0.95); }
+  .circleBase:nth-of-type(2) { transform: translate(10px, 14px) scale(0.95); }
+  .circleBase:nth-of-type(3) { transform: translate(-12px, -10px) scale(0.95); }
+  .circleBase:nth-of-type(4) { transform: translate(4px, 6px) scale(0.95); }
+  .circleBase:nth-of-type(5) { transform: translate(-8px, 10px) scale(0.95); }
+  .circleBase:nth-of-type(6) { transform: translate(12px, -12px) scale(0.95); }
+  .circleBase:nth-of-type(7) { transform: translate(-6px, 4px) scale(0.95); }
 
-  .circleBase:nth-of-type(1).circleFocused { transform: translate(0, -8px) scale(0.86); }
-  .circleBase:nth-of-type(2).circleFocused { transform: translate(10px, 14px) scale(0.86); }
-  .circleBase:nth-of-type(3).circleFocused { transform: translate(-12px, -10px) scale(0.86); }
-  .circleBase:nth-of-type(4).circleFocused { transform: translate(4px, 6px) scale(0.86); }
-  .circleBase:nth-of-type(5).circleFocused { transform: translate(-8px, 10px) scale(0.86); }
-  .circleBase:nth-of-type(6).circleFocused { transform: translate(12px, -12px) scale(0.86); }
-  .circleBase:nth-of-type(7).circleFocused { transform: translate(-6px, 4px) scale(0.86); }
+  .circleBase:nth-of-type(1).circleFocused { transform: translate(0, -8px) scale(1.03); }
+  .circleBase:nth-of-type(2).circleFocused { transform: translate(10px, 14px) scale(1.03); }
+  .circleBase:nth-of-type(3).circleFocused { transform: translate(-12px, -10px) scale(1.03); }
+  .circleBase:nth-of-type(4).circleFocused { transform: translate(4px, 6px) scale(1.03); }
+  .circleBase:nth-of-type(5).circleFocused { transform: translate(-8px, 10px) scale(1.03); }
+  .circleBase:nth-of-type(6).circleFocused { transform: translate(12px, -12px) scale(1.03); }
+  .circleBase:nth-of-type(7).circleFocused { transform: translate(-6px, 4px) scale(1.03); }
 
   .branchLabel {
-    padding: 6px 12px;
+    padding: 5px 10px;
+    gap: 5px;
   }
 
+  /* Placeholder names shrunk further (was 0.65rem) and clamped to a
+     max-width with ellipsis so a long name can never push the pill
+     wider than the viewport / overlap neighboring labels. */
   .branchName {
-    font-size: 0.65rem;
+    font-size: 0.58rem;
+    max-width: 34vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .footer {
@@ -509,25 +519,30 @@
 }
 
 @media (max-width: 420px) {
-  .circleBase:nth-of-type(1) { transform: translate(0, -6px)  }
-  .circleBase:nth-of-type(2) { transform: translate(8px, 10px) }
-  .circleBase:nth-of-type(3) { transform: translate(-10px, -8px)}
-  .circleBase:nth-of-type(4) { transform: translate(3px, 5px) }
-  .circleBase:nth-of-type(5) { transform: translate(-6px, 8px)  }
-  .circleBase:nth-of-type(6) { transform: translate(10px, -10px) }
-  .circleBase:nth-of-type(7) { transform: translate(-5px, 3px)  }
+  .circleBase:nth-of-type(1) { transform: translate(0, -6px) scale(0.85); }
+  .circleBase:nth-of-type(2) { transform: translate(8px, 10px) scale(0.85); }
+  .circleBase:nth-of-type(3) { transform: translate(-10px, -8px) scale(0.85); }
+  .circleBase:nth-of-type(4) { transform: translate(3px, 5px) scale(0.85); }
+  .circleBase:nth-of-type(5) { transform: translate(-6px, 8px) scale(0.85); }
+  .circleBase:nth-of-type(6) { transform: translate(10px, -10px) scale(0.85); }
+  .circleBase:nth-of-type(7) { transform: translate(-5px, 3px) scale(0.85); }
 
-  .circleBase:nth-of-type(1).circleFocused { transform: translate(0, -6px) }
-  .circleBase:nth-of-type(2).circleFocused { transform: translate(8px, 10px) }
-  .circleBase:nth-of-type(3).circleFocused { transform: translate(-10px, -8px) }
-  .circleBase:nth-of-type(4).circleFocused { transform: translate(3px, 5px) }
-  .circleBase:nth-of-type(5).circleFocused { transform: translate(-6px, 8px) }
-  .circleBase:nth-of-type(6).circleFocused { transform: translate(10px, -10px)  }
-  .circleBase:nth-of-type(7).circleFocused { transform: translate(-5px, 3px); }
+  .circleBase:nth-of-type(1).circleFocused { transform: translate(0, -6px) scale(0.93); }
+  .circleBase:nth-of-type(2).circleFocused { transform: translate(8px, 10px) scale(0.93); }
+  .circleBase:nth-of-type(3).circleFocused { transform: translate(-10px, -8px) scale(0.93); }
+  .circleBase:nth-of-type(4).circleFocused { transform: translate(3px, 5px) scale(0.93); }
+  .circleBase:nth-of-type(5).circleFocused { transform: translate(-6px, 8px) scale(0.93); }
+  .circleBase:nth-of-type(6).circleFocused { transform: translate(10px, -10px) scale(0.93); }
+  .circleBase:nth-of-type(7).circleFocused { transform: translate(-5px, 3px) scale(0.93); }
 
   .circleWrapper {
-    gap: 20px 16px;
-    max-width: 200px;
+    gap: 28px 22px;
+    max-width: 280px;
+  }
+
+  .branchName {
+    font-size: 0.52rem;
+    max-width: 30vw;
   }
 
   .overlay {
