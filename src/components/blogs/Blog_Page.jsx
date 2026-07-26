@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import ham from "../../assests/hamBtn.png";
 gsap.registerPlugin(ScrollTrigger);
 
-const BlogPage = () => {
+const BlogPage = ({ onHamClick }) => {
   const [clickedCard, setClickedCard] = useState(null);
   const containerRef = useRef(null);
   const dvmRef = useRef(null);
@@ -37,7 +37,7 @@ const BlogPage = () => {
       if (!textureRef.current) return;
       const { x, y } = gradientPos.current;
       const centerX = x + window.innerWidth * 1;
-      const centerY = y + window.innerHeight * 0.2;
+      const centerY = y + window.innerHeight * 0.1;
       const mask = `radial-gradient(circle 30vw at ${centerX}px ${centerY}px, black 0%, transparent 100%)`;
       textureRef.current.style.webkitMaskImage = mask;
       textureRef.current.style.maskImage = mask;
@@ -68,7 +68,7 @@ const BlogPage = () => {
       if (!textureRef2.current) return;
       const { x, y } = gradientPos2.current;
       const centerX = x + window.innerWidth * 0.15;
-      const centerY = y + window.innerHeight * 1;
+      const centerY = y + window.innerHeight * 0.2;
       const mask = `radial-gradient(circle 25vw at ${centerX}px ${centerY}px, black 0%, transparent 100%)`;
       textureRef2.current.style.webkitMaskImage = mask;
       textureRef2.current.style.maskImage = mask;
@@ -78,8 +78,8 @@ const BlogPage = () => {
 
     const ctx2 = gsap.context(() => {
       gsap.to(gradientPos2.current, {
-        x: window.innerWidth * 1,
-        y: window.innerHeight * 1,
+        x: window.innerWidth * 0.1,
+        y: window.innerHeight * 2,
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 10%",
@@ -114,7 +114,7 @@ const BlogPage = () => {
           Back To Portfolio
         </Link>
         <img src={logo} alt="logo" className={styles.logo} />
-        <img src={ham} alt="logo" className={styles.ham_nav} />
+        <img onClick={onHamClick} src={ham} alt="logo" className={styles.ham_nav} />
       </div>
       <div className={styles.container} ref={containerRef}>
         <div className={styles.grid}></div>

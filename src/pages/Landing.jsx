@@ -29,7 +29,7 @@ const Landing = () => {
       <Navbar onHamClick={() => setIsHamOpen(true)} />
 
       <LandingPage />
-      <Blog />
+      <Blog  onHamClick={() => setIsHamOpen(true)} />
       <Legacy />
 
       {isHamOpen && (
