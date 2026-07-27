@@ -7,6 +7,7 @@ import ProjectGrid from "../components/Project/ProjectGrid";
 import "../components/Project/Projects.css";
 import ProjectHeading from "../assests/Projects/projects.png"
 import ProjectHeadingOutline from "../assests/Projects/projects-outline.png"
+import bg3 from "../assests/bg_3.png";
 
 
 const CATEGORY_ORDER = [
@@ -43,6 +44,10 @@ export default function Projects() {
 
   return (
     <>
+    <div
+     style={{ backgroundImage: `url(${bg3})` }}
+     className="texture"
+    ></div>
       <Navbar onHamClick={() => setIsHamOpen(true)} />
         
       <div className="proj-page">
