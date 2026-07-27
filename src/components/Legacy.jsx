@@ -1,7 +1,5 @@
 import { useRef, useState, useEffect, useLayoutEffect } from "react";
 import styles from "./Legacy.module.css";
-import header from "../assests/Legacy/header.svg";
-import header_fill from "../assests/Legacy/header_fill.svg";
 import arrow from "../assests/Legacy/arrow.png";
 import LegacyCircle from "./LegacyCircle";
 import LegacyCard from "./LegacyCard";
@@ -576,18 +574,16 @@ const Legacy = () => {
       ></div>
 
       <div className={styles.header}>
-        <img
-          src={header}
+        <div
           alt="Header"
           ref={headerRef}
-          className={styles.headerOuterImage}
-        />
-        <img
-          src={header_fill}
+          className={styles.headerImage}
+        >LEGACY</div>
+        <div
           alt="Header"
           ref={headerFillRef}
-          className={styles.headerImage}
-        />
+          className={styles.headerOuterImage}
+        >LEGACY</div>
       </div>
 
       <div

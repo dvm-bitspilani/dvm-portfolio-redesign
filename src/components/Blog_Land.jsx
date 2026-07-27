@@ -1,6 +1,4 @@
 import styles from "./Blog.module.css";
-import blogImg from "../assests/blog.png";
-import blogOutImg from "../assests/blog_out.png";
 import arrow from "../assests/arrow.png";
 import Card from "./blogs/BlogCard";
 import { Link } from "react-router-dom";
@@ -153,13 +151,15 @@ const Blog = () => {
         ref={textureRef}
         className={styles.texture}
       ></div>
-      <img ref={blog} src={blogImg} alt="Blog" className={styles.image} />
-      <img
-        ref={blog_out}
-        src={blogOutImg}
-        alt="Blog"
-        className={styles.image1}
-      />
+      <div>
+        <div ref={blog}  alt="Blog" className={styles.image} >BLOGS</div>
+        <div
+          ref={blog_out}
+        
+          alt="Blog"
+          className={styles.image1}
+        >BLOGS</div>
+      </div>
 
       <div className={styles.contentColumn}>
         <div

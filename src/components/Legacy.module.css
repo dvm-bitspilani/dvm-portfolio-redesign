@@ -10,20 +10,40 @@
   width: 100%;
   max-height: 35vh;
   margin-top: 5%;
-}
-.headerOuterImage {
-  position: absolute;
-  max-width: 90%;
-  object-fit: cover;
-  margin-left: 5%;
+
 }
 .headerImage {
-  position: relative;
-  margin-left: 10%;
-  margin-top: 4%;
-  max-width: 80%;
-  object-fit: cover;
-  z-index: 1002;
+    position: absolute;
+    z-index: 3;
+    max-width: 90vw;
+    top: 15%;
+    left: 55%;
+    transform: translateX(-50%);
+    margin-left: -6%;
+    object-fit: contain;
+    font-family: 'Stretch Pro', sans-serif;
+    color: white;
+    font-size: clamp(2rem, 10vw, 8rem);
+    white-space: nowrap;
+    line-height: 1;
+}
+.headerOuterImage {
+    position: absolute;
+    z-index: 3;
+    max-width: 90vw;
+    top: 10%;
+    left: 60%;
+    transform: translateX(-50%);
+    margin-left: -11%;
+
+    font-family: 'Stretch Pro', sans-serif;
+    font-size: clamp(2.4rem, 12vw, 9.6rem);
+    white-space: nowrap;
+    line-height: 1;
+
+    color: transparent;              /* Hide fill */
+    -webkit-text-stroke: 1px #FFFFFF3B;  /* White outline */
+    text-stroke: 1px #FFFFFF3B;          /* Future standard */
 }
 
 .footer {
@@ -82,7 +102,7 @@
 .circleWrapper {
   width: 90%;
   margin-left: 5%;
-  margin-top: 3%;
+  margin-top: 18vh;
   position: relative;
   height: 100%;
   z-index: 1002;
@@ -359,10 +379,11 @@
 
 
 @media (max-width: 1024px) {
-  .headerOuterImage,
   .headerImage {
-    margin-left: 6%;
+    margin-left: -4%;
   }
+
+
 
   .footerContent {
     font-size: clamp(0.4rem, 1vw, 0.5rem);
@@ -392,12 +413,24 @@
   .header {
     margin-top: 8%;
     max-height: none;
+    min-height: 14vh;
   }
 
-  .headerOuterImage,
   .headerImage {
-    max-width: 96%;
-    margin-left: 2%;
+    max-width: 96vw;
+    margin-left: -2%;
+    font-size: clamp(1.75rem, 11vw, 4.5rem);
+  }
+  .headerOuterImage {
+    max-width: 96vw;
+    margin-top: 4%;
+    font-size: clamp(2rem, 12vw, 5rem);
+  }
+
+  .headerOuterImage {
+    max-width: 96vw;
+    /* margin-left: -3%; */
+    font-size: clamp(2.1rem, 13vw, 5.4rem);
   }
 
 
@@ -406,7 +439,7 @@
      circles much closer to full size so it doesn't read as "shrunk". */
   .circleWrapper {
     width: 100%;
-    margin: 0 auto;
+    margin: 10vh auto 0;
     height: auto;
     min-height: 80vh;
     display: flex;
@@ -523,6 +556,17 @@
 }
 
 @media (max-width: 420px) {
+  .headerImage {
+    margin-left: -1%;
+    font-size: clamp(1.5rem, 11vw, 3.4rem);
+  }
+
+  .headerOuterImage {
+    /* margin-left: -1.5%; */
+    font-size: clamp(1.8rem, 13vw, 4.1rem);
+    margin-top: 4%;
+  }
+
   .circleBase:nth-of-type(1) { transform: translate(0, 20px) scale(0.85); }
   .circleBase:nth-of-type(2) { transform: translate(8px, 10px) scale(0.85); }
   .circleBase:nth-of-type(3) { transform: translate(-10px, -8px) scale(0.85); }

@@ -1,6 +1,4 @@
 import styles from "./About.module.css";
-import about from "../assests/about_main.png";
-import about_outline from "../assests/about_outline.png";
 import { SplitText } from "gsap/SplitText";
 
 import { useRef, useEffect } from "react";
@@ -150,9 +148,10 @@ const About = () => {
         className={styles.texture}
       ></div>
 
-      
-      <img ref={about_ref} className={styles.image} src={about} alt="about" />
-      <img ref={about_outlineRef} className={styles.image1} src={about_outline} alt="about" />
+      <div className={styles.head}>
+        <div ref={about_ref} className={styles.image} alt="about">ABOUT US</div>
+        <div ref={about_outlineRef} className={styles.image1}  alt="about" >ABOUT US</div>
+      </div>
 
       {/*
         All three paragraphs used to be independently `position: absolute`
