@@ -72,3 +72,16 @@ html::-webkit-scrollbar-thumb:hover {
     filter: blur(6px);
   }
 }
+@font-face {
+  font-family: 'StretchPro';
+  src: url('../assets/StretchPro.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body{
+  font-family: 'StretchPro', sans-serif;
+  color: white;
+  margin: 0;
+  padding: 0;
+}

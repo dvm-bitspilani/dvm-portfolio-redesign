@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import "../components/ContactUs.css";
 import ContactUsHeading from "../assests/CONTACTUS.png"
 import ContactUsHeadingOutline from "../assests/Contactusback.png"
+import bg3 from "../assests/bg_3.png";
 
 const NAME_REGEX = /^(\w|\s)\D+$/;
 const PHONE_REGEX = /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
@@ -73,6 +74,10 @@ export default function ContactUs() {
   return (
     <div>
       <Navbar />
+      <div
+           style={{ backgroundImage: `url(${bg3})` }}
+           className="texture"
+          ></div>
 
       <div className="contact-page">
         <img src={ContactUsHeading} className="contact-heading" style={{ width: "80%", height: "auto", margin: "2rem", paddingLeft:"10rem" }} />
