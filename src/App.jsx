@@ -8,6 +8,10 @@ import About from "./components/About";
 import TeamPage from "./components/Team";
 import ContactUs from "./pages/ContactUs";
 import Preloader from "./components/PreLoader";
+import Projects from "./pages/Projects";
+import ProjectPage from "./components/Project/ProjectPage";
+
+
 
 import styles from "./App.module.css";
 
@@ -18,7 +22,7 @@ const App = () => {
   const [displayLocation, setDisplayLocation] = useState(location);
   const [stage, setStage] = useState("idle");
 
-  // Page transition
+
   useEffect(() => {
     if (location.pathname !== displayLocation.pathname) {
       setStage("fadeOut");
@@ -61,6 +65,8 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/team" element={<TeamPage />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:name" element={<ProjectPage />} />
         </Routes>
       </div>
     </>

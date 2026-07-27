@@ -6,14 +6,13 @@
   color: inherit;
   border-radius: 14px;
   overflow: hidden;
-  background: var(--proj-bg-card, #10182b);
-  border: 1px solid white;
-  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  background:  black;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow-y:visible
 }
 
 .project-card:hover {
   transform: translateY(-4px);
-  border-color: white
 }
 
 .project-card:focus-visible {
@@ -63,7 +62,6 @@
   font-size: 15px;
   color: #fff;
   background: rgba(5, 8, 16, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.35);
   padding-left: 3px; 
 }
 

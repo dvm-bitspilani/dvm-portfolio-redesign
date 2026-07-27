@@ -5,14 +5,11 @@
   max-width: 1180px;
   margin: 0 auto;
   padding: 0 32px;
+  overflow: visible;
+
 }
 
-.project-grid__empty {
-  text-align: center;
-  color:  #8b98b8;
-  padding: 60px 20px;
-  font-size: 17px;
-}
+
 
 @media (max-width: 720px) {
   .project-grid {
