@@ -27,11 +27,3 @@
   color: transparent;
   text-shadow: 0 0 44px rgba(91, 124, 250, 0.35);
 }
-.texture {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-
-  background-repeat: repeat;
-  background-size: auto;
-}

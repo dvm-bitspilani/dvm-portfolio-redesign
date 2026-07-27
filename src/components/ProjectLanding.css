@@ -90,13 +90,12 @@
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 16px;
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
 .project-carousel-name {
-  font-family: "Orbitron", "Segoe UI", sans-serif;
   font-size: 18px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
