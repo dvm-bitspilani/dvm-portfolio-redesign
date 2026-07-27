@@ -25,15 +25,24 @@
     max-width: 100%;
     top: 20%;
     object-fit: contain;
-    left: 4%;
+    left: 10%;
+    font-family: 'Stretch Pro', sans-serif;
+    color: white;
+    font-size: 10vw;
 }
 .image1 {
     position: absolute;
     z-index: 3;
     max-width: 100%;
     top: 15%;
-    left:0%;
-    object-fit: contain;
+    left: 2%;
+
+    font-family: 'Stretch Pro', sans-serif;
+    font-size: 12vw;
+
+    color: transparent;              /* Hide fill */
+    -webkit-text-stroke: 1px #FFFFFF3B;  /* White outline */
+    text-stroke: 1px #FFFFFF3B;          /* Future standard */
 }
 
 /* ---- paragraphs ----
@@ -170,16 +179,12 @@
 
 /* ---- Tablets (portrait) ---- */
 @media (max-width: 1024px) {
-  .image {
-    top: 16%;
-    left: 3%;
-    max-width: 55%;
-  }
+
 
   .image1 {
-    top: 10%;
-    left: 3%;
-    max-width: 55%;
+    /* top: 15%; */
+    /* left: 3%; */
+    /* max-width: 55%; */
   }
 
   .paraGroup {
@@ -227,16 +232,16 @@
     position: relative;
     top: 0;
     left: 0;
-    max-width: 80%;
+    /* max-width: 80%; */
     margin: 0 auto;
     display: block;
   }
 
   .image1 {
     position: absolute;
-    top: 6%;
-    left: 10%;
-    max-width: 80%;
+    /* top: 6%; */
+    /* left: 10%; */
+    /* max-width: 80%; */
   }
 
   .paraGroup {
@@ -290,12 +295,12 @@
   }
 
   .image1 {
-    margin-top: 28%;
+    margin-top: 10%;
   }
 
   .image {
     margin-top: 15%;
-    max-width: 90%;
+    /* max-width: 90%; */
   }
 
   .paraGroup {
@@ -342,8 +347,8 @@
 
   .image1 {
     position: absolute;
-    top: 8%;
-    left: 5%;
+    /* top: 8%; */
+    /* left: 5%; */
   }
 
   .text {

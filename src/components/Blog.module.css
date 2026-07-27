@@ -12,23 +12,30 @@
     perspective: 1000px;
 
 }
-.image{
+.image {
     position: absolute;
-    width: 50%;
     z-index: 3;
-    height: auto;
-    object-fit: cover;
-    left: 25%;
-    top:10%;
-}
-.image1{
-    z-index: 3;
-    position: absolute;
-    width: 60%;
-    height: auto;
-    object-fit: cover;
+    max-width: 100%;
+    top: 15%;
+    object-fit: contain;
     left: 20%;
-    top:5%;
+    font-family: 'Stretch Pro', sans-serif;
+    color: white;
+    font-size: 10vw;
+}
+.image1 {
+    position: absolute;
+    z-index: 3;
+    max-width: 100%;
+    top: 10%;
+    left: 15%;
+
+    font-family: 'Stretch Pro', sans-serif;
+    font-size: 12vw;
+
+    color: transparent;              /* Hide fill */
+    -webkit-text-stroke: 1px #FFFFFF3B;  /* White outline */
+    text-stroke: 1px #FFFFFF3B;          /* Future standard */
 }
 
 /* ---- Content column wrapper: groups the blog card row + "See All
@@ -233,14 +240,14 @@
 @media (max-width: 1024px) {
   .image {
     width: 62%;
-    left: 19%;
-    top: 6%;
+    left: 23%;
+    top: 12%;
   }
 
   .image1 {
     width: 72%;
-    left: 14%;
-    top: 2%;
+    left: 20%;
+    top: 10%;
   }
 
   .button {
@@ -289,8 +296,8 @@
   .image {
     position: relative;
     width: 78%;
-    left: 0;
-    top: 0;
+    left: 13%;
+    top: 10%;
     margin: 0 auto;
     display: block;
   }
@@ -298,8 +305,8 @@
   .image1 {
     position: absolute;
     width: 88%;
-    left: 6%;
-    top: 2%;
+    left: 20%;
+    top: 1%;
   }
 
   .contentColumn {
@@ -380,7 +387,7 @@
 
   .image1 {
     width: 96%;
-    left: 2%;
+    left: 18%;
   }
 
   .footer {
