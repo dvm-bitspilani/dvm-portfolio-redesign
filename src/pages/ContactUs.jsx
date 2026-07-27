@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import Navbar from "../components/Navbar";
 import "../components/ContactUs.css";
 import ContactUsHeading from "../assests/CONTACTUS.png"
+import ContactUsHeadingOutline from "../assests/Contactusback.png"
 
 const NAME_REGEX = /^(\w|\s)\D+$/;
 const PHONE_REGEX = /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
