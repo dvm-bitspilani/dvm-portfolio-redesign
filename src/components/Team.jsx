@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import styles from "./Team.module.css";
@@ -8,11 +9,8 @@ import github from "../assests/icons/github.png";
 import insta from "../assests/icons/twitter.png";
 import link from "../assests/icons/linkedin.png";
 import dribble from "../assests/icons/dribble.svg";
-
-// The full member roster, pasted directly from the data export. Each record
-// already carries its own `team` (Frontend/AppDev/Video/Design/Backend) and
-// `batch` (year) fields, so we don't need to reverse-engineer them from a
-// folder name anymore.
+import Nav from "./Navbar";
+import Ham from "./Ham";
 import teamMembersRaw from "./TeamInfo.json";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -29,19 +27,11 @@ const SOCIAL_ICON = {
   linkedin: link,
 };
 
-// Eagerly import every photo under src/assests/members/{year}/{folder}/{name}.{ext}
-// (Vite-specific: import.meta.glob). If you're on Create React App / webpack,
-// swap this for require.context('../assests/members', true, /\.(jpe?g|png|webp|jfif)$/i)
-// and adjust the path-parsing below to use module.keys() instead.
 const memberImageModules = import.meta.glob(
   "../assests/members/*/*/*.{jpg,jpeg,png,JPG,JPEG,PNG,webp,WEBP,jfif,JFIF}",
   { eager: true, import: "default" }
 );
 
-// Build a lookup so a JSON record's PhotoLink (e.g.
-// "./assets/members/2019/backend/anshal.jpeg") can be matched against
-// whatever actually got bundled, regardless of extension/case differences.
-// Key: "{year}/{folder}/{filename-without-extension, lowercased}"
 const PHOTO_MODULE_LOOKUP = (() => {
   const lookup = {};
   Object.entries(memberImageModules).forEach(([path, src]) => {
@@ -61,13 +51,9 @@ function resolvePhoto(photoLink) {
     const key = `${year}/${folder.toLowerCase()}/${filename.toLowerCase()}`;
     if (PHOTO_MODULE_LOOKUP[key]) return PHOTO_MODULE_LOOKUP[key];
   }
-  // Fall back to treating it as a public-folder path (e.g. served from
-  // /public/assets/members/...) rather than a bundled src import.
   return photoLink.replace(/^\.\//, "/");
 }
 
-// Build { [deptLabel]: { [year]: members[] } } once, directly from the
-// pasted JSON dataset — no folder-name guessing required.
 const REAL_TEAM_DATA = (() => {
   const data = {};
   teamMembersRaw.forEach((record) => {
@@ -90,7 +76,6 @@ const REAL_TEAM_DATA = (() => {
       LinkedInLink: record.LinkedInLink,
     });
   });
-  // Deterministic, alphabetical order within each year.
   Object.values(data).forEach((byYear) => {
     Object.values(byYear).forEach((members) =>
       members.sort((a, b) => a.name.localeCompare(b.name))
@@ -105,7 +90,8 @@ export default function TeamPage() {
   const [activeDept, setActiveDept] = useState(0);
   const [loading, setLoading] = useState(true);
   const [pageReady, setPageReady] = useState(false);
-  const [teamData, setTeamData] = useState({}); // { [deptIndex]: { [year]: members[] } }
+  const [teamData, setTeamData] = useState({});
+  const [isHamOpen, setIsHamOpen] = useState(false);
 
   const rootRef = useRef(null);
   const heroRef = useRef(null);
@@ -118,12 +104,10 @@ export default function TeamPage() {
   const progressRef = useRef(null);
   const statRef = useRef(null);
 
-  // Page renders immediately — no preloader/entrance animation, no boot delay.
   useLayoutEffect(() => {
     setPageReady(true);
   }, []);
 
-  // ---- scroll progress bar (whole document) ----
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.set(progressRef.current, { scaleX: 0, transformOrigin: "left center" });
@@ -136,7 +120,6 @@ export default function TeamPage() {
     return () => ctx.revert();
   }, []);
 
-  // ---- sticky filter bar shrink state ----
   useEffect(() => {
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
@@ -149,7 +132,6 @@ export default function TeamPage() {
     return () => ctx.revert();
   }, []);
 
-  // ---- animated pill under active tab ----
   useLayoutEffect(() => {
     const btn = tabRefs.current[activeDept];
     if (!btn || !pillRef.current) return;
@@ -157,7 +139,6 @@ export default function TeamPage() {
     gsap.to(pillRef.current, { x: offsetLeft, width: offsetWidth, duration: 0.45, ease: "power3.out" });
   }, [activeDept, pageReady]);
 
-  // ---- load team data (from the JSON dataset) whenever department changes ----
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
@@ -167,7 +148,6 @@ export default function TeamPage() {
         setLoading(false);
         return;
       }
-      // Small delay purely so the skeleton placeholder is visible on switch.
       await new Promise((r) => setTimeout(r, 350));
       if (cancelled) return;
 
@@ -183,13 +163,11 @@ export default function TeamPage() {
     };
   }, [activeDept]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // ---- department change: instant, no swipe/wipe cover ----
   const changeDept = (i) => {
     if (i === activeDept) return;
     setActiveDept(i);
   };
 
-  // ---- member count-up stat ----
   useEffect(() => {
     if (loading || !statRef.current) return;
     const currentYearData = teamData[activeDept] || {};
@@ -205,7 +183,6 @@ export default function TeamPage() {
     });
   }, [loading, activeDept, teamData]);
 
-  // ---- scroll reveal: year headings, ghost numerals, alternating card entrances ----
   useEffect(() => {
     if (loading) return;
     const ctx = gsap.context(() => {
@@ -270,6 +247,17 @@ export default function TeamPage() {
 
   return (
     <div className={styles.teamPage} ref={rootRef}>
+      <Nav onHamClick={() => setIsHamOpen(true)} />
+
+      {/* Rendered via portal so it's never trapped inside a transformed
+          ancestor (hero/logo scroll transforms create their own containing
+          block, which breaks position:fixed overlays). */}
+      {isHamOpen &&
+        createPortal(
+          <Ham onClose={() => setIsHamOpen(false)} />,
+          document.body
+        )}
+
       <div className={styles.progressBar} ref={progressRef} />
 
       <div className={styles.grain} aria-hidden="true" />
@@ -285,7 +273,6 @@ export default function TeamPage() {
         </div>
 
         <div className={styles.heroInner}>
-
           <h1 className={styles.heroTitle} ref={heroTitleRef} aria-label="The Team">
             {"WE ARE DVM".split("").map((ch, i) => (
               <span className={styles.heroLetterWrap} key={i}>
@@ -293,7 +280,6 @@ export default function TeamPage() {
               </span>
             ))}
           </h1>
-
         </div>
         <button className={styles.scrollCue} onClick={scrollToTeam} aria-label="Scroll to team">
           <span className={styles.scrollCueLine} />

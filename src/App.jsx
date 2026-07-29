@@ -11,21 +11,21 @@ import Preloader from "./components/PreLoader";
 import Projects from "./pages/Projects";
 import ProjectPage from "./components/Project/ProjectPage";
 
-
-
 import styles from "./App.module.css";
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
+  const [initialLoading, setInitialLoading] = useState(true);
+  const [routeLoading, setRouteLoading] = useState(false);
   const location = useLocation();
 
   const [displayLocation, setDisplayLocation] = useState(location);
   const [stage, setStage] = useState("idle");
 
-
+  // Route changed: kick off the preloader instead of just fading.
   useEffect(() => {
     if (location.pathname !== displayLocation.pathname) {
       setStage("fadeOut");
+      setRouteLoading(true);
     }
   }, [location, displayLocation]);
 
@@ -33,6 +33,8 @@ const App = () => {
     if (e.target !== e.currentTarget) return;
 
     if (stage === "fadeOut") {
+      // Old page has faded out — swap in the new route now, underneath
+      // the preloader, then fade it in once the preloader finishes.
       setDisplayLocation(location);
       setStage("fadeIn");
     } else if (stage === "fadeIn") {
@@ -40,8 +42,14 @@ const App = () => {
     }
   };
 
-  if (loading) {
-    return <Preloader onFinish={() => setLoading(false)} />;
+  const handleRouteFinish = () => {
+    setRouteLoading(false);
+  };
+
+  if (initialLoading) {
+    return (
+      <Preloader onFinish={() => setInitialLoading(false)} waitForLoad />
+    );
   }
 
   const stageClass =
@@ -54,6 +62,10 @@ const App = () => {
   return (
     <>
       <ScrollToTop />
+
+      {routeLoading && (
+        <Preloader onFinish={handleRouteFinish} key={location.pathname} />
+      )}
 
       <div
         className={`${styles.pageTransition} ${stageClass}`}
