@@ -3,6 +3,7 @@ import dvm_text from "../assests/image.png";
 import bg3 from "../assests/bg_3.png";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { gsap } from "gsap";
 import AboutPage from "./About";
 import Logo from "./Logo";
@@ -21,6 +22,7 @@ const HomePage = () => {
   const lineRef = useRef(null);
   const line1Ref = useRef(null);
   const gradientPos = useRef({ x: 0, y: 0 });
+  const location = useLocation();
 
   useEffect(() => {
     const updateMask = () => {
@@ -105,12 +107,27 @@ const HomePage = () => {
       )
       .from(dvm_Ref.current, { x: -100, opacity: 0 })
       .from(code_ref.current.children, { x: -100, opacity: 0, duration: 0.6, stagger: 0.2 })
-      .from(about_ref.current, { x: 100,  opacity: 0, duration: 0.3, stagger: 0.3 });
+      .from(about_ref.current, { x: 100, opacity: 0, duration: 0.3, stagger: 0.3 });
 
     return () => {
       tl.kill();
     };
   }, []);
+
+  // If we navigated here from another page wanting to land on a specific
+  // section (e.g. the hamburger menu's "about" link), scroll to it once
+  // this page has mounted.
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      const id = location.state.scrollTo;
+      const el = document.getElementById(id);
+      if (el) {
+        requestAnimationFrame(() => {
+          el.scrollIntoView({ behavior: "smooth" });
+        });
+      }
+    }
+  }, [location.state]);
 
   return (
     <div style={{ position: "relative" }}>
@@ -131,11 +148,13 @@ const HomePage = () => {
           <div>DESIGN.</div>
           <div>ANIMATE.</div>
         </div>
-  
+
         <div ref={gradientRef} className={styles.gradient}></div>
       </div>
 
-      <AboutPage />
+      <div id="about">
+        <AboutPage />
+      </div>
 
       <Logo triggerSelector="#hero-container" />
     </div>
