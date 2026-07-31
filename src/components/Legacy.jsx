@@ -50,7 +50,7 @@ const CONNECTION_PAIRS = [
 // How long (ms) to wait after the mouse leaves a circle/label before
 // collapsing the branch — gives the user time to move the cursor from
 // the circle to one of its fanned-out names without it closing on them.
-const CLOSE_DELAY =10;
+const CLOSE_DELAY = 350;
 
 // Computes where each person's branch should end. See previous version
 // for the full reasoning — unchanged.
@@ -133,6 +133,13 @@ const Legacy = () => {
 
   // Pending "collapse the branch" timer.
   const closeTimeoutRef = useRef(null);
+
+  // Live (non-stale) record of whether the pointer is currently over a
+  // circle or branch label. Checked inside the close timeout itself so
+  // a close scheduled while leaving circle A can't fire and close
+  // circle B's branch just because A's mouseleave happened to land
+  // after B's mouseenter.
+  const pointerInsideRef = useRef(false);
 
   const [centers, setCenters] = useState(null);
   const [wrapperSize, setWrapperSize] = useState(null);
@@ -243,6 +250,7 @@ const Legacy = () => {
     if (openKey) return;
     clearCloseTimeout();
     closeTimeoutRef.current = setTimeout(() => {
+      if (pointerInsideRef.current) return;
       closeAll();
     }, CLOSE_DELAY);
   };
@@ -729,8 +737,14 @@ const Legacy = () => {
                 top: node.y,
                 zIndex: 1501,
               }}
-              onMouseEnter={cancelScheduledClose}
-              onMouseLeave={scheduleCloseBranch}
+              onMouseEnter={() => {
+                pointerInsideRef.current = true;
+                cancelScheduledClose();
+              }}
+              onMouseLeave={() => {
+                pointerInsideRef.current = false;
+                scheduleCloseBranch();
+              }}
               onClick={(e) => {
                 e.stopPropagation();
                 openPerson(branchKey, node.person, e);

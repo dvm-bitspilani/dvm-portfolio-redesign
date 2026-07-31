@@ -1,41 +1,40 @@
 .container {
-    background-color: black;
-    display: flex;
-    align-items: center;
-    position: relative;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  position: relative;
 
-    isolation: isolate;
-    width: 100vw;
-    height: 100vh;
-    background: black;
-    overflow: hidden;
-    perspective: 1000px;
-
+  isolation: isolate;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  overflow: hidden;
+  perspective: 1000px;
 }
 .image {
-    position: absolute;
-    z-index: 3;
-    max-width: 100%;
-    top: 15%;
-    object-fit: contain;
-    left: 20%;
-    font-family: 'Stretch Pro', sans-serif;
-    color: white;
-    font-size: 10vw;
+  position: absolute;
+  z-index: 3;
+  max-width: 100%;
+  top: 15%;
+  object-fit: contain;
+  left: 20%;
+  font-family: "Stretch Pro", sans-serif;
+  color: white;
+  font-size: 10vw;
 }
 .image1 {
-    position: absolute;
-    z-index: 3;
-    max-width: 100%;
-    top: 10%;
-    left: 15%;
+  position: absolute;
+  z-index: 3;
+  max-width: 100%;
+  top: 10%;
+  left: 15%;
 
-    font-family: 'Stretch Pro', sans-serif;
-    font-size: 12vw;
+  font-family: "Stretch Pro", sans-serif;
+  font-size: 12vw;
 
-    color: transparent;              /* Hide fill */
-    -webkit-text-stroke: 1px #FFFFFF3B;  /* White outline */
-    text-stroke: 1px #FFFFFF3B;          /* Future standard */
+  color: transparent; /* Hide fill */
+  -webkit-text-stroke: 1px #ffffff3b; /* White outline */
+  text-stroke: 1px #ffffff3b; /* Future standard */
 }
 
 /* ---- Content column wrapper: groups the blog card row + "See All
@@ -45,47 +44,45 @@
    .blogsShifted (top: 30%, forced height: 100%) and .button
    (bottom: 10%) against the viewport. ---- */
 .contentColumn {
-    position: absolute;
-    top: 30%;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    gap: 4%;
+  position: absolute;
+  top: 30%;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 4%;
 }
 
-.button{
-    position: relative;
-    left: 20%;
-    display: flex;
-    align-items: center;
-    font-family: 'Orbitron', sans-serif ;
-    z-index: 1009;
-    width: 60%;
-    height: 35px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    background-color: transparent;
-    color: white;
-    cursor: pointer;
-    font-size: 0.9rem;
-    justify-content: center;
-    overflow: hidden;
-    margin-top: 20px;
-
+.button {
+  position: relative;
+  left: 20%;
+  display: flex;
+  align-items: center;
+  font-family: "Orbitron", sans-serif;
+  z-index: 1009;
+  width: 60%;
+  height: 35px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 20px;
 }
 .button span {
-    padding: 2px;
-    display: inline-block;
-    transform: scaleX(1.5);   /* Increase text width */
-    transform-origin: center;
+  padding: 2px;
+  display: inline-block;
+  transform: scaleX(1.5); /* Increase text width */
+  transform-origin: center;
 }
-.arrow{
-
-    margin-left: 20px;
-    padding: 2px;
-    display: inline-block;
-    transform-origin: center;
+.arrow {
+  margin-left: 20px;
+  padding: 2px;
+  display: inline-block;
+  transform-origin: center;
 }
 
 /* ---- Footer wrapper: groups DEPARTMENT OF / VISUAL MEDIA text + PROJECTS
@@ -103,119 +100,124 @@
 }
 
 .text {
-    position: absolute;
-    color: white;
-    font-family: "Orbitron";
-    left: 5.2%;
-    z-index: 99;
-    font-size: 0.6rem;
+  position: absolute;
+  color: white;
+  font-family: "Orbitron";
+  left: 5.2%;
+  z-index: 99;
+  font-size: 0.6rem;
 
-    bottom: 2%;
-
+  bottom: 2%;
 }
 .visualMedia {
-    font-size: 1rem;
-    padding-left: 20px;
+  font-size: 1rem;
+  padding-left: 20px;
 }
 
 .projects {
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    color: #FFFFFF;
-    font-family: "Josefin Sans";
-    bottom: 2%;
-    right: 7%;
-    border: 1px solid #FFFFFF;
-    padding: 10px;
-    padding-top: -2px;
-    border-radius: 999px;
-    background-color: transparent;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  color: #ffffff;
+  font-family: "Josefin Sans";
+  bottom: 2%;
+  right: 7%;
+  border: 1px solid #ffffff;
+  padding: 10px;
+  padding-top: -2px;
+  border-radius: 999px;
+  background-color: transparent;
 }
 
-
-.blogsShifted{
-    position: relative;
-    left: 15%;
-    display: flex;
-    width: 100%;
-    z-index: 1000;
-    gap: 2%;
+.blogsShifted {
+  position: relative;
+  left: 15%;
+  display: flex;
+  width: 100%;
+  z-index: 1000;
+  gap: 2%;
 }
-.blogs{
-    position: relative;
-    left: 0%;
-    display: flex;
-    width: 100%;
-    gap: 2%;
-    z-index: 1000;
+.blogs {
+  position: relative;
+  left: 0%;
+  display: flex;
+  width: 100%;
+  gap: 2%;
+  z-index: 1000;
 }
 .blogs,
 .blogsShifted {
-    overflow: visible;
+  overflow: visible;
 }
 
 .grid {
-    position: absolute;
-    inset: 0;
-    z-index: 997;
-    opacity: 0.6;
-    background:
-        repeating-linear-gradient(
-            to right,
-            rgba(255,255,255,.2) 0,
-            rgba(255,255,255,.2) 1px,
-            transparent 1px,
-            transparent 30px
-        )
+  position: absolute;
+  inset: 0;
+  z-index: 997;
+  opacity: 0.6;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.2) 0,
+    rgba(255, 255, 255, 0.2) 1px,
+    transparent 1px,
+    transparent 30px
+  );
 }
 
-.gradient{
-    position:absolute;
-    left:40%;
-    top:-10%;
-    width:40%;
-    height:60%;
-    z-index:999;
-    pointer-events:none;
+.gradient {
+  position: absolute;
+  left: 40%;
+  top: -10%;
+  width: 40%;
+  height: 60%;
+  z-index: 999;
+  pointer-events: none;
+  will-change: transform;
+  backface-visibility: hidden;
 
-    background:
-        radial-gradient(
-            circle at 20% 40%,
-            rgba(180,250,255,.9) 0%,
-            rgba(60,210,230,.75) 35%,
-            rgba(20,90,100,.35) 60%,
-            transparent 85%
-        );
+  background: radial-gradient(
+    circle at 20% 40%,
+    rgba(180, 250, 255, 0.9) 0%,
+    rgba(60, 210, 230, 0.75) 35%,
+    rgba(20, 90, 100, 0.35) 60%,
+    transparent 85%
+  );
 
-    mix-blend-mode: color;
+  mix-blend-mode: color;
 }
 
 .texture {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  will-change: mask-image, -webkit-mask-image;
 
-    background-size: cover;
-    background-position: center;
-    -webkit-mask-image: radial-gradient(circle 40vw at -9999px -9999px, black 0%, transparent 100%);
-    mask-image: radial-gradient(circle 40vw at -9999px -9999px, black 0%, transparent 100%);
+  background-size: cover;
+  background-position: center;
+  -webkit-mask-image: radial-gradient(
+    circle 40vw at -9999px -9999px,
+    black 0%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle 40vw at -9999px -9999px,
+    black 0%,
+    transparent 100%
+  );
 }
 
 @media (max-width: 1200px) {
   .image {
     width: 56%;
     left: 22%;
-
   }
 
   .image1 {
     width: 66%;
     left: 17%;
-
   }
 
   .button {
@@ -231,10 +233,10 @@
   .projects {
     font-size: 0.9rem;
   }
-  .blogs , .blogsShifted{
+  .blogs,
+  .blogsShifted {
     left: 5%;
   }
-
 }
 
 @media (max-width: 1024px) {
