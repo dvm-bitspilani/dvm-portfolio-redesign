@@ -23,6 +23,8 @@
   cursor: pointer;
   font-family: inherit;
   white-space: nowrap;
+  border:white 2px solid;
+  border-radius:10px;
   transition: color 0.2s ease, background 0.2s ease;
 }
 

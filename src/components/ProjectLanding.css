@@ -99,7 +99,6 @@
   font-size: 18px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #eaf3ff;
   margin: 0 0 12px;
 }
 
@@ -139,3 +138,33 @@
     background-size: cover;
     background-position: center;
  }
+ .see-all-container {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0;
+  position: relative;
+  z-index: 10;
+}
+
+.see-all-projects {
+  width: 500px;
+  max-width: 90%;
+  padding: 1.5rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border: 1px solid white;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.see-all-projects:hover {
+  color: #45e6ff;
+  border-color: #45e6ff;
+  background: rgba(69, 230, 255, 0.08);
+  box-shadow: 0 0 12px rgba(69, 230, 255, 0.2);
+}

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "../components/ProjectLanding.css";
 import bg3 from "../assests/bg_3.png";
+import { Link } from "react-router-dom";
 
-// Data lives right here for now — swap in real content/images whenever.
+
 const cards = [
   {
     name: "Project 1",
@@ -80,6 +81,12 @@ export default function ProjectLanding() {
         </div>
       </div>
     </div>
+   <div className="see-all-container">
+  <Link to="/projects" className="see-all-projects">
+    See All Projects
+  </Link>
+</div>
+
    </div>
   );
 }

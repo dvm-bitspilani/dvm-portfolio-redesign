@@ -45,8 +45,7 @@ export default function Projects() {
   return (
     <>
     <div
-     style={{ backgroundImage: `url(${bg3})` }}
-     className="texture"
+     
     ></div>
       <Navbar onHamClick={() => setIsHamOpen(true)} />
         
@@ -54,7 +53,7 @@ export default function Projects() {
        <img
        src={ProjectHeading}
        className="project-heading"
-       style={{ width: "80%", height: "auto", margin: "2rem",paddingLeft:"10rem" }}
+       style={{ width: "80%", height: "auto", margin: "2rem",paddingLeft:"10rem",marginTop:"10rem" }}
        />
 
         <Tabs
