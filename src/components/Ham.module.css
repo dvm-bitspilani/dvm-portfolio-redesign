@@ -5,7 +5,7 @@
   background: black;
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: 1005 ;
   animation: bodyIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 

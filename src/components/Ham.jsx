@@ -22,7 +22,7 @@ const SEGMENTS = [
     delay: 0.15,
     label: "BLOGS",
     side: "left",
-    labelOffset: { x: 25, y: -20 }, // px, in BASE_W/BASE_H space — tweak per label
+    labelOffset: { x: 25, y: -20 },
   },
   {
     key: "about",
@@ -118,7 +118,27 @@ const Ham = ({ onClose }) => {
 
   const handleEnter = (key) => setHoveredKey(key);
   const handleLeave = () => setHoveredKey(null);
-  const handleActivate = (to) => navigate(to);
+
+  // Handles both real route navigation ("/projects") and same-page
+  // anchor scrolling ("/#about", "/#legacy").
+  const handleActivate = (to) => {
+    if (to.startsWith("/#")) {
+      const id = to.slice(2);
+
+      if (window.location.pathname === "/") {
+        // Already on the home page — just scroll to the section.
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      } else {
+        // On another page — navigate home, then scroll once mounted.
+        navigate("/", { state: { scrollTo: id } });
+      }
+    } else {
+      navigate(to);
+    }
+
+    onClose();
+  };
 
   return (
     <div className={styles.body}>
@@ -143,14 +163,13 @@ const Ham = ({ onClose }) => {
           alt="M"
         />
 
-          <img
-            src={arrow}
-            className={styles.arrow}
-            style={{ animationDelay: "0.6s" }}
-            alt="Arrow"
-            onClick={() => onClose()}
-          />
-   
+        <img
+          src={arrow}
+          className={styles.arrow}
+          style={{ animationDelay: "0.6s" }}
+          alt="Arrow"
+          onClick={() => onClose()}
+        />
 
         <div className={styles.logoWrapper}>
           <svg width="0" height="0" style={{ position: "absolute" }}>
