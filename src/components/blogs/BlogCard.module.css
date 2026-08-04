@@ -55,13 +55,14 @@
     font-size: clamp(0.85rem, 1vw, 1rem);
 }
 
+/* ===== DESKTOP / TABLET default: WIDTH expands on click, height stays fixed ===== */
 .clicked {
-    transition: width 0.5s ease, height 0.5s ease;
+    transition: width 0.5s ease;
     width: min(90vw, 900px);
-    height: auto;
-    min-height: clamp(420px, 35vh, 560px);
+    height: clamp(420px, 35vh, 560px);
     overflow: visible;
     display: flex;
+    flex-direction: row;
     align-items: center;
     gap: clamp(1rem, 3vw, 3rem);
     padding: clamp(1rem, 2vw, 2rem);
@@ -89,6 +90,7 @@
 .clicked .cardImage {
     flex: 0 0 45%;
     width: 45%;
+    height: auto;
     aspect-ratio: 16 / 9;
     object-fit: cover;
 }
@@ -99,6 +101,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
+    min-width: 0;
 }
 
 .clicked .cardTitle {
@@ -133,10 +136,11 @@
 
     .clicked {
         width: 95%;
+        height: clamp(360px, 32vh, 480px);
     }
 }
 
-/* ---- 768px: single-column stacked cards, meaningfully smaller than desktop ---- */
+/* ===== 768px and below: HEIGHT expands instead, width fixed, layout stays row ===== */
 @media (max-width: 768px) {
 
     .card {
@@ -146,31 +150,62 @@
     }
 
     .clicked {
-        flex-direction: column;
+        transition: height 0.4s ease;
         width: 100%;
         height: auto;
         min-height: auto;
-        gap: 1.5rem;
+        overflow: visible;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: clamp(1rem, 4vw, 2rem);
+        padding: clamp(1rem, 2vw, 2rem);
+        border: none;
         z-index: 10000;
-        align-items: stretch;
+        background: rgba(255,255,255,0.03);
     }
 
     .clicked .cardImage {
-        width: 100%;
-        flex: none;
+        flex: 0 0 40%;
+        width: 40%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
     }
 
     .clicked .content {
-        width: 100%;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.75rem;
+        min-width: 0;
     }
 
     .clicked .cardTitle {
-        font-size: 1.5rem;
+        padding: 0;
+        margin: 0;
+        font-size: 1.25rem;
+        width: 100%;
+    }
+
+    .clicked .cardMeta {
+        padding: 0;
+    }
+
+    .clicked .cardDescription {
+        padding: 0;
+        width: 100%;
+        font-size: 0.9rem;
+    }
+    .clicked .by{
+        transform: scaleX(1.2);
+    }
+    .clicked .con{
+        margin-left: 20px;
     }
 }
 
-/* ---- 480px: phones — cards shrink further so they never crowd the
-   button/footer below them, text sizes step down to match ---- */
+/* ---- 480px: phones ---- */
 @media (max-width: 480px) {
     .card {
         width: 92%;
@@ -198,12 +233,17 @@
         gap: 1rem;
     }
 
+    .clicked .cardImage {
+        flex: 0 0 38%;
+        width: 38%;
+    }
+
     .clicked .cardTitle {
-        font-size: 1.25rem;
+        font-size: 1.05rem;
     }
 
     .clicked .cardDescription {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
 
     .readMore {
@@ -212,7 +252,7 @@
     }
 }
 
-/* ---- 360px: very small phones — smallest card footprint ---- */
+/* ---- 360px: very small phones ---- */
 @media (max-width: 360px) {
     .card {
         width: 94%;
@@ -220,26 +260,35 @@
     }
 
     .cardTitle {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         padding: 0.6rem 0.6rem 0;
     }
 
     .cardMeta {
-        font-size: 0.7rem;
+        font-size: 0.65rem;
         padding: 0.4rem 0.6rem;
     }
 
     .cardDescription {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         padding: 0 0.6rem 0.6rem;
         padding-top: 0.4rem;
     }
 
+    .clicked {
+        gap: 0.75rem;
+    }
+
+    .clicked .cardImage {
+        flex: 0 0 35%;
+        width: 35%;
+    }
+
     .clicked .cardTitle {
-        font-size: 1.1rem;
+        font-size: 0.95rem;
     }
 
     .clicked .cardDescription {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
     }
 }
