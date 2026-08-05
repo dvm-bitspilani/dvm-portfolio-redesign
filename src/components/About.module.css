@@ -42,45 +42,45 @@
     z-index: 3;
     pointer-events: none;
     overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
 }
 
-/* Wrapper dynamically fits content inside */
+/* Full height/width flex wrapper to enforce absolute horizontal centering */
 .titleWrapper {
     position: relative;
     width: 100%;
-    overflow: hidden;
     height: 100%;
-    margin: 0 auto;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden;
 }
 
+/* Solid white title - shrunk to fit screen bounds using responsive font scaling */
 .image {
     position: relative;
     z-index: 3;
-    top: 15vh; /* Controlled top positioning */
-    left: 0;
+    top: 20vh; /* Adjusted top positioning */
     font-family: 'Stretch Pro', sans-serif;
     color: white;
-    font-size: clamp(2rem, 8.5vw, 9vw);
+    font-size: clamp(1.5rem, 7.5vw, 8.5vw); /* Lowered minimum and clamp scale so it shrinks before breaking screen */
     line-height: 1;
     white-space: nowrap;
     pointer-events: auto;
     overflow: hidden;
     text-align: center;
+    max-width: 95vw;
+    box-sizing: border-box;
 }
 
+/* Outlined title shifted down */
 .image1 {
     position: absolute;
     z-index: 2;
-    top: calc(15vh - 2.5rem); /* Offset relative to solid title */
-    left: -2.5rem;
-    width: 100%;
-    height: 100%;
+    top: 17vh; /* Moved down below/behind solid text */
+    left: 50%;
+    transform: translateX(-50%);
     font-family: 'Stretch Pro', sans-serif;
-    font-size: clamp(2.5rem, 10.5vw, 11vw);
+    font-size: clamp(1.8rem, 8.8vw, 10vw); /* Adjusted clamp scaling for responsive shrinking */
     line-height: 1;
     color: transparent;
     -webkit-text-stroke: 1px #FFFFFF3B;
@@ -89,6 +89,8 @@
     overflow: hidden;
     pointer-events: auto;
     text-align: center;
+    max-width: 98vw;
+    box-sizing: border-box;
 }
 
 /* ---- Expanded Paragraph Group ---- */
@@ -179,8 +181,8 @@
 
 /* Adjustments for shorter screens */
 @media (max-height: 720px) {
-  .image { top: 10vh; }
-  .image1 { top: calc(10vh - 2rem); }
+  .image { top: 14vh; }
+  .image1 { top: 12vh; }
   .paraGroup { 
     top: clamp(32vh, 36vh, 380px);
     gap: 0.7em;
@@ -189,13 +191,17 @@
 
 /* Tablet & Mobile Screens */
 @media (max-width: 768px) {
+  .image {
+    font-size: clamp(1.2rem, 6.5vw, 7.5vw);
+  }
+  .image1 {
+    font-size: clamp(1.4rem, 7.5vw, 8.5vw);
+  }
   .paraGroup {
     right: 5vw;
     width: clamp(280px, 85vw, 550px);
     top: clamp(30vh, 35vh, 350px);
   }
-  .image { left: 0; }
-  .image1 { left: -1.5rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
