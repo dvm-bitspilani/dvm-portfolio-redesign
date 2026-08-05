@@ -81,7 +81,7 @@ const SEGMENTS = [
   },
   {
     key: "artwork",
-    to: "/",
+    to: "/artwork",
     viewBox: "0 0 30 166",
     path: "M0.5 149.636L28.8066 164.933L28.7969 0.214844L0.5 59.7148V149.636Z",
     box: { top: 23, left: 49, width: 8, height: 42 },

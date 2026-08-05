@@ -10,6 +10,7 @@ import ContactUs from "./pages/ContactUs";
 import Preloader from "./components/PreLoader";
 import Projects from "./pages/Projects";
 import ProjectPage from "./components/Project/ProjectPage";
+import ArtworkPage from "./pages/ArtworkPage";
 
 import styles from "./App.module.css";
 
@@ -79,6 +80,7 @@ const App = () => {
           <Route path="/team" element={<TeamPage />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:name" element={<ProjectPage />} />
+          <Route path="/artwork" element={<ArtworkPage />} /> 
         </Routes>
       </div>
     </>

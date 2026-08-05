@@ -1,0 +1,143 @@
+/* Scoped to #stage so these rules never leak onto other pages.
+   The old `html, body { ... }` rule was global — that's what broke
+   the landing page. Its intent (full-bleed, no-scroll, dark canvas)
+   is now expressed on #stage itself, which is already fixed + 100vw/100vh. */
+
+#stage {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: #050507;
+  background-image: url(./Frame.png);
+  overflow: hidden;
+}
+
+#stage svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#stage #baseGrid line {
+  stroke: #46464f;
+  stroke-width: 1;
+  opacity: 0.22;
+}
+
+#stage #netLines path {
+  fill: none;
+  stroke: #7d838f;
+  stroke-width: 1.2;
+  opacity: 0.55;
+}
+#stage #netLines path.outer {
+  stroke: #9aa0ab;
+  opacity: 0.7;
+}
+
+#stage #glowGrid {
+  -webkit-mask-image: radial-gradient(circle var(--sr, 260px) at var(--mx, -500px) var(--my, -500px), #fff 0%, rgba(255,255,255,0.55) 45%, rgba(255,255,255,0) 100%);
+  mask-image: radial-gradient(circle var(--sr, 260px) at var(--mx, -500px) var(--my, -500px), #fff 0%, rgba(255,255,255,0.55) 45%, rgba(255,255,255,0) 100%);
+}
+
+#stage #glowGrid line {
+  stroke: url(#spotlightGrad);
+  stroke-width: 1.4;
+}
+
+#stage #glowGrid .glowBlur {
+  filter: blur(2.5px);
+  opacity: 0.9;
+}
+
+#stage #glowGrid .glowSharp {
+  opacity: 1;
+}
+
+#stage #coreWrap {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+#stage #core {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(190,220,255,0.9) 25%, rgba(90,168,255,0.35) 55%, rgba(90,168,255,0) 75%);
+  transform: translate(-500px, -500px);
+  mix-blend-mode: screen;
+  filter: blur(1px);
+}
+
+#stage .card {
+  position: absolute;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+#stage #card1 { left: 11%; top: 21%; width: 30%; height: 24%; background: rgba(255, 107, 107, 0.35); border: 1px solid rgba(255,107,107,0.6); }
+#stage #card2 { left: 55%; top: 21%; width: 30%; height: 24%; background: rgba(96, 165, 250, 0.35); border: 1px solid rgba(96,165,250,0.6); }
+#stage #card3 { left: 11%; top: 59%; width: 30%; height: 24%; background: rgba(167, 139, 250, 0.35); border: 1px solid rgba(167,139,250,0.6); }
+#stage #card4 { left: 55%; top: 59%; width: 30%; height: 24%; background: rgba(251, 191, 36, 0.35); border: 1px solid rgba(251,191,36,0.6); }
+
+#stage .navArrow {
+  position: absolute;
+  top: 49.5%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 44px;
+  pointer-events: auto;
+  cursor: pointer;
+}
+#stage .navArrow.left { left: 1%; right: auto; }
+#stage .navArrow.right { left: auto; right: 1%; }
+#stage .navArrow path {
+  fill: none;
+  stroke: #8b8f98;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, stroke 0.2s ease;
+}
+#stage .navArrow:hover path {
+  opacity: 1;
+  stroke: #cfe8ff;
+}
+
+#stage header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  padding: 50px;
+  justify-content: space-between;
+  align-items: start;
+}
+
+#stage #artwork-heading {
+  color: #fff;
+  z-index: 100;
+  transform: translateX(-30%);
+  width: 233px;
+  height: 23px;
+  background-image: url(./ARTWORK.svg);
+}
+
+#stage h2 {
+  color: #fff;
+}
+
+#stage #ham {
+  width: 26.51px;
+  height: 46.39px;
+  background-image: url(./Ham.png);
+}
