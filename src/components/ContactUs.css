@@ -89,7 +89,7 @@
   }
 }
 .texture {
-    position: absolute;
+  position:absolute;
     inset: 0;
     z-index: 0;
     pointer-events: none;
@@ -97,3 +97,25 @@
     background-size: cover;
     background-position: center;
  }
+ .contact-page {
+  position: relative;
+  min-height: 100vh;
+}
+
+.texture {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.contact-page > *:not(.texture) {
+  position: relative;
+  z-index: 1;
+}
+.contact-heading {
+    text-align: center;
+    margin:3rem;
+    position: relative;
+    z-index: 5;
+    font-size: 2rem;
+}
