@@ -1,7 +1,7 @@
 .card {
     position: relative;
     width: clamp(300px, 23vw, 380px);
-    height: clamp(420px, 35vh, 560px);
+    height: clamp(420px, 35svh, 560px);
     border: 2px solid white;
     color: white;
     transition: all 0.2s ease;
@@ -59,7 +59,7 @@
 .clicked {
     transition: width 0.5s ease;
     width: min(90vw, 900px);
-    height: clamp(420px, 35vh, 560px);
+    height: clamp(420px, 35svh, 560px);
     overflow: visible;
     display: flex;
     flex-direction: row;
@@ -131,12 +131,12 @@
 @media (max-width: 1024px) {
     .card {
         width: 30%;
-        height: clamp(360px, 32vh, 480px);
+        height: clamp(360px, 32svh, 480px);
     }
 
     .clicked {
         width: 95%;
-        height: clamp(360px, 32vh, 480px);
+        height: clamp(360px, 32svh, 480px);
     }
 }
 
@@ -146,7 +146,7 @@
     .card {
         width: 90%;
         min-width: auto;
-        height: clamp(320px, 42vh, 420px);
+        height: clamp(320px, 42svh, 420px);
     }
 
     .clicked {
@@ -209,7 +209,7 @@
 @media (max-width: 480px) {
     .card {
         width: 92%;
-        height: clamp(260px, 36vh, 340px);
+        height: clamp(260px, 36svh, 340px);
     }
 
     .cardTitle {
@@ -256,7 +256,7 @@
 @media (max-width: 360px) {
     .card {
         width: 94%;
-        height: clamp(220px, 32vh, 300px);
+        height: clamp(220px, 32svh, 300px);
     }
 
     .cardTitle {

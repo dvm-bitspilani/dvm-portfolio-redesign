@@ -6,33 +6,10 @@ import { gsap } from "gsap";
 import { Link } from "react-router-dom";
 
 const Navbar = ({ onHamClick }) => {
-  const logo = useRef(null);
-  const hamRef = useRef(null);
 
-  useEffect(() => {
-    gsap.from(logo.current, {
-      scrollTrigger: {
-        trigger: logo.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      },
-      y: -50,
-      opacity: 0,
-    });
-  }, []);
 
-  useEffect(() => {
-    gsap.from(hamRef.current, {
-      scrollTrigger: {
-        trigger: logo.current,
-        start: "top top",
-        scrub: true,
-      },
-      y: -5,
-      opacity: 0,
-    });
-  }, []);
+
+
 
   return (
     <div className={styles.container}>
@@ -45,7 +22,6 @@ const Navbar = ({ onHamClick }) => {
       </Link>
 
       <div
-        ref={hamRef}
         className={styles.ham}
         onClick={onHamClick}
         role="button"

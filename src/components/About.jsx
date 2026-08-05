@@ -21,11 +21,12 @@ const About = () => {
   const footerRef = useRef(null);
 
   useEffect(() => {
+    const tl = gsap.timeline();
     const updateMask = () => {
       if (!textureRef.current) return;
       const { x, y } = gradientPos.current;
-      const centerX = x + window.innerWidth * 0.1;
-      const centerY = y + window.innerHeight * 0.28;
+      const centerX = x + window.innerWidth * 0.09;
+      const centerY = y + window.innerHeight * 0.25;
 
       const mask = `radial-gradient(circle 50vh at ${centerX}px ${centerY}px, black 0%, transparent 100%)`;
       textureRef.current.style.webkitMaskImage = mask;
@@ -36,8 +37,8 @@ const About = () => {
 
     const ctx = gsap.context(() => {
       gsap.to(gradientPos.current, {
-        x: window.innerWidth * 0.4,
-        y: window.innerHeight * 1,
+        x: window.innerWidth * 1.5,
+        y: window.innerHeight * 1.5,
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 50%",
@@ -46,10 +47,19 @@ const About = () => {
         },
         onUpdate: updateMask,
       });
-
+      gsap.to([textureRef.current, gradientRef.current], {
+        opacity: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 70%",
+          end: "top 25%",
+          scrub: true,
+        },
+      });
       gsap.to(gradientRef.current, {
-        x: window.innerWidth * 0.4,
-        y: window.innerHeight * 1,
+        x: window.innerWidth * 1.5,
+        y: window.innerHeight * 1.5,
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 10%",
@@ -101,7 +111,7 @@ const About = () => {
           (ref) =>
             new SplitText(ref.current, {
               type: "words",
-            })
+            }),
         );
 
       const tl = gsap.timeline({

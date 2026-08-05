@@ -6,7 +6,7 @@
 
   isolation: isolate;
   width: 100vw;
-  height: 100vh;
+  height: 100svh;
   background: black;
   overflow: hidden;
   perspective: 1000px;
@@ -177,7 +177,7 @@
   pointer-events: none;
   will-change: transform;
   backface-visibility: hidden;
-
+  opacity: 0;
   background: radial-gradient(
     circle at 20% 40%,
     rgba(180, 250, 255, 0.9) 0%,
@@ -194,8 +194,10 @@
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  will-change: mask-image, -webkit-mask-image;
-
+  will-change:
+    mask-image,
+    -webkit-mask-image;
+  opacity: 0;
   background-size: cover;
   background-position: center;
   -webkit-mask-image: radial-gradient(
@@ -290,8 +292,7 @@
 
 @media (max-width: 768px) {
   .container {
-    height: auto;
-    min-height: 100vh;
+    height: 100svh;
     display: block;
     padding: 6% 5% 8%;
   }

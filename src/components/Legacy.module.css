@@ -45,7 +45,7 @@
 
     color: transparent;              /* Hide fill */
     -webkit-text-stroke: 1px #FFFFFF3B;  /* White outline */
-    text-stroke: 1px #FFFFFF3B;          /* Future standard */
+    text-stroke: 1px #FFFFFF3B;          
 }
 
 .footer {

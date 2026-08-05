@@ -13,7 +13,7 @@
 .grid {
     position: absolute;
     inset: 0;
-    z-index: 1;
+    z-index: 100;
     opacity: 0.6;
     background: repeating-linear-gradient(
       to right,
@@ -29,6 +29,7 @@
     position: absolute;
     inset: 0;
     z-index: 2;
+    opacity: 0;
     pointer-events: none;
     background-size: cover;
     background-position: center;
@@ -62,7 +63,7 @@
     top: 20vh; /* Adjusted top positioning */
     font-family: 'Stretch Pro', sans-serif;
     color: white;
-    font-size: clamp(1.5rem, 7.5vw, 8.5vw); /* Lowered minimum and clamp scale so it shrinks before breaking screen */
+    font-size: clamp(2.2rem, 10vw, 11.5vw); /* Increased size */
     line-height: 1;
     white-space: nowrap;
     pointer-events: auto;
@@ -80,7 +81,7 @@
     left: 50%;
     transform: translateX(-50%);
     font-family: 'Stretch Pro', sans-serif;
-    font-size: clamp(1.8rem, 8.8vw, 10vw); /* Adjusted clamp scaling for responsive shrinking */
+    font-size: clamp(2.5rem, 11.5vw, 13.5vw); /* Increased size */
     line-height: 1;
     color: transparent;
     -webkit-text-stroke: 1px #FFFFFF3B;
@@ -166,6 +167,7 @@
     left: 0;
     top: 0;
     width: 60%;
+    opacity: 0;
     height: 90%;
     z-index: 999;
     pointer-events: none;
@@ -181,8 +183,14 @@
 
 /* Adjustments for shorter screens */
 @media (max-height: 720px) {
-  .image { top: 14vh; }
-  .image1 { top: 12vh; }
+  .image { 
+    top: 14vh; 
+    font-size: clamp(1.8rem, 8.5vw, 10vw);
+  }
+  .image1 { 
+    top: 12vh; 
+    font-size: clamp(2rem, 9.5vw, 11.5vw);
+  }
   .paraGroup { 
     top: clamp(32vh, 36vh, 380px);
     gap: 0.7em;
@@ -192,10 +200,10 @@
 /* Tablet & Mobile Screens */
 @media (max-width: 768px) {
   .image {
-    font-size: clamp(1.2rem, 6.5vw, 7.5vw);
+    font-size: clamp(1.8rem, 9vw, 10vw);
   }
   .image1 {
-    font-size: clamp(1.4rem, 7.5vw, 8.5vw);
+    font-size: clamp(2rem, 10vw, 11.5vw);
   }
   .paraGroup {
     right: 5vw;
@@ -209,4 +217,4 @@
   .image1 {
     transition: none;
   }
-}
+} 

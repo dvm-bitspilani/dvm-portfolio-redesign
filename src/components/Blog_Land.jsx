@@ -26,7 +26,7 @@ const Blog = () => {
       if (!textureRef.current) return;
 
       const { x, y } = gradientPos.current;
-      const centerX = x + window.innerWidth * 0.4;
+      const centerX = x + window.innerWidth * 0.7;
       const centerY = y + window.innerHeight * 0.2;
 
       const mask = `radial-gradient(circle 40vw at ${centerX}px ${centerY}px, black 0%, transparent 100%)`;
@@ -36,7 +36,16 @@ const Blog = () => {
     };
 
     updateMask();
-
+      gsap.to([textureRef.current, gradientRef.current], {
+        opacity: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 70%",
+          end: "top 25%",
+          scrub: true,
+        },
+      });
     const ctx = gsap.context(() => {
       gsap.to(gradientPos.current, {
         x: -window.innerWidth * 1.5,
@@ -151,15 +160,15 @@ const Blog = () => {
         ref={textureRef}
         className={styles.texture}
       ></div>
-      <div className={styles.imageContainer}>
-        <div ref={blog}  alt="Blog" className={styles.image} >BLOGS</div>
-        <div
-          ref={blog_out}
-        
-          alt="Blog"
-          className={styles.image1}
-        >BLOGS</div>
-      </div>
+        <div className={styles.imageContainer}>
+          <div ref={blog}  alt="Blog" className={styles.image} >BLOGS</div>
+          <div
+            ref={blog_out}
+          
+            alt="Blog"
+            className={styles.image1}
+          >BLOGS</div>
+        </div>
 
       <div className={styles.contentColumn}>
         <div
