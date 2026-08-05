@@ -26,8 +26,8 @@ const Blog = () => {
       if (!textureRef.current) return;
 
       const { x, y } = gradientPos.current;
-      const centerX = x + window.innerWidth * 0.7;
-      const centerY = y + window.innerHeight * 0.2;
+      const centerX = x + window.innerWidth * 1;
+      const centerY = y + window.innerHeight * 0.4;
 
       const mask = `radial-gradient(circle 40vw at ${centerX}px ${centerY}px, black 0%, transparent 100%)`;
 

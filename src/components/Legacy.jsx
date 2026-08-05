@@ -395,11 +395,22 @@ const Legacy = () => {
       textureRef.current.style.maskImage = mask;
     };
     updateMask();
-    gsap.to(gradientPos.current, {
-      y: window.innerHeight * 1,
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top 50%",
+      gsap.to([textureRef.current, gradientRef.current], {
+        opacity: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 70%",
+          end: "top 25%",
+          scrub: true,
+        },
+      });
+      gsap.to(gradientPos.current, {
+        x: window.innerWidth * 1,
+        y: window.innerHeight * 1,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 50%",
         end: "bottom -100%",
         scrub: 1,
       },
@@ -409,7 +420,7 @@ const Legacy = () => {
 
   useEffect(() => {
     gsap.to(gradientRef.current, {
-      x: window.innerWidth * 0.4,
+      x: window.innerWidth * 1,
       y: window.innerHeight * 1,
       scrollTrigger: {
         trigger: containerRef.current,

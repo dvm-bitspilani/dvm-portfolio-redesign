@@ -202,7 +202,7 @@
             rgba(20,90,100,.35) 60%,
             transparent 85%
         );
-
+    opacity: 0;
     mix-blend-mode: color;
 }
 
@@ -211,7 +211,7 @@
     inset: 0;
     z-index: 2;
     pointer-events: none;
-
+  opacity: 0;
     background-size: cover;
     background-position: center;
     -webkit-mask-image: radial-gradient(circle 50vh at -9999px -9999px, black 0%, transparent 100%);
