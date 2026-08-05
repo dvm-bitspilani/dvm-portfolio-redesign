@@ -2,9 +2,27 @@
     position: relative;
     isolation: isolate;
     width: 100vw;
+    max-width: 100%;
     height: 100vh;
+    height: 100dvh; /* Adapts dynamically to mobile address bars */
     background: black;
-    overflow: hidden;
+    overflow: hidden; /* Clips all off-screen animated elements and prevents scrollbars */
+    box-sizing: border-box;
+}
+
+.grid {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0.6;
+    background: repeating-linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.2) 0,
+      rgba(255, 255, 255, 0.2) 1px,
+      transparent 1px,
+      transparent 30px
+    );
+    pointer-events: none;
 }
 
 .texture {
@@ -12,63 +30,77 @@
     inset: 0;
     z-index: 2;
     pointer-events: none;
-    
     background-size: cover;
     background-position: center;
     -webkit-mask-image: radial-gradient(circle 50vh at -9999px -9999px, black 0%, transparent 100%);
     mask-image: radial-gradient(circle 50vh at -9999px -9999px, black 0%, transparent 100%);
 }
 
+.head {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.titleWrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
 .image {
     position: absolute;
     z-index: 3;
-    max-width: 100%;
-    top: 20%;
-    object-fit: contain;
-    left: 10%;
+    max-width: 90vw;
+    top: 18vh;
+    left: 8vw;
     font-family: 'Stretch Pro', sans-serif;
     color: white;
-    font-size: 10vw;
+    font-size: clamp(2rem, 9vw, 9.5vw);
+    line-height: 1;
+    white-space: nowrap;
+    pointer-events: auto;
+    overflow: hidden;
 }
+
 .image1 {
     position: absolute;
     z-index: 3;
-    max-width: 100%;
-    top: 15%;
-    left: 2%;
-
+    overflow: hidden; 
+    max-width: 90vw;
+    top: 13vh;
+    left: 2vw;
     font-family: 'Stretch Pro', sans-serif;
-    font-size: 12vw;
-
-    color: transparent;              /* Hide fill */
-    -webkit-text-stroke: 1px #FFFFFF3B;  /* White outline */
-    text-stroke: 1px #FFFFFF3B;          /* Future standard */
+    font-size: clamp(2.5rem, 11vw, 11.5vw);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px #FFFFFF3B;
+    text-stroke: 1px #FFFFFF3B;
+    white-space: nowrap;
+    pointer-events: auto;
 }
 
-/* ---- paragraphs ----
-   One positioned flow container instead of three independently
-   absolute-positioned blocks. Each .paragraph is normal flow, spaced by
-   `gap`, so the group's total height always matches its real content —
-   no more guessed `bottom` offsets that break when text wraps differently.
-*/
 .paraGroup {
     position: absolute;
     z-index: 3;
-    right: 20%;
-    bottom: 20%;
-    width: 30%;
+    right: 10vw;
+    bottom: 18vh;
+    width: clamp(280px, 32vw, 480px);
     display: flex;
     flex-direction: column;
-    gap: 1.6em;
+    gap: 1.2em;
+    max-height: 50vh;
 }
-.head{
-  overflow: hidden;
-}
+
 .paragraph {
     margin: 0;
     color: #FFFFFF;
-    font-family: "Orbitron";
-    font-size: 0.9rem;
+    font-family: "Orbitron", sans-serif;
+    font-size: clamp(0.75rem, 1.1vw, 0.95rem);
+    line-height: 1.5;
     overflow: hidden;
 }
 
@@ -76,7 +108,7 @@
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 7%;
+    bottom: 5vh;
     z-index: 3;
     display: flex;
     flex-direction: row;
@@ -84,12 +116,13 @@
     justify-content: space-between;
     gap: 24px;
     padding: 0 7% 0 5.2%;
+    box-sizing: border-box;
 }
 
 .text {
     color: #FFFFFF;
-    font-family: "Orbitron";
-    font-size: 0.7rem;
+    font-family: "Orbitron", sans-serif;
+    font-size: clamp(0.6rem, 0.9vw, 0.75rem);
     max-width: 65%;
     overflow: hidden;
     width: 50%;
@@ -97,8 +130,7 @@
 
 .visualMedia {
     padding-left: 2%;
-    font-size: 1rem;
-   
+    font-size: clamp(0.8rem, 1.2vw, 1.05rem);
     overflow: hidden;
 }
 
@@ -108,7 +140,7 @@
     align-items: center;
     justify-content: center;
     color: #FFFFFF;
-    font-family: "Josefin Sans";
+    font-family: "Josefin Sans", sans-serif;
     border: 1px solid #FFFFFF;
     padding: 10px 18px;
     border-radius: 999px;
@@ -116,265 +148,43 @@
     white-space: nowrap;
 }
 
-
-  .grid {
+.gradient {
     position: absolute;
-    inset: 0;
-    z-index: 997;
-    opacity: 0.6;
-    background: repeating-linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0.2) 0,
-      rgba(255, 255, 255, 0.2) 1px,
-      transparent 1px,
-      transparent 30px
+    left: 0;
+    top: 0;
+    width: 60%;
+    height: 90%;
+    z-index: 999;
+    pointer-events: none;
+    background: radial-gradient(
+        circle at 20% 40%,
+        rgba(180,250,255,.9) 0%,
+        rgba(60,210,230,.75) 35%,
+        rgba(20,90,100,.35) 60%,
+        transparent 85%
     );
-  }
-
-.gradient{
-    position:absolute;
-    left:0;
-    top:0;
-    width:60%;
-    height:90%;
-    z-index:999;
-    pointer-events:none;
-
-    background:
-        radial-gradient(
-            circle at 20% 40%,
-            rgba(180,250,255,.9) 0%,
-            rgba(60,210,230,.75) 35%,
-            rgba(20,90,100,.35) 60%,
-            transparent 85%
-        );
-
     mix-blend-mode: color;
 }
 
-
-@media (max-width: 1200px) {
-  .paraGroup {
-    width: 34%;
-    right: 8%;
-  }
-
-  .paragraph {
-    font-size: 0.82rem;
-  }
-
-  .footer {
-    bottom: 5%;
-  }
-
-  .text {
-    font-size: 0.65rem;
-  }
+/* Screen height adaptations without page overflow */
+@media (max-height: 700px) {
+  .image { top: 12vh; }
+  .image1 { top: 8vh; }
+  .paraGroup { bottom: 14vh; gap: 0.8em; }
+  .footer { bottom: 3vh; }
 }
 
-/* ---- Tablets (portrait) ---- */
-@media (max-width: 1024px) {
-
-
-  .image1 {
-    /* top: 15%; */
-    /* left: 3%; */
-    /* max-width: 55%; */
-  }
-
-  .paraGroup {
-    width: 42%;
-    right: 5%;
-  }
-
-  .paragraph {
-    font-size: 0.78rem;
-  }
-
-  .footer {
-    bottom: 5%;
-    padding: 0 6% 0 6%;
-  }
-
-  .text {
-    font-size: 0.6rem;
-  }
-
-  .visualMedia {
-    font-size: 0.9rem;
-  }
-
-  .project {
-    font-size: 0.85rem;
-    padding: 9px 14px;
-  }
-
-  .gradient {
-    width: 75%;
-    height: 70%;
-  }
-}
-
-/* ---- Mobile landscape / small tablets: switch to a stacked flow ---- */
+/* Mobile viewport bounds */
 @media (max-width: 768px) {
-  .container {
-    height: auto;
-    min-height: 100vh;
-    padding: 18vh 6% 8% 6%;
-  }
-
-  .image {
-    position: relative;
-    top: 0;
-    left: 0;
-    /* max-width: 80%; */
-    margin: 0 auto;
-    display: block;
-  }
-
-  .image1 {
-    position: absolute;
-    /* top: 6%; */
-    /* left: 10%; */
-    /* max-width: 80%; */
-  }
-
   .paraGroup {
-    position: relative;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    margin-top: 10%;
-    gap: 1.1em;
+    right: 5vw;
+    width: clamp(240px, 80vw, 360px);
+    bottom: 15vh;
   }
-
-  .paragraph {
-    font-size: 0.85rem;
-    line-height: 1.4rem;
-  }
-
-  .footer {
-    position: relative;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin-top: 8%;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 0;
-  }
-
-  .visualMedia {
-    font-size: 1rem;
-  }
-
-  .project {
-    padding: 10px 20px;
-    font-size: 0.85rem;
-  }
-
-  .gradient {
-    width: 100%;
-    height: 40%;
-    left: 0;
-    top: 0;
-  }
+  .image { left: 4vw; }
+  .image1 { left: 1vw; }
 }
 
-/* ---- Mobile phones ---- */
-@media (max-width: 480px) {
-  .container {
-    padding: 16vh 6% 10% 6%;
-  }
-
-  .image1 {
-    margin-top: 10%;
-  }
-
-  .image {
-    margin-top: 15%;
-    /* max-width: 90%; */
-  }
-
-  .paraGroup {
-    margin-top: 28%;
-    gap: 1em;
-  }
-
-  .paragraph {
-    font-size: 1rem;
-    line-height: 1.25rem;
-  }
-
-  .footer {
-    margin-top: 10%;
-    gap: 14px;
-  }
-
-  .text {
-    font-size: 0.6rem;
-    max-width: 100%;
-  }
-
-  .visualMedia {
-    font-size: 0.85rem;
-  }
-
-  .project {
-    font-size: 0.78rem;
-    padding: 9px 18px;
-  }
-
-  .grid {
-    background-size: 20px 20px;
-  }
-}
-
-/* ---- Very small phones ---- */
-@media (max-width: 360px) {
-  .image {
-    position: relative;
-    top: 0;
-    left: 0;
-  }
-
-  .image1 {
-    position: absolute;
-    /* top: 8%; */
-    /* left: 5%; */
-  }
-
-  .text {
-    font-size: 0.55rem;
-  }
-
-  .visualMedia {
-    font-size: 0.75rem;
-  }
-
-  .paraGroup {
-    margin-top: 24%;
-    gap: 0.9em;
-  }
-
-  .paragraph {
-    font-size: 0.72rem;
-    line-height: 1.15rem;
-  }
-
-  .footer {
-    margin-top: 10%;
-  }
-
-  .project {
-    font-size: 0.72rem;
-    padding: 8px 16px;
-  }
-}
-
-/* ---- Reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {
   .image,
   .image1 {
