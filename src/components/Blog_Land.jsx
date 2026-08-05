@@ -151,7 +151,7 @@ const Blog = () => {
         ref={textureRef}
         className={styles.texture}
       ></div>
-      <div>
+      <div className={styles.imageContainer}>
         <div ref={blog}  alt="Blog" className={styles.image} >BLOGS</div>
         <div
           ref={blog_out}

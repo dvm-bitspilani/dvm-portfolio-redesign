@@ -311,3 +311,10 @@
   border-color: white;
 }
 
+
+@media (max-width: 768px) {
+  .logoWrapper{
+    scale: 1.5;
+  }
+  
+}

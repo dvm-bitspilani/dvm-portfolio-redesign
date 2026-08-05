@@ -2,7 +2,7 @@
     position: relative;
     isolation: isolate;
     width: 100vw;
-    min-height: 100vh;
+    height: 100vh;
     background: black;
     overflow: hidden;
 }
@@ -61,7 +61,9 @@
     flex-direction: column;
     gap: 1.6em;
 }
-
+.head{
+  overflow: hidden;
+}
 .paragraph {
     margin: 0;
     color: #FFFFFF;
@@ -114,27 +116,20 @@
     white-space: nowrap;
 }
 
-.grid {
+
+  .grid {
     position: absolute;
     inset: 0;
     z-index: 997;
-    opacity: 0.4;
-    background:
-        repeating-linear-gradient(
-            to right,
-            rgba(255,255,255,.2) 0,
-            rgba(255,255,255,.2) 1px,
-            transparent 1px,
-            transparent 45px
-        ),
-        repeating-linear-gradient(
-            to bottom,
-            rgba(255,255,255,.2) 0,
-            rgba(255,255,255,.2) 1px,
-            transparent 4px,
-            transparent 45px
-        );
-}
+    opacity: 0.6;
+    background: repeating-linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.2) 0,
+      rgba(255, 255, 255, 0.2) 1px,
+      transparent 1px,
+      transparent 30px
+    );
+  }
 
 .gradient{
     position:absolute;

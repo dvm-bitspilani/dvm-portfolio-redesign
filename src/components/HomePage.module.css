@@ -107,19 +107,19 @@
     );
   }
 
-  .grid {
-    position: absolute;
-    inset: 0;
-    z-index: 997;
-    opacity: 0.6;
-    background: repeating-linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0.2) 0,
-      rgba(255, 255, 255, 0.2) 1px,
-      transparent 1px,
-      transparent 30px
-    );
-  }
+.grid {
+  position: absolute;
+  inset: 0;
+  z-index: 997;
+  opacity: 0.1;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.2) 0,
+    rgba(255, 255, 255, 0.2) 1px,
+    transparent 1px,
+    transparent 30px
+  );
+}
 
   .gradient {
     position: absolute;
