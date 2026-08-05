@@ -8,7 +8,7 @@ import { X } from "lucide-react";
 gsap.registerPlugin(ScrollTrigger);
 
 const Logo = ({ triggerSelector = "#hero-container" }) => {
-  const x_move = window.innerWidth > 768 ? -window.innerWidth * 0.4 : 0;
+  const x_move = window.innerWidth > 768 ? -window.innerWidth * 0.4 :  window.innerWidth * 0.3;
   const logoRef = useRef(null);
   const logoFloatRef = useRef(null);
   const logoSvg1Ref = useRef(null);
@@ -115,6 +115,7 @@ const Logo = ({ triggerSelector = "#hero-container" }) => {
         endTrigger: "#about-container",
         end: "bottom bottom",
         scrub: 3,
+        markers: true,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
           const scrolled = self.progress > 0.001;
@@ -161,7 +162,7 @@ const Logo = ({ triggerSelector = "#hero-container" }) => {
       trigger: triggerSelector,
       start: "top top",
       endTrigger: "#about-container",
-      end: "25% top",
+      end: "40% top",
       pin: el,
       pinSpacing: false,
       anticipatePin: 1,
