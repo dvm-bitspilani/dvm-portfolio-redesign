@@ -34,6 +34,7 @@
   height: 100%;
   object-fit: contain;
   transition: transform 0.3s ease, filter 0.3s ease;
+  overflow: hidden;
   pointer-events: none; /* clicks/keyboard go to the .ham wrapper, not the image */
 }
 
@@ -45,6 +46,7 @@
 .ham:hover .hamIcon {
   transform: scale(1.08);
   filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.45));
+  overflow: hidden;
 }
 
 .ham:active {

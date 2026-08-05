@@ -18,18 +18,35 @@ export default function Preloader({ onFinish, waitForLoad = false, minDuration =
     };
 
     if (!waitForLoad) {
-      // Route-change mode: don't wait on document `load`, just show
-      // briefly for a consistent transition feel.
+      // Route-change mode: don't wait on document `load` or fonts,
+      // just show briefly for a consistent transition feel.
       finishLoading();
       return;
     }
 
-    if (document.readyState === "complete") {
-      finishLoading();
-    } else {
-      window.addEventListener("load", finishLoading, { once: true });
-    }
+    const waitForFonts = async () => {
+      try {
+        if ("fonts" in document) {
+          await document.fonts.ready;
+        }
+      } catch (e) {
+        // Fonts API not supported or failed — proceed anyway
+      }
+    };
 
+    const start = async () => {
+      await waitForFonts();
+
+      if (document.readyState === "complete") {
+        finishLoading();
+      } else {
+        window.addEventListener("load", finishLoading, { once: true });
+      }
+    };
+
+    start();
+
+    // Safety net: never block longer than 4s, even if fonts/load hang
     const safetyTimer = setTimeout(finishLoading, 4000);
 
     return () => {
