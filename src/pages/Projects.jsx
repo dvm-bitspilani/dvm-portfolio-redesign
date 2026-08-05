@@ -50,11 +50,7 @@ export default function Projects() {
       <Navbar onHamClick={() => setIsHamOpen(true)} />
         
       <div className="proj-page">
-       <img
-       src={ProjectHeading}
-       className="project-heading"
-       style={{ width: "80%", height: "auto", margin: "2rem",paddingLeft:"10rem",marginTop:"10rem" }}
-       />
+       <div className="proj-heading">PROJECTS</div>
 
         <Tabs
           categories={categories}

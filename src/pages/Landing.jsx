@@ -7,6 +7,7 @@ import Blog from "../components/Blog_Land";
 import Legacy from "../components/Legacy";
 import Ham from "../components/Ham";
 import ProjectLanding from "./ProjectLanding";
+import ContactUs from "./ContactUs";
 
 const Landing = () => {
   const [isHamOpen, setIsHamOpen] = useState(false);
@@ -33,6 +34,7 @@ const Landing = () => {
       <Blog  onHamClick={() => setIsHamOpen(true)} />
       <Legacy />
       <ProjectLanding />
+      <ContactUs />
       {isHamOpen && (
         <Ham onClose={() => setIsHamOpen(false)} />
       )}

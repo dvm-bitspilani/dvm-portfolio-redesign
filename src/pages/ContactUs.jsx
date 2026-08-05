@@ -73,15 +73,14 @@ export default function ContactUs() {
 
   return (
     <div>
-      <Navbar />
-      <div
+      <div className="contact-page">
+        <div
            style={{ backgroundImage: `url(${bg3})` }}
            className="texture"
           ></div>
-
-      <div className="contact-page">
-        <img src={ContactUsHeading} className="contact-heading" style={{ width: "80%", height: "auto", margin: "2rem", paddingLeft:"10rem" }} />
-
+        <div className="contact-heading">
+        <h1>CONTACT US</h1>
+        </div>
         <form ref={formRef} className="contact-form" onSubmit={handleSubmit}>
           <input
             ref={nameRef}

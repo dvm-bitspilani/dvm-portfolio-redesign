@@ -27,3 +27,11 @@
   color: transparent;
   text-shadow: 0 0 44px rgba(91, 124, 250, 0.35);
 }
+.proj-heading{
+ text-align: center;
+ margin:3rem;
+ position: relative;
+ z-index: 5;
+ font-size: 5rem;
+ margin-top: 4rem;
+}
