@@ -162,7 +162,7 @@ const Logo = ({ triggerSelector = "#hero-container" }) => {
       trigger: triggerSelector,
       start: "top top",
       endTrigger: "#about-container",
-      end: "40% top",
+      end:  window.innerWidth > 768 ? "25% top" :  "35% top",
       pin: el,
       pinSpacing: false,
       anticipatePin: 1,
