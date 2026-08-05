@@ -4,9 +4,9 @@
     width: 100vw;
     max-width: 100%;
     height: 100vh;
-    height: 100dvh; /* Adapts dynamically to mobile address bars */
+    height: 100dvh; /* Dynamic viewport height prevents mobile scrollbars */
     background: black;
-    overflow: hidden; /* Clips all off-screen animated elements and prevents scrollbars */
+    overflow: hidden; /* Lock scrollbars completely */
     box-sizing: border-box;
 }
 
@@ -42,65 +42,76 @@
     z-index: 3;
     pointer-events: none;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
+/* Wrapper dynamically fits content inside */
 .titleWrapper {
     position: relative;
     width: 100%;
-    height: 100%;
     overflow: hidden;
+    height: 100%;
+    margin: 0 auto;
+    display: inline-block;
 }
 
 .image {
-    position: absolute;
+    position: relative;
     z-index: 3;
-    max-width: 90vw;
-    top: 18vh;
-    left: 8vw;
+    top: 15vh; /* Controlled top positioning */
+    left: 0;
     font-family: 'Stretch Pro', sans-serif;
     color: white;
-    font-size: clamp(2rem, 9vw, 9.5vw);
+    font-size: clamp(2rem, 8.5vw, 9vw);
     line-height: 1;
     white-space: nowrap;
     pointer-events: auto;
     overflow: hidden;
+    text-align: center;
 }
 
 .image1 {
     position: absolute;
-    z-index: 3;
-    overflow: hidden; 
-    max-width: 90vw;
-    top: 13vh;
-    left: 2vw;
+    z-index: 2;
+    top: calc(15vh - 2.5rem); /* Offset relative to solid title */
+    left: -2.5rem;
+    width: 100%;
+    height: 100%;
     font-family: 'Stretch Pro', sans-serif;
-    font-size: clamp(2.5rem, 11vw, 11.5vw);
+    font-size: clamp(2.5rem, 10.5vw, 11vw);
     line-height: 1;
     color: transparent;
     -webkit-text-stroke: 1px #FFFFFF3B;
     text-stroke: 1px #FFFFFF3B;
     white-space: nowrap;
+    overflow: hidden;
     pointer-events: auto;
+    text-align: center;
 }
 
+/* ---- Expanded Paragraph Group ---- */
 .paraGroup {
     position: absolute;
     z-index: 3;
-    right: 10vw;
-    bottom: 18vh;
-    width: clamp(280px, 32vw, 480px);
+    right: 8vw;
+    /* Cap the maximum distance from the heading by anchoring top relative to viewport */
+    top: clamp(38vh, 42vh, 460px); 
+    /* Increased paragraph width */
+    width: clamp(340px, 45vw, 650px);
     display: flex;
     flex-direction: column;
-    gap: 1.2em;
-    max-height: 50vh;
+    gap: clamp(0.8em, 1.5vh, 1.4em);
+    max-height: 42vh;
 }
 
 .paragraph {
     margin: 0;
     color: #FFFFFF;
     font-family: "Orbitron", sans-serif;
-    font-size: clamp(0.75rem, 1.1vw, 0.95rem);
-    line-height: 1.5;
+    font-size: clamp(0.8rem, 1.05vw, 1rem);
+    line-height: 1.55;
     overflow: hidden;
 }
 
@@ -166,23 +177,25 @@
     mix-blend-mode: color;
 }
 
-/* Screen height adaptations without page overflow */
-@media (max-height: 700px) {
-  .image { top: 12vh; }
-  .image1 { top: 8vh; }
-  .paraGroup { bottom: 14vh; gap: 0.8em; }
-  .footer { bottom: 3vh; }
+/* Adjustments for shorter screens */
+@media (max-height: 720px) {
+  .image { top: 10vh; }
+  .image1 { top: calc(10vh - 2rem); }
+  .paraGroup { 
+    top: clamp(32vh, 36vh, 380px);
+    gap: 0.7em;
+  }
 }
 
-/* Mobile viewport bounds */
+/* Tablet & Mobile Screens */
 @media (max-width: 768px) {
   .paraGroup {
     right: 5vw;
-    width: clamp(240px, 80vw, 360px);
-    bottom: 15vh;
+    width: clamp(280px, 85vw, 550px);
+    top: clamp(30vh, 35vh, 350px);
   }
-  .image { left: 4vw; }
-  .image1 { left: 1vw; }
+  .image { left: 0; }
+  .image1 { left: -1.5rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

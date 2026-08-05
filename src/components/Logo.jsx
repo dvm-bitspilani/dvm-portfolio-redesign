@@ -115,7 +115,6 @@ const Logo = ({ triggerSelector = "#hero-container" }) => {
         endTrigger: "#about-container",
         end: "bottom bottom",
         scrub: 3,
-        markers: true,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
           const scrolled = self.progress > 0.001;
