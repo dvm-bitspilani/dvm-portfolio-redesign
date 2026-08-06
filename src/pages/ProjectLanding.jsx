@@ -42,26 +42,31 @@ export default function ProjectLanding() {
   const textureRef = useRef(null);
   const gradientPos = useRef({ x: 0, y: 0 });
   const headingRef = useRef(null);
+  const headingOutlineRef = useRef(null);
   const cardRef = useRef(null);
   const paraRef = useRef(null);
   const seeAllRef = useRef(null);
 
-  // Scroll-driven "bubble" reveal for the texture layer
+  // Scroll-driven "bubble" reveal for the texture layer.
+  // The sweep runs top-right -> bottom-left.
   useEffect(() => {
-    // CHANGE 1: give the spotlight/gradient a starting position instead of
-    // the implicit (0, 0) top-left default. 0.5 puts it roughly mid-right;
-    // the scroll tween below still carries it on to 0.8 * innerWidth, so
-    // there's still room for rightward movement as the user scrolls.
-    gradientPos.current = { x: window.innerWidth * 0.5, y: 0 };
+    // The mask center is offset from the raw x/y by (+0.1 * innerWidth,
+    // +0.28 * innerHeight), so both the start and end values below are
+    // pre-compensated for that offset. Starting here puts the visible
+    // circle center at the top-right corner: (innerWidth, 0).
+    gradientPos.current = {
+      x: window.innerWidth * 0.9,
+      y: -window.innerHeight * 0.28,
+    };
 
-    // CHANGE 2: snap the actual gradient DOM node to that same starting
-    // transform immediately (no animation), so it visually matches
-    // gradientPos.current before any scrolling has happened. Without this
-    // the JS position value and the on-screen element would start out of
-    // sync — gradientPos.current would say "0.5 * width" but the element
-    // itself would still be sitting at its default (0, 0) transform.
+    // Snap the gradient DOM node to the same starting transform (no
+    // animation) so the element and gradientPos.current agree before any
+    // scrolling happens.
     if (gradientRef.current) {
-      gsap.set(gradientRef.current, { x: gradientPos.current.x, y: gradientPos.current.y });
+      gsap.set(gradientRef.current, {
+        x: gradientPos.current.x,
+        y: gradientPos.current.y,
+      });
     }
 
     const updateMask = () => {
@@ -75,45 +80,57 @@ export default function ProjectLanding() {
       textureRef.current.style.maskImage = mask;
     };
 
-    // CHANGE 3: updateMask() now reads the new starting x/y from CHANGE 1,
-    // so the mask bubble is correctly positioned on the right from the
-    // very first paint, before any scroll event fires.
+    // Paint the mask at its top-right start position before the first
+    // scroll event fires.
     updateMask();
 
     const ctx = gsap.context(() => {
-      // Move the invisible "spotlight" center as the user scrolls.
-      // This tween's start value is now whatever gradientPos.current
-      // already is (0.5 * innerWidth, from CHANGE 1) instead of 0 — so the
-      // sweep goes from "already on the right" to "further right" (0.8 *
-      // innerWidth), rather than starting at the left edge and sweeping
-      // across the whole screen.
-      // Spotlight center: top-right → bottom-left
-gsap.to(gradientPos.current, {
-  x: -window.innerWidth * 0.1,   // center lands at x = 0 after the +0.1 offset
-  y: window.innerHeight * 0.72,  // center lands at y = innerHeight after the +0.28 offset
-  scrollTrigger: {
-    trigger: containerRef.current,
-    start: "top 50%",
-    end: "bottom -100%",
-    scrub: 1,
-  },
-  onUpdate: updateMask,
-});
+      // Spotlight center: top-right -> bottom-left.
+      // Function-based values + invalidateOnRefresh so the corners are
+      // recalculated on resize instead of frozen at mount-time viewport.
+      gsap.to(gradientPos.current, {
+        x: () => -window.innerWidth * 0.1, // center lands at x = 0
+        y: () => window.innerHeight * 0.72, // center lands at y = innerHeight
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 50%",
+          end: "bottom -100%",
+          scrub: 1,
+          invalidateOnRefresh: true,
+        },
+        onUpdate: updateMask,
+      });
 
-// Color-blend overlay follows the same path
-gsap.to(gradientRef.current, {
-  x: -window.innerWidth * 0.1,
-  y: window.innerHeight * 0.72,
-  scrollTrigger: {
-    trigger: containerRef.current,
-    start: "top 10%",
-    end: "bottom -100%",
-    scrub: 1,
-  },
-});
-      // Heading entrance
+      // Color-blend overlay follows the same path.
+      gsap.to(gradientRef.current, {
+        x: () => -window.innerWidth * 0.1,
+        y: () => window.innerHeight * 0.72,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 50%",
+          end: "bottom -100%",
+          scrub: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      // Heading fill layer: drops in from the top-right.
       gsap.from(headingRef.current, {
+        y: -100,
+        x: 100,
+        opacity: 0,
+        duration: 1,
+        scrollTrigger: {
+          trigger: headingRef.current,
+          start: "top 85%",
+          end: "top",
+        },
+      });
+
+      // Heading outline layer: rises in from the bottom-left.
+      gsap.from(headingOutlineRef.current, {
         y: 100,
+        x: -100,
         opacity: 0,
         duration: 1,
         scrollTrigger: {
@@ -150,7 +167,6 @@ gsap.to(gradientRef.current, {
 
     return () => ctx.revert();
   }, []);
-
 
   useEffect(() => {
     if (!paraRef.current) return;
@@ -192,8 +208,13 @@ gsap.to(gradientRef.current, {
         className="texture"
       ></div>
 
-      <div className="project-landing-heading" ref={headingRef}>
-        <h1>PROJECTS</h1>
+      <div className="project-landing-heading">
+        <div ref={headingRef} className="project-heading-fill" style={{  }}>
+          PROJECTS
+        </div>
+        <div ref={headingOutlineRef} className="project-heading-outline">
+          PROJECTS
+        </div>
       </div>
 
       <div className="project-carousel">
