@@ -140,19 +140,20 @@
 
     mix-blend-mode: color;
   }
-
-  .container {
-    background-color: black;
-    display: flex;
-    align-items: center;
-    position: relative;
-    isolation: isolate;
-    width: 100vw;
-    height: 100vh;
-    background: black;
-    overflow: hidden;
-    perspective: 1000px;
-  }
+/* HomePage.module.css */
+.container {
+  background-color: black;
+  display: flex;
+  align-items: center;
+  position: relative;
+  isolation: isolate;
+  width: 100%;      /* was 100vw */
+  height: 100vh;
+  background: black;
+  overflow: hidden;
+  perspective: 1000px;
+}
+/* .grid stays as-is: opacity: 0.1 */
 
   .line {
     position: absolute;
@@ -320,9 +321,7 @@
       top: -3%;
     }
 
-    .grid {
-      background-size: 20px 20px;
-    }
+  
   }
 
   @media (max-width: 360px) {
