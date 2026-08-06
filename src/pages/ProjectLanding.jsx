@@ -48,6 +48,22 @@ export default function ProjectLanding() {
 
   // Scroll-driven "bubble" reveal for the texture layer
   useEffect(() => {
+    // CHANGE 1: give the spotlight/gradient a starting position instead of
+    // the implicit (0, 0) top-left default. 0.5 puts it roughly mid-right;
+    // the scroll tween below still carries it on to 0.8 * innerWidth, so
+    // there's still room for rightward movement as the user scrolls.
+    gradientPos.current = { x: window.innerWidth * 0.5, y: 0 };
+
+    // CHANGE 2: snap the actual gradient DOM node to that same starting
+    // transform immediately (no animation), so it visually matches
+    // gradientPos.current before any scrolling has happened. Without this
+    // the JS position value and the on-screen element would start out of
+    // sync — gradientPos.current would say "0.5 * width" but the element
+    // itself would still be sitting at its default (0, 0) transform.
+    if (gradientRef.current) {
+      gsap.set(gradientRef.current, { x: gradientPos.current.x, y: gradientPos.current.y });
+    }
+
     const updateMask = () => {
       if (!textureRef.current) return;
       const { x, y } = gradientPos.current;
@@ -59,34 +75,42 @@ export default function ProjectLanding() {
       textureRef.current.style.maskImage = mask;
     };
 
+    // CHANGE 3: updateMask() now reads the new starting x/y from CHANGE 1,
+    // so the mask bubble is correctly positioned on the right from the
+    // very first paint, before any scroll event fires.
     updateMask();
 
     const ctx = gsap.context(() => {
-      // Move the invisible "spotlight" center as the user scrolls
-      gsap.to(gradientPos.current, {
-        x: window.innerWidth * 0.4,
-        y: window.innerHeight * 1,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 50%",
-          end: "bottom -100%",
-          scrub: 1,
-        },
-        onUpdate: updateMask,
-      });
+      // Move the invisible "spotlight" center as the user scrolls.
+      // This tween's start value is now whatever gradientPos.current
+      // already is (0.5 * innerWidth, from CHANGE 1) instead of 0 — so the
+      // sweep goes from "already on the right" to "further right" (0.8 *
+      // innerWidth), rather than starting at the left edge and sweeping
+      // across the whole screen.
+      // Spotlight center: top-right → bottom-left
+gsap.to(gradientPos.current, {
+  x: -window.innerWidth * 0.1,   // center lands at x = 0 after the +0.1 offset
+  y: window.innerHeight * 0.72,  // center lands at y = innerHeight after the +0.28 offset
+  scrollTrigger: {
+    trigger: containerRef.current,
+    start: "top 50%",
+    end: "bottom -100%",
+    scrub: 1,
+  },
+  onUpdate: updateMask,
+});
 
-      // Move the color-blend gradient overlay in sync
-      gsap.to(gradientRef.current, {
-        x: window.innerWidth * 0.4,
-        y: window.innerHeight * 1,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 10%",
-          end: "bottom -100%",
-          scrub: 1,
-        },
-      });
-
+// Color-blend overlay follows the same path
+gsap.to(gradientRef.current, {
+  x: -window.innerWidth * 0.1,
+  y: window.innerHeight * 0.72,
+  scrollTrigger: {
+    trigger: containerRef.current,
+    start: "top 10%",
+    end: "bottom -100%",
+    scrub: 1,
+  },
+});
       // Heading entrance
       gsap.from(headingRef.current, {
         y: 100,
@@ -127,7 +151,7 @@ export default function ProjectLanding() {
     return () => ctx.revert();
   }, []);
 
-  // Word-by-word paragraph reveal, re-run whenever the card changes
+
   useEffect(() => {
     if (!paraRef.current) return;
 

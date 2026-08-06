@@ -42,6 +42,17 @@ export default function ContactUs() {
     };
 
     updateMask();
+     gsap.to([textureRef.current, gradientRef.current], {
+     opacity: 1,
+     ease: "none",
+     scrollTrigger: {
+     trigger: containerRef.current,
+     start: "top 10%",
+     end: "top 100%",
+     scrub: true,
+     
+  },
+});
 
     const ctx = gsap.context(() => {
       // Drive the texture "bubble" mask on scroll
