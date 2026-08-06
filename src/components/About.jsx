@@ -132,6 +132,49 @@ const About = () => {
           ease: "power2.out",
         });
       });
+
+      // --- Pin the section for ~1 second once fully scrolled into view ---
+      let isLocked = false;
+
+      const lockScrollFor = (ms) => {
+        if (isLocked) return;
+        isLocked = true;
+
+        const preventScroll = (e) => e.preventDefault();
+        window.addEventListener("wheel", preventScroll, { passive: false });
+        window.addEventListener("touchmove", preventScroll, {
+          passive: false,
+        });
+
+        const blockKeys = (e) => {
+          const keys = [
+            "ArrowUp",
+            "ArrowDown",
+            "PageUp",
+            "PageDown",
+            " ",
+            "Home",
+            "End",
+          ];
+          if (keys.includes(e.key)) e.preventDefault();
+        };
+        window.addEventListener("keydown", blockKeys, { passive: false });
+
+        setTimeout(() => {
+          window.removeEventListener("wheel", preventScroll);
+          window.removeEventListener("touchmove", preventScroll);
+          window.removeEventListener("keydown", blockKeys);
+          isLocked = false;
+        }, ms);
+      };
+
+      ScrollTrigger.create({
+        trigger: containerRef.current,
+        start: "top top", // fires once the section fully reaches the top of viewport
+        onEnter: () => lockScrollFor(500),
+        onEnterBack: () => lockScrollFor(500), // also lock when scrolling back up into it
+      });
+      // --- end pin effect ---
     }, containerRef);
 
     return () => ctx.revert();

@@ -261,9 +261,13 @@
   .arrow {
     margin-left: 12px;
   }
-  .grid {
-    background-size: 20px 20px;
+
+  .projects {
+    font-size: 0.75rem;
+    padding: 8px 14px;
   }
+
+
 }
 
 @media (max-width: 360px) {
@@ -276,4 +280,12 @@
   .button {
     font-size: 0.68rem;
   }
+
+  .projects {
+    font-size: 0.68rem;
+    padding: 7px 12px;
+  }
+}
+.imageContainer {
+  overflow: hidden;
 }
