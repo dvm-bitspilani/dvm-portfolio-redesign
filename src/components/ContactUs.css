@@ -12,7 +12,10 @@
   box-sizing: border-box;
 }
 
-.contact-page > *:not(.texture):not(.grid) {
+/* .gradient added to the exclusion list — without it this rule (0,3,0)
+   beat .gradient (0,1,0) and forced the overlay to position: relative /
+   z-index: 1, which broke its absolute placement and stacking. */
+.contact-page > *:not(.texture):not(.grid):not(.gradient) {
   position: relative;
   z-index: 1;
 }
@@ -27,13 +30,58 @@
   margin: 0 0 36px;
 }
 
+/* ----- Heading (two-layer: solid fill + offset outline ghost) ----- */
+
 .contact-heading {
-  text-align: center;
-  margin: 3rem;
   position: relative;
   z-index: 5;
-  font-size: 2rem;
+  margin: 3rem 0;
+  /* Both layers are absolutely positioned and contribute no flow height,
+     so the wrapper needs an explicit height or the form collapses
+     upward into it. */
+  height: clamp(3rem, 11vw, 8.5rem);
+  overflow: hidden;
 }
+
+.contact-heading-fill,
+.contact-heading-outline {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Stretch Pro", sans-serif;
+  white-space: nowrap;
+  line-height: 1;
+  overflow: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.contact-heading-fill::-webkit-scrollbar,
+.contact-heading-outline::-webkit-scrollbar {
+  display: none;
+}
+
+.contact-heading-fill {
+  z-index: 2;
+  top: 14%;
+  margin-left: -2.5%;
+  color: #ffffff;
+  /* "CONTACT US" is wider than "PROJECTS", so the vw step is smaller
+     to keep it off the viewport edges. */
+  font-size: clamp(1.6rem, 8vw, 6.5rem);
+}
+
+.contact-heading-outline {
+  z-index: 1;
+  top: 0;
+  margin-left: -6%;
+  font-size: clamp(1.95rem, 9.6vw, 7.8rem);
+  color: transparent;
+  -webkit-text-stroke: 1px #ffffff3b;
+ 
+}
+
+/* ----- Form ----- */
 
 .contact-form {
   display: flex;
@@ -92,12 +140,6 @@
   transform: translateY(-1px);
 }
 
-@media (max-width: 520px) {
-  .contact-form {
-    padding: 22px;
-  }
-}
-
 /* --- Shared background layers (grid / texture / gradient), matching About & ProjectLanding --- */
 
 .grid {
@@ -124,8 +166,16 @@
   background-size: cover;
   background-position: center;
 
-  -webkit-mask-image: radial-gradient(circle 50vh at -9999px -9999px, black 0%, transparent 100%);
-  mask-image: radial-gradient(circle 50vh at -9999px -9999px, black 0%, transparent 100%);
+  -webkit-mask-image: radial-gradient(
+    circle 50vh at -9999px -9999px,
+    black 0%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle 50vh at -9999px -9999px,
+    black 0%,
+    transparent 100%
+  );
 }
 
 .gradient {
@@ -144,4 +194,84 @@
     transparent 85%
   );
   mix-blend-mode: color;
+}
+
+/* ----- Responsive ----- */
+
+@media (max-width: 1024px) {
+  .contact-heading-fill {
+    margin-left: -2%;
+  }
+
+  .contact-heading-outline {
+    margin-left: -5%;
+  }
+}
+
+@media (max-width: 700px) {
+  .contact-page {
+    padding: 32px 14px 60px;
+  }
+
+  .contact-heading {
+    margin: 2rem 0;
+    height: clamp(2.4rem, 13vw, 5rem);
+  }
+
+  .contact-heading-fill {
+    margin-left: -1.2%;
+    font-size: clamp(1.4rem, 9vw, 3.6rem);
+  }
+
+  .contact-heading-outline {
+    margin-left: -3.5%;
+    font-size: clamp(1.65rem, 10.8vw, 4.1rem);
+  }
+
+  .contact-form {
+    padding: 24px 0;
+  }
+
+  .contact-form-submit {
+    font-size: 1.5rem;
+    padding: 0.5rem 1.5rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .contact-form {
+    padding: 22px 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .contact-heading {
+    height: clamp(2rem, 14vw, 3.6rem);
+  }
+
+  .contact-heading-fill {
+    margin-left: -1%;
+    font-size: clamp(1.2rem, 9vw, 2.8rem);
+  }
+
+  .contact-heading-outline {
+    margin-left: -2.5%;
+    font-size: clamp(1.4rem, 10.8vw, 3.3rem);
+  }
+
+  .contact-form-input,
+  .contact-form__textarea {
+    padding: 11px 13px;
+    font-size: 14px;
+  }
+
+  .contact-form-submit {
+    font-size: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-form-submit {
+    transition: none;
+  }
 }

@@ -1,8 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import "../components/ContactUs.css";
-import ContactUsHeading from "../assests/CONTACTUS.png";
-import ContactUsHeadingOutline from "../assests/Contactusback.png";
 import bg3 from "../assests/bg_3.png";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -27,6 +25,7 @@ export default function ContactUs() {
   const gradientRef = useRef(null);
   const gradientPos = useRef({ x: 0, y: 0 });
   const headingRef = useRef(null);
+  const headingOutlineRef = useRef(null);
   const formWrapRef = useRef(null);
 
   useEffect(() => {
@@ -42,17 +41,16 @@ export default function ContactUs() {
     };
 
     updateMask();
-     gsap.to([textureRef.current, gradientRef.current], {
-     opacity: 1,
-     ease: "none",
-     scrollTrigger: {
-     trigger: containerRef.current,
-     start: "top 10%",
-     end: "top 100%",
-     scrub: true,
-     
-  },
-});
+    gsap.to([textureRef.current, gradientRef.current], {
+      opacity: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 10%",
+        end: "top 100%",
+        scrub: true,
+      },
+    });
 
     const ctx = gsap.context(() => {
       // Drive the texture "bubble" mask on scroll
@@ -80,9 +78,23 @@ export default function ContactUs() {
         },
       });
 
-      // Heading entrance
+      // Heading fill layer: drops in from the top-right
       gsap.from(headingRef.current, {
+        y: -100,
+        x: 100,
+        opacity: 0,
+        duration: 1,
+        scrollTrigger: {
+          trigger: headingRef.current,
+          start: "top 85%",
+          end: "top",
+        },
+      });
+
+      // Heading outline layer: rises in from the bottom-left
+      gsap.from(headingOutlineRef.current, {
         y: 100,
+        x: -100,
         opacity: 0,
         duration: 1,
         scrollTrigger: {
@@ -95,7 +107,7 @@ export default function ContactUs() {
       // Form entrance
       gsap.from(formWrapRef.current, {
         y: 80,
-        x:-20,
+        x: -20,
         opacity: 0,
         duration: 1,
         scrollTrigger: {
@@ -156,7 +168,9 @@ export default function ContactUs() {
       }
     } catch (error) {
       console.log(error);
-      alert("Something went wrong! Please send a mail directly to admin@bits-dvm.org");
+      alert(
+        "Something went wrong! Please send a mail directly to admin@bits-dvm.org"
+      );
     } finally {
       formRef.current.reset();
     }
@@ -172,8 +186,13 @@ export default function ContactUs() {
           className="texture"
         ></div>
 
-        <div className="contact-heading" ref={headingRef}>
-          <h1>CONTACT US</h1>
+        <div className="contact-heading">
+          <div ref={headingRef} className="contact-heading-fill">
+            CONTACT US
+          </div>
+          <div ref={headingOutlineRef} className="contact-heading-outline">
+            CONTACT US
+          </div>
         </div>
 
         <form

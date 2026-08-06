@@ -43,7 +43,7 @@
   font-size: clamp(2.4rem, 12vw, 9.6rem);
   color: transparent;
   -webkit-text-stroke: 1px #ffffff3b;
-  text-stroke: 1px #ffffff3b;
+
 }
 
 /* ----- Carousel ----- */
@@ -337,4 +337,20 @@
   .see-all-projects {
     transition: none;
   }
+}
+.project-heading-fill,
+.project-heading-outline {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Stretch Pro", sans-serif;
+  white-space: nowrap;
+  line-height: 1;
+  overflow: hidden;        
+  -ms-overflow-style: none;
+}
+
+.project-heading-fill::-webkit-scrollbar,
+.project-heading-outline::-webkit-scrollbar {
+  display: none;
 }

@@ -209,7 +209,7 @@ export default function ProjectLanding() {
       ></div>
 
       <div className="project-landing-heading">
-        <div ref={headingRef} className="project-heading-fill" style={{  }}>
+        <div ref={headingRef} className="project-heading-fill" >
           PROJECTS
         </div>
         <div ref={headingOutlineRef} className="project-heading-outline">
