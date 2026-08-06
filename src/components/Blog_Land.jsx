@@ -171,7 +171,11 @@ const Blog = () => {
           >BLOGS</div>
         </div>
 
-        <div className={styles.contentColumn}>
+        <div
+          className={`${styles.contentColumn} ${
+            clickedCard ? styles.contentColumnActive : ""
+          }`}
+        >
         <div className={styles.blogsWrapper}>
           <div
             ref={blogsRef}

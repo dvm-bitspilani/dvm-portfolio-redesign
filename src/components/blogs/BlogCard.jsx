@@ -51,44 +51,53 @@ const BlogCard = ({ limit, clickedCard, setClickedCard, landingPage }) => {
 
   return (
     <>
-      {data.slice(0, limit).map((item) => (
-        <div
-          key={item.id}
-          ref={(el) => (cardRefs.current[item.id] = el)}
-          className={`${styles.card} ${
-            clickedCard === item.id ? styles.clicked : ""
-          }`}
-          onClick={() => handleClick(item.id)}
-          onTransitionEnd={() => handleTransitionEnd(item.id)}
-        >
-          <img className={styles.cardImage} src={item.image} alt={item.title} />
-          <div className={styles.content}>
-            <div className={styles.cardTitle}>{item.title}</div>
-            {clickedCard === item.id && (
-              <div className={styles.cardMeta}>
-                <span className={styles.by}>by {item.author}</span>
-                <br />
-                <div>
-                  <span>{item.date}</span>
-                  <span className={styles.con}>{item.readTime} minute read</span>
+      {data.slice(0, limit).map((item) => {
+        const isClicked = clickedCard === item.id;
+        // Any card that ISN'T the clicked one collapses out of the way
+        // whenever something is clicked, so the row's total width
+        // shrinks back down to roughly the clicked card's width instead
+        // of overflowing its container.
+        const isInactive = clickedCard !== null && !isClicked;
+
+        return (
+          <div
+            key={item.id}
+            ref={(el) => (cardRefs.current[item.id] = el)}
+            className={`${styles.card} ${isClicked ? styles.clicked : ""} ${
+              isInactive ? styles.inactive : ""
+            }`}
+            onClick={() => handleClick(item.id)}
+            onTransitionEnd={() => handleTransitionEnd(item.id)}
+          >
+            <img className={styles.cardImage} src={item.image} alt={item.title} />
+            <div className={styles.content}>
+              <div className={styles.cardTitle}>{item.title}</div>
+              {isClicked && (
+                <div className={styles.cardMeta}>
+                  <span className={styles.by}>by {item.author}</span>
+                  <br />
+                  <div>
+                    <span>{item.date}</span>
+                    <span className={styles.con}>{item.readTime} minute read</span>
+                  </div>
                 </div>
+              )}
+              <div className={styles.cardDescription}>
+                {isClicked ? item.bigdescription : item.description}
               </div>
-            )}
-            <div className={styles.cardDescription}>
-              {clickedCard === item.id ? item.bigdescription : item.description}
+              {isClicked && (
+                <div>
+                  {landingPage ? (
+                    <Link to="/blog" className={styles.readMore}>READ AHEAD</Link>
+                  ) : (
+                    <a href={item.link} className={styles.readMore}>FULL BLOG</a>
+                  )}
+                </div>
+              )}
             </div>
-            {clickedCard === item.id && (
-              <div>
-                {landingPage ? (
-                  <Link to="/blog" className={styles.readMore}>READ AHEAD</Link>
-                ) : (
-                  <a href={item.link} className={styles.readMore}>FULL BLOG</a>
-                )}
-              </div>
-            )}
           </div>
-        </div>
-      ))}
+        );
+      })}
     </>
   );
 };

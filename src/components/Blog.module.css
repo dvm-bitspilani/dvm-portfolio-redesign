@@ -19,12 +19,11 @@
   z-index: 3;
 }
 
-
 .image {
   position: absolute;
   top: 60%;
   left: 50%;
-  
+
   transform: translate(-50%, -50%);
   max-width: 100%;
   object-fit: contain;
@@ -34,7 +33,6 @@
   text-align: center;
 }
 .image1 {
-  
   position: absolute;
   top: 50%;
   left: 50%;
@@ -61,6 +59,15 @@
   gap: 2svh;
   overflow: hidden;
   padding: 0 5%;
+  transition: justify-content 0.3s ease;
+}
+
+/* When a card is clicked, stop centering vertically — anchor the
+   (now taller/expanded) row to the top of the column so it doesn't
+   get clipped by overflow:hidden on this container. */
+.contentColumnActive {
+  justify-content: flex-start;
+  padding-top: 2svh;
 }
 
 .blogsWrapper {
@@ -144,9 +151,26 @@
   width: 100%;
   z-index: 1000;
   gap: 2%;
-  justify-content: center;
   overflow: visible;
+  flex-wrap: nowrap;
+  transition:
+    transform 0.4s ease,
+    justify-content 0.4s ease;
+}
+
+/* Default / nothing clicked: centered row, free to wrap on small screens */
+.blogsShifted {
+  justify-content: center;
+  transform: translateX(0);
   flex-wrap: wrap;
+}
+
+/* A card is clicked/expanded: stop wrapping (expanded card needs room),
+   pull the whole row left so the expanded card grows into the freed
+   space instead of pushing off-screen to the right. */
+.blogs {
+  justify-content: flex-start;
+  transform: translateX(-2%);
 }
 
 .grid {
@@ -216,7 +240,6 @@
     height: clamp(80px, 16svh, 160px);
   }
 
-
   .contentColumn {
     gap: 1.5svh;
   }
@@ -226,6 +249,10 @@
     flex-direction: column;
     align-items: center;
     gap: 3svh;
+  }
+
+  .blogs {
+    transform: translateX(0);
   }
 
   .button {
@@ -266,8 +293,6 @@
     font-size: 0.75rem;
     padding: 8px 14px;
   }
-
-
 }
 
 @media (max-width: 360px) {
@@ -288,4 +313,11 @@
 }
 .imageContainer {
   overflow: hidden;
+}
+
+@media (max-height: 700px) {
+  .blogs,
+  .blogsShifted {
+    scale: 0.8;
+  }
 }
