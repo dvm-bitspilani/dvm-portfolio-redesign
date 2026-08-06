@@ -1,294 +1,299 @@
 .card {
-    position: relative;
-    width: clamp(300px, 23vw, 380px);
-    height: clamp(420px, 35svh, 560px);
-    border: 2px solid white;
-    color: white;
-    transition: all 0.2s ease;
-    background: rgba(255,255,255,0.02);
-    z-index: 1000;
-    transform-origin: top left;
-    transform: scaleX(1);
-    overflow: hidden;
+  position: relative;
+  width: clamp(300px, 23vw, 380px);
+  height: clamp(420px, 35svh, 560px);
+  border: 2px solid white;
+  color: white;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.02);
+  z-index: 1000;
+  transform-origin: top left;
+  transform: scaleX(1);
+  overflow: hidden;
 }
 .card:hover {
-    scale: 1.05;
-    z-index: 1001;
+  scale: 1.05;
+  z-index: 1001;
 }
 .readMore {
-    background-color: transparent;
-    border: none;
-    font-family: 'JetBrains Mono';
-    color: rgba(198, 249, 78, 1);
-    margin-left: 60%;
-    cursor: pointer;
-    z-index: 1111;
-    text-decoration: none;
+  background-color: transparent;
+  border: none;
+  font-family: "JetBrains Mono";
+  color: rgba(198, 249, 78, 1);
+  margin-left: 60%;
+  cursor: pointer;
+  z-index: 1111;
+  text-decoration: none;
 }
 
 .cardImage {
-    height: 50%;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    display: block;
+  height: 50%;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
 }
 
 .cardTitle {
-    font-family: "Orbitron", sans-serif;
-    font-size: clamp(1rem, 1.4vw, 1.5rem);
-    font-weight: bold;
-    width: 80%;
-    padding: 1rem 1rem 0;
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(1rem, 1.4vw, 1.5rem);
+  font-weight: bold;
+  width: 80%;
+  padding: 1rem 1rem 0;
 }
 
 .cardMeta {
-    padding: 0.75rem 1rem;
-    color: #9fdfff;
-    font-size: clamp(0.75rem, 0.9vw, 0.95rem);
+  padding: 0.75rem 1rem;
+  color: #9fdfff;
+  font-size: clamp(0.75rem, 0.9vw, 0.95rem);
 }
 
 .cardDescription {
-    padding: 0 1rem 1rem;
-    padding-top: 1rem;
-    color: #ccc;
-    font-size: clamp(0.85rem, 1vw, 1rem);
+  padding: 0 1rem 1rem;
+  padding-top: 1rem;
+  color: #ccc;
+  font-size: clamp(0.85rem, 1vw, 1rem);
 }
 
 /* ===== DESKTOP / TABLET default: WIDTH expands on click, height stays fixed ===== */
 .clicked {
-    transition: width 0.5s ease;
-    width: min(90vw, 900px);
-    height: clamp(420px, 35svh, 560px);
-    overflow: visible;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: clamp(1rem, 3vw, 3rem);
-    padding: clamp(1rem, 2vw, 2rem);
-    border: none;
-    z-index: 1001;
-    background: rgba(255,255,255,0.03);
+  transition: width 0.5s ease;
+  width: min(90vw, 900px);
+  height: clamp(420px, 35svh, 560px);
+  overflow: visible;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 3rem);
+  padding: clamp(1rem, 2vw, 2rem);
+  border: none;
+  z-index: 1001;
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .clicked::before {
-    content: "";
-    position: absolute;
-    inset: -40px;
-    z-index: -1;
-    border-radius: 24px;
-    background: radial-gradient(
-        circle at center,
-        rgba(0,255,255,0.35) 0%,
-        rgba(0,150,255,0.2) 40%,
-        rgba(100,0,255,0.12) 70%,
-        transparent 100%
-    );
-    filter: blur(50px);
+  content: "";
+  position: absolute;
+  inset: -40px;
+  z-index: -1;
+  border-radius: 24px;
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 255, 255, 0.35) 0%,
+    rgba(0, 150, 255, 0.2) 40%,
+    rgba(100, 0, 255, 0.12) 70%,
+    transparent 100%
+  );
+  filter: blur(50px);
 }
 
 .clicked .cardImage {
-    flex: 0 0 45%;
-    width: 45%;
-    height: auto;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
+  flex: 0 0 45%;
+  width: 45%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
 }
 
 .clicked .content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1rem;
-    min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  min-width: 0;
 }
 
 .clicked .cardTitle {
-    padding: 0;
-    margin: 0;
-    font-size: clamp(1.2rem, 2.5vw, 2rem);
-    width: 100%;
+  padding: 0;
+  margin: 0;
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  width: 100%;
 }
 
 .clicked .cardMeta {
-    padding: 0;
+  padding: 0;
 }
 
 .clicked .cardDescription {
-    padding: 0;
-    width: 100%;
-    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+  padding: 0;
+  width: 100%;
+  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
 }
-.clicked .by{
-    transform: scaleX(1.2);
+.clicked .by {
+  transform: scaleX(1.2);
 }
-.clicked .con{
-    margin-left: 20px;
+.clicked .con {
+  margin-left: 20px;
 }
 
 /* ---- 1024px: 3-up grid gets tighter, cards shrink proportionally ---- */
 @media (max-width: 1024px) {
-    .card {
-        width: 30%;
-        height: clamp(360px, 32svh, 480px);
-    }
+  .card {
+    width: 30%;
+    height: clamp(360px, 32svh, 480px);
+  }
 
-    .clicked {
-        width: 95%;
-        height: clamp(360px, 32svh, 480px);
-    }
+  .clicked {
+    width: 95%;
+    height: clamp(360px, 32svh, 480px);
+  }
 }
 
 /* ===== 768px and below: HEIGHT expands instead, width fixed, layout stays row ===== */
 @media (max-width: 768px) {
+  .card {
+    width: 90%;
+    min-width: auto;
+    height: clamp(320px, 42svh, 420px);
+  }
 
-    .card {
-        width: 90%;
-        min-width: auto;
-        height: clamp(320px, 42svh, 420px);
-    }
+  .clicked {
+    transition: height 0.4s ease;
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    overflow: visible;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: clamp(1rem, 4vw, 2rem);
+    padding: clamp(1rem, 2vw, 2rem);
+    border: none;
+    z-index: 10000;
+    background: rgba(255, 255, 255, 0.03);
+  }
 
-    .clicked {
-        transition: height 0.4s ease;
-        width: 100%;
-        height: auto;
-        min-height: auto;
-        overflow: visible;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: clamp(1rem, 4vw, 2rem);
-        padding: clamp(1rem, 2vw, 2rem);
-        border: none;
-        z-index: 10000;
-        background: rgba(255,255,255,0.03);
-    }
+  .clicked .cardImage {
+    flex: 0 0 40%;
+    width: 40%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
 
-    .clicked .cardImage {
-        flex: 0 0 40%;
-        width: 40%;
-        aspect-ratio: 16 / 9;
-        object-fit: cover;
-    }
+  .clicked .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.75rem;
+    min-width: 0;
+  }
 
-    .clicked .content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 0.75rem;
-        min-width: 0;
-    }
+  .clicked .cardTitle {
+    padding: 0;
+    margin: 0;
+    font-size: 1.25rem;
+    width: 100%;
+  }
 
-    .clicked .cardTitle {
-        padding: 0;
-        margin: 0;
-        font-size: 1.25rem;
-        width: 100%;
-    }
+  .clicked .cardMeta {
+    padding: 0;
+  }
 
-    .clicked .cardMeta {
-        padding: 0;
-    }
-
-    .clicked .cardDescription {
-        padding: 0;
-        width: 100%;
-        font-size: 0.9rem;
-    }
-    .clicked .by{
-        transform: scaleX(1.2);
-    }
-    .clicked .con{
-        margin-left: 20px;
-    }
+  .clicked .cardDescription {
+    padding: 0;
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  .clicked .by {
+    transform: scaleX(1.2);
+  }
+  .clicked .con {
+    margin-left: 20px;
+  }
 }
 
 /* ---- 480px: phones ---- */
 @media (max-width: 480px) {
-    .card {
-        width: 92%;
-        height: clamp(260px, 36svh, 340px);
-    }
+  .card {
+    width: 92%;
+    height: clamp(260px, 36svh, 340px);
+  }
 
-    .cardTitle {
-        font-size: clamp(0.9rem, 4vw, 1.15rem);
-        padding: 0.75rem 0.75rem 0;
-    }
+  .cardTitle {
+    font-size: clamp(0.9rem, 4vw, 1.15rem);
+    padding: 0.75rem 0.75rem 0;
+  }
 
-    .cardMeta {
-        padding: 0.5rem 0.75rem;
-        font-size: 0.75rem;
-    }
+  .cardMeta {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+  }
 
-    .cardDescription {
-        padding: 0 0.75rem 0.75rem;
-        padding-top: 0.5rem;
-        font-size: 0.8rem;
-    }
+  .cardDescription {
+    padding: 0 0.75rem 0.75rem;
+    padding-top: 0.5rem;
+    font-size: 0.8rem;
+  }
 
-    .clicked {
-        padding: 1rem;
-        gap: 1rem;
-    }
+  .clicked {
+    padding: 1rem;
+    gap: 1rem;
+  }
 
-    .clicked .cardImage {
-        flex: 0 0 38%;
-        width: 38%;
-    }
+  .clicked .cardImage {
+    flex: 0 0 38%;
+    width: 38%;
+  }
 
-    .clicked .cardTitle {
-        font-size: 1.05rem;
-    }
+  .clicked .cardTitle {
+    font-size: 1.05rem;
+  }
 
-    .clicked .cardDescription {
-        font-size: 0.8rem;
-    }
+  .clicked .cardDescription {
+    font-size: 0.8rem;
+  }
 
-    .readMore {
-        margin-left: 0;
-        font-size: 0.85rem;
-    }
+  .readMore {
+    margin-left: 0;
+    font-size: 0.85rem;
+  }
 }
 
 /* ---- 360px: very small phones ---- */
 @media (max-width: 360px) {
-    .card {
-        width: 94%;
-        height: clamp(220px, 32svh, 300px);
-    }
+  .card {
+    width: 94%;
+    height: clamp(220px, 32svh, 300px);
+  }
 
-    .cardTitle {
-        font-size: 0.8rem;
-        padding: 0.6rem 0.6rem 0;
-    }
+  .cardTitle {
+    font-size: 0.8rem;
+    padding: 0.6rem 0.6rem 0;
+  }
 
-    .cardMeta {
-        font-size: 0.65rem;
-        padding: 0.4rem 0.6rem;
-    }
+  .cardMeta {
+    font-size: 0.65rem;
+    padding: 0.4rem 0.6rem;
+  }
 
-    .cardDescription {
-        font-size: 0.7rem;
-        padding: 0 0.6rem 0.6rem;
-        padding-top: 0.4rem;
-    }
+  .cardDescription {
+    font-size: 0.7rem;
+    padding: 0 0.6rem 0.6rem;
+    padding-top: 0.4rem;
+  }
 
-    .clicked {
-        gap: 0.75rem;
-    }
+  .clicked {
+    gap: 0.75rem;
+  }
 
-    .clicked .cardImage {
-        flex: 0 0 35%;
-        width: 35%;
-    }
+  .clicked .cardImage {
+    flex: 0 0 35%;
+    width: 35%;
+  }
 
-    .clicked .cardTitle {
-        font-size: 0.95rem;
-    }
+  .clicked .cardTitle {
+    font-size: 0.95rem;
+  }
 
-    .clicked .cardDescription {
-        font-size: 0.75rem;
+  .clicked .cardDescription {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-height: 550px){
+    .card{
+        transform: scale(0.8);
     }
 }

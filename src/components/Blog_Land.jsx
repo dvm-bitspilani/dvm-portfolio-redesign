@@ -27,7 +27,7 @@ const Blog = () => {
 
       const { x, y } = gradientPos.current;
       const centerX = x + window.innerWidth * 1;
-      const centerY = y + window.innerHeight * 0.4;
+      const centerY = y + window.innerHeight * 0.3;
 
       const mask = `radial-gradient(circle 40vw at ${centerX}px ${centerY}px, black 0%, transparent 100%)`;
 
@@ -44,6 +44,7 @@ const Blog = () => {
           start: "top 70%",
           end: "top 25%",
           scrub: true,
+          markers: true,
         },
       });
     const ctx = gsap.context(() => {
@@ -170,16 +171,18 @@ const Blog = () => {
           >BLOGS</div>
         </div>
 
-      <div className={styles.contentColumn}>
-        <div
-          ref={blogsRef}
-          className={clickedCard ? styles.blogs : styles.blogsShifted}
-        >
-          <Card
-            limit={3}
-            clickedCard={clickedCard}
-            setClickedCard={setClickedCard}
-          />
+        <div className={styles.contentColumn}>
+        <div className={styles.blogsWrapper}>
+          <div
+            ref={blogsRef}
+            className={clickedCard ? styles.blogs : styles.blogsShifted}
+          >
+            <Card
+              limit={3}
+              clickedCard={clickedCard}
+              setClickedCard={setClickedCard}
+            />
+          </div>
         </div>
 
         <Link

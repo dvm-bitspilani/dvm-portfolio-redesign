@@ -1,68 +1,85 @@
 .container {
   background-color: black;
-  display: flex;
-  align-items: center;
   position: relative;
-
   isolation: isolate;
   width: 100vw;
   height: 100svh;
-  background: black;
   overflow: hidden;
   perspective: 1000px;
+  display: flex;
+  flex-direction: column;
+  padding: 2svh 0;
 }
+
+.imageContainer {
+  position: relative;
+  flex: 0 0 auto;
+  height: clamp(90px, 22svh, 260px);
+  overflow: hidden;
+  z-index: 3;
+}
+
+
 .image {
   position: absolute;
-  z-index: 3;
+  top: 60%;
+  left: 50%;
+  
+  transform: translate(-50%, -50%);
   max-width: 100%;
-  top: 15%;
   object-fit: contain;
-  left: 20%;
   font-family: "Stretch Pro", sans-serif;
   color: white;
-  font-size: 10vw;
+  font-size: clamp(2.2rem, min(10vw, 16svh), 7rem);
+  text-align: center;
 }
 .image1 {
+  
   position: absolute;
-  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   max-width: 100%;
-  top: 10%;
-  left: 15%;
-
   font-family: "Stretch Pro", sans-serif;
-  font-size: 12vw;
+  font-size: clamp(2.6rem, min(12vw, 19svh), 8.5rem);
+  text-align: center;
 
-  color: transparent; /* Hide fill */
-  -webkit-text-stroke: 1px #ffffff3b; /* White outline */
-  text-stroke: 1px #ffffff3b; /* Future standard */
+  color: transparent;
+  -webkit-text-stroke: 1px #ffffff3b;
+  text-stroke: 1px #ffffff3b;
 }
-
-/* ---- Content column wrapper: groups the blog card row + "See All
-   Posts" button in a single flow container so the button can never
-   overlap the cards, no matter how tall the card row renders. Replaces
-   the old approach of independently absolute-positioning .blogs/
-   .blogsShifted (top: 30%, forced height: 100%) and .button
-   (bottom: 10%) against the viewport. ---- */
 .contentColumn {
-  position: absolute;
-  top: 30%;
-  left: 0;
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
   width: 100%;
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  gap: 4%;
+  justify-content: center;
+  align-items: center;
+  gap: 2svh;
+  overflow: hidden;
+  padding: 0 5%;
+}
+
+.blogsWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 1 auto;
+  min-height: 0;
   overflow: hidden;
 }
 
 .button {
   position: relative;
-  left: 20%;
   display: flex;
   align-items: center;
   font-family: "Orbitron", sans-serif;
   z-index: 1009;
-  width: 60%;
+  width: min(60%, 420px);
   height: 35px;
   border: 2px solid rgba(255, 255, 255, 0.2);
   background-color: transparent;
@@ -71,12 +88,12 @@
   font-size: 0.9rem;
   justify-content: center;
   overflow: hidden;
-  margin-top: 20px;
+  flex: 0 0 auto;
 }
 .button span {
   padding: 2px;
   display: inline-block;
-  transform: scaleX(1.5); /* Increase text width */
+  transform: scaleX(1.5);
   transform-origin: center;
 }
 .arrow {
@@ -86,29 +103,20 @@
   transform-origin: center;
 }
 
-/* ---- Footer wrapper: groups DEPARTMENT OF / VISUAL MEDIA text + PROJECTS
-   button so they can be repositioned or reflowed together, instead of
-   independently absolute-positioned across every breakpoint. ---- */
 .footer {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  flex: 0 0 auto;
   z-index: 998;
-  pointer-events: none;
-}
-
-.footer > * {
-  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  padding: 1svh 5% 0;
 }
 
 .text {
-  position: absolute;
   color: white;
   font-family: "Orbitron";
-  left: 5.2%;
   z-index: 99;
   font-size: 0.6rem;
-
-  bottom: 2%;
 }
 .visualMedia {
   font-size: 1rem;
@@ -120,37 +128,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
   color: #ffffff;
   font-family: "Josefin Sans";
-  bottom: 2%;
-  right: 7%;
   border: 1px solid #ffffff;
   padding: 10px;
-  padding-top: -2px;
   border-radius: 999px;
   background-color: transparent;
+  margin-left: auto;
 }
 
-.blogsShifted {
-  position: relative;
-  left: 15%;
-  display: flex;
-  width: 100%;
-  z-index: 1000;
-  gap: 2%;
-}
+.blogsShifted,
 .blogs {
   position: relative;
-  left: 0%;
   display: flex;
   width: 100%;
-  gap: 2%;
   z-index: 1000;
-}
-.blogs,
-.blogsShifted {
+  gap: 2%;
+  justify-content: center;
   overflow: visible;
+  flex-wrap: wrap;
 }
 
 .grid {
@@ -185,7 +181,6 @@
     rgba(20, 90, 100, 0.35) 60%,
     transparent 85%
   );
-
   mix-blend-mode: color;
 }
 
@@ -212,248 +207,73 @@
   );
 }
 
-@media (max-width: 1200px) {
-  .image {
-    width: 56%;
-    left: 22%;
-  }
-
-  .image1 {
-    width: 66%;
-    left: 17%;
-  }
-
-  .button {
-    width: 68%;
-    left: 16%;
-    font-size: 0.82rem;
-  }
-
-  .text {
-    font-size: 0.55rem;
-  }
-
-  .projects {
-    font-size: 0.9rem;
-  }
-  .blogs,
-  .blogsShifted {
-    left: 5%;
-  }
-}
-
-@media (max-width: 1024px) {
-  .image {
-    width: 62%;
-    left: 23%;
-    top: 12%;
-  }
-
-  .image1 {
-    width: 72%;
-    left: 20%;
-    top: 10%;
-  }
-
-  .button {
-    width: 76%;
-    left: 12%;
-    height: 32px;
-    font-size: 0.78rem;
-  }
-
-  .text {
-    font-size: 0.5rem;
-    bottom: 4%;
-  }
-
-  .visualMedia {
-    font-size: 0.9rem;
-  }
-
-  .projects {
-    right: 5%;
-    bottom: 4%;
-    font-size: 0.85rem;
-    padding: 8px 14px;
-  }
-
-  .contentColumn {
-    top: 34%;
-    gap: 1.5%;
-  }
-
-  .blogs,
-  .blogsShifted {
-    left: 3%;
-    gap: 1.5%;
-  }
-}
-
 @media (max-width: 768px) {
   .container {
-    height: 100svh;
-    display: block;
-    padding: 6% 5% 8%;
+    overflow-y: auto;
   }
 
-  .image {
-    position: relative;
-    width: 78%;
-    left: 13%;
-    top: 10%;
-    margin: 0 auto;
-    display: block;
+  .imageContainer {
+    height: clamp(80px, 16svh, 160px);
   }
 
-  .image1 {
-    position: absolute;
-    width: 88%;
-    left: 20%;
-    top: 1%;
-  }
 
   .contentColumn {
-    position: relative;
-    top: 0;
-    left: 0;
-    gap: 6%;
+    gap: 1.5svh;
+  }
+
+  .blogsShifted,
+  .blogs {
+    flex-direction: column;
+    align-items: center;
+    gap: 3svh;
   }
 
   .button {
-    left: 0;
     width: 100%;
-    height: 40px;
-    margin-top: 5%;
-    font-size: 0.85rem;
-  }
-
-  .blogs,
-  .blogsShifted {
-    left: 0;
-    height: auto;
-    width: 100%;
-    margin-top: 6%;
-    flex-direction: column;
-    align-items: center;
-    gap: 6%;
   }
 
   .footer {
-    position: relative;
-    inset: auto;
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin-top: 5%;
-    gap: 4%;
-  }
-
-  .text {
-    position: relative;
-    left: 0;
-    bottom: 0;
-    font-size: 0.6rem;
+    gap: 1svh;
     text-align: center;
-  }
-
-  .visualMedia {
-    font-size: 0.85rem;
-    padding-left: 0;
+    padding-bottom: 1svh;
   }
 
   .projects {
-    position: relative;
-    right: 0;
-    bottom: 0;
-    width: fit-content;
-    font-size: 0.85rem;
-    padding: 9px 16px;
-  }
-
-  .gradient {
-    width: 100%;
-    height: 35%;
-    left: 0;
-    top: 0;
+    margin-left: 0;
   }
 }
 
 @media (max-width: 480px) {
-  .container {
-    padding: 8% 6% 10%;
-  }
-
-  .image {
-    width: 88%;
-  }
-
-  .image1 {
-    width: 96%;
-    left: 18%;
-  }
-
-  .footer {
-    margin-top: 4%;
-    gap: 3%;
-  }
-
   .text {
     font-size: 0.55rem;
   }
-
   .visualMedia {
     font-size: 0.78rem;
   }
-
   .button {
     height: 38px;
     font-size: 0.75rem;
   }
-
   .button span {
     transform: scaleX(1.15);
   }
-
   .arrow {
     margin-left: 12px;
   }
-
-  .projects {
-    font-size: 0.75rem;
-    padding: 8px 14px;
-  }
-
   .grid {
     background-size: 20px 20px;
   }
 }
 
-/* ---- Very small phones ---- */
 @media (max-width: 360px) {
-  .footer {
-    margin-top: 3%;
-    gap: 2.5%;
-  }
-
   .text {
     font-size: 0.5rem;
   }
-
   .visualMedia {
     font-size: 0.72rem;
   }
-
   .button {
     font-size: 0.68rem;
   }
-
-  .projects {
-    font-size: 0.68rem;
-    padding: 7px 12px;
-  }
-}
-.imageContainer {
-  overflow: hidden;
 }
