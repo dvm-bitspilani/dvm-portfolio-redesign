@@ -1,6 +1,7 @@
 .project-landing {
   position: relative;
     min-height: 100vh;
+    overflow: hidden;
 }
 .project-landing-heading{
     text-align: center;
@@ -34,8 +35,8 @@
 
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 16px;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
@@ -90,8 +91,8 @@
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 16px;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
@@ -167,4 +168,49 @@
   border-color: #45e6ff;
   background: rgba(69, 230, 255, 0.08);
   box-shadow: 0 0 12px rgba(69, 230, 255, 0.2);
+}
+.grid {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0.6;
+    background: repeating-linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.2) 0,
+      rgba(255, 255, 255, 0.2) 1px,
+      transparent 1px,
+      transparent 30px
+    );
+    pointer-events: none;
+}
+
+.gradient {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60%;
+    height: 90%;
+    z-index: 999;
+    pointer-events: none;
+    background: radial-gradient(
+        circle at 20% 40%,
+        rgba(180,250,255,.9) 0%,
+        rgba(60,210,230,.75) 35%,
+        rgba(20,90,100,.35) 60%,
+        transparent 85%
+    );
+    mix-blend-mode: color;
+}
+
+.texture {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+
+    background-size: cover;
+    background-position: center;
+
+    -webkit-mask-image: radial-gradient(circle 50vh at -9999px -9999px, black 0%, transparent 100%);
+    mask-image: radial-gradient(circle 50vh at -9999px -9999px, black 0%, transparent 100%);
 }

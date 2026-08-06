@@ -1,9 +1,9 @@
-
 .contact-page {
   position: relative;
-  min-height: 70vh;
+  min-height: 100vh;
   color: white;
   padding: 48px 20px 80px;
+  overflow: hidden;
 }
 
 .contact-page *,
@@ -12,8 +12,12 @@
   box-sizing: border-box;
 }
 
-.contact-page__title {
+.contact-page > *:not(.texture):not(.grid) {
+  position: relative;
+  z-index: 1;
+}
 
+.contact-page__title {
   font-weight: 700;
   font-size: clamp(28px, 5vw, 40px);
   letter-spacing: 0.05em;
@@ -23,6 +27,14 @@
   margin: 0 0 36px;
 }
 
+.contact-heading {
+  text-align: center;
+  margin: 3rem;
+  position: relative;
+  z-index: 5;
+  font-size: 2rem;
+}
+
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -30,8 +42,6 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 32px;
-
-;
 }
 
 .contact-form-input,
@@ -44,7 +54,6 @@
   border: 1px solid white;
   border-radius: 10px;
   outline: none;
-  
 }
 
 .contact-form-input::placeholder,
@@ -71,8 +80,8 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color:white;
-  background:transparent;
+  color: white;
+  background: transparent;
   cursor: pointer;
   border: 1px solid white;
   transition: filter 0.2s ease, transform 0.2s ease;
@@ -88,34 +97,51 @@
     padding: 22px;
   }
 }
-.texture {
-  position:absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    
-    background-size: cover;
-    background-position: center;
- }
- .contact-page {
-  position: relative;
-  min-height: 100vh;
+
+/* --- Shared background layers (grid / texture / gradient), matching About & ProjectLanding --- */
+
+.grid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.6;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.2) 0,
+    rgba(255, 255, 255, 0.2) 1px,
+    transparent 1px,
+    transparent 30px
+  );
+  pointer-events: none;
 }
 
 .texture {
   position: absolute;
   inset: 0;
   z-index: 0;
+  pointer-events: none;
+
+  background-size: cover;
+  background-position: center;
+
+  -webkit-mask-image: radial-gradient(circle 50vh at -9999px -9999px, black 0%, transparent 100%);
+  mask-image: radial-gradient(circle 50vh at -9999px -9999px, black 0%, transparent 100%);
 }
 
-.contact-page > *:not(.texture) {
-  position: relative;
-  z-index: 1;
-}
-.contact-heading {
-    text-align: center;
-    margin:3rem;
-    position: relative;
-    z-index: 5;
-    font-size: 2rem;
+.gradient {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 60%;
+  height: 90%;
+  z-index: 999;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 20% 40%,
+    rgba(180, 250, 255, 0.9) 0%,
+    rgba(60, 210, 230, 0.75) 35%,
+    rgba(20, 90, 100, 0.35) 60%,
+    transparent 85%
+  );
+  mix-blend-mode: color;
 }

@@ -1,9 +1,13 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import "../components/ContactUs.css";
-import ContactUsHeading from "../assests/CONTACTUS.png"
-import ContactUsHeadingOutline from "../assests/Contactusback.png"
+import ContactUsHeading from "../assests/CONTACTUS.png";
+import ContactUsHeadingOutline from "../assests/Contactusback.png";
 import bg3 from "../assests/bg_3.png";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const NAME_REGEX = /^(\w|\s)\D+$/;
 const PHONE_REGEX = /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
@@ -17,6 +21,82 @@ export default function ContactUs() {
   const emailRef = useRef(null);
   const numberRef = useRef(null);
   const messageRef = useRef(null);
+
+  const containerRef = useRef(null);
+  const textureRef = useRef(null);
+  const gradientRef = useRef(null);
+  const gradientPos = useRef({ x: 0, y: 0 });
+  const headingRef = useRef(null);
+  const formWrapRef = useRef(null);
+
+  useEffect(() => {
+    const updateMask = () => {
+      if (!textureRef.current) return;
+      const { x, y } = gradientPos.current;
+      const centerX = x + window.innerWidth * 0.1;
+      const centerY = y + window.innerHeight * 0.28;
+
+      const mask = `radial-gradient(circle 50vh at ${centerX}px ${centerY}px, black 0%, transparent 100%)`;
+      textureRef.current.style.webkitMaskImage = mask;
+      textureRef.current.style.maskImage = mask;
+    };
+
+    updateMask();
+
+    const ctx = gsap.context(() => {
+      // Drive the texture "bubble" mask on scroll
+      gsap.to(gradientPos.current, {
+        x: window.innerWidth * 1.5,
+        y: window.innerHeight,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 10%",
+          end: "bottom -100%",
+          scrub: 1,
+        },
+        onUpdate: updateMask,
+      });
+
+      // Move the cyan gradient overlay in sync, same as About/ProjectLanding
+      gsap.to(gradientRef.current, {
+        x: window.innerWidth * 1.5,
+        y: window.innerHeight * 1,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 10%",
+          end: "bottom -100%",
+          scrub: 1,
+        },
+      });
+
+      // Heading entrance
+      gsap.from(headingRef.current, {
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        scrollTrigger: {
+          trigger: headingRef.current,
+          start: "top 85%",
+          end: "top",
+        },
+      });
+
+      // Form entrance
+      gsap.from(formWrapRef.current, {
+        y: 80,
+        x:-20,
+        opacity: 0,
+        duration: 1,
+        scrollTrigger: {
+          trigger: formWrapRef.current,
+          start: "top 85%",
+          end: "top",
+        },
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -73,15 +153,26 @@ export default function ContactUs() {
 
   return (
     <div>
-      <div className="contact-page">
+      <div ref={containerRef} className="contact-page">
+        <div className="grid"></div>
         <div
-           style={{ backgroundImage: `url(${bg3})` }}
-           className="texture"
-          ></div>
-        <div className="contact-heading">
-        <h1>CONTACT US</h1>
+          style={{ backgroundImage: `url(${bg3})` }}
+          ref={textureRef}
+          className="texture"
+        ></div>
+
+        <div className="contact-heading" ref={headingRef}>
+          <h1>CONTACT US</h1>
         </div>
-        <form ref={formRef} className="contact-form" onSubmit={handleSubmit}>
+
+        <form
+          ref={(el) => {
+            formRef.current = el;
+            formWrapRef.current = el;
+          }}
+          className="contact-form"
+          onSubmit={handleSubmit}
+        >
           <input
             ref={nameRef}
             type="text"
@@ -118,6 +209,8 @@ export default function ContactUs() {
             Submit
           </button>
         </form>
+
+        <div ref={gradientRef} className="gradient"></div>
       </div>
     </div>
   );
