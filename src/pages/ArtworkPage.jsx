@@ -1,4 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom"
+
+import Navbar from "../components/Navbar"
+import Ham from "../components/Ham";
+
 import "../components/ArtworkPage.css";
 
 const CELL = 11.5;
@@ -465,13 +470,18 @@ export default function ArtworkPage() {
     };
   }, []);
 
+  const [isHamOpen, setIsHamOpen] = useState(false)
+
   return (
     <div id="stage" ref={stageRef}>
-      <header>
-        <h2>Back to Portfolio</h2>
-        <span id="artwork-heading"></span>
-        <span id="ham"></span>
-      </header>
+      <Navbar onHamClick={() => setIsHamOpen(true)} />
+      {isHamOpen && <Ham onClose={() => setIsHamOpen(false)} />}
+
+      {/*<header>
+        <Link id="back-to-landing" to="/">Back to Portfolio</Link>
+        <h1 id="artwork-heading">ARTWORK</h1>
+        <Link id="ham" to="/"></Link>
+      </header>*/}
 
       <svg id="baseGrid" ref={baseGridRef}></svg>
       <svg id="netLines" ref={netLinesRef}></svg>

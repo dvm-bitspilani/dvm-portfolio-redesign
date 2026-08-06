@@ -8,6 +8,7 @@
     background-color: transparent;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .heading {
@@ -19,34 +20,41 @@
 }
 
 .ham {
-  width: 42px;
-  height: 42px;
+  width: 52px;
+  height: 52px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   text-decoration: none;
   transition: transform 0.3s ease;
+  scrollbar-width: 0;
 }
 
 .hamIcon {
-  width: 100%;
-  height: 100%;
+  width: 42px;
+  height: 42px;
   object-fit: contain;
   transition: transform 0.3s ease, filter 0.3s ease;
   overflow: hidden;
   pointer-events: none; /* clicks/keyboard go to the .ham wrapper, not the image */
+  scrollbar-width: 0;
 }
 
 /* Hover animation — icon lifts and glows slightly instead of bars growing */
-.ham:hover {
+/*.ham:hover {
   transform: translateY(-2px);
-}
+  transform: scale(1.08);
+    scrollbar-width: 0;
+
+}*/
 
 .ham:hover .hamIcon {
-  transform: scale(1.08);
+  transform: translateY(-2px) scale(1.08);
   filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.45));
   overflow: hidden;
+    scrollbar-width: 0;
+
 }
 
 .ham:active {
@@ -57,4 +65,9 @@
   outline: 2px solid rgba(96, 165, 250, 0.8);
   outline-offset: 4px;
   border-radius: 8px;
+}
+
+html {
+  overflow-x: clip;
+  scrollbar-gutter: stable;
 }

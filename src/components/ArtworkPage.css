@@ -11,7 +11,7 @@
   margin: 0;
   padding: 0;
   background: #050507;
-  background-image: url(./Frame.png);
+  background-image: url(../assests/ArtworkPageBG.png);
   overflow: hidden;
 }
 
@@ -114,7 +114,7 @@
   stroke: #cfe8ff;
 }
 
-#stage header {
+/*#stage header {
   position: relative;
   z-index: 10;
   display: flex;
@@ -123,21 +123,19 @@
   align-items: start;
 }
 
-#stage #artwork-heading {
+#stage #back-to-landing {
+  font-family: "Orbitron", sans-serif;
   color: #fff;
-  z-index: 100;
-  transform: translateX(-30%);
-  width: 233px;
-  height: 23px;
-  background-image: url(./ARTWORK.svg);
+  text-decoration: none;
 }
 
-#stage h2 {
+#stage #artwork-heading {
   color: #fff;
+  font-family: "StretchPro", sans-serif;
 }
 
 #stage #ham {
   width: 26.51px;
   height: 46.39px;
-  background-image: url(./Ham.png);
-}
+  background-image: url(../assests/hamBtn.png);
+}*/
