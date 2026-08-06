@@ -61,7 +61,7 @@ export default function ContactUs() {
         y: window.innerHeight,
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 10%",
+          start: "top 30%",
           end: "bottom -100%",
           scrub: 1,
         },
