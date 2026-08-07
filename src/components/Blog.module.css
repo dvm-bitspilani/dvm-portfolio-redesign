@@ -22,9 +22,10 @@
 .image {
   position: absolute;
   top: 60%;
-  left: 50%;
-
-  transform: translate(-50%, -50%);
+  left: 0;
+  right: 0;
+  width: 100%;
+  transform: translateY(-50%);
   max-width: 100%;
   object-fit: contain;
   font-family: "Stretch Pro", sans-serif;
@@ -32,16 +33,17 @@
   font-size: clamp(2.2rem, min(10vw, 16svh), 7rem);
   text-align: center;
 }
+
 .image1 {
   position: absolute;
   top: 50%;
-  object-fit: contain;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 100%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  text-align: center;
   font-family: "Stretch Pro", sans-serif;
   font-size: clamp(2.6rem, min(12vw, 19svh), 8.5rem);
-  text-align: center;
 
   color: transparent;
   -webkit-text-stroke: 1px #ffffff3b;
