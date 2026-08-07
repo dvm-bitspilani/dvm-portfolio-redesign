@@ -78,10 +78,46 @@ html::-webkit-scrollbar-thumb:hover {
   font-weight: normal;
   font-style: normal;
 }
+.pageTransition {
+  width: 100%;
+}
 
-body{
-  font-family: 'StretchPro', sans-serif;
-  color: white;
-  margin: 0;
-  padding: 0;
+.swipePanel {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #111; /* pick your brand color */
+  transform: translateY(100%);
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  animation-fill-mode: forwards;
+  pointer-events: none;
+}
+
+/* Panel slides UP into view, covering the screen */
+.panelIn {
+  animation-name: panelSlideIn;
+}
+
+/* Panel continues UP and off, revealing the new page */
+.panelOut {
+  animation-name: panelSlideOut;
+}
+
+@keyframes panelSlideIn {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes panelSlideOut {
+  from {
+    transform: translateY(0%);
+  }
+  to {
+    transform: translateY(-100%);
+  }
 }

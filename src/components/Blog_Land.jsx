@@ -61,7 +61,6 @@ const Blog = () => {
           start: "top 70%",
           end: "top 25%",
           scrub: true,
-          markers: true,
         },
       });
     const ctx = gsap.context(() => {
@@ -139,17 +138,17 @@ const Blog = () => {
     const animations = [
       {
         x: -window.innerWidth * 0.2,
-        y: window.innerHeight * 0.2,
+        y: window.innerHeight * 0.1,
         rotate: -20,
       },
       {
-        y: window.innerHeight * 0.25,
+        y: window.innerHeight * 0.2,
         scale: 0.7,
         rotate: 0,
       },
       {
         x: window.innerWidth * 0.2,
-        y: window.innerHeight * 0.2,
+        y: window.innerHeight * 0.1,
         rotate: 20,
       },
     ];
@@ -158,11 +157,11 @@ const Blog = () => {
       gsap.from(card, {
         ...(animations[i] || animations[animations.length - 1]),
         opacity: 0,
-        duration: 0.8,
+        duration: 0.6,
 
         scrollTrigger: {
           trigger: blogsRef.current,
-          start: "top 75%",
+          start: "top 90%",
           end: "top 20%",
           scrub: 1,
         },

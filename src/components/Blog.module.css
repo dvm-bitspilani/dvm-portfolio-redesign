@@ -96,7 +96,17 @@
   justify-content: center;
   overflow: hidden;
   flex: 0 0 auto;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
 }
+.button:hover {
+  color: #45e6ff;
+  border-color: #45e6ff;
+  background: rgba(69, 230, 255, 0.08);
+  box-shadow: 0 0 12px rgba(69, 230, 255, 0.2);
+}
+
 .button span {
   padding: 2px;
   display: inline-block;
@@ -331,3 +341,4 @@
     scale: 0.8;
   }
 }
+

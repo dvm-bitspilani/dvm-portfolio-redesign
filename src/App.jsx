@@ -16,35 +16,28 @@ import styles from "./App.module.css";
 
 const App = () => {
   const [initialLoading, setInitialLoading] = useState(true);
-  const [routeLoading, setRouteLoading] = useState(false);
   const location = useLocation();
 
   const [displayLocation, setDisplayLocation] = useState(location);
-  const [stage, setStage] = useState("idle");
+  const [stage, setStage] = useState("idle"); // idle | cover | reveal
 
-  // Route changed: kick off the preloader instead of just fading.
+  // Route changed: bring the swipe panel in to cover the screen.
   useEffect(() => {
     if (location.pathname !== displayLocation.pathname) {
-      setStage("fadeOut");
-      setRouteLoading(true);
+      setStage("cover");
     }
   }, [location, displayLocation]);
 
-  const handleAnimationEnd = (e) => {
+  const handlePanelEnd = (e) => {
     if (e.target !== e.currentTarget) return;
 
-    if (stage === "fadeOut") {
-      // Old page has faded out — swap in the new route now, underneath
-      // the preloader, then fade it in once the preloader finishes.
+    if (stage === "cover") {
+      // Screen is fully covered — swap the route underneath, then reveal.
       setDisplayLocation(location);
-      setStage("fadeIn");
-    } else if (stage === "fadeIn") {
+      setStage("reveal");
+    } else if (stage === "reveal") {
       setStage("idle");
     }
-  };
-
-  const handleRouteFinish = () => {
-    setRouteLoading(false);
   };
 
   if (initialLoading) {
@@ -53,25 +46,21 @@ const App = () => {
     );
   }
 
-  const stageClass =
-    stage === "fadeOut"
-      ? styles.fadeOut
-      : stage === "fadeIn"
-      ? styles.fadeIn
-      : "";
-
   return (
     <>
       <ScrollToTop />
 
-      {routeLoading && (
-        <Preloader onFinish={handleRouteFinish} key={location.pathname} />
+      {stage !== "idle" && (
+        <div
+          className={`${styles.swipePanel} ${
+            stage === "cover" ? styles.panelIn : styles.panelOut
+          }`}
+          onAnimationEnd={handlePanelEnd}
+          aria-hidden="true"
+        />
       )}
 
-      <div
-        className={`${styles.pageTransition} ${stageClass}`}
-        onAnimationEnd={handleAnimationEnd}
-      >
+      <div className={styles.pageTransition}>
         <Routes location={displayLocation}>
           <Route path="/" element={<Land />} />
           <Route path="/blog" element={<Blog />} />
@@ -80,7 +69,7 @@ const App = () => {
           <Route path="/team" element={<TeamPage />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:name" element={<ProjectPage />} />
-          <Route path="/artwork" element={<ArtworkPage />} /> 
+          <Route path="/artwork" element={<ArtworkPage />} />
         </Routes>
       </div>
     </>

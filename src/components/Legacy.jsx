@@ -75,7 +75,10 @@ const computeBranchNodes = (key, center, wrapperSize) => {
   const maxHorizontal = isRightHalf
     ? center.x - margin
     : wrapperSize.width - margin - center.x;
-  const desiredHorizontal = Math.min(200, Math.max(100, wrapperSize.width * 0.13));
+  const desiredHorizontal = Math.min(
+    200,
+    Math.max(100, wrapperSize.width * 0.13),
+  );
   const horizontal = Math.max(70, Math.min(desiredHorizontal, maxHorizontal));
 
   const bendFraction = 0.4;
@@ -207,19 +210,19 @@ const Legacy = () => {
     if (anchor === "right") {
       left = Math.min(
         Math.max(left, overlayWidth + margin),
-        window.innerWidth - margin
+        window.innerWidth - margin,
       );
     } else {
       left = Math.min(
         Math.max(left, margin),
-        window.innerWidth - overlayWidth - margin
+        window.innerWidth - overlayWidth - margin,
       );
     }
 
     let top = circleCenterY - overlayHeight / 2;
     top = Math.min(
       Math.max(top, margin),
-      window.innerHeight - overlayHeight - margin
+      window.innerHeight - overlayHeight - margin,
     );
 
     setOverlayPos({ left, top, anchor, width: overlayWidth });
@@ -252,7 +255,7 @@ const Legacy = () => {
     closeTimeoutRef.current = setTimeout(() => {
       if (pointerInsideRef.current) return;
       closeAll();
-    }, CLOSE_DELAY);
+    }, 150);
   };
 
   const cancelScheduledClose = () => {
@@ -312,7 +315,7 @@ const Legacy = () => {
           stagger: -0.1,
           ease: "power2.in",
         },
-        "-=0.05"
+        "-=0.05",
       );
     } else {
       setBranchKey(null);
@@ -363,7 +366,7 @@ const Legacy = () => {
         stagger: 0.05,
         ease: "power2.out",
       },
-      "-=0.2"
+      "-=0.2",
     );
 
     return () => tl.kill();
@@ -372,7 +375,9 @@ const Legacy = () => {
   useEffect(() => {
     if (!openKey) return;
     const onResize = () => {
-      const el = document.querySelector(`[data-branch-label="${openKey}-${selectedPerson}"]`);
+      const el = document.querySelector(
+        `[data-branch-label="${openKey}-${selectedPerson}"]`,
+      );
       if (el) positionOverlayFromRect(el.getBoundingClientRect());
     };
     window.addEventListener("resize", onResize);
@@ -395,22 +400,22 @@ const Legacy = () => {
       textureRef.current.style.maskImage = mask;
     };
     updateMask();
-      gsap.to([textureRef.current, gradientRef.current], {
-        opacity: 1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 70%",
-          end: "top 25%",
-          scrub: true,
-        },
-      });
-      gsap.to(gradientPos.current, {
-        x: window.innerWidth * 1,
-        y: window.innerHeight * 1,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 50%",
+    gsap.to([textureRef.current, gradientRef.current], {
+      opacity: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 70%",
+        end: "top 25%",
+        scrub: true,
+      },
+    });
+    gsap.to(gradientPos.current, {
+      x: window.innerWidth * 1,
+      y: window.innerHeight * 1,
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 50%",
         end: "bottom -100%",
         scrub: 1,
       },
@@ -473,7 +478,7 @@ const Legacy = () => {
       opacity: 0,
       duration: 0.6,
       stagger: 0.2,
-    })
+    });
 
     return () => {
       tl.scrollTrigger?.kill();
@@ -505,7 +510,11 @@ const Legacy = () => {
       },
     });
 
-    tl.set(circleOrder, { opacity: 0, scale: 0.5, transformOrigin: "center center" })
+    tl.set(circleOrder, {
+      opacity: 0,
+      scale: 0.5,
+      transformOrigin: "center center",
+    })
       .set(validLines, { strokeDasharray: 1, strokeDashoffset: 1, opacity: 0 })
       .to(circleOrder, {
         opacity: 1,
@@ -523,7 +532,7 @@ const Legacy = () => {
           stagger: 0.05,
           ease: "power2.out",
         },
-        "-=0.15"
+        "-=0.15",
       )
       .set(validLines, { strokeDasharray: "0.02 0.015" })
       .set(circleOrder, { clearProps: "opacity,scale" })
@@ -593,16 +602,16 @@ const Legacy = () => {
       ></div>
 
       <div className={styles.header}>
-        <div
-          alt="Header"
-          ref={headerRef}
-          className={styles.headerImage}
-        >LEGACY</div>
+        <div alt="Header" ref={headerRef} className={styles.headerImage}>
+          LEGACY
+        </div>
         <div
           alt="Header"
           ref={headerFillRef}
           className={styles.headerOuterImage}
-        >LEGACY</div>
+        >
+          LEGACY
+        </div>
       </div>
 
       <div
@@ -715,7 +724,13 @@ const Legacy = () => {
             }}
           >
             <defs>
-              <linearGradient id="branchGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <linearGradient
+                id="branchGradient"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
                 <stop offset="0%" stopColor="#4facfe" />
                 <stop offset="100%" stopColor="#00c6ff" />
               </linearGradient>
@@ -822,7 +837,6 @@ const Legacy = () => {
           <h2>DEPARTMENT OF</h2>
           <h1 className={styles.vm}>VISUAL MEDIA</h1>
         </div>
-
       </div>
       <div ref={gradientRef} className={styles.gradient}></div>
     </div>
