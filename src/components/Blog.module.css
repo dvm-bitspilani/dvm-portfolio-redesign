@@ -234,6 +234,8 @@
 @media (max-width: 768px) {
   .container {
     overflow-y: auto;
+    height: auto;
+    min-height: 100svh;
   }
 
   .imageContainer {
@@ -241,7 +243,15 @@
   }
 
   .contentColumn {
+    overflow: visible;
+    overflow-y: visible;
+    flex: none;
     gap: 1.5svh;
+  }
+
+  .blogsWrapper {
+    overflow: visible;
+    flex: none;
   }
 
   .blogsShifted,

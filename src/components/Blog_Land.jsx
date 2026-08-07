@@ -9,6 +9,8 @@ import { useRef, useEffect, useState } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const MOBILE_BREAKPOINT = 768;
+
 const Blog = () => {
   const textureRef = useRef(null);
   const gradientRef = useRef(null);
@@ -20,6 +22,21 @@ const Blog = () => {
   const gradientPos = useRef({ x: 0, y: 0 });
   const blogsRef = useRef(null);
   const [clickedCard, setClickedCard] = useState(null);
+
+  // Track viewport width so we can show fewer cards on phones.
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth <= MOBILE_BREAKPOINT : false
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const cardLimit = isMobile ? 2 : 3;
 
   useEffect(() => {
     const updateMask = () => {
@@ -139,19 +156,19 @@ const Blog = () => {
 
     [...cards].forEach((card, i) => {
       gsap.from(card, {
-        ...animations[i],
+        ...(animations[i] || animations[animations.length - 1]),
         opacity: 0,
-        duration: 1.2,
+        duration: 0.8,
 
         scrollTrigger: {
           trigger: blogsRef.current,
           start: "top 75%",
-          end: "top 30%",
+          end: "top 20%",
           scrub: 1,
         },
       });
     });
-  }, []);
+  }, [cardLimit]);
 
   return (
     <div ref={containerRef} className={styles.container}>
@@ -182,7 +199,7 @@ const Blog = () => {
             className={clickedCard ? styles.blogs : styles.blogsShifted}
           >
             <Card
-              limit={3}
+              limit={cardLimit}
               clickedCard={clickedCard}
               setClickedCard={setClickedCard}
             />
