@@ -97,26 +97,6 @@ export default function ProjectPage() {
 
             
           </div>
-
-          {!isVideo && images.length > 1 && (
-            <div className="proj-detail__thumbs">
-              {images.map((src, i) => (
-                <button
-                  key={src + i}
-                  type="button"
-                  className={
-                    "proj-detail__thumb" +
-                    (i === activeImage ? " proj-detail__thumb--active" : "")
-                  }
-                  onClick={() => setActiveImage(i)}
-                  aria-label={`Show image ${i + 1}`}
-                >
-                  <img src={src} alt="" />
-                </button>
-              ))}
-            </div>
-          )}
-
           <div className="proj-detail__body">
             <div className="proj-detail__heading">
               <h2 className="proj-detail__title">{project.name}</h2>
@@ -151,6 +131,26 @@ export default function ProjectPage() {
              
             </div>
           </div>
+          {!isVideo && images.length > 1 && (
+            <div className="proj-detail__thumbs">
+              {images.map((src, i) => (
+                <button
+                  key={src + i}
+                  type="button"
+                  className={
+                    "proj-detail__thumb" +
+                    (i === activeImage ? " proj-detail__thumb--active" : "")
+                  }
+                  onClick={() => setActiveImage(i)}
+                  aria-label={`Show image ${i + 1}`}
+                >
+                  <img src={src} alt="" />
+                </button>
+              ))}
+            </div>
+          )}
+
+          
         </article>
       </div>
     </div>

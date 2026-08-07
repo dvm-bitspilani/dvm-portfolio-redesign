@@ -72,7 +72,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 1rem;
 }
 
 .proj-detail__nav {
@@ -102,7 +102,6 @@
   flex: 1 1 auto;
   border-radius: 18px;
   overflow: hidden;
-  background: #060a14;
   border: 1px solid white;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
 }
@@ -143,9 +142,9 @@
   box-shadow: 0 8px 24px rgba(255, 180, 84, 0.35);
 }
 
-/* thumbnail strip */
 .proj-detail__thumbs {
   display: flex;
+  flex-direction: column;
   gap: 10px;
   margin-top: 14px;
   padding: 0 60px;
@@ -154,6 +153,7 @@
 
 .proj-detail__thumb {
   flex: 0 0 auto;
+  flex-direction: column;
   width: 84px;
   height: 56px;
   border-radius: 8px;
@@ -215,7 +215,7 @@
   padding: 5px 12px;
   border-radius: 999px;
   color: white;
-  border: 1px solid rgba(69, 230, 255, 0.4);
+
   background: rgba(69, 230, 255, 0.08);
 }
 
@@ -236,7 +236,7 @@
   margin: 0;
   font-size: 16px;
   line-height: 1.65;
-  color: #c7d2ea;
+
 }
 
 .proj-detail__actions {
