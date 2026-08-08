@@ -2,7 +2,7 @@
   position: relative;
   width: clamp(300px, 23vw, 380px);
   height: clamp(420px, 35svh, 560px);
-  border: 2px solid white;
+  border:2px solid #4ADEC6;
   color: white;
   transition: all 0.2s ease;
   background: rgba(255, 255, 255, 0.02);
