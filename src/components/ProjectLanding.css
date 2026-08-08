@@ -170,8 +170,7 @@
   font-size: 1.25rem;
   font-weight: 600;
   border: 1px solid white;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  border-radius:20%
   transition: all 0.3s ease;
 }
 
