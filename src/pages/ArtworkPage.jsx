@@ -1,13 +1,22 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom"
 
 import Navbar from "../components/Navbar"
 import Ham from "../components/Ham";
+import ArtworkCard from "../components/ArtworkCard";
+import artworks from "../data/artworks";
 
 import "../components/ArtworkPage.css";
 
 const CELL = 11.5;
 const SPOT_RADIUS = 260;
+
+// four slots on screen at a time; 26 artworks => 7 pages, the last one partial
+const CARDS_PER_PAGE = 4;
+const TOTAL_PAGES = Math.ceil(artworks.length / CARDS_PER_PAGE);
+
+// must match the transition duration on #stage .card in ArtworkPage.css
+const FADE_MS = 320;
 
 // corners are pinned only to the LEFT and RIGHT edges of the viewport
 // (x = 0 or x = w). Their y positions sit inset from top/bottom, leaving
@@ -472,16 +481,52 @@ export default function ArtworkPage() {
 
   const [isHamOpen, setIsHamOpen] = useState(false)
 
+  // ---- artwork paging -----------------------------------------------------
+  const [page, setPage] = useState(0);
+  const [isFading, setIsFading] = useState(false);
+
+  // a ref, not the state value, guards the transition: state updates are
+  // batched, so a fast double-click would otherwise read a stale `isFading`
+  // and start a second page turn mid-fade
+  const isFadingRef = useRef(false);
+  const fadeTimeoutRef = useRef(null);
+  const fadeRafRef = useRef(null);
+
+  const changePage = useCallback((direction) => {
+    if (isFadingRef.current) return;
+    isFadingRef.current = true;
+    setIsFading(true);
+
+    fadeTimeoutRef.current = setTimeout(() => {
+      // swap the cards while the layer is still transparent, then drop the
+      // fading class on a later frame so the new cards animate in from 0
+      // instead of appearing already opaque
+      setPage((p) => (p + direction + TOTAL_PAGES) % TOTAL_PAGES);
+      fadeRafRef.current = requestAnimationFrame(() => {
+        fadeRafRef.current = requestAnimationFrame(() => {
+          setIsFading(false);
+          isFadingRef.current = false;
+        });
+      });
+    }, FADE_MS);
+  }, []);
+
+  useEffect(() => () => {
+    if (fadeTimeoutRef.current) clearTimeout(fadeTimeoutRef.current);
+    if (fadeRafRef.current) cancelAnimationFrame(fadeRafRef.current);
+  }, []);
+
+  const visibleArtworks = artworks.slice(
+    page * CARDS_PER_PAGE,
+    page * CARDS_PER_PAGE + CARDS_PER_PAGE
+  );
+
   return (
     <div id="stage" ref={stageRef}>
       <Navbar onHamClick={() => setIsHamOpen(true)} />
       {isHamOpen && <Ham onClose={() => setIsHamOpen(false)} />}
 
-      {/*<header>
-        <Link id="back-to-landing" to="/">Back to Portfolio</Link>
-        <h1 id="artwork-heading">ARTWORK</h1>
-        <Link id="ham" to="/"></Link>
-      </header>*/}
+      <h1 id="artwork-heading">ARTWORK</h1>
 
       <svg id="baseGrid" ref={baseGridRef}></svg>
       <svg id="netLines" ref={netLinesRef}></svg>
@@ -504,21 +549,62 @@ export default function ArtworkPage() {
         <g className="glowSharp" ref={sharpLayerRef}></g>
       </svg>
 
-      <div className="card" id="card1"></div>
-      <div className="card" id="card2"></div>
-      <div className="card" id="card3"></div>
-      <div className="card" id="card4"></div>
+      <div className={`card-layer${isFading ? " is-fading" : ""}`}>
+        {visibleArtworks.map((artwork, i) => (
+          // slot ids stay card1..card4 - the CSS that positions the four
+          // quadrants is untouched, only what sits in them changes
+          <div className="card" id={`card${i + 1}`} key={artwork.id}>
+            <ArtworkCard {...artwork} />
+          </div>
+        ))}
+      </div>
 
-      <svg className="navArrow left" ref={arrowLeftRef} viewBox="0 0 34 44">
+      <svg
+        className="navArrow left"
+        ref={arrowLeftRef}
+        viewBox="0 0 34 44"
+        role="button"
+        tabIndex={0}
+        aria-label="Previous artworks"
+        onClick={() => changePage(-1)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            changePage(-1);
+          }
+        }}
+      >
         <path d="M 24 6 L 8 22 L 24 38" />
       </svg>
-      <svg className="navArrow right" ref={arrowRightRef} viewBox="0 0 34 44">
+      <svg
+        className="navArrow right"
+        ref={arrowRightRef}
+        viewBox="0 0 34 44"
+        role="button"
+        tabIndex={0}
+        aria-label="Next artworks"
+        onClick={() => changePage(1)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            changePage(1);
+          }
+        }}
+      >
         <path d="M 10 6 L 26 22 L 10 38" />
       </svg>
 
       <div id="coreWrap" ref={coreWrapRef}>
         <div id="core" ref={coreRef}></div>
       </div>
+
+      <footer>
+        <div id="dep-name-div">
+          <h2>DEPARTMENT OF</h2>
+          <h1>VISUAL MEDIA</h1>
+        </div>
+        <div><h2>Made with ❤️ by DVM</h2></div>
+      </footer>
     </div>
   );
 }

@@ -1,0 +1,153 @@
+.full-details-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    font-family: "Orbitron", sans-serif;
+    transition: all 0.3s ease ;
+    padding: 10px;
+}
+
+.full-details-card:hover {
+    background-color: #000;
+    box-shadow: 0 0 20px 20px aliceblue;
+}
+
+.full-details-card .artwork-title {
+    align-self: center;
+    margin: 0 0 12px;
+    font-size: clamp(0.75rem, 1.15vw, 1.15rem);
+    font-weight: 200;
+    line-height: 1.2;
+    text-align: center;
+    /* keep long titles on one tidy line instead of pushing the artwork down */
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.full-details-card article {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    gap: 6%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.image-container {
+    flex: 0 0 auto;
+    width: 45%;
+    max-width: 190px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.creator-section {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.creator-section h3 {
+    margin: 0;
+    font-size: clamp(0.65rem, 0.9vw, 0.95rem);
+    font-weight: 200;
+    line-height: 1.2;
+}
+
+.socials {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Icon buttons: dim grey at rest, lit blue on hover/focus - same two colours
+   the nav arrows use, so the page reads as one system.
+
+   Sizing is pinned with hard px values (not %) and locked down with
+   flex-shrink/flex-grow: 0 + box-sizing + overflow:hidden. Percentage sizing
+   on an inline <svg> depends on the browser correctly treating the anchor's
+   26x26 box as a definite containing block - if anything upstream (a flex
+   parent, a global reset) interferes with that, the svg falls back to its
+   own intrinsic size and balloons up, which is what caused the icons to
+   render huge and overlap each other. Fixed px values remove that ambiguity
+   entirely. */
+.socials .social {
+    /* Something outside this component appears to apply absolute
+       positioning (and/or an offsetting transform) to these anchors,
+       collapsing every icon onto the same top-left point. Forcing them
+       back into normal flex flow here, with !important, undoes that
+       regardless of where the external rule lives in the cascade. */
+    position: static !important;
+    inset: auto !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin: 0 !important;
+    transform: none !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 26px !important;
+    width: 26px !important;
+    height: 26px !important;
+    max-width: 26px !important;
+    max-height: 26px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    color: #8b8f98;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.socials .social svg {
+    display: block !important;
+    width: 26px !important;
+    height: 26px !important;
+    max-width: 26px !important;
+    max-height: 26px !important;
+    flex-shrink: 0 !important;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.socials .social:hover,
+.socials .social:focus-visible {
+    color: #cfe8ff;
+    transform: translateY(-2px) !important;
+}
+
+.socials .social:focus-visible {
+    outline: 1px solid #cfe8ff;
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .socials .social {
+        transition: none;
+    }
+
+    .socials .social:hover,
+    .socials .social:focus-visible {
+        transform: none !important;
+    }
+}
