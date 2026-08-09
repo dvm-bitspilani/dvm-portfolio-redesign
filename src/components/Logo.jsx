@@ -93,6 +93,7 @@ const Logo = ({ triggerSelector = "#hero-container" }) => {
   // Move/rotate/scale as user scrolls Home → all the way through About.
   useEffect(() => {
     const el = logoRef.current;
+    const isMobile = window.innerWidth <= 768;
 
     gsap.set(el, {
       xPercent: 0,
@@ -127,7 +128,9 @@ const Logo = ({ triggerSelector = "#hero-container" }) => {
         },
       },
       onComplete: () => {
-        gsap.set(el, { zIndex: 2 });
+        // Lower stacking on mobile so the settled logo doesn't sit
+        // above content it shouldn't (desktop keeps original zIndex 2).
+        gsap.set(el, { zIndex: isMobile ? -10 : 2 });
       },
       onReverseComplete: () => {
         gsap.set(el, { zIndex: 1000 });

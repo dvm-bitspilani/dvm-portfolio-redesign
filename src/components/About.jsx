@@ -26,7 +26,7 @@ const About = () => {
       const centerX = x + window.innerWidth * 0.09;
       const centerY = y + window.innerHeight * 0.25;
 
-      const mask = `radial-gradient(circle 50vh at ${centerX}px ${centerY}px, black 0%, transparent 100%)`;
+      const mask = `radial-gradient(circle 40vw at ${centerX}px ${centerY}px, black 0%, transparent 100%)`;
       textureRef.current.style.webkitMaskImage = mask;
       textureRef.current.style.maskImage = mask;
     };

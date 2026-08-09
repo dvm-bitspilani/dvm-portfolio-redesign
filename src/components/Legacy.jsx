@@ -393,7 +393,7 @@ const Legacy = () => {
       const centerX = x + window.innerWidth * 0.1;
       const centerY = y + window.innerHeight * 0.28;
 
-      const mask = `radial-gradient(circle 50vh at ${centerX}px ${centerY}px, black 0%, transparent 100%)`;
+      const mask = `radial-gradient(circle 40vw at ${centerX}px ${centerY}px, black 0%, transparent 100%)`;
       textureRef.current.style.webkitMaskImage = mask;
       textureRef.current.style.maskImage = mask;
     };
@@ -471,8 +471,6 @@ const Legacy = () => {
       },
     });
 
-  
-
     return () => {
       tl.scrollTrigger?.kill();
       tl.kill();
@@ -494,12 +492,17 @@ const Legacy = () => {
 
     const validLines = lineRefs.current.filter(Boolean);
 
+    const isMobile = window.innerWidth <= 700;
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: wrapperRef.current,
         start: "top 96%",
         end: "top 20%",
-        toggleActions: "play none none reverse",
+        toggleActions: isMobile
+          ? "play none none none"
+          : "play none none reverse",
+        once: isMobile,
       },
     });
 
@@ -536,7 +539,6 @@ const Legacy = () => {
       tl.kill();
     };
   }, [centers]);
-
   useEffect(() => {
     const calculate = () => {
       setCenters({
