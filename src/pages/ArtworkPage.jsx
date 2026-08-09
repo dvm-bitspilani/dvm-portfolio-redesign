@@ -11,12 +11,22 @@ import "../components/ArtworkPage.css";
 const CELL = 11.5;
 const SPOT_RADIUS = 260;
 
-// four slots on screen at a time; 26 artworks => 7 pages, the last one partial
-const CARDS_PER_PAGE = 4;
-const TOTAL_PAGES = Math.ceil(artworks.length / CARDS_PER_PAGE);
+// four slots on screen at a time on desktop; below the 768px breakpoint the
+// net's vertical inner curve is removed (see ArtworkPage.css), leaving only
+// a top/bottom split, so only 2 cards fit on screen at once there
+const CARDS_PER_PAGE_DESKTOP = 4;
+const CARDS_PER_PAGE_MOBILE = 2;
+const MOBILE_BREAKPOINT = 768;
 
 // must match the transition duration on #stage .card in ArtworkPage.css
 const FADE_MS = 320;
+
+// total run time of the click pulse in triggerPulse(), i.e. straighten (0.55)
+// + flood (0.5) + hold/shrink (0.25 + 0.6) + un-straighten (0.6). Only used as
+// a safety net: the real "cards may come back now" signal is the pulse's own
+// completion callback, and this just guarantees they never stay hidden if that
+// callback is somehow lost.
+const PULSE_MS = 2500;
 
 // corners are pinned only to the LEFT and RIGHT edges of the viewport
 // (x = 0 or x = w). Their y positions sit inset from top/bottom, leaving
@@ -77,6 +87,12 @@ export default function ArtworkPage() {
   const spotlightGradRef = useRef(null);
   const arrowLeftRef = useRef(null);
   const arrowRightRef = useRef(null);
+  const cardLayerRef = useRef(null);
+
+  // the net effect lives entirely inside the big useEffect below; this ref is
+  // the one door out of it, so the paging logic can start a pulse and be told
+  // when the curves have finished settling back
+  const startPulseRef = useRef(null);
 
   useEffect(() => {
     const stage = stageRef.current;
@@ -88,8 +104,6 @@ export default function ArtworkPage() {
     const core = coreRef.current;
     const coreWrap = coreWrapRef.current;
     const spotlightGrad = spotlightGradRef.current;
-    const arrowLeft = arrowLeftRef.current;
-    const arrowRight = arrowRightRef.current;
 
     if (!stage) return;
 
@@ -259,6 +273,21 @@ export default function ArtworkPage() {
       return inside;
     }
 
+    // are we over one of the artwork cards? The cards are plain rectangles, so
+    // their bounding boxes are an exact hit-test. Cards that are mid-fade are
+    // ignored: they're transparent and pointer-events:none, so hovering the
+    // space they occupy shouldn't count as hovering a card.
+    function isOverCard(x, y) {
+      const layer = cardLayerRef.current;
+      if (!layer || layer.classList.contains('is-fading')) return false;
+      const cards = layer.querySelectorAll('.card');
+      for (const card of cards) {
+        const r = card.getBoundingClientRect();
+        if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) return true;
+      }
+      return false;
+    }
+
     function makeLine(x1, y1, x2, y2) {
       const ns = 'http://www.w3.org/2000/svg';
       const line = document.createElementNS(ns, 'line');
@@ -326,9 +355,21 @@ export default function ArtworkPage() {
       // visually clipped to the net, so this is harmless outside it)
       updatePointer(x, y);
 
+      const inside = isInsideNet(x, y);
+      const overCard = isOverCard(x, y);
+
+      // the glowing #core dot already acts as a custom cursor inside the
+      // net, so the real OS cursor is hidden there and only reappears once
+      // the pointer leaves the net's interior.
+      // Cards are the exception: they hold real controls (social links), so
+      // over a card the dot is faded out and the OS cursor handed back, which
+      // also lets the link hover/pointer states read normally.
+      stage.classList.toggle('cursor-hidden', inside && !overCard);
+      stage.classList.toggle('core-hidden', overCard);
+
       // the net's curves ease toward the cursor while it's inside; once it
       // exits, the target resets to centre and they ease back to rest
-      if (isInsideNet(x, y)) {
+      if (inside) {
         targetMouseX = x;
         targetMouseY = y;
       } else {
@@ -362,16 +403,27 @@ export default function ArtworkPage() {
     }
 
     // click-triggered pulse: straighten the outer curves, flood the net blue,
-    // fade back, then ease the curves back to their normal shape
-    function triggerPulse() {
-      if (pulseActive) return;
+    // fade back, then ease the curves back to their normal shape.
+    //
+    // `onDone` fires on the very last frame of that sequence - i.e. once
+    // straightenT is back at 0 and every quadratic curve has returned to its
+    // resting shape - which is the cue the card layer waits on before fading
+    // the new page in. Returns false (without calling onDone) if a pulse is
+    // already running, so the caller can leave the page alone.
+    function triggerPulse(onDone) {
+      if (pulseActive) return false;
       pulseActive = true;
+
+      const finish = () => {
+        pulseActive = false;
+        if (onDone) onDone();
+      };
 
       const gsap = typeof window !== 'undefined' ? window.gsap : undefined;
 
       if (typeof gsap !== 'undefined') {
         const state = { straighten: straightenT, radius: currentSpotRadius };
-        pulseTimeline = gsap.timeline({ onComplete: () => { pulseActive = false; } })
+        pulseTimeline = gsap.timeline({ onComplete: finish })
           .to(state, {
             straighten: 1,
             duration: 0.55,
@@ -397,7 +449,7 @@ export default function ArtworkPage() {
             ease: 'power2.inOut',
             onUpdate: () => { straightenT = state.straighten; }
           });
-        return;
+        return true;
       }
 
       // Fallback: no GSAP available, run the same sequence with rAF tweens
@@ -417,7 +469,7 @@ export default function ArtworkPage() {
                   tweenValue({
                     from: straightenT, to: 0, duration: 0.6, ease: 'power2.inOut',
                     onUpdate: (v) => { straightenT = v; },
-                    onComplete: () => { pulseActive = false; }
+                    onComplete: finish
                   });
                 }
               });
@@ -425,11 +477,15 @@ export default function ArtworkPage() {
           });
         }
       });
+
+      return true;
     }
 
     const handleMouseMove = (e) => handlePointer(e.clientX, e.clientY);
     const handleMouseLeave = () => {
       updatePointer(-500, -500);
+      stage.classList.remove('cursor-hidden');
+      stage.classList.remove('core-hidden');
       targetMouseX = window.innerWidth / 2;
       targetMouseY = window.innerHeight / 2;
     };
@@ -453,8 +509,11 @@ export default function ArtworkPage() {
       rafId = requestAnimationFrame(raf);
     }
 
-    if (arrowLeft) arrowLeft.addEventListener('click', triggerPulse);
-    if (arrowRight) arrowRight.addEventListener('click', triggerPulse);
+    // The arrows no longer fire the pulse through their own listener. changePage
+    // owns it now, so the page turn and the net animation share one lifecycle
+    // (and keyboard activation gets the pulse too, which the old click-only
+    // listener missed).
+    startPulseRef.current = triggerPulse;
 
     stage.addEventListener('mousemove', handleMouseMove);
     stage.addEventListener('mouseleave', handleMouseLeave);
@@ -465,8 +524,7 @@ export default function ArtworkPage() {
       stage.removeEventListener('mousemove', handleMouseMove);
       stage.removeEventListener('mouseleave', handleMouseLeave);
       stage.removeEventListener('touchmove', handleTouchMove);
-      if (arrowLeft) arrowLeft.removeEventListener('click', triggerPulse);
-      if (arrowRight) arrowRight.removeEventListener('click', triggerPulse);
+      startPulseRef.current = null;
 
       const gsapCleanup = typeof window !== 'undefined' ? window.gsap : undefined;
       if (typeof gsapCleanup !== 'undefined') {
@@ -482,43 +540,98 @@ export default function ArtworkPage() {
   const [isHamOpen, setIsHamOpen] = useState(false)
 
   // ---- artwork paging -----------------------------------------------------
+  const [cardsPerPage, setCardsPerPage] = useState(() =>
+    typeof window !== "undefined" && window.innerWidth < MOBILE_BREAKPOINT
+      ? CARDS_PER_PAGE_MOBILE
+      : CARDS_PER_PAGE_DESKTOP
+  );
+
+  useEffect(() => {
+    const onResize = () => {
+      setCardsPerPage(
+        window.innerWidth < MOBILE_BREAKPOINT
+          ? CARDS_PER_PAGE_MOBILE
+          : CARDS_PER_PAGE_DESKTOP
+      );
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  const totalPages = Math.ceil(artworks.length / cardsPerPage);
+
   const [page, setPage] = useState(0);
   const [isFading, setIsFading] = useState(false);
 
+  // crossing the breakpoint changes totalPages - clamp the current page back
+  // into range instead of leaving it pointing past the new last page
+  useEffect(() => {
+    setPage((p) => (p >= totalPages ? 0 : p));
+  }, [totalPages]);
+
   // a ref, not the state value, guards the transition: state updates are
   // batched, so a fast double-click would otherwise read a stale `isFading`
-  // and start a second page turn mid-fade
+  // and start a second page turn mid-fade.
+  //
+  // It now stays true for the whole net pulse, not just the 320ms fade, so
+  // arrow presses land on exactly one page turn: further presses while the
+  // curves are still moving are ignored outright rather than queueing up
+  // another swap behind the animation.
   const isFadingRef = useRef(false);
   const fadeTimeoutRef = useRef(null);
   const fadeRafRef = useRef(null);
+  const safetyTimeoutRef = useRef(null);
 
   const changePage = useCallback((direction) => {
     if (isFadingRef.current) return;
     isFadingRef.current = true;
     setIsFading(true);
 
+    // swap the artworks while the layer is fully transparent
     fadeTimeoutRef.current = setTimeout(() => {
-      // swap the cards while the layer is still transparent, then drop the
-      // fading class on a later frame so the new cards animate in from 0
-      // instead of appearing already opaque
-      setPage((p) => (p + direction + TOTAL_PAGES) % TOTAL_PAGES);
+      setPage((p) => (p + direction + totalPages) % totalPages);
+    }, FADE_MS);
+
+    // drop the fading class on a later frame so the new cards animate in from
+    // opacity 0 instead of appearing already opaque
+    const revealCards = () => {
+      if (safetyTimeoutRef.current) {
+        clearTimeout(safetyTimeoutRef.current);
+        safetyTimeoutRef.current = null;
+      }
       fadeRafRef.current = requestAnimationFrame(() => {
         fadeRafRef.current = requestAnimationFrame(() => {
           setIsFading(false);
           isFadingRef.current = false;
         });
       });
-    }, FADE_MS);
-  }, []);
+    };
+
+    // the cards come back only once the pulse has fully resolved and every
+    // quadratic curve has eased back to its resting shape
+    const started = startPulseRef.current
+      ? startPulseRef.current(revealCards)
+      : false;
+
+    if (!started) {
+      // nothing to wait on (net effect not mounted, or a pulse is somehow
+      // already running) - fall back to the plain fade timing
+      safetyTimeoutRef.current = setTimeout(revealCards, FADE_MS);
+      return;
+    }
+
+    safetyTimeoutRef.current = setTimeout(revealCards, PULSE_MS + 600);
+  }, [totalPages]);
 
   useEffect(() => () => {
     if (fadeTimeoutRef.current) clearTimeout(fadeTimeoutRef.current);
+    if (safetyTimeoutRef.current) clearTimeout(safetyTimeoutRef.current);
     if (fadeRafRef.current) cancelAnimationFrame(fadeRafRef.current);
   }, []);
 
   const visibleArtworks = artworks.slice(
-    page * CARDS_PER_PAGE,
-    page * CARDS_PER_PAGE + CARDS_PER_PAGE
+    page * cardsPerPage,
+    page * cardsPerPage + cardsPerPage
   );
 
   return (
@@ -549,7 +662,10 @@ export default function ArtworkPage() {
         <g className="glowSharp" ref={sharpLayerRef}></g>
       </svg>
 
-      <div className={`card-layer${isFading ? " is-fading" : ""}`}>
+      <div
+        className={`card-layer${isFading ? " is-fading" : ""}`}
+        ref={cardLayerRef}
+      >
         {visibleArtworks.map((artwork, i) => (
           // slot ids stay card1..card4 - the CSS that positions the four
           // quadrants is untouched, only what sits in them changes
@@ -599,11 +715,7 @@ export default function ArtworkPage() {
       </div>
 
       <footer>
-        <div id="dep-name-div">
-          <h2>DEPARTMENT OF</h2>
-          <h1>VISUAL MEDIA</h1>
-        </div>
-        <div><h2>Made with ❤️ by DVM</h2></div>
+        <h2>Made with ❤️ by DVM</h2>
       </footer>
     </div>
   );

@@ -1,6 +1,6 @@
 .container {
     position: fixed;
-    top: 5%;
+    top: 1%;
     left: 4%;
     right: 4%;
     z-index: 1000;
@@ -8,6 +8,7 @@
     background-color: transparent;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .heading {
@@ -69,4 +70,10 @@
 html {
   overflow-x: clip;
   scrollbar-gutter: stable;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    top: 2%;
+  }
 }

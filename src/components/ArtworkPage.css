@@ -11,6 +11,13 @@
   color: #fff;
 }
 
+/* Applied/removed in ArtworkPage.jsx's handlePointer via the existing
+   isInsideNet() hit-test - the glowing #core dot reads as the cursor while
+   inside the net, so the real OS cursor is hidden there. */
+#stage.cursor-hidden {
+  cursor: none;
+}
+
 #stage svg {
   position: absolute;
   /*top: 0;
@@ -73,6 +80,15 @@
   transform: translate(-500px, -500px);
   mix-blend-mode: screen;
   filter: blur(1px);
+  opacity: 1;
+  transition: opacity 180ms ease;
+}
+
+/* Toggled in ArtworkPage.jsx's handlePointer whenever the pointer is over a
+   card. The dot stands in for the cursor across the rest of the net, but a
+   card holds real links, so there it hands the job back to the OS cursor. */
+#stage.core-hidden #core {
+  opacity: 0;
 }
 
 /* Wrapper that holds the 4 visible cards. It matches #stage exactly, so the
@@ -93,6 +109,11 @@
   opacity: 1;
   transform: translateY(0);
   transition: opacity 320ms ease, transform 320ms ease;
+  /* belt and braces alongside the .cursor-hidden toggle: `cursor` inherits, so
+     this beats a `cursor: none` inherited from #stage no matter how the class
+     lands mid-movement. Children that set their own cursor (the social links'
+     `pointer`) still win over this inherited `auto`. */
+  cursor: auto;
 }
 
 /* Page turn: the layer fades out, the page state swaps underneath, then the
@@ -118,6 +139,44 @@
 #stage #card2 { left: 55%; top: 21%; width: 30%; height: 24%;}
 #stage #card3 { left: 11%; top: 59%; width: 30%; height: 24%;}
 #stage #card4 { left: 55%; top: 59%; width: 30%; height: 24%;}
+
+/* card1/card3 always sit in the left column (left: 11%) on desktop - mirror
+   their internal layout (creator info first, artwork second) so the page
+   reads symmetrically around the centre net instead of every card matching.
+   High specificity (two IDs) beats ArtworkCard.css's plain ".full-details-card
+   article" rule regardless of file order, so this doesn't need !important. */
+#stage #card1 .full-details-card article,
+#stage #card3 .full-details-card article {
+  flex-direction: row-reverse;
+}
+
+@media (max-width: 767px) {
+  /* #netLines' inner curves are the last two <path> children appended in
+     ArtworkPage.jsx's ensureNetElements (hMid, then vMid) - vMid, the
+     vertical one, is always last, so :last-child targets it precisely
+     without needing a dedicated class. Only its rendering is skipped here;
+     ArtworkPage.jsx still computes it, which is harmless. */
+  #netLines path:last-child {
+    display: none;
+  }
+
+  /* Only card1/card2 ever render below this breakpoint (cardsPerPage drops
+     to 2 in ArtworkPage.jsx), so they're restacked top/bottom to match the
+     single remaining horizontal divider instead of the left/right split. */
+  #stage #card1 { left: 8%; top: 15%; width: 84%; height: 32%; }
+  #stage #card2 { left: 8%; top: 55%; width: 84%; height: 32%; }
+
+  /* card1 is stacked on top here, not sitting in a left column, and card3
+     never renders at this width - so the desktop row-reverse doesn't apply.
+     This still has to restate the direction (not just rely on ArtworkCard.css's
+     own mobile rule) because these two IDs outrank that plain-class rule -
+     row-reverse would otherwise keep beating it and leave card1 showing its
+     creator info above the image instead of below. */
+  #stage #card1 .full-details-card article,
+  #stage #card3 .full-details-card article {
+    flex-direction: column;
+  }
+}
 
 #stage .navArrow {
   position: absolute;
@@ -163,29 +222,15 @@ footer {
   font-family: "Orbitron", sans-serif;
   display: flex;
   width: 52vw;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin: 0 0 30px 70px;
+  width: 100%;
 }
 
-#dep-name-div {
-  display: flex;
-  flex-direction: column;
-}
-
-#dep-name-div h1 {
+footer h2 {
   font-weight: 200;
-  align-self: flex-end;
-  margin-left: 30px;
-}
-
-#dep-name-div h2 {
-  font-weight: 200;
-  align-self: flex-start;
-}
-
-footer div h2 {
-  font-weight: 200;
+  transform: translateX(-40%);
 }
 
 #artwork-heading {
@@ -200,4 +245,10 @@ footer div h2 {
 @font-face {
   font-family: "StretchPro";
   src: url(../assests/StretchPro.otf);
+}
+
+@media screen and (max-width: 768px) {
+  #artwork-heading {
+    font-size: 1.5rem;
+  }
 }

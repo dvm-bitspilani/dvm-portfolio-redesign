@@ -3,14 +3,57 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
+    box-sizing: border-box;
     font-family: "Orbitron", sans-serif;
-    transition: all 0.3s ease ;
     padding: 10px;
+
+    /* The resting state carries the same border and radius as the hover state,
+       just fully transparent. Animating a transparent border to a visible one
+       keeps the card's inner box the same size throughout - if the border only
+       existed on :hover, every element inside would shift by 1px the moment
+       the pointer arrived. */
+    border: 1px solid transparent;
+    border-radius: 14px;
+    background-color: transparent;
+    /* Same gradient shape as the hover state below, just fully transparent -
+       matching stop structure is what lets the browser interpolate between
+       the two instead of just snapping, the same reasoning the border comment
+       above already used for the border itself. */
+    background-image: radial-gradient(
+        circle,
+        rgba(4, 6, 12, 0) 0%,
+        rgba(4, 6, 12, 0) 55%,
+        rgba(4, 6, 12, 0) 100%
+    );
+    box-shadow: none;
+    transition: background-color 0.3s ease, background-image 0.3s ease,
+                border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .full-details-card:hover {
-    background-color: #000;
-    box-shadow: 0 0 20px 20px aliceblue;
+    /* Was a flat rgba(4,6,12,0.82) fill out to the (transparent) border edge.
+       With the border gone there's nothing to hand off to at the edge, so the
+       fill itself now tapers to transparent instead of stopping abruptly -
+       same colour at the centre, fading out toward the corners. */
+    background-image: radial-gradient(
+        circle,
+        rgba(4, 6, 12, 0.82) 0%,
+        rgba(4, 6, 12, 0.82) 55%,
+        rgba(4, 6, 12, 0) 100%
+    );
+    /* three layers instead of one hard 20px spread - a tight rim, a
+       wider blue bloom that matches the net's #5aa8ff spotlight, and a faint
+       inner glow so the edge looks lit rather than drawn on */
+    box-shadow:
+        0 0 12px rgba(240, 248, 255, 0.35),
+        0 0 34px rgba(90, 168, 255, 0.22),
+        inset 0 0 24px rgba(90, 168, 255, 0.10);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .full-details-card {
+        transition: none;
+    }
 }
 
 .full-details-card .artwork-title {
@@ -36,20 +79,134 @@
     justify-content: space-evenly;
 }
 
+/* .image-container is a <button> now (it opens the modal), so the browser's
+   default button chrome has to be cleared before the layout rules below read
+   the same as they did on the old <div> */
 .image-container {
     flex: 0 0 auto;
     width: 45%;
     max-width: 190px;
     height: 100%;
+    /* Flex items default to min-height: auto, which refuses to shrink below
+       the content's intrinsic minimum size - here that's the <img>'s natural
+       aspect ratio at this box's width. On mobile the card is much wider
+       relative to its height than on desktop, so that intrinsic minimum
+       regularly exceeds the height article actually has to give it, and
+       without this override the browser grows image-container (and article,
+       and the card around it) to fit the image instead of honouring the
+       height: 100% above - which is what made the article look oversized. */
+    min-height: 0;
     display: flex;
     align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    border-radius: 4px;
 }
 
+/* Cards read as a quiet grid of greyscale thumbnails; colour arrives only on
+   the artwork you're pointing at, which doubles as the affordance that the
+   image is clickable. The modal's copy is never desaturated (see
+   .artwork-modal-figure img) - once it's open, you're looking at the piece
+   itself. */
 .image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    /* Was width:100%; height:100%; object-fit:contain - that forces the
+       <img> element's own box to always fill the full slot, with
+       object-fit only scaling the *picture* inside it down to match the
+       aspect ratio. Whenever the image's intrinsic ratio didn't match the
+       slot, that left a real (if invisible) gap between the img's box and
+       what's actually drawn - which is (a) still a flex item with an
+       automatic minimum size based on the image's own intrinsic ratio,
+       so a tall/narrow image could inflate the row regardless of the
+       min-height:0 above, and (b) hoverable/clickable over that whole gap,
+       not just the visible picture, which is what made :hover (even moved
+       onto the img itself) trigger outside the artwork.
+       Sizing intrinsically instead - auto width/height capped by max - makes
+       the img's box exactly match what's drawn, so it can never demand more
+       room than it's actually using, and hover only ever covers the
+       artwork itself. */
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
     border-radius: 4px;
+    filter: grayscale(1);
+    /* Was cursor: pointer on .image-container - moved here so the hand
+       cursor (and the colour reveal below) responds to the image itself
+       rather than the button's full hit box. */
+    cursor: pointer;
+    transition: filter 0.35s ease;
+}
+
+.image-container img:hover {
+    filter: grayscale(0) brightness(1.04);
+}
+
+/* Keyboard focus lands on the <button>, not the image, so this half still
+   has to key off the container - only the mouse-hover case above moves. */
+.image-container:focus-visible img {
+    filter: grayscale(0) brightness(1.04);
+}
+
+.image-container:focus-visible {
+    outline: 1px solid #cfe8ff;
+    outline-offset: 3px;
+}
+
+/* On mobile the card slot itself is landscape (84% wide, 32% tall - see
+   #stage #card1/#card2 in ArtworkPage.css), but .image-container's width is
+   capped at 45%/190px while its height above is 100% of the article. That
+   pins the button to the article's full height regardless of how narrow its
+   width ends up, so it renders as a tall portrait box even though the slot
+   around it is short and wide - and since the artwork image is centred and
+   scaled to fit, it can't fill that extra height, leaving a dead vertical
+   gutter above/below the picture.
+
+   height: auto here, with nothing else set, is what actually closes that
+   gap: the <img> above already sizes itself intrinsically (width: auto;
+   height: auto; max-width/max-height: 100%), so once image-container's own
+   height stops being forced, it just wraps its child - a flex container
+   with no explicit height shrinks to fit its content by default. An
+   aspect-ratio here would have been a step backwards: artworks don't all
+   share one aspect ratio, so pinning the container to a fixed ratio (e.g.
+   1/1) reintroduces the same letterboxing this rule is meant to remove
+   whenever an image isn't that shape. */
+@media (max-width: 767px) {
+    .image-container {
+        height: auto;
+    }
+
+    /* image-container no longer stretches, but article itself was still
+       `flex: 1` from the desktop rule above - a plain flex:1 child always
+       grows to fill whatever room its parent (full-details-card) has left
+       after the title, regardless of how tall its own children actually
+       are, so article kept claiming the card's full height even once
+       nothing inside it needed that much. flex: 0 0 auto makes article
+       size to its content instead. Stacking that content in a column -
+       image on top, creator info below - is also just a better fit for the
+       slot's own proportions here: on desktop the slot is roughly square
+       and a side-by-side row makes sense, but on mobile it's wide and
+       short, so laying the image and creator row out top-to-bottom uses
+       that shape better than squeezing them side by side ever could. The
+       row layout's 6% gap (sized for two side-by-side columns) is swapped
+       for a fixed vertical gap to match. */
+    .full-details-card article {
+        flex: 0 0 auto;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    /* With article now only as tall as its content, centre that content
+       (title stays pinned to the top) within whatever room the fixed-size
+       card slot leaves below it, instead of leaving it stranded at the top
+       with dead space beneath. */
+    .full-details-card {
+        justify-content: center;
+    }
 }
 
 .creator-section {
@@ -116,6 +273,12 @@
 }
 
 .socials .social svg {
+    /* #stage svg in ArtworkPage.css sets position:absolute + 100%/100% on
+       every svg in the page (id selector, so it outranks this rule on
+       specificity). We already fixed width/height with !important; position
+       needs the same treatment, otherwise the icon still pops out of normal
+       flow and jumps to whatever ancestor is positioned. */
+    position: static !important;
     display: block !important;
     width: 26px !important;
     height: 26px !important;
@@ -149,5 +312,276 @@
     .socials .social:hover,
     .socials .social:focus-visible {
         transform: none !important;
+    }
+}
+/* ---------------------------------------------------------------------------
+   Artwork modal
+
+   Rendered into document.body via a portal (see ArtworkCard.jsx), so none of
+   the `#stage ...` rules in ArtworkPage.css apply here - in particular the
+   blanket `#stage svg { position: absolute; width: 100%; height: 100% }` that
+   the card's social icons have to override. Selectors below are plain classes
+   and don't need to out-specify anything.
+--------------------------------------------------------------------------- */
+
+.artwork-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4vh 4vw;
+    box-sizing: border-box;
+    background: rgba(2, 3, 7, 0.82);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    /* the stage hides the OS cursor in favour of its glowing dot; the dot
+       doesn't reach up here, so hand the real cursor back */
+    cursor: auto;
+    animation: artwork-modal-fade 200ms ease both;
+}
+
+.artwork-modal {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    box-sizing: border-box;
+    width: min(760px, 100%);
+    max-height: 92vh;
+    /* the shell never scrolls - .artwork-modal-body does. Two nested scroll
+       areas is what produced a scrollbar on the panel AND inside it once the
+       description got long. */
+    overflow: hidden;
+    padding: 30px clamp(18px, 3vw, 36px) 30px;
+    font-family: "Orbitron", sans-serif;
+    color: #fff;
+    /* Was a flat rgba(4,6,12,0.94) fill bounded by an aliceblue border - the
+       border's gone, so the fill now tapers to transparent at its own edge
+       instead, matching the card's hover treatment. */
+    background-image: radial-gradient(
+        circle,
+        rgba(4, 6, 12, 0.94) 0%,
+        rgba(4, 6, 12, 0.94) 60%,
+        rgba(4, 6, 12, 0) 100%
+    );
+    border-radius: 16px;
+    /* same rim + bloom as the card's hover state, one step brighter, so the
+       modal reads as the card opened up rather than a separate surface */
+    box-shadow:
+        0 0 14px rgba(240, 248, 255, 0.30),
+        0 0 60px rgba(90, 168, 255, 0.25),
+        inset 0 0 44px rgba(90, 168, 255, 0.07);
+    animation: artwork-modal-rise 240ms ease both;
+}
+
+/* The single scrolling region: image + description. */
+.artwork-modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    /* flex items default to min-height:auto, which refuses to shrink below
+       their content - without this the body would push the modal past its
+       max-height instead of scrolling inside it */
+    min-height: 0;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    /* don't chain the scroll to the page behind once this hits its end */
+    overscroll-behavior: contain;
+    /* reserve the scrollbar's width up front so text doesn't reflow at the
+       moment the description grows long enough to need one */
+    scrollbar-gutter: stable;
+    padding-right: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(207, 232, 255, 0.35) transparent;
+}
+
+.artwork-modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.artwork-modal-body::-webkit-scrollbar-thumb {
+    background: rgba(207, 232, 255, 0.30);
+    border-radius: 3px;
+}
+
+.artwork-modal-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.artwork-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: 0;
+    border-radius: 4px;
+    background: none;
+    color: #8b8f98;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.artwork-modal-close svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+}
+
+.artwork-modal-close:hover,
+.artwork-modal-close:focus-visible {
+    color: #cfe8ff;
+}
+
+.artwork-modal-close:focus-visible {
+    outline: 1px solid #cfe8ff;
+    outline-offset: 2px;
+}
+
+.artwork-modal-title {
+    margin: 0;
+    flex: 0 0 auto;
+    /* clear of the close button on narrow screens */
+    padding: 0 34px;
+    font-size: clamp(1rem, 2.2vw, 1.55rem);
+    font-weight: 200;
+    line-height: 1.25;
+    text-align: center;
+}
+
+.artwork-modal-figure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* don't let a long description squash the artwork - it scrolls past
+       instead */
+    flex: 0 0 auto;
+    margin: 0;
+}
+
+.artwork-modal-figure img {
+    display: block;
+    max-width: 100%;
+    /* the image is the point of the modal, but the description and creator row
+       below it still have to be reachable without scrolling on most screens */
+    max-height: 52vh;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.artwork-modal-description {
+    max-width: 62ch;
+    margin: 0 auto;
+    font-size: clamp(0.72rem, 1vw, 0.85rem);
+    font-weight: 200;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.artwork-modal-creator {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 20px;
+    flex: 0 0 auto;
+    padding-top: 18px;
+    border-top: 1px solid rgba(240, 248, 255, 0.14);
+}
+
+.artwork-modal-creator h3 {
+    margin: 0;
+    font-size: clamp(0.75rem, 1.1vw, 0.95rem);
+    font-weight: 200;
+    line-height: 1.2;
+}
+
+@keyframes artwork-modal-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes artwork-modal-rise {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes artwork-modal-fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes artwork-modal-sink {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(12px); }
+}
+
+/* Mirrors the open animations above. ArtworkCard.jsx keeps the modal mounted
+   for 180ms after close is requested (matching this duration) so these get a
+   chance to run instead of the modal just vanishing. */
+.artwork-modal-backdrop.is-closing {
+    animation: artwork-modal-fade-out 180ms ease both;
+}
+
+.artwork-modal.is-closing {
+    animation: artwork-modal-sink 180ms ease both;
+}
+
+@media (max-width: 767px) {
+    .artwork-modal {
+        gap: 14px;
+        padding: 26px 18px;
+    }
+
+    .artwork-modal-figure img {
+        max-height: 44vh;
+    }
+
+    .artwork-modal-creator {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .creator-section {
+        align-items: center;
+    }
+
+    .creator-section h3 {
+        font-size: 0.75rem;
+    }
+
+    .full-details-card .artwork-title {
+        font-size: 1rem;
+    }
+
+    .full-details-card {
+        justify-content: space-evenly;
+        padding: 0;
+    }
+
+    .full-details-card article {
+        justify-content: space-between;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .artwork-modal-backdrop,
+    .artwork-modal,
+    .artwork-modal-backdrop.is-closing,
+    .artwork-modal.is-closing {
+        animation: none;
+    }
+
+    .image-container img {
+        transition: none;
     }
 }

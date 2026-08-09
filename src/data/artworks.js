@@ -26,6 +26,7 @@ const artworks = [
     dribble: "",
     behance: "",
     gitHub: "",
+    description: "Sometime in the future, this may be possible....spaceship traveling at warp speed. 3d modeling done in blender and gave my best to make it as close as possible to a sci-fi fiction theme....somewhere in the future this may be possible."
   },
   {
     id: 2,
@@ -81,6 +82,7 @@ const artworks = [
     dribble: "",
     behance: "",
     gitHub: "",
+    description: "Somewhere in the near future, Technology would be so advanced that the average human life expectancy would cross 100 years or so. We would infuse ourselves with technology and would be so dependent on technology that it may be hard to live without it. And maybe it would be so advanced that we are able to bring back the dead by making them into cyborgs or even robots. But what consequence will this have on our own world then? Will we disrupt the natural cycle of life?"
   },
   {
     id: 7,
@@ -92,6 +94,7 @@ const artworks = [
     dribble: "",
     behance: "",
     gitHub: "",
+    description: "This maybe a bit of a long description but do give it a read. Metaphorically speaking, we tend to wear masks almost daily to hide from others, or even ourselves, to cover up our personality and portray an identity that is different from our real one....Afraid of being alone or simply in order to follow social patterns...Few reasons for putting on a mask could be the fear of not being respected, loved or accepted or even due to fear of being judged. We do not bother to try to accept who we really are and improve ourselves...it seems much easier to lie and be insecure, operating only in superficiality. All this does is create an environment in which appearances take priority over true feelings. The best way to take off the mask is to get to know your true self and give it a chance. So do not hide behind a mask anymore!"
   },
   {
     id: 8,
@@ -114,6 +117,7 @@ const artworks = [
     dribble: "",
     behance: "",
     gitHub: "",
+    description: "Reliving the legacy of master assassin Altair from the assassin's creed series...this is dedicated to all the assassin's creed fans out there. This render was done in blender eevee engine."
   },
   {
     id: 10,
@@ -125,6 +129,7 @@ const artworks = [
     dribble: "",
     behance: "",
     gitHub: "",
+    description: "Two factions One great war which led to the rise of the galactic empire and the purge of the Jedi Order. The last of those who remain have set on a quest to uncover the truth of the world and restore the fallen order. Star wars fan art inspired from the game-'Jedi Fallen Order'. Made and rendered in blender cycles engine."
   },
   {
     id: 11,
@@ -147,6 +152,7 @@ const artworks = [
     dribble: "",
     behance: "",
     gitHub: "",
+    description: "The era of Spartans may have been long gone but their tales of bravery and courage in war have been etched as memories which shall not be forgotten for centuries to come. Rendered and composited in Blender 3d software."
   },
   {
     id: 13,
@@ -213,6 +219,7 @@ const artworks = [
     dribble: "",
     behance: "",
     gitHub: "",
+    description: "Ever wanted to go on a trip to the northern part of the world and spend a night just gazing at the sky and taking in the beauty of the northern lights as you feel the cold winds grazing your skin surrounded by silent snow filled mountains ? Rendered and composited in blender cycles engine."
   },
   {
     id: 19,
@@ -224,6 +231,7 @@ const artworks = [
     dribble: "",
     behance: "",
     gitHub: "",
+    description: "First major procedural project. Made everything procedurally including the fan. Nodes shared here but is a bit messy and it was a great learning experience for me experimenting with math nodes in blender. It sure was fun!"
   },
   {
     id: 20,
@@ -246,6 +254,7 @@ const artworks = [
     dribble: "",
     behance: "",
     gitHub: "",
+    description: "Ever wondered if Illuminati did actually exist? Well it did exist but not really the way as suggested by rumors.They were an Enlightenment era secret society which apparently was responsible for the french revolution and run the world politics from behind the shadows manipulating people to establish a new world order.Anyways this artwork was made in blender eevee engine.Total time taken-10hrs."
   },
   {
     id: 22,
@@ -257,6 +266,7 @@ const artworks = [
     dribble: "",
     behance: "",
     gitHub: "",
+    description: "Ever wanted to sit in front of a fire place in your home during a cold winter night on the eve of Christmas just relishing the warmth filled moment with your cat sleeping by your side? Modeled and rendered in blender cycles engine.Merry Christmas to everyone in advance"
   },
   {
     id: 23,
@@ -268,6 +278,7 @@ const artworks = [
     dribble: "",
     behance: "",
     gitHub: "",
+    description: "My first try at low poly art. Didn't turn out the way I was expecting composition wise but enjoyed making the models except the balloons which are images(and maybe ruin the whole poly thing but I tried). Made and rendered in blender cycles engine."
   },
   {
     id: 24,
@@ -279,6 +290,7 @@ const artworks = [
     dribble: "",
     behance: "",
     gitHub: "",
+    description: "Inspired from the Witcher game series and well I recently played Witcher 3 and I would dare say it is the best adventure game out there. Made and rendered in blender cycles engine. 'A lone witcher travelling across lands and seas, taking up contracts and killing monsters with his silver sword, occasionally came across relics which granted him the strength to continue doing what he does best.'"
   },
   {
     id: 25,
@@ -290,6 +302,7 @@ const artworks = [
     dribble: "",
     behance: "",
     gitHub: "",
+    description: "Confront your fears head on,never give up when in a dark phase of life instead move on ahead overcoming all the hardships believing in the fact that you shall reach light at the end of a seemingly dense and endless forest of darkness.Wolf model from blendswap and human figure from mixamo.Rendered in blender eevee engine.I know that the composition is a bit off but this is all i could manage in the little time i had."
   },
   {
     id: 26,

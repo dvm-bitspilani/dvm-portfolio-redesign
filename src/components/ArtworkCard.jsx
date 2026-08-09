@@ -1,3 +1,6 @@
+import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+
 import "./ArtworkCard.css";
 
 /* Social icons are inline SVG rather than background-image PNGs.
@@ -59,9 +62,156 @@ const SOCIALS = [
   ["gitHub", "GitHub"],
 ];
 
+/* Shared by the card and the modal so the two icon rows can never drift apart.
+   Only renders an icon when that profile actually has a URL, so a creator with
+   no Behance doesn't get a dead icon that opens about:blank. */
+function SocialLinks({ links, creatorName }) {
+  return (
+    <div className="socials">
+      {SOCIALS.filter(([key]) => links[key]).map(([key, label]) => (
+        <a
+          key={key}
+          className={`social ${key}`}
+          href={links[key]}
+          target="_blank"
+          rel="noopener noreferrer"
+          title={label}
+          aria-label={`${creatorName} on ${label}`}
+        >
+          {ICONS[key]}
+        </a>
+      ))}
+    </div>
+  );
+}
+
+/* The modal is portalled to document.body rather than rendered in place.
+   ArtworkPage.css styles by descendant of #stage - most importantly
+   `#stage svg { position: absolute; width: 100%; height: 100% }` - and #stage
+   itself is position:fixed with overflow:hidden and a clip-path on its
+   children. Anything rendered inside the card would inherit all of that and
+   have to fight it (the socials already carry !important overrides for exactly
+   this reason). Outside #stage, none of those selectors reach the modal, and
+   the stage's `cursor: none` doesn't apply either, so the pointer behaves
+   normally over the dialog. */
+function ArtworkModal({
+  title,
+  image,
+  description,
+  creatorName,
+  links,
+  isClosing,
+  onClose,
+}) {
+  const dialogRef = useRef(null);
+  const closeButtonRef = useRef(null);
+
+  useEffect(() => {
+    const previouslyFocused = document.activeElement;
+    closeButtonRef.current?.focus();
+
+    // the page behind shouldn't scroll while the overlay is up
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        e.stopPropagation();
+        onClose();
+        return;
+      }
+
+      if (e.key !== "Tab" || !dialogRef.current) return;
+
+      // keep Tab inside the dialog: without this the focus ring walks off into
+      // the nav arrows and social links sitting behind the overlay
+      const focusable = dialogRef.current.querySelectorAll(
+        'a[href], button:not([disabled])'
+      );
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    // capture phase so Escape is handled before anything else on the page
+    document.addEventListener("keydown", handleKeyDown, true);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown, true);
+      document.body.style.overflow = previousOverflow;
+      if (previouslyFocused instanceof HTMLElement) previouslyFocused.focus();
+    };
+  }, [onClose]);
+
+  return createPortal(
+    <div
+      className={`artwork-modal-backdrop${isClosing ? " is-closing" : ""}`}
+      // mousedown, not click: a click that starts on the image and ends on the
+      // backdrop (a stray drag) shouldn't close the dialog
+      onMouseDown={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <div
+        className={`artwork-modal${isClosing ? " is-closing" : ""}`}
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="artwork-modal-title"
+      >
+        <button
+          type="button"
+          className="artwork-modal-close"
+          ref={closeButtonRef}
+          onClick={onClose}
+          aria-label="Close"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+
+        <h2 className="artwork-modal-title" id="artwork-modal-title">
+          {title}
+        </h2>
+
+        {/* one scroll container for the whole dialog. The title, close button
+            and creator row sit outside it and stay put; only this region moves
+            when the description runs long, so a long description can't hand a
+            scrollbar to every block in the modal. */}
+        <div className="artwork-modal-body">
+          <figure className="artwork-modal-figure">
+            <img src={image} alt={title} draggable="false" />
+          </figure>
+
+          {description && (
+            <p className="artwork-modal-description">{description}</p>
+          )}
+        </div>
+
+        <div className="artwork-modal-creator">
+          <h3>By {creatorName}</h3>
+          <SocialLinks links={links} creatorName={creatorName} />
+        </div>
+      </div>
+    </div>,
+    document.body
+  );
+}
+
 export default function ArtworkCard({
   title,
   image,
+  description,
   creatorName,
   insta,
   linkedIn,
@@ -70,39 +220,84 @@ export default function ArtworkCard({
   gitHub,
 }) {
   const links = { insta, linkedIn, dribble, behance, gitHub };
+  const [isOpen, setIsOpen] = useState(false);
+  // Mounted for one more beat after the user asks to close, so the
+  // artwork-modal-fade-out/artwork-modal-sink animations (ArtworkCard.css)
+  // have time to play before the modal actually leaves the DOM - unmounting
+  // immediately, as `isOpen && <ArtworkModal .../>` alone would do, cuts the
+  // exit off with nothing to animate.
+  const [isClosing, setIsClosing] = useState(false);
+  const closeTimeoutRef = useRef(null);
+
+  const handleOpen = useCallback(() => {
+    // reopening while the exit animation is still running would otherwise
+    // leave the earlier close timeout armed, closing the reopened modal out
+    // from under the user a moment later
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setIsClosing(false);
+    setIsOpen(true);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setIsClosing(true);
+    // Matches the 180ms is-closing animations in ArtworkCard.css; skipped
+    // entirely under reduced motion, where those animations are disabled.
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    closeTimeoutRef.current = setTimeout(
+      () => {
+        setIsOpen(false);
+        setIsClosing(false);
+      },
+      prefersReducedMotion ? 0 : 180
+    );
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    };
+  }, []);
 
   return (
     <div className="full-details-card">
       <h2 className="artwork-title">{title}</h2>
 
       <article>
-        <div className="image-container">
+        {/* a real <button>, not a div with onClick, so the artwork opens from
+            the keyboard and announces itself to screen readers. It keeps the
+            .image-container class, so the existing layout rules still size it */}
+        <button
+          type="button"
+          className="image-container"
+          onClick={handleOpen}
+          aria-haspopup="dialog"
+          aria-label={`Open ${title}`}
+        >
           <img src={image} alt={title} loading="lazy" draggable="false" />
-        </div>
+        </button>
 
         <section className="creator-section">
           <h3>By {creatorName}</h3>
-
-          <div className="socials">
-            {/* only render an icon when that profile actually has a URL, so a
-                creator with no Behance doesn't get a dead icon that opens
-                about:blank */}
-            {SOCIALS.filter(([key]) => links[key]).map(([key, label]) => (
-              <a
-                key={key}
-                className={`social ${key}`}
-                href={links[key]}
-                target="_blank"
-                rel="noopener noreferrer"
-                title={label}
-                aria-label={`${creatorName} on ${label}`}
-              >
-                {ICONS[key]}
-              </a>
-            ))}
-          </div>
+          <SocialLinks links={links} creatorName={creatorName} />
         </section>
       </article>
+
+      {isOpen && (
+        <ArtworkModal
+          title={title}
+          image={image}
+          description={description}
+          creatorName={creatorName}
+          links={links}
+          isClosing={isClosing}
+          onClose={handleClose}
+        />
+      )}
     </div>
   );
 }
