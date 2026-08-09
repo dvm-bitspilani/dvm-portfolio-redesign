@@ -4,7 +4,6 @@ import blog_out from "../../assests/blog_out.png";
 import Card from "./BlogCard";
 import { useState, useEffect, useRef } from "react";
 import bg3 from "../../assests/bg_3.png";
-import logo from "../../assests/logo.png";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Link } from "react-router-dom";
@@ -14,7 +13,6 @@ gsap.registerPlugin(ScrollTrigger);
 const BlogPage = ({ onHamClick }) => {
   const [clickedCard, setClickedCard] = useState(null);
   const containerRef = useRef(null);
-  const dvmRef = useRef(null);
   const textureRef = useRef(null);
   const textureRef2 = useRef(null);
   const blogRef = useRef(null);
@@ -23,6 +21,14 @@ const BlogPage = ({ onHamClick }) => {
   const gradientPos2 = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+      // On mobile: don't scroll to top — the clicked card expands
+      // in place via CSS min-height instead.
+      return;
+    }
+
     window.scrollTo({ top: 0, behavior: "smooth" });
     document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
     document.body.scrollTo({ top: 0, behavior: "smooth" });
@@ -113,7 +119,6 @@ const BlogPage = ({ onHamClick }) => {
         <Link to="/" className={styles.back}>
           Back To Portfolio
         </Link>
-        <img src={logo} alt="logo" className={styles.logo} />
         <img onClick={onHamClick} src={ham} alt="logo" className={styles.ham_nav} />
       </div>
       <div className={styles.container} ref={containerRef}>
@@ -147,10 +152,7 @@ const BlogPage = ({ onHamClick }) => {
         </div>
       </div>
       <div className={styles.container2}>
-        <div ref={dvmRef} className={styles.text}>
-          <div>DEPARTMENT OF</div>
-          <div className={styles.visualMedia}>VISUAL MEDIA</div>
-        </div>
+        
 
         <button className={styles.projects}>Made with ❤️ by DVM</button>
         <div ref={gradientRef} className={styles.gradient}></div>

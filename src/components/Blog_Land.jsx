@@ -18,7 +18,6 @@ const Blog = () => {
   const logoRef = useRef(null);
   const blog_out = useRef(null);
   const blog = useRef(null);
-  const dvmRef = useRef(null);
   const gradientPos = useRef({ x: 0, y: 0 });
   const blogsRef = useRef(null);
   const [clickedCard, setClickedCard] = useState(null);
@@ -117,20 +116,6 @@ const Blog = () => {
     });
   }, []);
 
-  useEffect(() => {
-    gsap.from(dvmRef.current.children, {
-      x: -100,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.4,
-
-      scrollTrigger: {
-        trigger: blog.current,
-        start: "top 40%",
-        end: "top 20%",
-      },
-    });
-  }, []);
 
   useEffect(() => {
     const cards = blogsRef.current.children;
@@ -214,13 +199,13 @@ const Blog = () => {
           <img src={arrow} alt="Arrow" className={styles.arrow} />
         </Link>
       </div>
-
+{/* 
       <div className={styles.footer}>
         <div ref={dvmRef} className={styles.text}>
           <div>DEPARTMENT OF</div>
           <div className={styles.visualMedia}>VISUAL MEDIA</div>
         </div>
-      </div>
+      </div> */}
 
       <div ref={gradientRef} className={styles.gradient}></div>
     </div>

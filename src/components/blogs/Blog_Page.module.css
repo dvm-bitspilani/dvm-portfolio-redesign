@@ -1,6 +1,6 @@
 .blogs {
   position: relative;
-  margin-top: 50vh;
+  margin-top: 45vh;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
@@ -23,7 +23,7 @@
   width: 100vw;
 }
 
-.blogs [class*="clicked"] {
+.blogs [clas~="clicked"] {
   grid-column: 1 / -1;
   order: -1;
   width: 100%;
@@ -57,22 +57,7 @@
   top: 10%;
 }
 
-.text {
-  position: relative;
-  width: 100%;
-  text-align: left;
-  margin-left: 15%;
-  margin-top: 4rem;
-  color: white;
-  font-family: "Orbitron", sans-serif;
-  letter-spacing: 2px;
-}
 
-.visualMedia {
-  font-weight: bold;
-  font-size: 1.2rem;
-  margin-left: 3%;
-}
 
 .projects {
   margin-left: 45%;
@@ -184,16 +169,9 @@
   width: 100vw;
   z-index: 1002;
   background-color: transparent;
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
 }
 
-.logo {
-  height: 4vh;
-  width: auto;
-  z-index: 1002;
-  margin-right: 5%;
-}
+
 
 .ham_nav {
   height: 4vh;
@@ -273,6 +251,16 @@
     grid-template-columns: repeat(2, 1fr);
     padding: 0 6%;
     gap: 12px;
+    justify-items: center;
+  }
+
+  /* Keep clicked card in its original grid position on mobile —
+     just grow it in place instead of reordering to the top */
+  .blogs [class~="clicked"] {
+    grid-column: auto;
+    order: 0;
+    width: 100%;
+    min-height: 70vh;
   }
 
   .blogImage {
@@ -288,6 +276,8 @@
   .text {
     margin-left: 8%;
     margin-top: 3rem;
+    width: fit-content;
+    text-align: center;
   }
 
   .visualMedia {
@@ -315,6 +305,16 @@
     grid-template-columns: 1fr;
     padding: 0 6%;
     gap: 20px;
+    justify-items: center;
+  }
+
+  /* Keep clicked card in its original grid position on mobile —
+     just grow it in place instead of reordering to the top */
+  .blogs [class*="clicked"] {
+    grid-column: auto;
+    order: 0;
+    width: 100%;
+    min-height: 70vh;
   }
 
   .blogImage {
@@ -336,6 +336,8 @@
   .text {
     margin-left: 6%;
     margin-top: 2rem;
+    width: fit-content;
+    text-align: center;
   }
 
   .back {

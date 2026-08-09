@@ -120,8 +120,6 @@ const Legacy = () => {
   const img3Ref = useRef(null);
   const headerRef = useRef(null);
   const headerFillRef = useRef(null);
-  const footerRef = useRef(null);
-  const footerConRef = useRef(null);
   const gradientPos = useRef({ x: 0, y: 0 });
 
   // Refs to the connecting-graph lines (base + gradient overlay pair)
@@ -473,12 +471,7 @@ const Legacy = () => {
       },
     });
 
-    tl.from(footerConRef.current.children, {
-      x: -100,
-      opacity: 0,
-      duration: 0.6,
-      stagger: 0.2,
-    });
+  
 
     return () => {
       tl.scrollTrigger?.kill();
@@ -832,12 +825,12 @@ const Legacy = () => {
         </div>
       )}
 
-      <div ref={footerRef} className={styles.footer}>
+      {/* <div ref={footerRef} className={styles.footer}>
         <div className={styles.footerContent} ref={footerConRef}>
           <h2>DEPARTMENT OF</h2>
           <h1 className={styles.vm}>VISUAL MEDIA</h1>
         </div>
-      </div>
+      </div> */}
       <div ref={gradientRef} className={styles.gradient}></div>
     </div>
   );

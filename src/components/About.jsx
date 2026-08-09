@@ -17,8 +17,6 @@ const About = () => {
   const paraRef = useRef(null);
   const para1Ref = useRef(null);
   const para2Ref = useRef(null);
-  const dvmRef = useRef(null);
-  const footerRef = useRef(null);
 
   useEffect(() => {
     const tl = gsap.timeline();
@@ -92,17 +90,6 @@ const About = () => {
         },
       });
 
-      gsap.from(dvmRef.current?.children || [], {
-        x: -100,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.4,
-        scrollTrigger: {
-          trigger: footerRef.current,
-          start: "top 85%",
-          end: "top",
-        },
-      });
 
       const refs = [paraRef, para1Ref, para2Ref];
       const splits = refs
@@ -218,12 +205,12 @@ const About = () => {
         </p>
       </div>
 
-      <div ref={footerRef} className={styles.footer}>
+      {/* <div ref={footerRef} className={styles.footer}>
         <div ref={dvmRef} className={styles.text}>
           <div>DEPARTMENT OF</div>
           <div className={styles.visualMedia}>VISUAL MEDIA</div>
         </div>
-      </div>
+      </div> */}
 
       <div ref={gradientRef} className={styles.gradient}></div>
     </div>

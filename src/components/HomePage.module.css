@@ -54,7 +54,7 @@
   .text_sub {
     position: absolute;
     color: #ffffff;
-    font-family: "Josefin Sans";
+    font-family: "Orbitron";
     display: flex;
     flex-direction: column;
     z-index: 1005;
@@ -108,18 +108,20 @@
   }
 
 .grid {
-  position: absolute;
-  inset: 0;
-  z-index: 997;
-  opacity: 0.1;
-  background: repeating-linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0.2) 0,
-    rgba(255, 255, 255, 0.2) 1px,
-    transparent 1px,
-    transparent 30px
-  );
+    position: absolute;
+    inset: 0;
+    z-index: 100;
+    opacity: 0.6;
+    background: repeating-linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.2) 0,
+      rgba(255, 255, 255, 0.2) 1px,
+      transparent 1px,
+      transparent 30px
+    );
+    pointer-events: none;
 }
+
 
   .gradient {
     position: absolute;
