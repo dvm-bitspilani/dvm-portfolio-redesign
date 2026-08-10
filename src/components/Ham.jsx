@@ -97,14 +97,20 @@ const Ham = ({ onClose }) => {
   const [hoveredKey, setHoveredKey] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
+useEffect(() => {
     const computeScale = () => {
-      // Extra margin (0.88 / 0.88 instead of 0.94 / 0.92) leaves room
-      // for label line/dot/text that overhangs the base 1200x800 canvas,
-      // so labels never get clipped by the viewport edge.
-      const availW = window.innerWidth * 0.88;
-      const availH = window.innerHeight * 0.88;
-      setScale(Math.min(availW / BASE_W, availH / BASE_H));
+      const isMobile = window.innerWidth <= 768;
+      const marginW = isMobile ? 0.95 : 0.7;   // was 0.82 — more buffer for label overflow
+      const marginH = isMobile ? 0.95 : 0.7;   // was 0.82
+
+      const availW = window.innerWidth * marginW;
+      const availH = window.innerHeight * marginH;
+
+      // Cap scale so it never balloons on very large/ultrawide screens —
+      // beyond this, fixed-px label offsets (--ox/--oy) get amplified
+      // enough to outrun even the extra margin above.
+      const rawScale = Math.min(availW / BASE_W, availH / BASE_H);
+      setScale(Math.min(rawScale, 1.4));
     };
 
     computeScale();

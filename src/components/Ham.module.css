@@ -1,11 +1,10 @@
 .body {
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
   background: black;
   position: fixed;
   inset: 0;
-  z-index: 1005 ;
+  z-index: 1005;
   animation: bodyIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -22,8 +21,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform-origin: center center;overflow: hidden;
-  /* width, height, and transform (translate + scale) are set inline from JS */
+  transform-origin: center center;
+  /* width, height, transform, and --scale are set inline from JS */
 }
 
 .d {
@@ -34,7 +33,6 @@
   top: 40%;
   opacity: 0;
   animation: dropIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
-
 }
 
 .m {
@@ -89,19 +87,15 @@
 .logoWrapper {
   position: absolute;
   top: 15%;
-  left: 18%;
+  left: 22%;
   width: 800px;
   height: 500px;
   scale: 1.2;
-  left:22%;
-  overflow: hidden;
 }
-
 
 .segmentGroup {
   position: absolute;
   overflow: hidden;
-
 }
 
 .segmentGroup.isHovered {
@@ -159,7 +153,7 @@
 .segment.isHovered {
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.35))
     drop-shadow(0 0 22px rgba(120, 200, 255, 0.25));
-    overflow: hidden;
+  overflow: hidden;
   /* transform: scale(1.045); */
 }
 
@@ -176,7 +170,6 @@
   clip-path: inset(0 0 0 0);
 }
 
-
 .labelLayer {
   position: absolute;
   inset: 0;
@@ -192,11 +185,11 @@
   --oy: 0px;
   display: flex;
   align-items: center;
-  gap: clamp(4px, 0.6vw, 10px);
+  gap: calc(6px * var(--scale, 1));
   color: white;
   font-family: "Orbitron";
   font-weight: 300;
-  font-size: clamp(0.4rem, 1vw, 0.9rem);
+  font-size: calc(14px * var(--scale, 1));
   letter-spacing: 0.05em;
   white-space: nowrap;
   cursor: pointer;
@@ -226,7 +219,10 @@
 @keyframes labelFadeLeft {
   from {
     opacity: 0;
-    transform: translate(calc(var(--tx) + var(--ox) - 16px), calc(-50% + var(--oy)));
+    transform: translate(
+      calc(var(--tx) + var(--ox) - 16px),
+      calc(-50% + var(--oy))
+    );
   }
   to {
     opacity: 1;
@@ -237,7 +233,10 @@
 @keyframes labelFadeRight {
   from {
     opacity: 0;
-    transform: translate(calc(var(--tx) + var(--ox) + 16px), calc(-50% + var(--oy)));
+    transform: translate(
+      calc(var(--tx) + var(--ox) + 16px),
+      calc(-50% + var(--oy))
+    );
   }
   to {
     opacity: 1;
@@ -247,8 +246,8 @@
 
 .dot {
   position: relative;
-  width: clamp(12px, 1.4vw, 20px);
-  height: clamp(12px, 1.4vw, 20px);
+  width: calc(16px * var(--scale, 1));
+  height: calc(16px * var(--scale, 1));
   border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 50%;
   flex-shrink: 0;
@@ -275,7 +274,7 @@
 
 .line {
   height: 1px;
-  width: clamp(20px, 5.5vw, 130px);
+  width: calc(70px * var(--scale, 1));
   background: rgba(255, 255, 255, 0.35);
   flex-shrink: 0;
   transition: background 0.5s ease;
@@ -311,10 +310,364 @@
   border-color: white;
 }
 
+@media (max-width: 768px) {
+  .logoWrapper {
+    scale: 1.6;
+  }
+
+  /* reclaim vertical space on small screens */
+  .d,
+  .m {
+    display: none;
+  }
+.body {
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  position: fixed;
+  inset: 0;
+  z-index: 1005;
+  animation: bodyIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes bodyIntro {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.stage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center center;
+  /* width, height, transform, and --scale are set inline from JS */
+}
+
+.d {
+  height: 10%;
+  width: auto;
+  position: absolute;
+  left: 15%;
+  top: 40%;
+  opacity: 0;
+  animation: dropIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.m {
+  height: 10%;
+  width: auto;
+  position: absolute;
+  right: 15%;
+  top: 40%;
+  opacity: 0;
+  animation: dropIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+@keyframes dropIn {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.arrow {
+  height: 5%;
+  width: auto;
+  position: absolute;
+  left: 0%;
+  top: 5%;
+  cursor: pointer;
+  z-index: 1001;
+  opacity: 0;
+  transition: transform 0.3s ease;
+  animation: fadeSettle 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+}
+
+.arrow:hover {
+  transform: rotateZ(90deg) scale(1.15);
+}
+
+@keyframes fadeSettle {
+  from {
+    opacity: 0;
+    transform: rotateZ(70deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotateZ(90deg);
+  }
+}
+
+.logoWrapper {
+  position: absolute;
+  top: 15%;
+  left: 22%;
+  width: 800px;
+  height: 500px;
+  scale: 1.2;
+}
+
+.segmentGroup {
+  position: absolute;
+  overflow: hidden;
+}
+
+.segmentGroup.isHovered {
+  z-index: 50;
+  overflow: hidden;
+}
+
+.segmentGroup a {
+  position: absolute;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.segmentSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  transform-box: fill-box;
+  animation: segmentIntro 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  overflow: hidden;
+}
+
+@keyframes segmentIntro {
+  from {
+    opacity: 0;
+    transform: scale(0.75) translateY(18px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+.segment {
+  fill: url(#hamHoverGradient);
+  cursor: pointer;
+  pointer-events: visiblePainted; /* only the painted pixels of the wedge are hit-testable */
+  transition:
+    filter 0.4s ease,
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-box: fill-box;
+  overflow: hidden;
+  transform-origin: center;
+}
+
+.segment.isHovered {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.35))
+    drop-shadow(0 0 22px rgba(120, 200, 255, 0.25));
+  overflow: hidden;
+  /* transform: scale(1.045); */
+}
+
+.segmentFill {
+  fill: white;
+  pointer-events: none;
+  clip-path: inset(0 100% 0 0);
+  overflow: hidden;
+  transition: clip-path 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.segmentFill.isHovered {
+  overflow: hidden;
+  clip-path: inset(0 0 0 0);
+}
+
+.labelLayer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* re-enabled per-label below */
+  z-index: 100; /* always above every .segmentGroup */
+}
+
+.label {
+  position: absolute;
+  top: 50%;
+  --tx: 0px;
+  --ox: 0px;
+  --oy: 0px;
+  display: flex;
+  align-items: center;
+  gap: calc(6px * var(--scale, 1));
+  color: white;
+  font-family: "Orbitron";
+  font-weight: 300;
+  font-size: calc(14px * var(--scale, 1));
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  cursor: pointer;
+  pointer-events: auto; /* the label text itself is the exact hit target */
+  opacity: 0;
+  transition: letter-spacing 0.4s ease;
+}
+
+.label.left {
+  padding-right: 4px;
+  flex-direction: row;
+  animation: labelFadeLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.label.left .text {
+  transform-origin: left center;
+}
+
+.label.right {
+  padding-left: 4px;
+  flex-direction: row-reverse;
+  animation: labelFadeRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.label.right .text {
+  transform-origin: right center;
+}
+
+@keyframes labelFadeLeft {
+  from {
+    opacity: 0;
+    transform: translate(
+      calc(var(--tx) + var(--ox) - 16px),
+      calc(-50% + var(--oy))
+    );
+  }
+  to {
+    opacity: 1;
+    transform: translate(calc(var(--tx) + var(--ox)), calc(-50% + var(--oy)));
+  }
+}
+
+@keyframes labelFadeRight {
+  from {
+    opacity: 0;
+    transform: translate(
+      calc(var(--tx) + var(--ox) + 16px),
+      calc(-50% + var(--oy))
+    );
+  }
+  to {
+    opacity: 1;
+    transform: translate(calc(var(--tx) + var(--ox)), calc(-50% + var(--oy)));
+  }
+}
+
+.dot {
+  position: relative;
+  width: calc(16px * var(--scale, 1));
+  height: calc(16px * var(--scale, 1));
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.dot::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30%;
+  height: 30%;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition:
+    border-color 0.4s ease,
+    background 0.4s ease;
+}
+
+.line {
+  height: 1px;
+  width: calc(70px * var(--scale, 1));
+  background: rgba(255, 255, 255, 0.35);
+  flex-shrink: 0;
+  transition: background 0.5s ease;
+}
+
+.text {
+  display: inline-block;
+  transition:
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    text-shadow 0.4s ease;
+}
+
+.label.isHovered .line {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.9),
+    transparent
+  );
+}
+
+.label.isHovered .text {
+  transform: scale(1.12);
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+}
+
+.label.isHovered {
+  letter-spacing: 0.08em;
+}
+
+.label.isHovered .dot,
+.label.isHovered .dot::after {
+  border-color: white;
+}
 
 @media (max-width: 768px) {
-  .logoWrapper{
-    scale: 1.5;
+  .logoWrapper {
+    scale: 1.6;
   }
-  
+
+  /* reclaim vertical space on small screens */
+  .d,
+  .m {
+    display: none;
+  }
+
+  .label {
+    font-size: calc(16px * var(--scale, 1));
+    gap: calc(5px * var(--scale, 1));
+  }
+
+  .dot {
+    width: calc(15px * var(--scale, 1));
+    height: calc(15px * var(--scale, 1));
+  }
+
+  .line {
+    width: calc(38px * var(--scale, 1));
+  }
+}
+  .label {
+    font-size: calc(16px * var(--scale, 1));
+    gap: calc(5px * var(--scale, 1));
+  }
+
+  .dot {
+    width: calc(15px * var(--scale, 1));
+    height: calc(15px * var(--scale, 1));
+  }
+
+  .line {
+    width: calc(38px * var(--scale, 1));
+  }
 }
