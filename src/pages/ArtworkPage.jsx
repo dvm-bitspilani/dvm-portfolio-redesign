@@ -21,19 +21,46 @@ const MOBILE_BREAKPOINT = 768;
 // must match the transition duration on #stage .card in ArtworkPage.css
 const FADE_MS = 320;
 
-// total run time of the click pulse in triggerPulse(), i.e. straighten (0.55)
-// + flood (0.5) + hold/shrink (0.25 + 0.6) + un-straighten (0.6). Only used as
-// a safety net: the real "cards may come back now" signal is the pulse's own
-// completion callback, and this just guarantees they never stay hidden if that
-// callback is somehow lost.
-const PULSE_MS = 2500;
+// ---- navArrow click-pulse timing -----------------------------------------
+// This is the whole animation that plays when a .navArrow is clicked: the
+// outer net curves straighten, the spotlight floods the net blue, holds,
+// shrinks back, then the curves un-straighten. All four phases run in
+// sequence (the third has an extra hold delay before it starts), so the
+// total time is the sum of all five numbers below. To make the click
+// animation faster/slower, just edit these five values (seconds) - both the
+// GSAP timeline and the no-GSAP fallback below read from them, so nothing
+// else needs to change.
+const PULSE_STRAIGHTEN_DURATION = 0.3;   // outer curves straighten
+const PULSE_FLOOD_DURATION = 0.25;       // spotlight radius grows to flood
+const PULSE_HOLD_DELAY = 0.15;           // pause before the radius shrinks back
+const PULSE_SHRINK_DURATION = 0.3;       // spotlight radius shrinks back
+const PULSE_UNSTRAIGHTEN_DURATION = 0.3; // outer curves un-straighten
+
+// total run time of the click pulse above, in ms. Only used as a safety net:
+// the real "cards may come back now" signal is the pulse's own completion
+// callback, and this just guarantees they never stay hidden if that callback
+// is somehow lost. Derived from the constants above, so it stays in sync
+// automatically - no need to hand-edit it when tuning the durations.
+const PULSE_MS = (
+  PULSE_STRAIGHTEN_DURATION +
+  PULSE_FLOOD_DURATION +
+  PULSE_HOLD_DELAY +
+  PULSE_SHRINK_DURATION +
+  PULSE_UNSTRAIGHTEN_DURATION
+) * 1000;
+
+// vertical nudge applied to every y-coordinate that positions the net (both
+// CORNERS and BOW below) so the whole net - corners, bows, and the inner
+// curves that anchor off them - shifts down as one piece without changing
+// its shape. Purely additive, so 0 reproduces the original layout exactly.
+const NET_Y_SHIFT = 0.04;
 
 // corners are pinned only to the LEFT and RIGHT edges of the viewport
 // (x = 0 or x = w). Their y positions sit inset from top/bottom, leaving
 // room above and below the net for other page content.
 const CORNERS = {
-  TL: [0, 0.115], TR: [1, 0.10],
-  BR: [1, 0.86], BL: [0, 0.88]
+  TL: [0, 0.115 + NET_Y_SHIFT], TR: [1, 0.10 + NET_Y_SHIFT],
+  BR: [1, 0.86 + NET_Y_SHIFT], BL: [0, 0.88 + NET_Y_SHIFT]
 };
 
 // fixed "bow" amount for the outer curves (the axis NOT driven by the mouse) —
@@ -41,7 +68,7 @@ const CORNERS = {
 // endpoints, so each edge sags inward.
 const BOW = {
   leftX: 0.06, rightX: 0.94,   // left/right edges bow inward horizontally
-  topY: 0.16, bottomY: 0.82    // top/bottom edges bow inward vertically
+  topY: 0.16 + NET_Y_SHIFT, bottomY: 0.82 + NET_Y_SHIFT    // top/bottom edges bow inward vertically
 };
 
 // how far the mouse can push the outer curves' control points (wider = more bend)
@@ -351,6 +378,17 @@ export default function ArtworkPage() {
     }
 
     function handlePointer(x, y) {
+      // Below the mobile breakpoint the cursor-driven grid effects (the
+      // spotlight glow and the net curves reacting to pointer position) are
+      // switched off entirely - mousemove/touchmove call straight into this
+      // function, so returning early here is the single point that disables
+      // both. targetMouseX/Y are left at the centre (set once in buildGrid
+      // and never reassigned below), so the net simply stays at its resting
+      // shape. This doesn't touch triggerPulse()/the navArrow click pulse,
+      // which drives straightenT and currentSpotRadius independently of
+      // pointer position, so that animation is unaffected on mobile.
+      if (window.innerWidth < MOBILE_BREAKPOINT) return;
+
       // the spotlight glow always follows the raw cursor (it's already
       // visually clipped to the net, so this is harmless outside it)
       updatePointer(x, y);
@@ -426,26 +464,26 @@ export default function ArtworkPage() {
         pulseTimeline = gsap.timeline({ onComplete: finish })
           .to(state, {
             straighten: 1,
-            duration: 0.55,
+            duration: PULSE_STRAIGHTEN_DURATION,
             ease: 'power2.inOut',
             onUpdate: () => { straightenT = state.straighten; }
           })
           .to(state, {
             radius: 2600,
-            duration: 0.5,
+            duration: PULSE_FLOOD_DURATION,
             ease: 'power2.out',
             onUpdate: () => { currentSpotRadius = state.radius; }
           })
           .to(state, {
             radius: SPOT_RADIUS,
-            duration: 0.6,
+            duration: PULSE_SHRINK_DURATION,
             ease: 'power2.inOut',
-            delay: 0.25,
+            delay: PULSE_HOLD_DELAY,
             onUpdate: () => { currentSpotRadius = state.radius; }
           })
           .to(state, {
             straighten: 0,
-            duration: 0.6,
+            duration: PULSE_UNSTRAIGHTEN_DURATION,
             ease: 'power2.inOut',
             onUpdate: () => { straightenT = state.straighten; }
           });
@@ -454,20 +492,20 @@ export default function ArtworkPage() {
 
       // Fallback: no GSAP available, run the same sequence with rAF tweens
       tweenValue({
-        from: straightenT, to: 1, duration: 0.55, ease: 'power2.inOut',
+        from: straightenT, to: 1, duration: PULSE_STRAIGHTEN_DURATION, ease: 'power2.inOut',
         onUpdate: (v) => { straightenT = v; },
         onComplete: () => {
           tweenValue({
-            from: currentSpotRadius, to: 2600, duration: 0.5, ease: 'power2.out',
+            from: currentSpotRadius, to: 2600, duration: PULSE_FLOOD_DURATION, ease: 'power2.out',
             onUpdate: (v) => { currentSpotRadius = v; },
             onComplete: () => {
               tweenValue({
-                from: currentSpotRadius, to: SPOT_RADIUS, duration: 0.6, ease: 'power2.inOut',
-                delay: 0.25,
+                from: currentSpotRadius, to: SPOT_RADIUS, duration: PULSE_SHRINK_DURATION, ease: 'power2.inOut',
+                delay: PULSE_HOLD_DELAY,
                 onUpdate: (v) => { currentSpotRadius = v; },
                 onComplete: () => {
                   tweenValue({
-                    from: straightenT, to: 0, duration: 0.6, ease: 'power2.inOut',
+                    from: straightenT, to: 0, duration: PULSE_UNSTRAIGHTEN_DURATION, ease: 'power2.inOut',
                     onUpdate: (v) => { straightenT = v; },
                     onComplete: finish
                   });

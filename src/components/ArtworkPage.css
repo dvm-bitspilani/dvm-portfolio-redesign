@@ -164,7 +164,13 @@
      to 2 in ArtworkPage.jsx), so they're restacked top/bottom to match the
      single remaining horizontal divider instead of the left/right split. */
   #stage #card1 { left: 8%; top: 15%; width: 84%; height: 32%; }
-  #stage #card2 { left: 8%; top: 55%; width: 84%; height: 32%; }
+  /* Was top: 55%, height: 32% - bottom edge at 87%, past where the bottom net
+     curve actually dips to at the horizontal centre. (BL/BR corners sit at
+     0.86/0.88, but the curve bows inward to its control point at 0.82 - see
+     CORNERS/BOW in ArtworkPage.jsx - so the curve's lowest point mid-screen is
+     only ~84.5%.) Shifted up (top: 48%) and trimmed slightly (height: 30%) so
+     the card's bottom edge (78%) clears the curve at every x with margin. */
+  #stage #card2 { left: 8%; top: 48%; width: 84%; height: 30%; }
 
   /* card1 is stacked on top here, not sitting in a left column, and card3
      never renders at this width - so the desktop row-reverse doesn't apply.

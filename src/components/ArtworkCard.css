@@ -31,16 +31,6 @@
 }
 
 .full-details-card:hover {
-    /* Was a flat rgba(4,6,12,0.82) fill out to the (transparent) border edge.
-       With the border gone there's nothing to hand off to at the edge, so the
-       fill itself now tapers to transparent instead of stopping abruptly -
-       same colour at the centre, fading out toward the corners. */
-    background-image: radial-gradient(
-        circle,
-        rgba(4, 6, 12, 0.82) 0%,
-        rgba(4, 6, 12, 0.82) 55%,
-        rgba(4, 6, 12, 0) 100%
-    );
     /* three layers instead of one hard 20px spread - a tight rim, a
        wider blue bloom that matches the net's #5aa8ff spotlight, and a faint
        inner glow so the edge looks lit rather than drawn on */
@@ -48,6 +38,29 @@
         0 0 12px rgba(240, 248, 255, 0.35),
         0 0 34px rgba(90, 168, 255, 0.22),
         inset 0 0 24px rgba(90, 168, 255, 0.10);
+}
+
+/* The darkened backdrop only makes sense on a device that can genuinely
+   hover a pointer over the card. On touch there's no "point without
+   touching" gesture to un-set :hover with, so a tap latches the state on
+   (some browsers clear it on the next tap elsewhere, some don't) instead of
+   it responding to presence the way it does with a mouse - so it's scoped to
+   devices that actually support hover with a precise pointer, and left out
+   for mobile/touch entirely instead of just moving under a width breakpoint. */
+@media (hover: hover) and (pointer: fine) {
+    .full-details-card:hover {
+        /* Was a flat rgba(4,6,12,0.82) fill out to the (transparent) border
+           edge. With the border gone there's nothing to hand off to at the
+           edge, so the fill itself now tapers to transparent instead of
+           stopping abruptly - same colour at the centre, fading out toward
+           the corners. */
+        background-image: radial-gradient(
+            circle,
+            rgba(4, 6, 12, 0.82) 0%,
+            rgba(4, 6, 12, 0.82) 55%,
+            rgba(4, 6, 12, 0) 100%
+        );
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
