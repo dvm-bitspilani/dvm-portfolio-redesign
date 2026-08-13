@@ -1,35 +1,52 @@
-import rawProjects from "./projects.json";
+import rawProjects from "../../projects.json";
 
-const monthMap = {
-  January: 0,
-  February: 1,
-  March: 2,
-  April: 3,
-  May: 4,
-  June: 5,
-  July: 6,
-  August: 7,
-  September: 8,
-  October: 9,
-  November: 10,
-  December: 11,
-};
+const assetModules = import.meta.glob("../../assests/**/*", {
+  eager: true,
+  query: "?url",
+  import: "default",
+});
 
 const getDate = (date) => {
-  if (!date) return 0;
-
+  if (!date || typeof date !== "string") return 0;
   const timestamp = Date.parse(`1 ${date}`);
-
   return isNaN(timestamp) ? 0 : timestamp;
+};
+
+const cleanValue = (value) => {
+  if (value === null || value === undefined) return null;
+  if (typeof value !== "string") return value;
+  const trimmed = value.trim();
+  if (!trimmed || trimmed === "-") return null;
+  return trimmed;
+};
+
+const getAsset = (value) => {
+  const path = cleanValue(value);
+  if (!path) return null;
+
+  if (path.startsWith("http://") || path.startsWith("https://")) {
+    return path;
+  }
+
+  const filename = path.replace(/\\/g, "/").split("/").pop();
+  if (!filename) return null;
+
+  const assetKey = Object.keys(assetModules).find((key) => {
+    const keyFilename = key.replace(/\\/g, "/").split("/").pop();
+    return keyFilename === filename;
+  });
+
+  return assetKey ? assetModules[assetKey] : null;
 };
 
 const projects = rawProjects
   .map((item) => {
     const f = item.fields;
 
-    const categories = f.teamsInvolved
+    const categories = (f.teamsInvolved || "")
       .split(",")
       .map((x) => x.trim())
+      .filter(Boolean)
       .map((x) => {
         switch (x) {
           case "Front":
@@ -45,41 +62,23 @@ const projects = rawProjects
 
     return {
       id: String(item.pk),
-
       name: f.name,
-
       categories,
-
       type: categories.includes("Video") ? "video" : "website",
-
-      date: f.date === "-" ? null : f.date,
-
+      date: cleanValue(f.date),
       websiteLink:
         f.website_link === "http://null.com"
           ? null
-          : f.website_link,
-
-      heroImage:
-        f.heroSectionImageLink === "-"
-          ? null
-          : f.heroSectionImageLink,
-
-      text1: f.text_1 === "-" ? null : f.text_1,
-
-      text2: f.text_2 === "-" ? null : f.text_2,
-
-      gallery:
-        f.long_images_link === "-"
-          ? []
-          : f.long_images_link.split(",").map((img) => img.trim()),
-
-      mockup:
-        f.mockups_link === "-"
-          ? null
-          : f.mockups_link,
-
+          : cleanValue(f.website_link),
+      heroImage: getAsset(f.heroSectionImageLink),
+      text1: cleanValue(f.text_1),
+      text2: cleanValue(f.text_2),
+      gallery: f.long_images_link
+        ? f.long_images_link.split(",").map((img) => getAsset(img)).filter(Boolean)
+        : [],
+      mockup: getAsset(f.mockups_link),
       youtubeId: categories.includes("Video")
-        ? f.heroSectionImageLink
+        ? cleanValue(f.heroSectionImageLink)
         : null,
     };
   })
