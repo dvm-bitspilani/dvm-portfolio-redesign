@@ -223,7 +223,7 @@ export default function ProjectLanding() {
       <div className="project-carousel">
         <div className="project-carousel-card" ref={cardRef}>
           <div className="project-carousel-image">
-            <img src={card.image} alt={card.name} />
+            <img src={card.image} alt={card.name}  />
 
             <button
               type="button"
