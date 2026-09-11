@@ -4,6 +4,7 @@ import "../components/ContactUs.css";
 import bg3 from "../assests/bg_3.png";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import arrow from "../assests/arrow.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -236,8 +237,9 @@ export default function ContactUs() {
           />
 
           <button type="submit" className="contact-form-submit">
-            Submit
-          </button>
+  <span>Submit</span>
+  <img src={arrow} alt="Arrow" className="submit-arrow" />
+</button>
         </form>
 
         <div ref={gradientRef} className="gradient"></div>

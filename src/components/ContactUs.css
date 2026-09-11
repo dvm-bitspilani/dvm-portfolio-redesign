@@ -275,3 +275,49 @@
     transition: none;
   }
 }
+.contact-form-submit {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Orbitron", sans-serif;
+  z-index: 10;
+
+  width: min(60%, 420px);
+  height: 35px;
+
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background-color: transparent;
+
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+
+  overflow: hidden;
+  text-decoration: none;
+
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.contact-form-submit:hover {
+  color: #45e6ff;
+  border-color: #45e6ff;
+  background: rgba(69, 230, 255, 0.08);
+  box-shadow: 0 0 12px rgba(69, 230, 255, 0.2);
+}
+
+.contact-form-submit span {
+  padding: 2px;
+  display: inline-block;
+  transform: scaleX(1.5);
+  transform-origin: center;
+}
+
+.submit-arrow {
+  margin-left: 20px;
+  padding: 2px;
+  display: inline-block;
+  transform-origin: center;
+}

@@ -136,17 +136,20 @@
 }
 
 .project-carousel-name {
-  font-size: 18px;
+  font-size: 2rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  margin: 0 0 12px;
+  margin: 0 0 2rem;
+  color: white;
+    font-family: "Stretch Pro", sans-serif;
 }
 
 .project-carousel-paragraph {
-  font-size: 15px;
-  line-height: 1.6;
-  color: #c7d2ea;
+  font-size: 1rem;
+  line-height: 1.3;
+  color: white;
   margin: 0;
+    font-family: "Stretch Pro", sans-serif;
 }
 
 /* ----- See all ----- */
@@ -171,7 +174,6 @@
   font-weight: 600;
   border: 1px solid white;
   border-radius:20%
-  transition: all 0.3s ease;
 }
 
 .see-all-projects:hover {
@@ -352,4 +354,59 @@
 .project-heading-fill::-webkit-scrollbar,
 .project-heading-outline::-webkit-scrollbar {
   display: none;
+}
+.see-all-container {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0;
+  position: relative;
+  z-index: 10;
+}
+
+.see-all-projects {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Orbitron", sans-serif;
+  z-index: 1009;
+
+  width: min(60%, 420px);
+  height: 35px;
+
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background-color: transparent;
+  color: white;
+
+  cursor: pointer;
+  font-size: 0.9rem;
+
+  overflow: hidden;
+  flex: 0 0 auto;
+  text-decoration: none;
+
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.see-all-projects:hover {
+  color: #45e6ff;
+  border-color: #45e6ff;
+  background: rgba(69, 230, 255, 0.08);
+  box-shadow: 0 0 12px rgba(69, 230, 255, 0.2);
+}
+
+.see-all-projects span {
+  padding: 2px;
+  display: inline-block;
+  transform: scaleX(1.5);
+  transform-origin: center;
+}
+
+.projects-arrow {
+  margin-left: 20px;
+  padding: 2px;
+  display: inline-block;
+  transform-origin: center;
 }

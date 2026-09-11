@@ -1,19 +1,22 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import "../components/ProjectLanding.css";
+import abc from "../assests/img/project-imgs/hero/apogee25-hero-min.png"
 import bg3 from "../assests/bg_3.png";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
+import arrow from "../assests/arrow.png";
+
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const cards = [
   {
-    name: "Project 1",
-    image: "",
+    name: "APOGEE'25 ",
+    image: abc,
     paragraph:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      " This was the Official Website of the 43rd edition of APOGEE'25, based on the theme Revved-Up Rhapsody. It streamlined the registration process for outside participants. The website featured an Events Page that listed all the events conducted during the fest, as well as numerous miscellaneous sections and pages, including Contact Us Page, Sponsors' & Media Partners Page, Speakers' Page, and many others."
   },
   {
     name: "Project 2",
@@ -249,10 +252,11 @@ export default function ProjectLanding() {
       </div>
 
       <div className="see-all-container" ref={seeAllRef}>
-        <Link to="/projects" className="see-all-projects">
-          See All Projects
-        </Link>
-      </div>
+  <Link to="/projects" className="see-all-projects">
+    <span>See All Projects</span>
+    <img src={arrow} alt="Arrow" className="projects-arrow" />
+  </Link>
+</div>
 
       <div ref={gradientRef} className="gradient"></div>
     </div>
