@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import type { WallItem } from '../model'
-import { FONT_DISPLAY, FONT_MONO, loadCanvasFonts } from './textures'
+import { FONT_DISPLAY, FONT_MONO, loadCanvasFonts, noLig } from './textures'
 
 const PAGE = 2048
 const PAD = 4
@@ -238,7 +238,7 @@ export class Atlas {
     // Wide display face: shrink until the longest word fits.
     let fs = 30 * u
     ctx.font = `400 ${fs}px ${FONT_DISPLAY}`
-    const words = t.title.toUpperCase().split(/\s+/)
+    const words = t.title.toUpperCase().split(/\s+/).map(noLig)
     const maxWord = Math.max(...words.map((wd) => ctx.measureText(wd).width))
     if (maxWord > w - 44 * u) {
       fs *= (w - 44 * u) / maxWord

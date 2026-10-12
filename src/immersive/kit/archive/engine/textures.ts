@@ -6,6 +6,12 @@ export const FONT_DISPLAY = '"Stretch Pro", "imm-archive-stretch", "Orbitron", s
 export const FONT_LABEL = '"Orbitron", system-ui, sans-serif'
 export const FONT_MONO = '"JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace'
 
+/**
+ * Stretch Pro ligates doubled capitals (EE, PP, …) and canvas has no font-variant-ligatures switch:
+ * a ZERO WIDTH NON-JOINER between every character keeps each glyph separate.
+ */
+export const noLig = (s: string) => [...s].join('\u200C')
+
 /** Wait (briefly) for the faces drawn into canvases. Never rejects. */
 export function loadCanvasFonts() {
   if (typeof document === 'undefined' || !document.fonts) return Promise.resolve()
@@ -123,14 +129,14 @@ export function createCentreTexture(opts: { letters: boolean; copy: boolean }) {
     let size = 3.2 * ppc
     ctx.font = `400 ${size}px ${FONT_DISPLAY}`
     const maxW = (CENTRE.w - 1.1) * ppc
-    const mw = ctx.measureText('DVM').width
+    const mw = ctx.measureText(noLig('DVM')).width
     if (mw > maxW) {
       size *= maxW / mw
       ctx.font = `400 ${size}px ${FONT_DISPLAY}`
     }
     ctx.lineWidth = 2.5
     ctx.strokeStyle = 'rgba(255,255,255,0.3)'
-    ctx.strokeText('DVM', X(0), Y(MARK.cy + 0.1))
+    ctx.strokeText(noLig('DVM'), X(0), Y(MARK.cy + 0.1))
     ctx.restore()
   }
 
@@ -140,7 +146,7 @@ export function createCentreTexture(opts: { letters: boolean; copy: boolean }) {
     ctx.textBaseline = 'alphabetic'
     ctx.font = `400 ${0.3 * ppc}px ${FONT_DISPLAY}`
     ctx.letterSpacing = '4px'
-    ctx.fillText('DEPARTMENT OF VISUAL MEDIA', X(0), Y(2.25))
+    ctx.fillText(noLig('DEPARTMENT OF VISUAL MEDIA'), X(0), Y(2.25))
     ctx.letterSpacing = '0px'
     ctx.font = `400 ${0.17 * ppc}px ${FONT_MONO}`
     ctx.fillStyle = 'rgba(255,255,255,0.6)'

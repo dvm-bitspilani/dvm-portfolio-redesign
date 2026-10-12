@@ -66,6 +66,16 @@
   cursor: pointer;
 }
 
+/* Stretch Pro ligates doubled capitals (EE, PP): keep every glyph separate. */
+.imm-archive-title,
+.imm-archive-panel h2,
+.imm-archive-stats dd,
+.imm-archive-index__head h2,
+.imm-archive-index__group h3 {
+  font-variant-ligatures: none;
+  font-feature-settings: 'liga' 0, 'dlig' 0, 'clig' 0;
+}
+
 /* ------------------------------------------------------------- stage */
 .imm-archive-stage {
   position: absolute;
@@ -579,6 +589,10 @@
 .imm-archive-stats > div {
   padding: 10px 12px;
   background: color-mix(in srgb, var(--a-panel) 92%, black);
+}
+.imm-archive-meta > div:last-child:nth-child(odd),
+.imm-archive-stats > div:last-child:nth-child(odd) {
+  grid-column: span 2;
 }
 .imm-archive-meta dt,
 .imm-archive-stats dt {
