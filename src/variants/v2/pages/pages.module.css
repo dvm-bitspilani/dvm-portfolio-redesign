@@ -1,0 +1,122 @@
+.srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+.headFill {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: "Stretch Pro", "v2 Stretch", sans-serif;
+  font-weight: 400;
+  font-size: clamp(2.2rem, 7vw, 7rem);
+  line-height: 0.95;
+  color: #fff;
+  white-space: nowrap;
+}
+.headOutline {
+  position: absolute;
+  left: 0.14em;
+  top: 0.2em;
+  font-family: "Stretch Pro", "v2 Stretch", sans-serif;
+  font-size: clamp(2.2rem, 7vw, 7rem);
+  line-height: 0.95;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.23);
+  white-space: nowrap;
+  pointer-events: none;
+}
+.gridBg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.45;
+  pointer-events: none;
+  background: repeating-linear-gradient(to right, rgba(255, 255, 255, 0.2) 0, rgba(255, 255, 255, 0.2) 1px, transparent 1px, transparent 30px);
+}
+
+/* ---------- archive ---------- */
+.archive { position: fixed; inset: 0; background: #050506; }
+
+/* ---------- projects ---------- */
+.swarmBg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.projPage {
+  z-index: 1;
+  padding: 18vh 0 10vh 5.2%;
+  width: 58%;
+  background: transparent;
+}
+.projHead { position: relative; margin-bottom: 3vh; }
+.projLede {
+  min-height: 1.5em;
+  margin: 0 0 3vh;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.1rem;
+  color: #8fb3bd;
+}
+.projLede strong { color: #45e6ff; font-weight: 600; margin-right: 8px; }
+.grid.grid { margin: 3vh 0 0; padding: 0; max-width: none; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+.card { position: relative; }
+
+/* ---------- about ---------- */
+.about { background: #000; }
+.aboutTop {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  overflow: hidden;
+}
+.aboutMark { position: relative; height: 100vh; min-height: 520px; }
+.aboutTexture {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  -webkit-mask-image: radial-gradient(circle 55% at 50% 45%, #000 0%, transparent 100%);
+  mask-image: radial-gradient(circle 55% at 50% 45%, #000 0%, transparent 100%);
+  opacity: 0.9;
+}
+.aboutText { position: relative; z-index: 1; padding: 18vh 7vw 10vh 0; }
+.aboutPara {
+  margin: 0 0 1.1em;
+  max-width: 36em;
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(0.85rem, 1.02vw, 1rem);
+  line-height: 1.75;
+  color: #e9f6fa;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 5vh 0 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(95, 212, 230, 0.35);
+}
+.stats div { display: flex; flex-direction: column-reverse; gap: 6px; }
+.stats dd { margin: 0; font-family: "Stretch Pro", "v2 Stretch", sans-serif; font-size: clamp(1.5rem, 2.6vw, 2.6rem); color: #45e6ff; }
+.stats dt { font-family: "Rajdhani", sans-serif; font-size: 0.95rem; color: #8fb3bd; }
+
+.teams { padding: 14vh 5.2% 16vh; border-top: 1px solid rgba(255, 255, 255, 0.12); }
+.teamsTitle {
+  margin: 0 0 6vh;
+  font-family: "Stretch Pro", "v2 Stretch", sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3.4vw, 3.4rem);
+  color: #fff;
+}
+.teamList { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0; }
+.teamList li { padding: 26px 24px 30px 0; border-top: 1px solid rgba(95, 212, 230, 0.35); }
+.teamList h3 { margin: 0 0 12px; font-family: "Orbitron", sans-serif; font-weight: 500; font-size: 1.05rem; color: #45e6ff; }
+.teamList p { margin: 0; max-width: 30em; font-family: "Rajdhani", sans-serif; font-size: 1.05rem; line-height: 1.5; color: #b9c4c8; }
+.tlIntro { max-width: 24rem; }
+.tlIntro h2 { margin: 0 0 16px; font-family: "Stretch Pro", "v2 Stretch", sans-serif; font-weight: 400; font-size: clamp(1.8rem, 3.4vw, 3.4rem); color: #fff; }
+.tlIntro p { margin: 0; font-family: "Rajdhani", sans-serif; font-size: 1.1rem; line-height: 1.5; color: #b9c4c8; }
+
+@media (max-width: 768px) {
+  .projPage { width: auto; padding: 46vh 5% 10vh; }
+  .aboutTop { grid-template-columns: 1fr; }
+  .aboutMark { height: 56vh; min-height: 340px; }
+  .aboutText { padding: 0 6% 10vh; }
+  .stats dt { font-size: 0.8rem; }
+}
+.aboutHead .headFill,
+.aboutHead .headOutline { font-size: clamp(2rem, 5vw, 5.6rem); }

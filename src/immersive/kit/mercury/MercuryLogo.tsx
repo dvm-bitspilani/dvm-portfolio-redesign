@@ -32,6 +32,8 @@ export interface MercuryLogoProps {
   shadow?: number
   /** Studio floor reflection + caustics, 0..1. Default 1. Studio mode only. */
   floor?: number
+  /** Transparent mode only: a liquid-mirror pool under the mark (reflection + caustics), composited as light. 0..1, default 0 (off). */
+  reflection?: number
   /** X-ray stage: strength of the distance-field contour lines around the mark, 0..1. Default 1. */
   contours?: number
   fit?: MercuryFit
@@ -103,6 +105,7 @@ export const MercuryLogo = forwardRef<MercuryLogoHandle, MercuryLogoProps>(funct
     exposure = 1,
     shadow,
     floor = 1,
+    reflection = 0,
     contours = 1,
     fit,
     rotation,
@@ -147,6 +150,7 @@ export const MercuryLogo = forwardRef<MercuryLogoHandle, MercuryLogoProps>(funct
       exposure,
       shadow: shadow ?? (background === 'studio' ? 0 : 0.6),
       floor,
+      reflection,
       contours,
       fit: fitR,
       yaw: rotation?.yaw ?? 0.08,

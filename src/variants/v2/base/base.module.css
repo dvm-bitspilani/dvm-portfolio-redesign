@@ -1,0 +1,26 @@
+.artArchive {
+  position: fixed;
+  right: 4%;
+  bottom: 28px;
+  z-index: 50;
+  padding: 10px 16px;
+  border: 1px solid rgba(69, 230, 255, 0.45);
+  border-radius: 999px;
+  background: rgba(3, 10, 14, 0.7);
+  backdrop-filter: blur(8px);
+  color: #cfe8ff;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.artArchive:hover,
+.artArchive:focus-visible {
+  background: #45e6ff;
+  color: #031417;
+  outline: none;
+}
+@media (max-width: 768px) {
+  .artArchive { right: 50%; transform: translateX(50%); bottom: 72px; white-space: nowrap; }
+}

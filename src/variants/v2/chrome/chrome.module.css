@@ -1,0 +1,141 @@
+@font-face {
+  font-family: "v2 Stretch";
+  src: url("../../../assests/StretchPro.otf") format("opentype");
+  font-display: swap;
+}
+
+.nav {
+  position: fixed;
+  top: 1%;
+  left: 4%;
+  right: 4%;
+  z-index: 1000;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+  overflow: visible;
+}
+.nav > * { pointer-events: auto; }
+
+.wordmark {
+  color: #fff;
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.2rem;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  overflow: visible;
+}
+
+.navLink {
+  color: #cfe8ff;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  padding: 8px 2px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+.navLink:hover,
+.navLink[aria-current="page"] {
+  color: #45e6ff;
+  border-color: #45e6ff;
+}
+
+.ham {
+  all: unset;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.hamIcon {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  pointer-events: none;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.ham:hover .hamIcon {
+  transform: translateY(-2px) scale(1.08);
+  filter: drop-shadow(0 0 6px rgba(69, 230, 255, 0.45));
+}
+.ham:focus-visible,
+.navLink:focus-visible,
+.wordmark:focus-visible {
+  outline: 2px solid #45e6ff;
+  outline-offset: 4px;
+}
+
+/* ---- Archive door inside the hamburger overlay ---- */
+.hamArchive {
+  position: absolute;
+  right: 4%;
+  bottom: 6%;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  color: #cfe8ff;
+  text-decoration: none;
+  opacity: 0;
+  animation: hamArchiveIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both;
+  overflow: visible;
+}
+.hamArchiveKicker {
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.7rem;
+  color: #6d8a94;
+}
+.hamArchiveTitle {
+  font-family: "Stretch Pro", "v2 Stretch", sans-serif;
+  font-size: clamp(1.6rem, 3.6vw, 3rem);
+  color: transparent;
+  -webkit-text-stroke: 1px #cfe8ff;
+  transition: color 0.3s ease, -webkit-text-stroke-color 0.3s ease;
+}
+.hamArchive:hover .hamArchiveTitle,
+.hamArchive:focus-visible .hamArchiveTitle {
+  color: #45e6ff;
+  -webkit-text-stroke-color: #45e6ff;
+}
+.hamArchive:focus-visible { outline: none; }
+@keyframes hamArchiveIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 768px) {
+  .nav { top: 2%; }
+  .navRight { gap: 12px; }
+  .navLink { font-size: 0.68rem; }
+  .hamArchive { left: 6%; right: auto; align-items: flex-start; bottom: 5%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hamArchive { animation: none; opacity: 1; }
+}
+
+.asciiToggle {
+  all: unset;
+  cursor: pointer;
+  color: #cfe8ff;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  padding: 8px 2px;
+  border-bottom: 1px solid transparent;
+}
+.asciiToggle[aria-pressed="true"] { color: #45e6ff; border-color: #45e6ff; }
+.asciiToggle:hover { color: #45e6ff; }
+.asciiToggle:focus-visible { outline: 2px solid #45e6ff; outline-offset: 4px; }

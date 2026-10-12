@@ -1,0 +1,331 @@
+/* ===================== V2 home: Mercury Lake ===================== */
+.stageWrap {
+  position: relative;
+  background: #000;
+  overflow: clip;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- hero ---------- */
+.hero {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 560px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #000;
+  cursor: crosshair;
+}
+
+.sky {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: var(--horizon);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.6;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.2) 0,
+    rgba(255, 255, 255, 0.2) 1px,
+    transparent 1px,
+    transparent 30px
+  );
+}
+
+.skyTexture {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 30%;
+  pointer-events: none;
+  will-change: mask-image;
+}
+
+/* the base hero's teal colour wash, pooled where the light hits the surface */
+.wash {
+  position: absolute;
+  left: 30%;
+  bottom: -12%;
+  width: 60%;
+  height: 70%;
+  pointer-events: none;
+  background: radial-gradient(closest-side at 55% 70%, rgba(180, 250, 255, 0.8) 0%, rgba(60, 210, 230, 0.6) 35%, rgba(20, 90, 100, 0.3) 60%, transparent 85%);
+  mix-blend-mode: color;
+}
+
+.lettersClip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.lettersSink {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+.letters {
+  position: absolute;
+  bottom: 0;
+  max-width: none;
+  user-select: none;
+  pointer-events: none;
+  filter: brightness(1.7);
+  will-change: transform;
+}
+
+.lake {
+  position: absolute;
+  inset: var(--horizon) 0 0 0;
+  z-index: 2;
+  overflow: hidden;
+  background: linear-gradient(180deg, #02080a 0%, #000 70%);
+}
+.lakeGlow {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 70%;
+  transform: scaleY(-1);
+  opacity: 0.32;
+  -webkit-mask-image: radial-gradient(ellipse 42% 85% at var(--mx) 0%, #000 0%, transparent 100%);
+  mask-image: radial-gradient(ellipse 42% 85% at var(--mx) 0%, #000 0%, transparent 100%);
+  pointer-events: none;
+}
+.lakeCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.horizon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--horizon);
+  height: 1px;
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent 0%, rgba(95, 212, 230, 0.55) 18%, #cfe8ff 50%, rgba(95, 212, 230, 0.55) 82%, transparent 100%);
+  box-shadow: 0 0 18px rgba(69, 230, 255, 0.35);
+  transform-origin: 50% 50%;
+}
+
+.heroCopy {
+  position: absolute;
+  z-index: 6;
+  left: 5.2%;
+  top: clamp(110px, 17vh, 170px);
+  max-width: min(34rem, 38vw);
+  pointer-events: none;
+}
+.kicker {
+  margin: 0 0 10px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: #8fb3bd;
+}
+.heroTitle {
+  margin: 0;
+  font-family: "Stretch Pro", "v2 Stretch", sans-serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 4.4vw, 4.8rem);
+  line-height: 1.04;
+  color: #fff;
+  letter-spacing: 0.01em;
+}
+.heroLede {
+  margin: 22px 0 0;
+  max-width: 26rem;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 500;
+  font-size: 1.12rem;
+  line-height: 1.45;
+  color: #b9d3db;
+}
+
+.lakeCopy {
+  position: absolute;
+  z-index: 6;
+  left: 5.2%;
+  right: 5.2%;
+  bottom: clamp(70px, 9vh, 96px);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  pointer-events: none;
+}
+.motto {
+  margin: 0;
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(1rem, 1.5vw, 1.45rem);
+  color: #fff;
+  display: flex;
+  gap: 0.9em;
+}
+.hint {
+  margin: 0 0 4px;
+  max-width: 22rem;
+  text-align: right;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 0.95rem;
+  color: #6f8f99;
+}
+
+/* ---------- the pinned mark layer ---------- */
+.markLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  min-height: 560px;
+  z-index: 5;
+  pointer-events: none;
+  overflow: visible;
+}
+.markBox {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+.asciiMark {
+  position: absolute;
+}
+
+/* ---------- About ---------- */
+.about {
+  position: relative;
+  min-height: 135vh;
+  background: #000;
+}
+.aboutBg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+.aboutTexture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  /* stays centred on the resting mark while About scrolls (sticky is broken by the base CSS, so it simply sits near the top) */
+  top: 18vh;
+  background-size: cover;
+  background-position: center;
+  -webkit-mask-image: radial-gradient(circle 42vw at var(--ax) var(--ay), #000 0%, transparent 100%);
+  mask-image: radial-gradient(circle 42vw at var(--ax) var(--ay), #000 0%, transparent 100%);
+  opacity: 0.85;
+  pointer-events: none;
+}
+.aboutInner {
+  position: relative;
+  z-index: 6;
+  margin-left: 50%;
+  width: min(42vw, 640px);
+  padding: 24vh 0 30vh;
+}
+.aboutHead {
+  position: relative;
+  margin-bottom: 7vh;
+}
+.aboutTitle {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: "Stretch Pro", "v2 Stretch", sans-serif;
+  font-weight: 400;
+  font-size: clamp(2.4rem, 6.2vw, 6.6rem);
+  line-height: 0.95;
+  color: #fff;
+  white-space: nowrap;
+}
+.aboutTitleOutline {
+  position: absolute;
+  left: 0.12em;
+  top: 0.18em;
+  font-family: "Stretch Pro", "v2 Stretch", sans-serif;
+  font-size: clamp(2.4rem, 6.2vw, 6.6rem);
+  line-height: 0.95;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.23);
+  white-space: nowrap;
+  pointer-events: none;
+}
+.aboutCopy p {
+  margin: 0 0 1.2em;
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(0.85rem, 1.05vw, 1.02rem);
+  line-height: 1.75;
+  color: #e9f6fa;
+  max-width: 36em;
+}
+.aboutStats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 6vh 0 0;
+  padding-top: 22px;
+  border-top: 1px solid rgba(95, 212, 230, 0.35);
+}
+.aboutStats div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 6px;
+}
+.aboutStats dd {
+  margin: 0;
+  font-family: "Stretch Pro", "v2 Stretch", sans-serif;
+  font-size: clamp(1.5rem, 2.6vw, 2.6rem);
+  color: #45e6ff;
+}
+.aboutStats dt {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 0.95rem;
+  color: #8fb3bd;
+}
+
+/* ---------- small screens ---------- */
+@media (max-width: 768px) {
+  .heroCopy {
+    left: 6%;
+    right: 6%;
+    max-width: none;
+    top: 104px;
+  }
+  .heroTitle { font-size: clamp(1.7rem, 9vw, 2.6rem); }
+  .heroLede { font-size: 1rem; max-width: 20rem; margin-top: 12px; }
+  .lakeCopy { flex-direction: column; align-items: flex-start; left: 6%; right: 6%; gap: 10px; }
+  .hint { text-align: left; font-size: 0.85rem; }
+  .motto { font-size: 0.95rem; }
+  .aboutInner { margin: 0 6%; width: auto; padding: 18vh 0 24vh; }
+  .aboutStats { grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .aboutStats dt { font-size: 0.8rem; }
+  .wash { left: 10%; width: 80%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skyTexture, .lettersSink, .letters { will-change: auto; }
+}

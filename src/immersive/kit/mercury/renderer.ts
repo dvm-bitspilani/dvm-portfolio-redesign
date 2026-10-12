@@ -45,6 +45,8 @@ export interface RendererOptions {
   exposure: number
   shadow: number
   floor: number
+  /** Transparent mode: mirror-pool reflection + caustics under the mark, 0..1 (0 = off). */
+  reflection?: number
   contours: number
   fit: Required<MercuryFit>
   yaw: number
@@ -726,7 +728,7 @@ export class MercuryRenderer {
     pass.set1i('uSteps', this.steps)
     pass.set1i('uStudio', studio ? 1 : 0)
     pass.set1f('uFloorY', L.y - 0.5 * L.scale - 0.035)
-    pass.set1f('uFloorAmt', studio ? o.floor : 0)
+    pass.set1f('uFloorAmt', studio ? o.floor : (o.reflection ?? 0))
     pass.set1f('uShadow', o.shadow)
     pass.set1f('uContours', o.contours)
     pass.set2f('uShadowOff', 0.035, -0.055)

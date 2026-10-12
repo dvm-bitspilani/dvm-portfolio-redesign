@@ -24,6 +24,7 @@ Fills its positioned parent (`position:absolute; inset:0`). The canvas never tak
 | `exposure` | `1` | |
 | `shadow` | `0.6` / `0` studio | Soft shadow on an implicit plane behind the mark. |
 | `floor` | `1` | Studio floor reflection and caustics. |
+| `reflection` | `0` | Transparent mode only: a liquid-mirror pool under the mark (the studio floor's raymarched reflection + caustics), composited as light over the page. 0 = off (default, unchanged behaviour); values above 1 strengthen it. Used by variant v2's "mercury lake" hero. |
 | `contours` | `1` | X-ray distance-field contour lines around the mark. |
 | `fit` | `{ mode:'contain', padding:0.12, scale:1, x:0, y:0 }` | Sizes the mark inside the box. `padding` is a fraction per side. `x`/`y` offset the centre in half-box units (x right, y down). `mode:'height'\|'width'` fits one axis. |
 | `rotation` | `{ yaw:0.08, pitch:-0.13 }` | Base orientation (radians). |

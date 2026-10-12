@@ -321,7 +321,7 @@ void main(){
 
   float cov, tc;
   float tHit = march(ro, rd, uSteps, pa, cov, tc);
-  float tFloor = (studioOn && rd.y < 0.0) ? (uFloorY - ro.y) / rd.y : -1.0;
+  float tFloor = ((studioOn || uFloorAmt > 0.001) && rd.y < 0.0) ? (uFloorY - ro.y) / rd.y : -1.0;
   bool floorFirst = tFloor > 0.0 && (tHit < 0.0 || tFloor < tHit);
 
   // ---- studio floor: glossy black, reflects the mark, catches caustics
@@ -396,6 +396,7 @@ void main(){
     acc.rgb += bg * (1.0 - acc.a);
     acc.a = 1.0;
   } else {
+    acc.rgb += bg * (1.0 - acc.a); // transparent-mode reflection pool (bg is black otherwise)
     acc.a = clamp(max(acc.a, maxc(acc.rgb)), 0.0, 1.0);
   }
   acc.rgb += (hash12(frag + fract(uTime)*91.0) - 0.5) / 255.0 * acc.a;

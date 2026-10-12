@@ -1,0 +1,15 @@
+.root {
+  background: #000;
+  min-height: 100vh;
+  color: #fff;
+}
+/* The panel carries a thin teal waterline so the swipe reads as the lake rising. */
+.panel {
+  background: #030608;
+  box-shadow: inset 0 1px 0 rgba(69, 230, 255, 0.55);
+}
+/* Stretch Pro ships doubled-letter ligatures (EE, CC…) that garble names like APOGEE; inherited by the whole variant. */
+.root {
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "dlig" 0, "clig" 0;
+}
