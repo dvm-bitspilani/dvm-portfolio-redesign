@@ -1,6 +1,5 @@
 // Copied from src/components/Team.jsx for V2 (imports point at the originals; links stay inside /v/v2).
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import styles from "../../../components/Team.module.css";
@@ -11,7 +10,6 @@ import insta from "../../../assests/icons/twitter.png";
 import link from "../../../assests/icons/linkedin.png";
 import dribble from "../../../assests/icons/dribble.svg";
 import Nav from "../chrome/Navbar";
-import Ham from "../chrome/Ham";
 import teamMembersRaw from "../../../components/TeamInfo.json";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -92,7 +90,6 @@ export default function TeamPage() {
   const [loading, setLoading] = useState(true);
   const [pageReady, setPageReady] = useState(false);
   const [teamData, setTeamData] = useState({});
-  const [isHamOpen, setIsHamOpen] = useState(false);
 
   const rootRef = useRef(null);
   const heroRef = useRef(null);
@@ -117,7 +114,7 @@ export default function TeamPage() {
         end: "max",
         onUpdate: (self) => gsap.set(progressRef.current, { scaleX: self.progress }),
       });
-    }, rootRef);
+    }, rootRef.current);
     return () => ctx.revert();
   }, []);
 
@@ -129,7 +126,7 @@ export default function TeamPage() {
         end: 99999,
         toggleClass: { targets: filterWrapRef.current, className: styles.isStuck },
       });
-    }, rootRef);
+    }, rootRef.current);
     return () => ctx.revert();
   }, []);
 
@@ -236,7 +233,7 @@ export default function TeamPage() {
         });
       });
       ScrollTrigger.refresh();
-    }, containerRef);
+    }, containerRef.current);
     return () => ctx.revert();
   }, [loading, activeDept, teamData]);
 
@@ -248,16 +245,7 @@ export default function TeamPage() {
 
   return (
     <div className={styles.teamPage} ref={rootRef}>
-      <Nav onHamClick={() => setIsHamOpen(true)} />
-
-      {/* Rendered via portal so it's never trapped inside a transformed
-          ancestor (hero/logo scroll transforms create their own containing
-          block, which breaks position:fixed overlays). */}
-      {isHamOpen &&
-        createPortal(
-          <Ham onClose={() => setIsHamOpen(false)} />,
-          document.body
-        )}
+      <Nav />
 
       <div className={styles.progressBar} ref={progressRef} />
 

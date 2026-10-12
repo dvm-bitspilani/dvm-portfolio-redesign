@@ -1,3 +1,4 @@
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef, useState } from "react";
 
 export function useMedia(query) {
@@ -51,4 +52,38 @@ export function useLatest(value) {
   const r = useRef(value);
   r.current = value;
   return r;
+}
+
+/**
+ * The base sections create ScrollTriggers in effects without cleanup; once the page
+ * unmounts they linger on detached nodes (and warn on every refresh). Kill every trigger
+ * that lives inside `ref` when the component unmounts.
+ */
+export function useKillTriggersOnUnmount(ref) {
+  useEffect(() => {
+    const el = ref.current;
+    return () => {
+      if (!el) return;
+      ScrollTrigger.getAll().forEach((st) => {
+        const t = st.trigger;
+        if (t && (t === el || el.contains(t))) {
+          st.animation?.kill();
+          st.kill();
+        }
+      });
+    };
+  }, [ref]);
+}
+
+/** Like useNear, but latches: mounts heavy content once it comes close and keeps it (no layout jumps). */
+export function useOnceNear(ref, margin = "60% 0px") {
+  const [near, setNear] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || near) return;
+    const io = new IntersectionObserver(([e]) => e.isIntersecting && setNear(true), { rootMargin: margin });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [ref, margin, near]);
+  return near;
 }

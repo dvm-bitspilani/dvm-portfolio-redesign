@@ -39,7 +39,7 @@
 .pill:hover,
 .pill:focus-visible { background: #45e6ff; border-color: #45e6ff; color: #021014; outline: none; }
 
-/* ---------- timeline ---------- */
+/* ---------- timeline (Our Legacy page) ---------- */
 .timeline { position: relative; background: #050506; }
 .timelineIntro { max-width: 26rem; }
 .timelineIntro h2 {
@@ -57,65 +57,6 @@
   line-height: 1.5;
   color: #b9c4c8;
 }
-
-/* ---------- projects + swarm ---------- */
-.projects {
-  position: relative;
-  min-height: 100vh;
-  padding: 16vh 5.2% 14vh;
-  background: #000;
-  overflow: hidden;
-  isolation: isolate;
-}
-.projectsField { position: absolute; inset: 0; z-index: 0; }
-.projectsGrid {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  opacity: 0.35;
-  pointer-events: none;
-  background: repeating-linear-gradient(to right, rgba(255, 255, 255, 0.2) 0, rgba(255, 255, 255, 0.2) 1px, transparent 1px, transparent 30px);
-}
-.projectsInner { position: relative; z-index: 1; width: min(46%, 640px); }
-.projectsLede {
-  margin: 0 0 4vh;
-  max-width: 30rem;
-  font-family: "Rajdhani", sans-serif;
-  font-size: 1.05rem;
-  line-height: 1.5;
-  color: #8fb3bd;
-}
-.index { list-style: none; margin: 0 0 6vh; padding: 0; border-top: 1px solid rgba(255, 255, 255, 0.14); }
-.index li { border-bottom: 1px solid rgba(255, 255, 255, 0.14); }
-.indexLink {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: baseline;
-  gap: 4px 18px;
-  padding: 16px 0;
-  color: #fff;
-  text-decoration: none;
-  transition: padding 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease;
-}
-.indexName {
-  font-family: "Stretch Pro", "v2 Stretch", sans-serif;
-  font-size: clamp(0.95rem, 1.45vw, 1.35rem);
-  line-height: 1.15;
-}
-.indexMeta {
-  display: inline-flex;
-  gap: 12px;
-  font-family: "Rajdhani", sans-serif;
-  font-size: 0.95rem;
-  color: #6f8f99;
-  white-space: nowrap;
-}
-.indexMeta em { font-style: normal; color: #cfe8ff; }
-.indexLink:hover,
-.indexLink:focus-visible,
-.indexActive .indexLink { padding-left: 14px; color: #45e6ff; outline: none; }
-.indexLink:hover .indexMeta,
-.indexActive .indexMeta { color: #8fd8e6; }
 
 /* ---------- archive teaser ---------- */
 .teaser {

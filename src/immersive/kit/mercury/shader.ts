@@ -41,6 +41,7 @@ uniform sampler2D uBackdrop;
 uniform int uHasBackdrop;
 uniform vec4 uBdXform;      // backdrop uv = cssPx * xy + zw
 uniform float uFrost;
+uniform float uClarity;
 uniform vec2 uLogoScreen;   // logo centre, canvas css px
 uniform float uMarkPx;      // logo height, css px
 uniform int uStudio;
@@ -260,17 +261,21 @@ vec4 shadeObject(vec3 p, vec3 rd, vec3 n, vec2 cssPx, float wC, float wG, float 
     vec3 film = mix(vec3(1.0), thinFilm(cosI, 380.0 + 300.0*blend), clamp((0.12 + 0.3*fres) * uSheen, 0.0, 1.0));
     if(solidBehind()){
       vec2 bend = (rin.xy - rd.xy) * vec2(1.0, -1.0) * uMarkPx * 0.2;
-      vec2 mag = uLogoScreen + (cssPx - uLogoScreen) * 0.82;       // thick-lens magnification
+      // uClarity 0..1 (default 0 = original look): thinner lens, less frost + milky veil
+      vec2 mag = uLogoScreen + (cssPx - uLogoScreen) * mix(0.82, 0.9, uClarity);  // thick-lens magnification
       vec2 p0 = mag + bend;
-      vec2 dp = bend * 0.22;                                        // chromatic split
-      float lod = uFrost + 1.5*(1.0-cosI);
+      vec2 dp = bend * 0.22 * (1.0 - 0.75*uClarity);                // chromatic split
+      float lod = uFrost + 1.5*(1.0-cosI)*(1.0 - 0.65*uClarity);
       vec3 refr = vec3(behind(p0, lod).r, behind(p0 + dp, lod).g, behind(p0 + dp*2.0, lod).b);
       refr = pow(refr, vec3(2.2));
-      vec3 col = refr * uGlassTint * 1.25 + body * 0.38;
-      col = mix(col, env, 0.05 + 0.9*fres);
-      col += env * 0.16;
-      col *= film;
-      res += vec4(tonemap(col), 1.0) * wG;
+      vec3 col = refr * uGlassTint * mix(1.25, 1.75, uClarity) + body * 0.38 * (1.0 - 0.8*uClarity);
+      col = mix(col, env, (0.05 + 0.9*fres) * (1.0 - 0.25*uClarity));
+      col += env * 0.16 * (1.0 - 0.8*uClarity);
+      col *= mix(film, vec3(1.0), 0.6*uClarity);
+      // clarity also lets the real page through the faces that look at the viewer
+      // (premultiplied: refraction on top of the live page behind); 0 = opaque as before
+      float see = uClarity * 0.82 * cosI * cosI;
+      res += vec4(tonemap(col) * (1.0 - see), 1.0 - see) * wG;
     } else {
       // see-through glass over live DOM: body absorption + reflections only
       vec3 reflT = tonemap(env * (0.07 + 0.9*fres) * film);

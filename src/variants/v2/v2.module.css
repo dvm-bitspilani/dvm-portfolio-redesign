@@ -13,3 +13,13 @@
   font-variant-ligatures: none;
   font-feature-settings: "liga" 0, "dlig" 0, "clig" 0;
 }
+
+/* The base App.module.css declares "StretchPro" with a broken URL (../assets/…); pages that
+   use that family (team, artwork) then log a font decode warning. Re-declare it correctly. */
+@font-face {
+  font-family: "StretchPro";
+  src: url("../../assests/StretchPro.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

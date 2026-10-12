@@ -9,6 +9,7 @@ import bg3 from "../../../assests/bg_3.png";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef, useEffect, useState } from "react";
+import { useKillTriggersOnUnmount } from "../lib/hooks";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,6 +19,7 @@ const Blog = () => {
   const textureRef = useRef(null);
   const gradientRef = useRef(null);
   const containerRef = useRef(null);
+  useKillTriggersOnUnmount(containerRef);
   const logoRef = useRef(null);
   const blog_out = useRef(null);
   const blog = useRef(null);
@@ -88,7 +90,7 @@ const Blog = () => {
           scrub: 1,
         },
       });
-    }, containerRef);
+    }, containerRef.current);
 
     return () => ctx.revert();
   }, []);

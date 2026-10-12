@@ -7,15 +7,15 @@ import { useState, useEffect, useRef } from "react";
 import bg3 from "../../../assests/bg_3.png";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Link } from "react-router-dom";
-import { P } from "../lib/paths";
 
-import ham from "../../../assests/hamBtn.png";
+import Navbar from "../chrome/Navbar";
+import { useKillTriggersOnUnmount } from "../lib/hooks";
 gsap.registerPlugin(ScrollTrigger);
 
-const BlogPage = ({ onHamClick }) => {
+const BlogPage = () => {
   const [clickedCard, setClickedCard] = useState(null);
   const containerRef = useRef(null);
+  useKillTriggersOnUnmount(containerRef);
   const textureRef = useRef(null);
   const textureRef2 = useRef(null);
   const blogRef = useRef(null);
@@ -66,7 +66,7 @@ const BlogPage = ({ onHamClick }) => {
         },
         onUpdate: updateMask,
       });
-    }, containerRef);
+    }, containerRef.current);
 
     return () => ctx.revert();
   }, []);
@@ -97,7 +97,7 @@ const BlogPage = ({ onHamClick }) => {
         },
         onUpdate: updateMask2,
       });
-    }, containerRef);
+    }, containerRef.current);
 
     return () => ctx2.revert();
   }, []);
@@ -117,12 +117,7 @@ const BlogPage = ({ onHamClick }) => {
 
     <>
     
-      <div className={styles.navbar}>
-        <Link to={P("/")} className={styles.back}>
-          Back To Portfolio
-        </Link>
-        <img onClick={onHamClick} src={ham} alt="Open menu" role="button" tabIndex={0} onKeyDown={(e) => e.key === "Enter" && onHamClick?.()} className={styles.ham_nav} />
-      </div>
+      <Navbar />
       <div className={styles.container} ref={containerRef}>
         <div className={styles.grid}></div>
         <div

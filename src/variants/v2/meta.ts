@@ -5,7 +5,7 @@ const meta: VariantMeta = {
   order: 2,
   name: 'V2 · Reframed',
   summary:
-    'A new hero built around the liquid mark: a mercury lake on a horizon line, the outlined DVM letters rising out of it and reflected in it. Scroll lifts the mark out of the pool (chrome → glass → x-ray). Origami timeline on home, a swarm that re-forms into each project cover, a CRT terminal for contact, and the Archive wall.',
+    'A new hero built around the liquid mark: a mercury lake on a horizon line, the outlined DVM letters rising out of it. One live mercury mark for the whole site: it lifts off the lake into clear glass beside About, turns x-ray, then collapses, flips and docks in the navbar, where it stays on every page and dives into the menu preview. Original Projects, V1-style Legacy swarm, an Our Legacy page with the origami year-by-year strip, a CRT terminal for contact, and the Archive wall.',
 }
 
 export default meta

@@ -1,22 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "../chrome/Navbar";
-import Ham from "../chrome/Ham";
 import MarkStage from "./MarkStage";
-import TimelineSection from "./TimelineSection";
-import ProjectsSection from "./ProjectsSection";
 import ArchiveTeaser from "./ArchiveTeaser";
 import Blog_Land from "../base/Blog_Land";
-import Legacy from "../../../components/Legacy";
+import Legacy from "../legacy/Legacy";
+import ProjectLanding from "../projects/ProjectLanding";
 import Terminal from "../contact/Terminal";
-import s from "../chrome/chrome.module.css";
 
 export default function Home() {
-  const [hamOpen, setHamOpen] = useState(false);
-  const [ascii, setAscii] = useState(false);
   const location = useLocation();
 
-  // Arrived from the menu wanting a section (e.g. /#about, /#legacy).
+  // Arrived wanting a section (e.g. /v/v2#about, /v/v2#legacy, or state.scrollTo).
   useEffect(() => {
     const id = location.state?.scrollTo || location.hash.slice(1);
     if (!id) return;
@@ -26,27 +21,15 @@ export default function Home() {
 
   return (
     <>
-      <Navbar onHamClick={() => setHamOpen(true)}>
-        <button
-          type="button"
-          className={s.asciiToggle}
-          aria-pressed={ascii}
-          title="Swap the hero mark between liquid mercury and ASCII"
-          onClick={() => setAscii((a) => !a)}
-        >
-          {ascii ? "Mercury" : "ASCII"}
-        </button>
-      </Navbar>
+      <Navbar />
       <main>
-        <MarkStage ascii={ascii} />
-        <TimelineSection tone="copper" />
+        <MarkStage />
         <Blog_Land />
         <Legacy />
-        <ProjectsSection />
+        <ProjectLanding />
         <Terminal id="contact" />
         <ArchiveTeaser />
       </main>
-      {hamOpen && <Ham onClose={() => setHamOpen(false)} />}
     </>
   );
 }

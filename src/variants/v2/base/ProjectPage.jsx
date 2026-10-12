@@ -1,12 +1,12 @@
 // Copied from src/components/Project/ProjectPage.jsx for V2 (imports point at the originals; links stay inside /v/v2).
 import React, { useEffect, useState } from "react";
-import Ham from "../chrome/Ham";
 import { P } from "../lib/paths";
 
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Navbar from "../chrome/Navbar";
 import projects from "../../../components/Project/projectsData";
 import "../../../components/Project/ProjectPage.css";
+import b from "./base.module.css";
 
 export default function ProjectPage() {
   const { name } = useParams();
@@ -26,7 +26,6 @@ export default function ProjectPage() {
       );
 
   const [activeImage, setActiveImage] = useState(0);
-  const [isHamOpen, setIsHamOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -58,11 +57,10 @@ export default function ProjectPage() {
 
   return (
     <div>
-      <Navbar onHamClick={() => setIsHamOpen(true)} />
-      {isHamOpen && <Ham onClose={() => setIsHamOpen(false)} />}
+      <Navbar />
 
       <div className="proj-detail-page">
-        <Link to={P("/projects")} className="proj-detail-page__back">
+        <Link to={P("/projects")} className={`proj-detail-page__back ${b.back}`}>
           ‹ Back to Projects
         </Link>
 

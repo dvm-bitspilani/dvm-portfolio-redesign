@@ -34,6 +34,8 @@ export interface MercuryBackdrop {
   live?: boolean
   /** Base blur (mip LOD) of the refraction. Default 1.2. */
   frost?: number
+  /** 0..1: clearer, more see-through glass (less frost falloff, body haze and milky veil). Default 0. */
+  clarity?: number
 }
 
 export interface RendererOptions {
@@ -764,6 +766,7 @@ export class MercuryRenderer {
     const hasBd = !!(bd && this.bdSource)
     pass.set1i('uHasBackdrop', hasBd ? 1 : 0)
     pass.set1f('uFrost', bd?.frost ?? 1.2)
+    pass.set1f('uClarity', Math.min(1, Math.max(0, bd?.clarity ?? 0)))
     if (hasBd && bd && mode > 0.02 && mode < 1.98) {
       if (bd.live) this.uploadBackdrop()
       const cr = this.canvas.getBoundingClientRect()

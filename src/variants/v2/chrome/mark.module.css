@@ -1,0 +1,12 @@
+/* The one live mercury mark: a fixed square posed by chrome/mark.jsx. */
+.box {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 92px;
+  height: 92px;
+  z-index: 1001;
+  pointer-events: none;
+  will-change: transform;
+  transform: translate3d(-200px, -200px, 0);
+}

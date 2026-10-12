@@ -2,23 +2,27 @@
 // origami strip unfolding the department's milestones (teal foil, to sit with the glass).
 import { useEffect, useMemo, useRef, useState } from "react";
 import { MercuryLogo, paintHeroBackdrop } from "../../../immersive/kit/mercury";
+import { GLASS_ENV } from "../lib/glass";
 import { FoldTimeline } from "../../../immersive/kit/timeline";
 import { site, stats, verticals } from "../../../immersive/data";
 import bg3 from "../../../assests/bg_3.png";
 import Navbar from "../chrome/Navbar";
-import Ham from "../chrome/Ham";
 import { buildMilestoneStops, useScopedSelect } from "../lib/timeline";
-import { loadImage, useMedia } from "../lib/hooks";
+import { loadImage, useMedia, useNear, useOnceNear } from "../lib/hooks";
 import s from "./pages.module.css";
 
 const ABOUT_STATS = stats.filter((x) => ["users on our apps and websites", "fests: BOSM, Oasis & APOGEE", "teams"].includes(x.label));
 
 export default function AboutPage() {
-  const [hamOpen, setHamOpen] = useState(false);
   const stageRef = useRef(null);
   const mercRef = useRef(null);
   const [backdrop, setBackdrop] = useState(null);
   const narrow = useMedia("(max-width: 768px)");
+  // The big glass mark only lives while the top of the page is near: with the docked
+  // navbar mark and the milestones strip below, never more than two GL contexts render.
+  const near = useNear(stageRef, "40% 0px");
+  const tlRef = useRef(null);
+  const tlNear = useOnceNear(tlRef, "60% 0px");
   const milestones = useMemo(() => buildMilestoneStops(), []);
   const onSelect = useScopedSelect();
 
@@ -47,20 +51,23 @@ export default function AboutPage() {
 
   return (
     <>
-      <Navbar onHamClick={() => setHamOpen(true)} />
+      <Navbar />
       <main className={s.about}>
         <section className={s.aboutTop} aria-labelledby="v2-about-page-title">
           <div className={s.gridBg} aria-hidden="true" />
           <div ref={stageRef} className={s.aboutMark}>
             <div className={s.aboutTexture} style={{ backgroundImage: `url(${bg3})` }} aria-hidden="true" />
-            <MercuryLogo
-              ref={mercRef}
-              material="glass"
-              backdrop={backdrop ? { source: backdrop, element: stageRef, frost: 1 } : null}
-              fit={{ padding: narrow ? 0.14 : 0.16 }}
-              introDelay={0.4}
-              label="DVM mark in glass"
-            />
+            {near && (
+              <MercuryLogo
+                ref={mercRef}
+                material="glass"
+                env={GLASS_ENV}
+                backdrop={backdrop ? { source: backdrop, element: stageRef, frost: 0.35, clarity: 0.85 } : null}
+                fit={{ padding: narrow ? 0.14 : 0.16 }}
+                introDelay={0.4}
+                label="DVM mark in glass"
+              />
+            )}
           </div>
           <div className={s.aboutText}>
             <div className={`${s.projHead} ${s.aboutHead}`}>
@@ -93,20 +100,23 @@ export default function AboutPage() {
           </ul>
         </section>
 
-        <FoldTimeline
-          items={milestones}
-          tone="teal"
-          title="Milestones"
-          onSelect={onSelect}
-          intro={
-            <div className={s.tlIntro}>
-              <h2>Milestones</h2>
-              <p>Fest themes, firsts and every year's intake, printed on one folded strip.</p>
-            </div>
-          }
-        />
+        <div ref={tlRef} className={s.tlSlot}>
+          {tlNear && (
+          <FoldTimeline
+            items={milestones}
+            tone="teal"
+            title="Milestones"
+            onSelect={onSelect}
+            intro={
+              <div className={s.tlIntro}>
+                <h2>Milestones</h2>
+                <p>Fest themes, firsts and every year's intake, printed on one folded strip.</p>
+              </div>
+            }
+          />
+          )}
+        </div>
       </main>
-      {hamOpen && <Ham onClose={() => setHamOpen(false)} />}
     </>
   );
 }

@@ -34,26 +34,8 @@
 /* ---------- archive ---------- */
 .archive { position: fixed; inset: 0; background: #050506; }
 
-/* ---------- projects ---------- */
-.swarmBg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-.projPage {
-  z-index: 1;
-  padding: 18vh 0 10vh 5.2%;
-  width: 58%;
-  background: transparent;
-}
+/* ---------- shared heading block ---------- */
 .projHead { position: relative; margin-bottom: 3vh; }
-.projLede {
-  min-height: 1.5em;
-  margin: 0 0 3vh;
-  font-family: "Rajdhani", sans-serif;
-  font-size: 1.1rem;
-  color: #8fb3bd;
-}
-.projLede strong { color: #45e6ff; font-weight: 600; margin-right: 8px; }
-.grid.grid { margin: 3vh 0 0; padding: 0; max-width: none; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
-.card { position: relative; }
-
 /* ---------- about ---------- */
 .about { background: #000; }
 .aboutTop {
@@ -112,7 +94,6 @@
 .tlIntro p { margin: 0; font-family: "Rajdhani", sans-serif; font-size: 1.1rem; line-height: 1.5; color: #b9c4c8; }
 
 @media (max-width: 768px) {
-  .projPage { width: auto; padding: 46vh 5% 10vh; }
   .aboutTop { grid-template-columns: 1fr; }
   .aboutMark { height: 56vh; min-height: 340px; }
   .aboutText { padding: 0 6% 10vh; }
@@ -120,3 +101,17 @@
 }
 .aboutHead .headFill,
 .aboutHead .headOutline { font-size: clamp(2rem, 5vw, 5.6rem); }
+
+/* ---------- Our Legacy page ---------- */
+.legacyPage { background: #000; }
+.tlLinks { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin-top: 26px !important; }
+.tlLink {
+  color: #cfe8ff;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.8rem;
+  text-decoration: underline;
+  text-decoration-color: rgba(69, 230, 255, 0.5);
+  text-underline-offset: 5px;
+}
+.tlLink:hover, .tlLink:focus-visible { color: #45e6ff; outline: none; }
+.tlSlot { min-height: 100vh; }

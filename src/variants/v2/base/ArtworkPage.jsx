@@ -5,7 +5,6 @@ import { P } from "../lib/paths";
 import v2 from "./base.module.css";
 
 import Navbar from "../chrome/Navbar"
-import Ham from "../chrome/Ham";
 import ArtworkCard from "../../../components/ArtworkCard";
 import artworks from "../../../data/artworks";
 
@@ -578,7 +577,6 @@ export default function ArtworkPage() {
     };
   }, []);
 
-  const [isHamOpen, setIsHamOpen] = useState(false)
 
   // ---- artwork paging -----------------------------------------------------
   const [cardsPerPage, setCardsPerPage] = useState(() =>
@@ -677,8 +675,7 @@ export default function ArtworkPage() {
 
   return (
     <div id="stage" ref={stageRef}>
-      <Navbar onHamClick={() => setIsHamOpen(true)} />
-      {isHamOpen && <Ham onClose={() => setIsHamOpen(false)} />}
+      <Navbar />
 
       <h1 id="artwork-heading">ARTWORK</h1>
 

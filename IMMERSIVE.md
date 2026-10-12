@@ -11,7 +11,7 @@ npm run dev     # then open the routes below; a floating switcher (bottom-left, 
 |---|---|
 | `/` | The original redesign, unchanged |
 | `/v/v1` | **V1 · Faithful** — original hero layout, paper logo replaced by the live Mercury logo; ASCII boot preloader hands off to it; teal origami timeline ("Our Story") on home + /about; swarm behind Legacy and as hover-portraits on Team; `/v/v1/archive` |
-| `/v/v2` | **V2 · Reframed** — new "Mercury Lake" hero (mark standing on a reflective waterline, outlined DVM skyline mirrored below); chrome → glass → x-ray on scroll; ASCII toggle + terminal contact; copper timeline; swarm re-forms into project covers; `/v/v2/archive` |
+| `/v/v2` | **V2 · Reframed** — "Mercury Lake" hero; ONE persistent live mercury mark (`chrome/mark.jsx`): hero chrome → clear glass beside About (kit `backdrop.clarity`) → x-ray → collapse/flip/dock into the navbar slot, docked on every page, flies into the new full-screen menu; original preloader + original Projects; V1-style Legacy swarm; `/v/v2/legacy` (Legacy + teal origami year-by-year); terminal contact; `/v/v2/archive` |
 | `/v/v3` | **V3 · Medium shift** — one scroll story: ASCII boot → Mercury → swarm (About, teams, stats, fests) → paper mark → origami timeline → archive wall teaser; `/v/v3/archive` |
 | `/kit/mercury` `/kit/ascii` `/kit/timeline` `/kit/swarm` `/kit/archive` | Sandboxes for the reusable components |
 
