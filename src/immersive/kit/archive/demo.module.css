@@ -1,0 +1,235 @@
+.page {
+  position: fixed;
+  inset: 0;
+  background: #050506;
+  color: #cfe8ff;
+  font-family: 'Rajdhani', system-ui, sans-serif;
+  overflow: hidden;
+}
+
+.wall {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* ---- the redesign's backdrop, for the transparent preset */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.texture {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.85;
+  -webkit-mask-image: radial-gradient(circle 46vw at 50% 52%, black 0%, transparent 100%);
+  mask-image: radial-gradient(circle 46vw at 50% 52%, black 0%, transparent 100%);
+}
+.grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.6;
+  background: repeating-linear-gradient(to right, rgba(255, 255, 255, 0.2) 0, rgba(255, 255, 255, 0.2) 1px, transparent 1px, transparent 30px);
+}
+.letters {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Stretch Pro', sans-serif;
+  font-size: 28vw;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px #ffffff3b;
+  white-space: nowrap;
+}
+
+/* ---- navbar replica (src/components/Navbar.module.css) */
+.nav {
+  position: fixed;
+  top: 1%;
+  left: 4%;
+  right: 4%;
+  z-index: 1000;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.nav > * {
+  pointer-events: auto;
+}
+.brand {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
+  color: #fff;
+  text-decoration: none;
+}
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.presetBtn {
+  padding: 8px 14px;
+  border: 1px solid rgba(120, 220, 235, 0.3);
+  border-radius: 999px;
+  background: rgba(8, 14, 16, 0.6);
+  backdrop-filter: blur(10px);
+  font: 500 11px/1 'Orbitron', sans-serif;
+  letter-spacing: 0.06em;
+  color: #bfe9ef;
+  cursor: pointer;
+}
+.presetBtn[aria-expanded='true'] {
+  background: #5fd4e6;
+  color: #031417;
+}
+.ham {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.ham img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.ham:hover img {
+  transform: translateY(-2px) scale(1.08);
+  filter: drop-shadow(0 0 6px rgba(69, 230, 255, 0.45));
+}
+
+/* ---- presets drawer */
+.drawer {
+  position: fixed;
+  z-index: 1001;
+  top: calc(1% + 84px);
+  right: 4%;
+  width: min(380px, calc(100vw - 32px));
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  padding: 18px;
+  background: rgba(11, 18, 32, 0.95);
+  border: 1px solid rgba(120, 220, 235, 0.2);
+  border-radius: 8px;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.9);
+}
+.drawer h2 {
+  margin: 0;
+  font: 400 18px/1.1 'Stretch Pro', 'Orbitron', sans-serif;
+  color: #fff;
+}
+.lede {
+  margin: 6px 0 14px;
+  font-size: 15px;
+  color: #7f97a8;
+}
+.presets {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+}
+.presets button {
+  display: grid;
+  gap: 2px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid rgba(120, 220, 235, 0.16);
+  border-radius: 6px;
+  background: none;
+  color: #cfe8ff;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+.presets button[aria-pressed='true'] {
+  border-color: #45e6ff;
+  background: rgba(69, 230, 255, 0.1);
+}
+.presets strong {
+  font: 500 12px/1.3 'Orbitron', sans-serif;
+  letter-spacing: 0.04em;
+}
+.presets span {
+  font-size: 14.5px;
+  line-height: 1.35;
+  color: #9fb3c1;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-family: 'JetBrains Mono Variable', ui-monospace, monospace;
+  font-size: 11.5px;
+}
+.row > span {
+  width: 64px;
+  color: #7f97a8;
+}
+.row button {
+  padding: 5px 10px;
+  border: 1px solid rgba(120, 220, 235, 0.22);
+  border-radius: 999px;
+  background: none;
+  color: #cfe8ff;
+  font: inherit;
+  cursor: pointer;
+}
+.row button[aria-pressed='true'] {
+  border-color: #45e6ff;
+  background: #45e6ff;
+  color: #031417;
+}
+
+.toast {
+  position: fixed;
+  z-index: 1002;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  padding: 9px 16px;
+  border: 1px solid #45e6ff;
+  border-radius: 999px;
+  background: rgba(11, 18, 32, 0.95);
+  font-family: 'JetBrains Mono Variable', ui-monospace, monospace;
+  font-size: 12px;
+  white-space: pre;
+}
+
+.ring {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.ringSpin {
+  transform-origin: 320px 236px;
+  animation: spin 60s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ringSpin {
+    animation: none;
+  }
+}
