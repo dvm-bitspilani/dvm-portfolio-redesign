@@ -1,0 +1,9 @@
+.page {
+  position: relative;
+  height: 100vh;
+  background: #050506;
+}
+.wall {
+  position: fixed;
+  inset: 0;
+}

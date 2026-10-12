@@ -1,0 +1,50 @@
+.archive {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(20px, 6vh, 56px);
+  transform: translateX(-50%);
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  color: #fff;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: 0.24em;
+  cursor: pointer;
+  opacity: 0;
+  animation: archiveIn 0.6s 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  white-space: nowrap;
+  outline: none;
+}
+.archive small {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: #7fa9b3;
+}
+.archiveRule {
+  width: 1px;
+  height: 28px;
+  background: linear-gradient(transparent, #45e6ff);
+  transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.archive:hover,
+.archive:focus-visible {
+  color: #45e6ff;
+  text-shadow: 0 0 14px rgba(69, 230, 255, 0.6);
+}
+.archive:hover .archiveRule,
+.archive:focus-visible .archiveRule {
+  height: 40px;
+}
+@keyframes archiveIn {
+  from { opacity: 0; transform: translate(-50%, 12px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+@media (max-width: 768px) {
+  .archive small { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .archive { animation: none; opacity: 1; }
+}

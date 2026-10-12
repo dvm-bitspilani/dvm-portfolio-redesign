@@ -1,0 +1,27 @@
+/* the base imports Orbitron + Rajdhani for this page but never applies them */
+.root {
+  padding-top: 84px;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.08rem;
+}
+.root :global(.proj-detail__title),
+.root :global(.proj-detail__tag),
+.root :global(.proj-detail__date),
+.root :global(.proj-detail-page__back),
+.root :global(.proj-detail__link-btn) {
+  font-family: "Orbitron", sans-serif;
+}
+.root :global(.proj-detail__text) {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.08rem;
+  line-height: 1.55;
+}
+.noVideo {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  min-height: 240px;
+  margin: 0;
+  color: #7fa9b3;
+  font: 500 1.1rem/1.4 "Rajdhani", sans-serif;
+}

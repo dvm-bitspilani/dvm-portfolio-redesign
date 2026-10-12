@@ -1,0 +1,90 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+  background: #050506;
+  padding-top: 70px;
+}
+.texture {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.55;
+  -webkit-mask-image: radial-gradient(circle 38vw at 70vw 18vh, black 0%, transparent 100%);
+  mask-image: radial-gradient(circle 38vw at 70vw 18vh, black 0%, transparent 100%);
+  pointer-events: none;
+}
+.grid {
+  position: fixed;
+  inset: 0;
+  opacity: 0.4;
+  background: repeating-linear-gradient(to right, rgba(255, 255, 255, 0.16) 0, rgba(255, 255, 255, 0.16) 1px, transparent 1px, transparent 30px);
+  pointer-events: none;
+}
+.heading {
+  position: relative;
+  z-index: 2;
+  margin: 6vh 0 1.5vh;
+  text-align: center;
+  font: 400 clamp(40px, 8vw, 120px) / 1 "Stretch Pro", "Orbitron", sans-serif;
+}
+.solid {
+  position: relative;
+  color: #fff;
+}
+.ghost {
+  position: absolute;
+  left: 50%;
+  top: -0.28em;
+  transform: translateX(-52%) scale(1.1);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(95, 212, 230, 0.4);
+  white-space: nowrap;
+}
+.lede {
+  position: relative;
+  z-index: 2;
+  margin: 0 auto 3vh;
+  text-align: center;
+  font: 500 1.05rem/1.4 "Rajdhani", sans-serif;
+  color: #7fa9b3;
+}
+.card {
+  position: relative;
+  z-index: 2;
+  border: 1px solid rgba(207, 232, 255, 0.08);
+}
+.card:hover,
+.card:focus-visible {
+  border-color: rgba(69, 230, 255, 0.45);
+  box-shadow: 0 0 28px rgba(69, 230, 255, 0.12);
+}
+.thumb {
+  isolation: isolate;
+}
+.ascii {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  animation: asciiIn 0.25s ease-out both;
+}
+@keyframes asciiIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.cats {
+  font: 500 0.85rem/1.2 "Rajdhani", sans-serif;
+  color: #7fa9b3;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ascii { animation: none; }
+}
+
+.page :global(.filter-tabs__tab) {
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 0.06em;
+}
+.page :global(.project-card__name) {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.05rem;
+}

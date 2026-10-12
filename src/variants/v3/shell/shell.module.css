@@ -1,0 +1,54 @@
+.root {
+  position: relative;
+  min-height: 100vh;
+  background: #050506;
+  color: #e9f6ff;
+}
+
+.fallback {
+  position: fixed;
+  inset: 0;
+  background: #050506;
+}
+
+/* the redesign's swipe panel (App.module.css), tinted to the v3 teal */
+.swipe {
+  position: fixed;
+  inset: 0;
+  z-index: 99990;
+  background: #0b1214;
+  transform: translateY(100%);
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  animation-fill-mode: forwards;
+  pointer-events: none;
+}
+.swipe::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #45e6ff 30%, #cfe8ff 50%, #45e6ff 70%, transparent);
+  box-shadow: 0 0 18px #45e6ff;
+}
+.swipeIn {
+  animation-name: swipeIn;
+}
+.swipeOut {
+  animation-name: swipeOut;
+}
+@keyframes swipeIn {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0%); }
+}
+@keyframes swipeOut {
+  from { transform: translateY(0%); }
+  to { transform: translateY(-100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .swipe {
+    animation-duration: 0.01s;
+  }
+}
