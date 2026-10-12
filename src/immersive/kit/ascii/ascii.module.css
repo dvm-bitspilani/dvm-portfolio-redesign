@@ -1,0 +1,159 @@
+/* AsciiLogo / AsciiImage / AsciiBoot — scoped styles (CSS module, no globals). */
+
+.root {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  --imm-ascii-ink: #45e6ff;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  outline: none;
+}
+
+.interactive {
+  cursor: grab;
+  touch-action: pan-y;
+}
+.interactive:focus-visible {
+  outline: 1px solid var(--imm-ascii-ink);
+  outline-offset: -1px;
+}
+.grabbing {
+  cursor: grabbing;
+}
+
+/* Optional CRT bezel: dark plastic surround + recessed glass with phosphor spill. */
+.bezel {
+  border-radius: 22px;
+  background: linear-gradient(180deg, #17191c 0%, #0c0d0f 12%, #08090a 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.6);
+}
+.bezel > .screen {
+  inset: 12px;
+  border-radius: 16px;
+  background: #000;
+  box-shadow:
+    0 0 0 2px #040405,
+    0 0 0 3px rgba(255, 255, 255, 0.04),
+    0 0 50px -16px color-mix(in srgb, var(--imm-ascii-ink) 45%, transparent);
+}
+.bezel > .screen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.9),
+    inset 0 0 24px 5px rgba(0, 0, 0, 0.8);
+}
+
+.caption {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font: 12px/1.2 'JetBrains Mono Variable', ui-monospace, monospace;
+  color: color-mix(in srgb, var(--imm-ascii-ink) 55%, #0b1220);
+  white-space: nowrap;
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+}
+.caption > span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.caption > span:last-child {
+  flex-shrink: 0;
+}
+.bezel > .caption {
+  left: 26px;
+  right: 26px;
+  bottom: 20px;
+}
+
+/* ---------------- boot overlay ---------------- */
+
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: #050506;
+  overflow: hidden;
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s ease;
+}
+.bootContained {
+  position: absolute;
+}
+.bootFade {
+  opacity: 0;
+  transform: scale(1.12);
+  pointer-events: none;
+}
+.bootPowerOff {
+  background-color: transparent;
+  transition: background-color 0.5s ease 0.05s;
+  pointer-events: none;
+}
+
+.skip {
+  position: absolute;
+  right: max(16px, 2.4vw);
+  top: max(14px, 2.2vh);
+  z-index: 2;
+  appearance: none;
+  border: 1px solid color-mix(in srgb, var(--imm-ascii-ink) 50%, transparent);
+  background: rgba(5, 5, 6, 0.6);
+  color: var(--imm-ascii-ink);
+  font: 13px/1 'JetBrains Mono Variable', ui-monospace, monospace;
+  padding: 9px 14px 8px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+.skip:hover,
+.skip:focus-visible {
+  background: var(--imm-ascii-ink);
+  color: #050506;
+  outline: none;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boot {
+    transition-duration: 0.3s;
+  }
+  .bootFade {
+    transform: none;
+  }
+}
