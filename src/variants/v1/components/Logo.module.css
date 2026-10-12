@@ -1,0 +1,77 @@
+.image_container,
+.logoFloatWrapper {
+    width: 100%;
+  position: fixed;
+  inset: 0;
+  top: -5%;
+  left: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 800px;
+  overflow: hidden;
+  z-index: 1000;
+  pointer-events: none; /* let clicks pass through to page content */
+}
+
+.image_container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  
+}
+.logo {
+  position: absolute;
+  z-index: 1000;
+  transition: transform 0.15s ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
+  object-fit: cover;
+  height: 55%;
+  width: fit-content;
+  margin-top: 5%;
+  transform: scaleX(1.1);
+}
+
+.logo1 {
+  position: absolute;
+  margin-right: 5%;
+  z-index: 1000;
+  transition: transform 0.15s ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
+  height: 40%;
+}
+
+@media (max-width: 1024px) {
+  .logo { height: 48%; }
+  .logo1 { height: 34%; }
+}
+@media (max-width: 768px) {
+  .logo { height: 40%; scale: 0.8; }
+  .logo1 { height: 28%; scale: 0.8; }
+}
+@media (max-width: 480px) {
+  .logo { height: 30%; scale: 0.6; }
+  .logo1 { height: 20%; scale: 0.6; }
+
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo, .logo1, .logoFloatWrapper { transition: none; }
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+}
+/* v1: the mercury mark fills the floating wrapper (sized by MercuryLogo's fit). */
+.mercury {
+  position: absolute;
+  inset: 0;
+  z-index: 1000;
+}

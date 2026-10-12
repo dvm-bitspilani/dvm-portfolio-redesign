@@ -1,0 +1,135 @@
+.container {
+    position: fixed;
+    top: 1%;
+    left: 4%;
+    right: 4%;
+    z-index: 1000;
+    height: 80px;
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* v1: the bar spans the width; only its links take clicks, so page
+       controls under it (e.g. "Back to Projects") stay clickable */
+    pointer-events: none;
+}
+
+.container > * {
+    pointer-events: auto;
+}
+
+.heading {
+    color: #FFFFFF;
+    font-family: "Orbitron";
+    z-index: 1;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.ham {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+  scrollbar-width: 0;
+}
+
+.hamIcon {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  overflow: hidden;
+  pointer-events: none; /* clicks/keyboard go to the .ham wrapper, not the image */
+  scrollbar-width: 0;
+}
+
+/* Hover animation — icon lifts and glows slightly instead of bars growing */
+/*.ham:hover {
+  transform: translateY(-2px);
+  transform: scale(1.08);
+    scrollbar-width: 0;
+
+}*/
+
+.ham:hover .hamIcon {
+  transform: translateY(-2px) scale(1.08);
+  filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.45));
+  overflow: hidden;
+    scrollbar-width: 0;
+
+}
+
+.ham:active {
+  transform: scale(0.95);
+}
+
+.ham:focus-visible {
+  outline: 2px solid rgba(96, 165, 250, 0.8);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+html {
+  overflow-x: clip;
+  scrollbar-gutter: stable;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    top: 2%;
+  }
+}
+/* v1: Archive link beside the menu button */
+.right {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2.4vw, 34px);
+  overflow: visible;
+}
+
+.archive {
+  position: relative;
+  color: #ffffff;
+  font-family: "Orbitron";
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-decoration: none;
+  padding: 6px 0;
+  overflow: visible;
+}
+
+.archive::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0.18em;
+  bottom: 0;
+  height: 1px;
+  background: #45e6ff;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.archive:hover::after,
+.archive:focus-visible::after,
+.archiveActive::after {
+  transform: scaleX(1);
+}
+
+.archive:focus-visible {
+  outline: 2px solid rgba(96, 165, 250, 0.8);
+  outline-offset: 4px;
+}
+
+/* Phones: the Archive lives in the hamburger menu (and on home / artwork). */
+@media screen and (max-width: 600px) {
+  .archive {
+    display: none;
+  }
+}

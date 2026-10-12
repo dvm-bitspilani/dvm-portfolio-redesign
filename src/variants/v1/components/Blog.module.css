@@ -1,0 +1,329 @@
+.container {
+  background-color: black;
+  position: relative;
+  isolation: isolate;
+  width: 100vw;
+  height: 100svh;
+  overflow: hidden;
+  perspective: 1000px;
+  display: flex;
+  flex-direction: column;
+  padding: 2svh 0;
+}
+
+.imageContainer {
+  position: relative;
+  flex: 0 0 auto;
+  height: clamp(90px, 22svh, 260px);
+  overflow: hidden;
+  z-index: 3;
+}
+
+.image {
+  position: absolute;
+  top: 60%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  max-width: 100%;
+  object-fit: contain;
+  font-family: "Stretch Pro", sans-serif;
+  color: white;
+  font-size: clamp(2.2rem, min(10vw, 16svh), 7rem);
+  text-align: center;
+}
+
+.image1 {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  text-align: center;
+  font-family: "Stretch Pro", sans-serif;
+  font-size: clamp(2.6rem, min(12vw, 19svh), 8.5rem);
+
+  color: transparent;
+  -webkit-text-stroke: 1px #ffffff3b;
+
+}
+.contentColumn {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2svh;
+  overflow: hidden;
+  padding: 0 5%;
+  transition: justify-content 0.3s ease;
+}
+
+/* When a card is clicked, stop centering vertically — anchor the
+   (now taller/expanded) row to the top of the column so it doesn't
+   get clipped by overflow:hidden on this container. */
+.contentColumnActive {
+  justify-content: flex-start;
+  padding-top: 2svh;
+}
+
+.blogsWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-family: "Orbitron", sans-serif;
+  z-index: 1009;
+  width: min(60%, 420px);
+  height: 35px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+  justify-content: center;
+  overflow: hidden;
+  flex: 0 0 auto;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+
+}
+.button:hover {
+  color: #45e6ff;
+  border-color: #45e6ff;
+  background: rgba(69, 230, 255, 0.08);
+  box-shadow: 0 0 12px rgba(69, 230, 255, 0.2);
+}
+
+.button span {
+  padding: 2px;
+  display: inline-block;
+  transform: scaleX(1.5);
+  transform-origin: center;
+}
+.arrow {
+  margin-left: 20px;
+  padding: 2px;
+  display: inline-block;
+  transform-origin: center;
+}
+
+
+.projects {
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-family: "Josefin Sans";
+  border: 1px solid #ffffff;
+  padding: 10px;
+  border-radius: 999px;
+  background-color: transparent;
+  margin-left: auto;
+}
+
+.blogsShifted,
+.blogs {
+  position: relative;
+  display: flex;
+  width: 100%;
+  z-index: 1000;
+  gap: 2%;
+  overflow: visible;
+  flex-wrap: nowrap;
+  transition:
+    transform 0.4s ease,
+    justify-content 0.4s ease;
+}
+
+/* Default / nothing clicked: centered row, free to wrap on small screens */
+.blogsShifted {
+  justify-content: center;
+  transform: translateX(0);
+  flex-wrap: wrap;
+}
+
+/* A card is clicked/expanded: stop wrapping (expanded card needs room),
+   pull the whole row left so the expanded card grows into the freed
+   space instead of pushing off-screen to the right. */
+.blogs {
+  justify-content: flex-start;
+  transform: translateX(-2%);
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  z-index: 997;
+  opacity: 0.6;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.2) 0,
+    rgba(255, 255, 255, 0.2) 1px,
+    transparent 1px,
+    transparent 30px
+  );
+}
+
+.gradient {
+  position: absolute;
+  left: 40%;
+  top: -10%;
+  width: 40%;
+  height: 60%;
+  z-index: 999;
+  pointer-events: none;
+  will-change: transform;
+  backface-visibility: hidden;
+  opacity: 0;
+  background: radial-gradient(
+    circle at 20% 40%,
+    rgba(180, 250, 255, 0.9) 0%,
+    rgba(60, 210, 230, 0.75) 35%,
+    rgba(20, 90, 100, 0.35) 60%,
+    transparent 85%
+  );
+  mix-blend-mode: color;
+}
+
+.texture {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  will-change:
+    mask-image,
+    -webkit-mask-image;
+  opacity: 0;
+  background-size: cover;
+  background-position: center;
+  -webkit-mask-image: radial-gradient(
+    circle 40vw at -9999px -9999px,
+    black 0%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle 40vw at -9999px -9999px,
+    black 0%,
+    transparent 100%
+  );
+}
+
+@media (max-width: 768px) {
+  .container {
+    overflow-y: auto;
+    height: auto;
+    min-height: 100svh;
+  }
+
+  .imageContainer {
+    height: clamp(80px, 16svh, 160px);
+  }
+
+  .contentColumn {
+    overflow: visible;
+    overflow-y: visible;
+    flex: none;
+    gap: 1.5svh;
+  }
+
+  .blogsWrapper {
+    overflow: visible;
+    flex: none;
+  }
+
+  .blogsShifted,
+  .blogs {
+    flex-direction: column;
+    align-items: center;
+    gap: 3svh;
+  }
+
+  .blogs {
+    transform: translateX(0);
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: 1svh;
+    text-align: center;
+    padding-bottom: 1svh;
+  }
+
+  .projects {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .text {
+    font-size: 0.55rem;
+  }
+  .visualMedia {
+    font-size: 0.78rem;
+  }
+  .button {
+    height: 38px;
+    font-size: 0.75rem;
+  }
+  .button span {
+    transform: scaleX(1.15);
+  }
+  .arrow {
+    margin-left: 12px;
+  }
+
+  .projects {
+    font-size: 0.75rem;
+    padding: 8px 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .text {
+    font-size: 0.5rem;
+  }
+  .visualMedia {
+    font-size: 0.72rem;
+  }
+  .button {
+    font-size: 0.68rem;
+  }
+
+  .projects {
+    font-size: 0.68rem;
+    padding: 7px 12px;
+  }
+}
+.imageContainer {
+  overflow: hidden;
+}
+
+@media (max-height: 700px) {
+  .blogs,
+  .blogsShifted {
+    scale: 0.8;
+  }
+}
+

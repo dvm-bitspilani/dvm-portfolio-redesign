@@ -1,0 +1,9 @@
+/* Sits above the masked texture (z 2, earlier in the DOM) and below the
+   LEGACY title (3) and the circle graph (1002). */
+.layer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}

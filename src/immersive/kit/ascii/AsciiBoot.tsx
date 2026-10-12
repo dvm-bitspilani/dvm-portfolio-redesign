@@ -13,6 +13,8 @@ import { fontFamily, resolveTheme, type FontName, type PaletteName } from './cor
 export interface AsciiBootProps {
   /** called once the overlay has fully exited (or immediately when `once` already ran this session) */
   onDone?: () => void
+  /** called when the exit (power-off / fade) starts, i.e. when the page underneath begins to show */
+  onExit?: () => void
   /** show once per browser session; a string sets the sessionStorage key (default key 'imm-ascii-boot') */
   once?: boolean | string
   /** any key / click / tap (and the Skip button) jumps to the exit (default true) */
@@ -139,6 +141,7 @@ export function AsciiBoot(props: AsciiBootProps) {
   // exit → done
   useEffect(() => {
     if (phase !== 'exit') return
+    propsRef.current.onExit?.()
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches
     const ms = reduced ? 350 : exitMode === 'power-off' ? 650 : 950
     const id = setTimeout(() => {

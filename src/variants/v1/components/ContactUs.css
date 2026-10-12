@@ -1,0 +1,323 @@
+.contact-page {
+  position: relative;
+  min-height: 100vh;
+  color: white;
+  padding: 48px 20px 80px;
+  overflow: hidden;
+}
+
+.contact-page *,
+.contact-page *::before,
+.contact-page *::after {
+  box-sizing: border-box;
+}
+
+/* .gradient added to the exclusion list — without it this rule (0,3,0)
+   beat .gradient (0,1,0) and forced the overlay to position: relative /
+   z-index: 1, which broke its absolute placement and stacking. */
+.contact-page > *:not(.texture):not(.grid):not(.gradient) {
+  position: relative;
+  z-index: 1;
+}
+
+.contact-page__title {
+  font-weight: 700;
+  font-size: clamp(28px, 5vw, 40px);
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-transform: uppercase;
+  color: white;
+  margin: 0 0 36px;
+}
+
+/* ----- Heading (two-layer: solid fill + offset outline ghost) ----- */
+
+.contact-heading {
+  position: relative;
+  z-index: 5;
+  margin: 3rem 0;
+  /* Both layers are absolutely positioned and contribute no flow height,
+     so the wrapper needs an explicit height or the form collapses
+     upward into it. */
+  height: clamp(3rem, 11vw, 8.5rem);
+  overflow: hidden;
+}
+
+.contact-heading-fill,
+.contact-heading-outline {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Stretch Pro", sans-serif;
+  white-space: nowrap;
+  line-height: 1;
+  overflow: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.contact-heading-fill::-webkit-scrollbar,
+.contact-heading-outline::-webkit-scrollbar {
+  display: none;
+}
+
+.contact-heading-fill {
+  z-index: 2;
+  top: 14%;
+  margin-left: -2.5%;
+  color: #ffffff;
+  /* "CONTACT US" is wider than "PROJECTS", so the vw step is smaller
+     to keep it off the viewport edges. */
+  font-size: clamp(1.6rem, 8vw, 6.5rem);
+}
+
+.contact-heading-outline {
+  z-index: 1;
+  top: 0;
+  margin-left: -6%;
+  font-size: clamp(1.95rem, 9.6vw, 7.8rem);
+  color: transparent;
+  -webkit-text-stroke: 1px #ffffff3b;
+ 
+}
+
+/* ----- Form ----- */
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.contact-form-input,
+.contact-form__textarea {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 15px;
+  color: white;
+  background: transparent;
+  border: 1px solid white;
+
+  outline: none;
+}
+
+.contact-form-input::placeholder,
+.contact-form__textarea::placeholder {
+  color: white;
+}
+
+.contact-form-input:focus,
+.contact-form__textarea:focus {
+  border-color: white;
+  background: rgba(69, 230, 255, 0.05);
+}
+
+.contact-form__textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact-form-submit {
+  align-self: center;
+  margin-top: 8px;
+  padding: 0.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: white;
+  background: transparent;
+  cursor: pointer;
+  border: 1px solid white;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.contact-form-submit:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+/* --- Shared background layers (grid / texture / gradient), matching About & ProjectLanding --- */
+
+.grid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.6;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.2) 0,
+    rgba(255, 255, 255, 0.2) 1px,
+    transparent 1px,
+    transparent 30px
+  );
+  pointer-events: none;
+}
+
+.texture {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background-size: cover;
+  background-position: center;
+
+  -webkit-mask-image: radial-gradient(
+    circle 50vh at -9999px -9999px,
+    black 0%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle 50vh at -9999px -9999px,
+    black 0%,
+    transparent 100%
+  );
+}
+
+.gradient {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 60%;
+  height: 90%;
+  z-index: 999;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 20% 40%,
+    rgba(180, 250, 255, 0.9) 0%,
+    rgba(60, 210, 230, 0.75) 35%,
+    rgba(20, 90, 100, 0.35) 60%,
+    transparent 85%
+  );
+  mix-blend-mode: color;
+}
+
+/* ----- Responsive ----- */
+
+@media (max-width: 1024px) {
+  .contact-heading-fill {
+    margin-left: -2%;
+  }
+
+  .contact-heading-outline {
+    margin-left: -5%;
+  }
+}
+
+@media (max-width: 700px) {
+  .contact-page {
+    padding: 32px 14px 60px;
+  }
+
+  .contact-heading {
+    margin: 2rem 0;
+    height: clamp(2.4rem, 13vw, 5rem);
+  }
+
+  .contact-heading-fill {
+    margin-left: -1.2%;
+    font-size: clamp(1.4rem, 9vw, 3.6rem);
+  }
+
+  .contact-heading-outline {
+    margin-left: -3.5%;
+    font-size: clamp(1.65rem, 10.8vw, 4.1rem);
+  }
+
+  .contact-form {
+    padding: 24px 0;
+  }
+
+  .contact-form-submit {
+    font-size: 1.5rem;
+    padding: 0.5rem 1.5rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .contact-form {
+    padding: 22px 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .contact-heading {
+    height: clamp(2rem, 14vw, 3.6rem);
+  }
+
+  .contact-heading-fill {
+    margin-left: -1%;
+    font-size: clamp(1.2rem, 9vw, 2.8rem);
+  }
+
+  .contact-heading-outline {
+    margin-left: -2.5%;
+    font-size: clamp(1.4rem, 10.8vw, 3.3rem);
+  }
+
+  .contact-form-input,
+  .contact-form__textarea {
+    padding: 11px 13px;
+    font-size: 14px;
+  }
+
+  .contact-form-submit {
+    font-size: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-form-submit {
+    transition: none;
+  }
+}
+.contact-form-submit {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Orbitron", sans-serif;
+  z-index: 10;
+
+  width: min(60%, 420px);
+  height: 35px;
+
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background-color: transparent;
+
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+
+  overflow: hidden;
+  text-decoration: none;
+
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.contact-form-submit:hover {
+  color: #45e6ff;
+  border-color: #45e6ff;
+  background: rgba(69, 230, 255, 0.08);
+  box-shadow: 0 0 12px rgba(69, 230, 255, 0.2);
+}
+
+.contact-form-submit span {
+  padding: 2px;
+  display: inline-block;
+  transform: scaleX(1.5);
+  transform-origin: center;
+}
+
+.submit-arrow {
+  margin-left: 20px;
+  padding: 2px;
+  display: inline-block;
+  transform-origin: center;
+}

@@ -63,6 +63,7 @@ typed under it, then the tube powers off onto the page. ≈ 3.9 s at `speed={1}`
 | prop | default | |
 |---|---|---|
 | `onDone` | – | after the exit finishes (or immediately if `once` already ran) |
+| `onExit` | – | when the exit (power-off / fade) starts, i.e. as the page underneath begins to show (hand-off cue) |
 | `once` | `false` | sessionStorage gate; `true` → key `imm-ascii-boot`, or pass your own key |
 | `skippable` | `true` | any key / click / tap and a real "Skip intro" button |
 | `waitForLoad` / `maxWait` | `false` / `4` | hold on the logo until `load` + fonts, capped (matches PreLoader) |

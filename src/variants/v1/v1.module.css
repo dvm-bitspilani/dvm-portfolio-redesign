@@ -1,0 +1,93 @@
+/* ---- app shell (the base App.module.css swipe, copied so v1 is self-contained) ---- */
+.pageTransition {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Variant root. Deliberately not positioned: the base pages (e.g. Artwork's
+   absolute #stage) expect the viewport as their containing block, and the
+   base's global `* { overflow-x: hidden }` would clip them otherwise. */
+.root {
+  display: block;
+}
+
+.swipePanel {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #111;
+  transform: translateY(100%);
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  animation-fill-mode: forwards;
+  pointer-events: none;
+}
+
+.panelIn {
+  animation-name: v1PanelIn;
+}
+
+.panelOut {
+  animation-name: v1PanelOut;
+}
+
+@keyframes v1PanelIn {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes v1PanelOut {
+  from {
+    transform: translateY(0%);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+.archiveFallback {
+  position: fixed;
+  inset: 0;
+  background: #050506;
+}
+
+/* ---- artwork page → archive ---- */
+.artArchiveLink {
+  position: absolute;
+  right: 5%;
+  bottom: 26px;
+  z-index: 20;
+  padding: 8px 16px;
+  border: 1px solid rgba(207, 232, 255, 0.55);
+  border-radius: 999px;
+  color: #cfe8ff;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  background: rgba(5, 5, 6, 0.6);
+  transition:
+    background 0.25s,
+    color 0.25s,
+    border-color 0.25s;
+}
+
+.artArchiveLink:hover,
+.artArchiveLink:focus-visible {
+  background: #45e6ff;
+  border-color: #45e6ff;
+  color: #031417;
+}
+
+@media (max-width: 768px) {
+  .artArchiveLink {
+    right: 50%;
+    transform: translateX(50%);
+    bottom: 64px;
+    white-space: nowrap;
+  }
+}

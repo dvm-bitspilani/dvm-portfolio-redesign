@@ -1,0 +1,619 @@
+.container {
+  position: relative;
+  isolation: isolate;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  overflow: hidden;
+}
+.header {
+  width: 100%;
+  max-height: 35vh;
+  margin-top: 5%;
+  overflow: hidden;
+}
+.headerImage {
+  position: absolute;
+  z-index: 3;
+  max-width: 90vw;
+  top: 15%;
+  left: 55%;
+  transform: translateX(-50%);
+  margin-left: -6%;
+  object-fit: contain;
+  font-family: "Stretch Pro", sans-serif;
+  color: white;
+  font-size: clamp(2rem, 10vw, 8rem);
+  white-space: nowrap;
+  line-height: 1;
+  overflow: hidden;
+}
+.headerOuterImage {
+  position: absolute;
+  z-index: 3;
+  max-width: 90vw;
+  top: 10%;
+  left: 60%;
+  transform: translateX(-50%);
+  margin-left: -11%;
+  overflow: hidden;
+  font-family: "Stretch Pro", sans-serif;
+  font-size: clamp(2.4rem, 12vw, 9.6rem);
+  white-space: nowrap;
+  line-height: 1;
+
+  color: transparent; /* Hide fill */
+  -webkit-text-stroke: 1px #ffffff3b; /* White outline */
+  text-stroke: 1px #ffffff3b;
+}
+
+.footerActions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  overflow: visible;
+  max-width: max-content;
+}
+.footerButton {
+  margin-bottom: 1%;
+  margin-right: 4%;
+  border-radius: 999px;
+  border: 1px solid white;
+  color: #ffffff;
+  font-family: "Orbitron";
+  background-color: transparent;
+  padding: 1%;
+  width: 100%;
+  height: 40px;
+}
+
+.circleWrapper {
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 18vh;
+  position: relative;
+  height: 100%;
+  z-index: 1002;
+}
+
+.google {
+  position: absolute;
+  left: 30%;
+  top: 5%;
+}
+.microsoft {
+  position: absolute;
+  left: 20%;
+  top: 40%;
+  z-index: 1000;
+}
+.meta {
+  position: absolute;
+  left: 10%;
+  top: 15%;
+}
+.imc {
+  position: absolute;
+  left: 50%;
+  top: 20%;
+}
+
+.img1 {
+  position: absolute;
+  right: 10%;
+  top: 30%;
+}
+.img2 {
+  position: absolute;
+  right: 25%;
+  top: 10%;
+}
+.img3 {
+  position: absolute;
+  right: 35%;
+  top: 40%;
+}
+
+.circleBase {
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  cursor: pointer;
+}
+
+.circleDimmed {
+  opacity: 0.4;
+}
+
+.baseLine {
+  stroke: #888;
+  stroke-width: 2;
+  stroke-dasharray: 6, 6;
+  transition: opacity 0.3s ease;
+}
+
+.baseLine.dimmed {
+  opacity: 0.4;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  z-index: 997;
+  opacity: 0.6;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.2) 0,
+    rgba(255, 255, 255, 0.2) 1px,
+    transparent 1px,
+    transparent 30px
+  );
+}
+
+.gradient {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 60%;
+  height: 90%;
+  z-index: 999;
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle at 20% 40%,
+    rgba(180, 250, 255, 0.9) 0%,
+    rgba(60, 210, 230, 0.75) 35%,
+    rgba(20, 90, 100, 0.35) 60%,
+    transparent 85%
+  );
+  opacity: 0;
+  mix-blend-mode: color;
+}
+
+.texture {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  background-size: cover;
+  background-position: center;
+  -webkit-mask-image: radial-gradient(
+    circle 40vw at -9999px -9999px,
+    black 0%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle 40vw at -9999px -9999px,
+    black 0%,
+    transparent 100%
+  );
+}
+
+/* ----- Shared card overlay ----- */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 2000;
+  animation: backdropIn 0.25s ease-out;
+}
+
+@keyframes backdropIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.overlay {
+  position: fixed;
+  z-index: 2001;
+}
+
+.overlay.anchorLeft {
+  animation: cardInLeft 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.overlay.anchorRight {
+  animation: cardInRight 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes cardInLeft {
+  from {
+    opacity: 0;
+    transform: translateY(50%) scale(0.92) translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(50%) scale(1) translateX(0);
+  }
+}
+
+@keyframes cardInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-90%) scale(0.92) translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-90%) scale(1) translateX(0);
+  }
+}
+
+/* ----- Focus / dimming overlay for branch view ----- */
+
+.focusBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1001; /* below circleWrapper's 1002, so the focused circle
+                    and its branches stay lit above this layer */
+  background: radial-gradient(
+    circle at 50% 45%,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    backdrop-filter 0.35s ease;
+}
+
+.focusBackdropVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.circleFocused {
+  filter: drop-shadow(0 0 24px rgba(79, 172, 254, 0.65));
+  transform: scale(1.06);
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.4s ease;
+}
+
+/* ----- Branch lines (tree-like connectors to names) ----- */
+
+.branchLine {
+  fill: none;
+  stroke: url(#branchGradient);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ----- Branch name labels ----- */
+
+.branchLabel {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(10, 14, 20, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 8px 16px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.2s ease;
+}
+
+.branchLabel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  transform: scaleX(0);
+  transform-origin: left;
+  z-index: -1;
+  transition: transform 0.35s ease;
+}
+
+.branchLabel:hover::before {
+  transform: scaleX(1);
+}
+
+.branchLabel:hover {
+  border-color: rgba(79, 172, 254, 0.7);
+  box-shadow: 0 0 22px rgba(79, 172, 254, 0.35);
+  transform: translate(-50%, -50%) scale(1.04);
+}
+
+.branchName {
+  font-family: "Orbitron";
+  font-size: 0.75rem;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.75);
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+.branchLabel:hover .branchName {
+  color: #000000;
+}
+
+@media (max-width: 1024px) {
+  .headerImage {
+    margin-left: -4%;
+  }
+
+  .footerContent {
+    font-size: clamp(0.4rem, 1vw, 0.5rem);
+  }
+
+  .footerButton {
+    height: 34px;
+    font-size: 0.85rem;
+  }
+
+  .branchName {
+    font-size: 0.7rem;
+  }
+
+  .branchLabel {
+    padding: 7px 14px;
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    overflow-y: hidden;
+    height: auto;
+    height: 100vh;
+  }
+
+  .header {
+    margin-top: 8%;
+    max-height: none;
+    min-height: 14vh;
+  }
+
+  .headerImage {
+    max-width: 96vw;
+    margin-left: -2%;
+    font-size: clamp(1.75rem, 11vw, 4.5rem);
+  }
+  .headerOuterImage {
+    max-width: 96vw;
+    margin-top: 4%;
+    font-size: clamp(2rem, 12vw, 5rem);
+  }
+
+  .headerOuterImage {
+    max-width: 96vw;
+    /* margin-left: -3%; */
+    font-size: clamp(2.1rem, 13vw, 5.4rem);
+  }
+
+  /* Circle section was cramped into a tiny 230px box with heavily
+     scaled-down (0.78x) circles — grown to a wider, taller box with
+     circles much closer to full size so it doesn't read as "shrunk". */
+  .circleWrapper {
+    width: 100%;
+    margin: 10vh auto 0;
+    height: auto;
+    min-height: 60vh;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+
+    align-content: space-evenly;
+    gap: 80px 40px;
+    max-width: 340px;
+    padding: 48px 0 64px;
+  }
+
+  .google,
+  .microsoft,
+  .meta,
+  .imc,
+  .img1,
+  .img2,
+  .img3 {
+    position: static;
+  }
+  .circleBase {
+    transform: translate(0, 0) scale(0.95);
+  }
+
+  .circleBase:nth-of-type(1) {
+    transform: translate(-6px, -44px) scale(0.95);
+  }
+  .circleBase:nth-of-type(2) {
+    transform: translate(14px, 24px) scale(0.95);
+  }
+  .circleBase:nth-of-type(3) {
+    transform: translate(-18px, 6px) scale(0.95);
+  }
+  .circleBase:nth-of-type(4) {
+    transform: translate(8px, -20px) scale(0.95);
+  }
+  .circleBase:nth-of-type(5) {
+    transform: translate(-10px, 42px) scale(0.95);
+  }
+  .circleBase:nth-of-type(6) {
+    transform: translate(16px, -8px) scale(0.95);
+  }
+  .circleBase:nth-of-type(7) {
+    transform: translate(-4px, 18px) scale(0.95);
+  }
+
+  .circleBase:nth-of-type(1).circleFocused {
+    transform: translate(-6px, -34px) scale(1.03);
+  }
+  .circleBase:nth-of-type(2).circleFocused {
+    transform: translate(14px, 24px) scale(1.03);
+  }
+  .circleBase:nth-of-type(3).circleFocused {
+    transform: translate(-18px, 6px) scale(1.03);
+  }
+  .circleBase:nth-of-type(4).circleFocused {
+    transform: translate(8px, -20px) scale(1.03);
+  }
+  .circleBase:nth-of-type(5).circleFocused {
+    transform: translate(-10px, 32px) scale(1.03);
+  }
+  .circleBase:nth-of-type(6).circleFocused {
+    transform: translate(16px, -8px) scale(1.03);
+  }
+  .circleBase:nth-of-type(7).circleFocused {
+    transform: translate(-4px, 18px) scale(1.03);
+  }
+
+  .branchLabel {
+    padding: 5px 10px;
+    gap: 5px;
+  }
+
+  /* Placeholder names shrunk further (was 0.65rem) and clamped to a
+     max-width with ellipsis so a long name can never push the pill
+     wider than the viewport / overlap neighboring labels. */
+  .branchName {
+    font-size: 0.58rem;
+    max-width: 34vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    position: relative;
+    left: 5%;
+    right: 5%;
+    bottom: auto;
+    margin: 40px 0;
+  }
+
+  .footerContent {
+    font-size: clamp(0.45rem, 1.6vw, 0.55rem);
+  }
+
+  .vm {
+    margin-left: 12%;
+  }
+
+  .footerActions {
+    align-self: flex-start;
+  }
+
+  .overlay {
+    left: 50% !important;
+    top: 50% !important;
+    width: 100vw !important;
+    max-height: 100vh;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .overlay.anchorLeft,
+  .overlay.anchorRight {
+    animation: cardInCenter 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .google {
+    margin-bottom: 10%;
+  }
+  .meta {
+    margin-left: 2%;
+    margin-bottom: 20%;
+  }
+
+  @keyframes cardInCenter {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .headerImage {
+    margin-left: -1%;
+    font-size: clamp(1.5rem, 11vw, 3.4rem);
+  }
+
+  .headerOuterImage {
+    /* margin-left: -1.5%; */
+    font-size: clamp(1.8rem, 13vw, 4.1rem);
+    margin-top: 4%;
+  }
+
+  .circleBase:nth-of-type(1) {
+    transform: translate(0, 20px) scale(0.85);
+  }
+  .circleBase:nth-of-type(2) {
+    transform: translate(8px, 10px) scale(0.85);
+  }
+  .circleBase:nth-of-type(3) {
+    transform: translate(-10px, -8px) scale(0.85);
+  }
+  .circleBase:nth-of-type(4) {
+    transform: translate(3px, 5px) scale(0.85);
+  }
+  .circleBase:nth-of-type(5) {
+    transform: translate(-6px, 8px) scale(0.85);
+  }
+  .circleBase:nth-of-type(6) {
+    transform: translate(10px, -10px) scale(0.85);
+  }
+  .circleBase:nth-of-type(7) {
+    transform: translate(-5px, 3px) scale(0.85);
+  }
+
+  .circleBase:nth-of-type(1).circleFocused {
+    transform: translate(0, -6px) scale(0.93);
+  }
+  .circleBase:nth-of-type(2).circleFocused {
+    transform: translate(8px, 10px) scale(0.93);
+  }
+  .circleBase:nth-of-type(3).circleFocused {
+    transform: translate(-10px, -8px) scale(0.93);
+  }
+  .circleBase:nth-of-type(4).circleFocused {
+    transform: translate(3px, 5px) scale(0.93);
+  }
+  .circleBase:nth-of-type(5).circleFocused {
+    transform: translate(-6px, 8px) scale(0.93);
+  }
+  .circleBase:nth-of-type(6).circleFocused {
+    transform: translate(10px, -10px) scale(0.93);
+  }
+  .circleBase:nth-of-type(7).circleFocused {
+    transform: translate(-5px, 3px) scale(0.93);
+  }
+
+  .circleWrapper {
+    gap: 48px 24px;
+    max-width: 280px;
+  }
+
+  .branchName {
+    font-size: 0.52rem;
+    max-width: 30vw;
+  }
+
+  .overlay {
+    width: min(94vw, 340px) !important;
+  }
+}

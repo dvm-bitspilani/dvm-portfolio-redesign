@@ -1,0 +1,260 @@
+#stage {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: #050507;
+  background-image: url(../../../assests/ArtworkPageBG.png);
+  overflow: hidden;
+  color: #fff;
+}
+
+/* Applied/removed in ArtworkPage.jsx's handlePointer via the existing
+   isInsideNet() hit-test - the glowing #core dot reads as the cursor while
+   inside the net, so the real OS cursor is hidden there. */
+#stage.cursor-hidden {
+  cursor: none;
+}
+
+#stage svg {
+  position: absolute;
+  /*top: 0;
+  left: 0;*/
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#stage #baseGrid line {
+  stroke: #46464f;
+  stroke-width: 1;
+  opacity: 0.22;
+}
+
+#stage #netLines path {
+  fill: none;
+  stroke: #7d838f;
+  stroke-width: 1.2;
+  opacity: 0.55;
+}
+#stage #netLines path.outer {
+  stroke: #9aa0ab;
+  opacity: 0.7;
+}
+
+#stage #glowGrid {
+  -webkit-mask-image: radial-gradient(circle var(--sr, 260px) at var(--mx, -500px) var(--my, -500px), #fff 0%, rgba(255,255,255,0.55) 45%, rgba(255,255,255,0) 100%);
+  mask-image: radial-gradient(circle var(--sr, 260px) at var(--mx, -500px) var(--my, -500px), #fff 0%, rgba(255,255,255,0.55) 45%, rgba(255,255,255,0) 100%);
+}
+
+#stage #glowGrid line {
+  stroke: url(#spotlightGrad);
+  stroke-width: 1.4;
+}
+
+#stage #glowGrid .glowBlur {
+  filter: blur(2.5px);
+  opacity: 0.9;
+}
+
+#stage #glowGrid .glowSharp {
+  opacity: 1;
+}
+
+#stage #coreWrap {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+#stage #core {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(190,220,255,0.9) 25%, rgba(90,168,255,0.35) 55%, rgba(90,168,255,0) 75%);
+  transform: translate(-500px, -500px);
+  mix-blend-mode: screen;
+  filter: blur(1px);
+  opacity: 1;
+  transition: opacity 180ms ease;
+}
+
+/* Toggled in ArtworkPage.jsx's handlePointer whenever the pointer is over a
+   card. The dot stands in for the cursor across the rest of the net, but a
+   card holds real links, so there it hands the job back to the OS cursor. */
+#stage.core-hidden #core {
+  opacity: 0;
+}
+
+/* Wrapper that holds the 4 visible cards. It matches #stage exactly, so the
+   cards' percentage positions below are unchanged. It's transparent to the
+   mouse so the net still tracks the cursor across the whole stage - only the
+   cards themselves take pointer events back. */
+#stage .card-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+#stage .card {
+  position: absolute;
+  border-radius: 6px;
+  box-sizing: border-box;
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 320ms ease, transform 320ms ease;
+  /* belt and braces alongside the .cursor-hidden toggle: `cursor` inherits, so
+     this beats a `cursor: none` inherited from #stage no matter how the class
+     lands mid-movement. Children that set their own cursor (the social links'
+     `pointer`) still win over this inherited `auto`. */
+  cursor: auto;
+}
+
+/* Page turn: the layer fades out, the page state swaps underneath, then the
+   class is removed and the new set fades in. Keep 320ms in sync with FADE_MS
+   in ArtworkPage.jsx. */
+#stage .card-layer.is-fading .card {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #stage .card {
+    transition: opacity 120ms linear;
+    transform: none;
+  }
+
+  #stage .card-layer.is-fading .card {
+    transform: none;
+  }
+}
+#stage #card1 { left: 11%; top: 21%; width: 30%; height: 24%;}
+#stage #card2 { left: 55%; top: 21%; width: 30%; height: 24%;}
+#stage #card3 { left: 11%; top: 59%; width: 30%; height: 24%;}
+#stage #card4 { left: 55%; top: 59%; width: 30%; height: 24%;}
+
+/* card1/card3 always sit in the left column (left: 11%) on desktop - mirror
+   their internal layout (creator info first, artwork second) so the page
+   reads symmetrically around the centre net instead of every card matching.
+   High specificity (two IDs) beats ArtworkCard.css's plain ".full-details-card
+   article" rule regardless of file order, so this doesn't need !important. */
+#stage #card1 .full-details-card article,
+#stage #card3 .full-details-card article {
+  flex-direction: row-reverse;
+}
+
+@media (max-width: 767px) {
+  /* #netLines' inner curves are the last two <path> children appended in
+     ArtworkPage.jsx's ensureNetElements (hMid, then vMid) - vMid, the
+     vertical one, is always last, so :last-child targets it precisely
+     without needing a dedicated class. Only its rendering is skipped here;
+     ArtworkPage.jsx still computes it, which is harmless. */
+  #netLines path:last-child {
+    display: none;
+  }
+
+  /* Only card1/card2 ever render below this breakpoint (cardsPerPage drops
+     to 2 in ArtworkPage.jsx), so they're restacked top/bottom to match the
+     single remaining horizontal divider instead of the left/right split. */
+  #stage #card1 { left: 8%; top: 15%; width: 84%; height: 32%; }
+  /* Was top: 55%, height: 32% - bottom edge at 87%, past where the bottom net
+     curve actually dips to at the horizontal centre. (BL/BR corners sit at
+     0.86/0.88, but the curve bows inward to its control point at 0.82 - see
+     CORNERS/BOW in ArtworkPage.jsx - so the curve's lowest point mid-screen is
+     only ~84.5%.) Shifted up (top: 48%) and trimmed slightly (height: 30%) so
+     the card's bottom edge (78%) clears the curve at every x with margin. */
+  #stage #card2 { left: 8%; top: 48%; width: 84%; height: 30%; }
+
+  /* card1 is stacked on top here, not sitting in a left column, and card3
+     never renders at this width - so the desktop row-reverse doesn't apply.
+     This still has to restate the direction (not just rely on ArtworkCard.css's
+     own mobile rule) because these two IDs outrank that plain-class rule -
+     row-reverse would otherwise keep beating it and leave card1 showing its
+     creator info above the image instead of below. */
+  #stage #card1 .full-details-card article,
+  #stage #card3 .full-details-card article {
+    flex-direction: column;
+  }
+}
+
+#stage .navArrow {
+  position: absolute;
+  top: 49.5%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 44px;
+  pointer-events: auto;
+  cursor: pointer;
+}
+#stage .navArrow:focus-visible {
+  outline: 1px solid #cfe8ff;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+#stage .navArrow.left { left: 1%; right: auto; }
+#stage .navArrow.right { left: auto; right: 1%; }
+#stage .navArrow path {
+  fill: none;
+  stroke: #8b8f98;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, stroke 0.2s ease;
+}
+#stage .navArrow:focus {outline: none;}
+#stage .navArrow:hover path {
+  opacity: 1;
+  stroke: #cfe8ff;
+}
+
+#stage:first-child,
+#stage:nth-child(2) {
+  position: absolute;
+  top: 0;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  font-size: 0.6rem;
+  font-family: "Orbitron", sans-serif;
+  display: flex;
+  width: 52vw;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 30px 70px;
+  width: 100%;
+}
+
+footer h2 {
+  font-weight: 200;
+  transform: translateX(-40%);
+}
+
+#artwork-heading {
+  position: absolute;
+  top: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  font-family: "StretchPro", sans-serif;
+}
+
+@font-face {
+  font-family: "StretchPro";
+  src: url(../../../assests/StretchPro.otf);
+}
+
+@media screen and (max-width: 768px) {
+  #artwork-heading {
+    font-size: 1.5rem;
+  }
+}

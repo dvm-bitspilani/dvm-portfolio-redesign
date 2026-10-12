@@ -1,0 +1,415 @@
+.project-landing {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* ----- Heading ----- */
+
+.project-landing-heading {
+  position: relative;
+  z-index: 10;
+  margin: 3rem 0;
+  height: clamp(3.4rem, 13vw, 10.5rem);
+  overflow: hidden;
+}
+
+.project-heading-fill,
+.project-heading-outline {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 96vw;
+  font-family: "Stretch Pro", sans-serif;
+  white-space: nowrap;
+  line-height: 1;
+  overflow: hidden;
+  -ms-overflow-style: none;
+}
+
+.project-heading-fill::-webkit-scrollbar,
+.project-heading-outline::-webkit-scrollbar {
+  display: none;
+}
+
+.project-heading-fill {
+  z-index: 2;
+  top: 14%;
+  margin-left: -3%;
+  color: #ffffff;
+  font-size: clamp(2rem, 10vw, 8rem);
+}
+
+.project-heading-outline {
+  z-index: 1;
+  top: 0;
+  margin-left: -8%;
+  font-size: clamp(2.4rem, 12vw, 9.6rem);
+  color: transparent;
+  -webkit-text-stroke: 1px #ffffff3b;
+}
+
+/* ----- Carousel ----- */
+
+.project-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 20px;
+  margin: 3rem 0;
+  z-index: 10;
+}
+
+
+ .project-carousel-card {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1100px;
+  gap: 24px;
+  position: relative;
+  z-index: 10;
+  isolation: isolate; /* add this line */
+}
+
+.project-carousel-image {
+  position: relative;
+  flex: 0 0 auto;
+  width: 45%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  /* backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px); */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  z-index: 10;
+  isolation: isolate; /* new line — scopes the backdrop-filter blur to this box */
+}
+.project-carousel-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index:999
+}
+
+/* ----- Carousel Navigation ----- */
+
+.project-carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 22px;
+  line-height: 1;
+  color: #eaf3ff;
+  background: rgba(5, 8, 16, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    background 0.2s ease;
+  z-index: 11;
+}
+
+.project-carousel-nav:hover {
+  color: #45e6ff;
+  border-color: #45e6ff;
+  background: rgba(5, 8, 16, 0.75);
+  transform: translateY(-50%) scale(1.06);
+}
+
+.project-carousel-nav-left {
+  left: 10px;
+}
+
+.project-carousel-nav-right {
+  right: 10px;
+}
+
+/* ----- Carousel Content ----- */
+
+.project-carousel-content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  padding: 24px 28px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 16px;
+  /* backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px); */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  position: relative;
+  z-index: 10;
+}
+
+.project-carousel-name {
+  font-size: 2rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0 0 2rem;
+  color: white;
+  font-family: "Stretch Pro", sans-serif;
+}
+
+.project-carousel-paragraph {
+  font-size: 1rem;
+  line-height: 1.3;
+  color: white;
+  margin: 0;
+}
+
+/* ----- See All ----- */
+
+.see-all-container {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0;
+  position: relative;
+  z-index: 10;
+}
+
+.see-all-projects {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Orbitron", sans-serif;
+  z-index: 10;
+  width: min(60%, 420px);
+  height: 35px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+  overflow: hidden;
+  flex: 0 0 auto;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.see-all-projects:hover {
+  color: #45e6ff;
+  border-color: #45e6ff;
+  background: rgba(69, 230, 255, 0.08);
+  box-shadow: 0 0 12px rgba(69, 230, 255, 0.2);
+}
+
+.see-all-projects span {
+  padding: 2px;
+  display: inline-block;
+  transform: scaleX(1.5);
+  transform-origin: center;
+}
+
+.projects-arrow {
+  margin-left: 20px;
+  padding: 2px;
+  display: inline-block;
+  transform-origin: center;
+}
+
+/* ----- Background Grid ----- */
+
+.grid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.6;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.2) 0,
+    rgba(255, 255, 255, 0.2) 1px,
+    transparent 1px,
+    transparent 30px
+  );
+  pointer-events: none;
+}
+
+/* ----- Animated Gradient ----- */
+
+/*
+  IMPORTANT:
+  Gradient is now behind all actual project content.
+  It can still animate across the background, but it
+  cannot blend with / distort the project image.
+*/
+
+.gradient {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 60%;
+  height: 90%;
+  z-index: 2;
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle at 20% 40%,
+    rgba(180, 250, 255, 0.9) 0%,
+    rgba(60, 210, 230, 0.75) 35%,
+    rgba(20, 90, 100, 0.35) 60%,
+    transparent 85%
+  );
+
+ 
+}
+
+/* ----- Texture ----- */
+
+.texture {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+
+  -webkit-mask-image: radial-gradient(
+    circle 50vh at -9999px -9999px,
+    black 0%,
+    transparent 100%
+  );
+
+  mask-image: radial-gradient(
+    circle 50vh at -9999px -9999px,
+    black 0%,
+    transparent 100%
+  );
+}
+
+/* ----- Responsive ----- */
+
+@media (max-width: 1024px) {
+  .project-heading-fill {
+    margin-left: -2.5%;
+  }
+
+  .project-heading-outline {
+    margin-left: -6.5%;
+  }
+}
+
+@media (max-width: 700px) {
+  .project-landing-heading {
+    margin: 2rem 0;
+    height: clamp(2.8rem, 15vw, 6rem);
+  }
+
+  .project-heading-fill {
+    margin-left: -1.5%;
+    font-size: clamp(1.75rem, 11vw, 4.5rem);
+  }
+
+  .project-heading-outline {
+    margin-left: -4%;
+    font-size: clamp(2rem, 13vw, 5rem);
+  }
+
+  .project-carousel {
+    margin: 2rem 0;
+  }
+
+  .see-all-container {
+    margin: 2rem 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .project-carousel {
+    padding: 32px 12px;
+  }
+
+  .project-carousel-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .project-carousel-image {
+    width: 100%;
+  }
+
+  .project-carousel-content {
+    text-align: center;
+    align-items: center;
+    padding: 20px 18px;
+  }
+
+  .see-all-projects {
+    padding: 1.1rem 0;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .project-landing-heading {
+    height: clamp(2.4rem, 16vw, 4.4rem);
+  }
+
+  .project-heading-fill {
+    margin-left: -1%;
+    font-size: clamp(1.5rem, 11vw, 3.4rem);
+  }
+
+  .project-heading-outline {
+    margin-left: -3%;
+    font-size: clamp(1.8rem, 13vw, 4.1rem);
+  }
+
+  .project-carousel-nav {
+    width: 32px;
+    height: 32px;
+    font-size: 19px;
+  }
+
+  .project-carousel-name {
+    font-size: 16px;
+  }
+
+  .project-carousel-paragraph {
+    font-size: 14px;
+  }
+}
+
+/* ----- Reduced Motion ----- */
+
+@media (prefers-reduced-motion: reduce) {
+  .project-carousel-nav,
+  .see-all-projects {
+    transition: none;
+  }
+}
+.gradient {
+    position: absolute;
+    left: 40%;
+    top: -10%;
+    width: 40%;
+    height: 60%;
+    z-index: 3; /* was 999 — now sits behind .text (99) and .grid (100), like ProjectLanding's layering */
+    pointer-events: none;
+
+    background: radial-gradient(
+      circle at 20% 40%,
+      rgba(180, 250, 255, 0.9) 0%,
+      rgba(60, 210, 230, 0.75) 35%,
+      rgba(20, 90, 100, 0.35) 60%,
+      transparent 85%
+    );
+
+    /* mix-blend-mode: color;  <- removed, matches ProjectLanding's plain layer approach */
+}
