@@ -1,0 +1,458 @@
+/* FoldTimeline — the ORIGAMI strip. Everything is scoped to this module. */
+
+.root,
+.v {
+  --tl-fibre: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.11 0.035' numOctaves='3' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 0.95 0 0 0 0 0.9 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+}
+
+.root[data-tone='copper'],
+.v[data-tone='copper'] {
+  --tl-bg: #050404;
+  --tl-paper: #1a1716;
+  --tl-ink: #f3ebe1;
+  --tl-dust: #bdaea1;
+  --tl-rule: rgba(189, 174, 161, 0.55);
+  --tl-foil: #f0a46e;
+  --tl-foil-soft: rgba(240, 164, 110, 0.32);
+  --tl-glow: rgba(255, 140, 80, 0.6);
+  --tl-foil-grad: linear-gradient(170deg, #9a4220 0%, #ff6a3d 22%, #ffcfae 38%, #e5804c 52%, #8a3818 72%, #ff8a55 88%, #9a4220 100%);
+  --tl-entry-font: 400 21px/1.08 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --tl-kind-font: 500 12px/1.2 'Inter Tight Variable', 'Helvetica Neue', Arial, sans-serif;
+  --tl-kind-track: 0;
+  --tl-year-font: 400 1em/1 'Instrument Serif', Georgia, serif;
+  --tl-year-scale: 0.74;
+  --tl-title-font: 400 clamp(40px, 9vw, 64px)/0.95 'Instrument Serif', Georgia, serif;
+}
+
+.root[data-tone='teal'],
+.v[data-tone='teal'] {
+  --tl-bg: #050506;
+  --tl-paper: #10171a;
+  --tl-ink: #e2f4ff;
+  --tl-dust: #8fb0bd;
+  --tl-rule: rgba(143, 176, 189, 0.5);
+  --tl-foil: #45e6ff;
+  --tl-foil-soft: rgba(69, 230, 255, 0.3);
+  --tl-glow: rgba(69, 230, 255, 0.6);
+  --tl-foil-grad: linear-gradient(170deg, #13606f 0%, #45e6ff 22%, #effdff 38%, #5fd4e6 52%, #0f4d5a 72%, #33e7ff 88%, #13606f 100%);
+  --tl-entry-font: 600 19px/1.12 Rajdhani, 'Helvetica Neue', Arial, sans-serif;
+  --tl-kind-font: 400 10px/1.2 Orbitron, 'Helvetica Neue', Arial, sans-serif;
+  --tl-kind-track: 0.06em;
+  --tl-year-font: 400 1em/1 'Stretch Pro', Orbitron, 'Arial Black', sans-serif;
+  --tl-year-scale: 0.46;
+  --tl-title-font: 400 clamp(26px, 6.4vw, 44px)/1 'Stretch Pro', Orbitron, sans-serif;
+}
+
+/* the redesign ships a global `* { overflow-x: hidden }`; undo it inside the component so
+   threads, beads and pinning are not clipped (specific rules below re-clip where needed) */
+.root,
+.v,
+.root :where(*),
+.v :where(*) {
+  overflow: visible;
+}
+
+.root {
+  position: relative;
+  width: 100%;
+  color: var(--tl-ink);
+}
+.rootFill {
+  height: 100%;
+}
+.root :focus-visible,
+.v :focus-visible {
+  outline: 2px solid var(--tl-foil);
+  outline-offset: 3px;
+}
+
+.sr {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------------------------------------------------------------- horizontal stage */
+
+.track {
+  position: relative;
+  width: 100%;
+}
+.trackExternal {
+  position: absolute;
+  inset: 0;
+}
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--tl-bg);
+  isolation: isolate;
+}
+.trackExternal .stage {
+  height: 100%;
+}
+.trackSticky .stage {
+  position: sticky;
+  top: 0;
+}
+.stageTransparent {
+  background: transparent;
+}
+.stage canvas {
+  display: block;
+}
+
+.intro {
+  position: absolute;
+  left: clamp(24px, 6vw, 104px);
+  top: 50%;
+  translate: 0 -50%;
+  width: min(520px, 42vw);
+  z-index: 2;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+.intro a,
+.intro button {
+  pointer-events: auto;
+}
+
+.hint {
+  position: absolute;
+  right: clamp(24px, 4vw, 52px);
+  bottom: 36px;
+  margin: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font: italic 400 17px/1.3 'Instrument Serif', Georgia, serif;
+  color: var(--tl-dust);
+  opacity: 0;
+  transition: opacity 0.6s;
+  pointer-events: none;
+}
+.hint::before {
+  content: '';
+  width: 42px;
+  border-top: 1px dashed var(--tl-foil);
+}
+
+/* captions, positioned by the WebGL scene under each stop */
+.captions {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+}
+.cap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--imm-tl-cap-w, 320px);
+  padding: 34px 0 0;
+  opacity: calc(var(--imm-tl-cap-a, 0) * 0.5);
+  transition: opacity 0.45s ease;
+  pointer-events: auto;
+  will-change: transform;
+}
+.cap[data-active],
+.cap:hover,
+.cap:focus-within {
+  opacity: var(--imm-tl-cap-a, 0);
+}
+/* the thread that hangs each list from its foil-stamped stop on the strip */
+.cap::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 26px;
+  border-left: 1px solid var(--tl-foil);
+  box-shadow: 0 0 10px var(--tl-glow);
+}
+.cap::after {
+  content: '';
+  position: absolute;
+  left: -3px;
+  top: 26px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--tl-foil);
+  box-shadow: 0 0 10px var(--tl-glow);
+}
+.capList {
+  list-style: none;
+  margin: 0;
+  padding: 4px 0 0 18px;
+  border-left: 1px solid var(--tl-foil-soft);
+}
+.capOpen {
+  max-height: max(160px, 32vh);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--tl-foil-soft) transparent;
+}
+.capList > li,
+.vEntries > li {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  padding: 6px 0 7px;
+  border-bottom: 1px dashed color-mix(in srgb, var(--tl-ink) 11%, transparent);
+}
+.capList small,
+.vEntries small {
+  margin-left: auto;
+  font: var(--tl-kind-font);
+  letter-spacing: var(--tl-kind-track);
+  color: var(--tl-foil);
+  white-space: nowrap;
+}
+.capLink {
+  all: unset;
+  font: var(--tl-entry-font);
+  color: var(--tl-ink);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.25s;
+  text-wrap: pretty;
+}
+.capLink:hover {
+  color: var(--tl-foil);
+}
+.capLink:focus-visible {
+  outline: 2px solid var(--tl-foil);
+  outline-offset: 2px;
+}
+.capMore {
+  border-bottom: 0 !important;
+}
+.capMore button {
+  all: unset;
+  cursor: pointer;
+  font: var(--tl-kind-font);
+  font-size: 13px;
+  letter-spacing: var(--tl-kind-track);
+  color: var(--tl-foil);
+  border-bottom: 1px dashed currentColor;
+  padding: 2px 0 1px;
+}
+.capMore button:focus-visible {
+  outline: 2px solid var(--tl-foil);
+  outline-offset: 3px;
+}
+.capNote {
+  margin: 10px 0 0 18px;
+  font: italic 400 15px/1.35 'Instrument Serif', Georgia, serif;
+  color: var(--tl-dust);
+}
+
+/* ---------------------------------------------------------------- vertical strip */
+
+.v {
+  --strip-w: 76px;
+  --gap: 24px;
+  position: relative;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(64px, 12vw, 120px) clamp(16px, 5vw, 40px) 72px;
+  color: var(--tl-ink);
+}
+.vHead,
+.vStop {
+  display: grid;
+  grid-template-columns: var(--strip-w) minmax(0, 1fr);
+  column-gap: var(--gap);
+}
+.vHead {
+  align-items: end;
+}
+/* paper, shared by the head, every stop and the tail */
+.vHeadPaper,
+.vPaper,
+.vTailPaper {
+  position: relative;
+  background:
+    linear-gradient(90deg, var(--tl-foil) 0 2px, transparent 2px calc(100% - 2px), var(--tl-foil) calc(100% - 2px)),
+    var(--tl-fibre),
+    var(--tl-paper);
+  box-shadow:
+    -10px 0 30px -12px rgba(0, 0, 0, 0.9),
+    10px 0 40px -18px var(--tl-glow);
+}
+.vHeadPaper {
+  padding: 22px 10px 18px;
+  clip-path: polygon(0 14px, 100% 0, 100% 100%, 0 100%);
+}
+.vMark {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.7));
+}
+.vHeadText {
+  padding-bottom: 18px;
+}
+.vTitle {
+  margin: 0;
+  font: var(--tl-title-font);
+  color: var(--tl-ink);
+  text-wrap: balance;
+}
+.vList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.vPaper {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 30px;
+}
+/* ruler along the right edge: minor and major ticks */
+.vPaper::before {
+  content: '';
+  position: absolute;
+  right: 6px;
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  background:
+    repeating-linear-gradient(180deg, var(--tl-rule) 0 1.5px, transparent 1.5px 48px) right top / 12px 100% no-repeat,
+    repeating-linear-gradient(180deg, var(--tl-rule) 0 1px, transparent 1px 9.6px) right top / 6px 100% no-repeat;
+  opacity: 0.8;
+}
+/* crease notation where the strip was folded: valley dashed, mountain dash-dot */
+.vPaper::after {
+  content: '';
+  position: absolute;
+  left: -20%;
+  top: 0;
+  width: 140%;
+  height: 1.5px;
+  transform-origin: center;
+  transform: translateY(-2px) rotate(-24deg);
+  background: repeating-linear-gradient(90deg, var(--tl-rule) 0 9px, transparent 9px 16px);
+}
+.vPaper[data-crease='mountain']::after {
+  transform: translateY(-2px) rotate(24deg);
+  background: repeating-linear-gradient(90deg, var(--tl-rule) 0 14px, transparent 14px 19px, var(--tl-rule) 19px 21px, transparent 21px 26px);
+}
+.vStop:first-child .vPaper::after {
+  display: none;
+}
+.vYear {
+  position: relative;
+  z-index: 1;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font: var(--tl-year-font);
+  font-size: calc(var(--strip-w) * var(--tl-year-scale));
+  white-space: nowrap;
+  padding: 2px 0;
+  background: var(--tl-foil-grad);
+  background-size: 100% 260%;
+  background-position: 0 calc(50% + var(--imm-tl-sheen, 0) * 120%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.6));
+}
+.vBody {
+  position: relative;
+  padding: 22px 0 46px;
+}
+/* thread from the strip to the list */
+.vBody::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--gap) * -1);
+  top: 40px;
+  width: calc(var(--gap) - 4px);
+  border-top: 1px solid var(--tl-foil);
+  box-shadow: 0 0 10px var(--tl-glow);
+}
+.vBody::after {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 37px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--tl-foil);
+  box-shadow: 0 0 10px var(--tl-glow);
+}
+.vLabel {
+  margin: 0 0 4px;
+  padding-top: 8px;
+}
+.vLabel small {
+  font: var(--tl-kind-font);
+  letter-spacing: var(--tl-kind-track);
+  color: var(--tl-dust);
+}
+.vEntries {
+  list-style: none;
+  margin: 0;
+  padding: 2px 0 0;
+}
+.vTail {
+  display: grid;
+  grid-template-columns: var(--strip-w) minmax(0, 1fr);
+  column-gap: var(--gap);
+  align-items: end;
+}
+.vTailPaper {
+  height: 92px;
+  clip-path: polygon(0 0, 100% 0, 100% 62%, 0 100%);
+  background:
+    radial-gradient(circle at center, var(--tl-bg) 0 2.2px, transparent 2.6px) 0 10px / 11px 11px repeat-x,
+    linear-gradient(90deg, var(--tl-foil) 0 2px, transparent 2px calc(100% - 2px), var(--tl-foil) calc(100% - 2px)),
+    var(--tl-fibre),
+    var(--tl-paper);
+}
+.vTail p {
+  margin: 0 0 6px;
+  font: var(--tl-kind-font);
+  letter-spacing: var(--tl-kind-track);
+  color: var(--tl-dust);
+}
+
+@media (max-width: 480px) {
+  .v {
+    --strip-w: 60px;
+    --gap: 18px;
+  }
+  .capList > li,
+  .vEntries > li {
+    flex-wrap: wrap;
+    row-gap: 2px;
+  }
+  .vEntries small {
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cap,
+  .hint,
+  .capLink {
+    transition: none;
+  }
+}
