@@ -1,0 +1,57 @@
+/* Fills its positioned parent. The canvas never takes pointer events: the engine
+   listens on window, so DOM content above or around it stays fully interactive. */
+.field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+
+/* Full-page ambient layer used by SwarmProvider. */
+.fixed {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* No WebGL: a still teal glow so the layout keeps its weight. */
+.noGL {
+  background: radial-gradient(ellipse 40% 45% at 70% 50%, rgba(69, 230, 255, 0.22), rgba(18, 122, 146, 0.08) 55%, transparent 75%);
+}
+
+.ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2147483000;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.ring::after {
+  content: '';
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  left: -17px;
+  top: -17px;
+  border-radius: 50%;
+  border: 1px solid rgba(95, 212, 230, 0.5);
+  transition:
+    transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.4s,
+    background 0.4s,
+    box-shadow 0.4s;
+}
+.ring[data-holding]::after {
+  transform: scale(0.35);
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow:
+    0 0 0 30px rgba(69, 230, 255, 0.07),
+    0 0 60px 20px rgba(69, 230, 255, 0.25);
+}

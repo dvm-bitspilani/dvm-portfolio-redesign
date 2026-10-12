@@ -1,0 +1,513 @@
+.root {
+  --bg: #050506;
+  --panel: rgba(11, 18, 32, 0.72);
+  --line: rgba(207, 232, 255, 0.12);
+  --accent: #45e6ff;
+  --pale: #cfe8ff;
+  --muted: rgba(207, 232, 255, 0.62);
+  --display: 'Stretch Pro', 'Orbitron', sans-serif;
+  --body: 'Rajdhani', 'Space Grotesk', system-ui, sans-serif;
+  --mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+  --gut: max(20px, 5.2vw);
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--pale);
+  font: 500 18px/1.55 var(--body);
+  -webkit-font-smoothing: antialiased;
+  font-variant-ligatures: none;
+  font-feature-settings: 'liga' 0, 'dlig' 0, 'clig' 0;
+}
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+.root :focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ---------- top bar ---------- */
+
+.bar {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px var(--gut);
+  pointer-events: none;
+}
+.bar > * {
+  pointer-events: auto;
+}
+.mark {
+  font: 400 20px/1 var(--display);
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+.switch {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid rgba(207, 232, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(5, 5, 6, 0.6);
+  backdrop-filter: blur(10px);
+}
+.switch button {
+  all: unset;
+  cursor: pointer;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font: 600 14px/1 var(--body);
+  letter-spacing: 0.04em;
+  color: var(--pale);
+}
+.switch button[aria-pressed='true'] {
+  background: var(--accent);
+  color: #031417;
+}
+.switch button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- full page ---------- */
+
+/* The redesign's thin vertical rules, above the particles, below the copy. */
+.grid {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.32;
+  background: repeating-linear-gradient(to right, rgba(255, 255, 255, 0.2) 0 1px, transparent 1px 30px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+}
+.page {
+  position: relative;
+  z-index: 2;
+}
+.band {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px var(--gut);
+}
+.col {
+  width: min(34rem, 44vw);
+}
+.flip {
+  justify-content: flex-end;
+}
+.hero .col {
+  position: relative;
+}
+.display {
+  margin: 0 0 28px;
+  font: 400 clamp(28px, 3.4vw, 54px) / 1.08 var(--display);
+  letter-spacing: 0.01em;
+  color: #fff;
+  text-wrap: balance;
+}
+.lede {
+  margin: 0 0 32px;
+  font-size: 20px;
+  color: var(--pale);
+  max-width: 32em;
+}
+.h2 {
+  margin: 0 0 20px;
+  font: 400 clamp(22px, 2.2vw, 34px) / 1.12 var(--display);
+  color: #fff;
+  text-wrap: balance;
+}
+.col p,
+.closingCol p {
+  margin: 0 0 28px;
+  color: var(--muted);
+  max-width: 32em;
+}
+.outline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 4vh;
+  font: 400 31vw/0.8 var(--display);
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(207, 232, 255, 0.12);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.interlude {
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: 32px;
+}
+.statement {
+  margin: 0;
+  max-width: 22em;
+  font: 400 clamp(20px, 2.3vw, 36px) / 1.3 var(--display);
+  color: #fff;
+  text-wrap: balance;
+  text-shadow: 0 0 30px rgba(5, 5, 6, 0.9);
+}
+.interlude .code {
+  text-align: left;
+}
+.closing {
+  align-items: flex-end;
+  justify-content: center;
+}
+.closingCol {
+  width: min(40rem, 100%);
+  text-align: center;
+}
+.closingCol .code {
+  text-align: left;
+}
+.link {
+  all: unset;
+  cursor: pointer;
+  color: var(--accent);
+  border-bottom: 1px solid rgba(69, 230, 255, 0.4);
+}
+.closingCol a.link {
+  white-space: nowrap;
+}
+.link:hover {
+  border-bottom-color: var(--accent);
+}
+.link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.code {
+  margin: 0 0 24px;
+  padding: 14px 16px;
+  overflow-x: auto;
+  font: 400 12.5px/1.6 var(--mono);
+  color: #bfe9ef;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  backdrop-filter: blur(8px);
+  white-space: pre;
+}
+
+/* hover index */
+.index {
+  list-style: none;
+  margin: 8px 0 32px;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.index li {
+  border-bottom: 1px solid var(--line);
+}
+.index button {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 3.4em 1fr auto;
+  align-items: baseline;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 4px;
+  color: var(--muted);
+  transition: color 0.2s, padding 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.index button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+.index .on {
+  color: #fff;
+  padding-left: 14px;
+}
+.year {
+  font: 400 13px/1 var(--mono);
+  color: rgba(207, 232, 255, 0.45);
+}
+.title {
+  font: 600 19px/1.2 var(--body);
+}
+.fest {
+  font-size: 14px;
+  color: rgba(207, 232, 255, 0.45);
+}
+.on .fest,
+.on .year {
+  color: var(--accent);
+}
+
+.stats {
+  position: fixed;
+  right: var(--gut);
+  bottom: 18px;
+  z-index: 20;
+  margin: 0;
+  font: 400 11px/1 var(--mono);
+  color: rgba(207, 232, 255, 0.5);
+  pointer-events: none;
+}
+
+/* ---------- embedded ---------- */
+
+.embed {
+  padding: 96px var(--gut) 64px;
+}
+.embedGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 22rem;
+  gap: 32px;
+  align-items: start;
+}
+.embedTitle {
+  margin: 0 0 14px;
+  font: 400 clamp(22px, 2vw, 30px) / 1.1 var(--display);
+  color: #fff;
+}
+.embedLede {
+  margin: 0 0 6px;
+  font-size: 16px;
+  color: var(--muted);
+}
+.stage {
+  --mx: 70%;
+  --my: 50%;
+  /* Not sticky: the redesign's global \`* { overflow-x: hidden }\` makes every ancestor a scroll container. */
+  position: relative;
+  height: calc(100vh - 128px);
+  min-height: 420px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  background: #000;
+  cursor: crosshair;
+}
+.stageSolid {
+  background: #050506;
+}
+.texture {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.55;
+  -webkit-mask-image: radial-gradient(circle 32vw at var(--mx) var(--my), #000 0%, transparent 100%);
+  mask-image: radial-gradient(circle 32vw at var(--mx) var(--my), #000 0%, transparent 100%);
+}
+.stageLines {
+  position: absolute;
+  inset: 0;
+  opacity: 0.4;
+  background: repeating-linear-gradient(to right, rgba(255, 255, 255, 0.16) 0 1px, transparent 1px 30px);
+  pointer-events: none;
+}
+.stageNote {
+  position: absolute;
+  left: 18px;
+  top: 16px;
+  font: 400 11px/1 var(--mono);
+  color: rgba(207, 232, 255, 0.5);
+  pointer-events: none;
+}
+
+.stageStats {
+  position: absolute;
+  right: 18px;
+  bottom: 14px;
+  margin: 0;
+  font: 400 11px/1 var(--mono);
+  color: rgba(207, 232, 255, 0.5);
+  pointer-events: none;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.group {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.group legend {
+  padding: 0;
+  margin-bottom: 8px;
+  font: 400 12px/1 var(--mono);
+  color: rgba(207, 232, 255, 0.5);
+}
+.group > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.chip {
+  all: unset;
+  cursor: pointer;
+  padding: 6px 12px;
+  border: 1px solid rgba(207, 232, 255, 0.22);
+  border-radius: 999px;
+  font: 600 14px/1.2 var(--body);
+  color: var(--pale);
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.chip:hover {
+  border-color: rgba(69, 230, 255, 0.6);
+}
+.chip[aria-pressed='true'] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #031417;
+}
+.chip:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.hint {
+  margin: -10px 0 0;
+  font-size: 14px;
+  color: rgba(207, 232, 255, 0.5);
+}
+.textForm {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+}
+.textForm label {
+  font: 400 12px/1 var(--mono);
+  color: rgba(207, 232, 255, 0.5);
+}
+.textForm input {
+  min-width: 0;
+  padding: 7px 10px;
+  border: 1px solid rgba(207, 232, 255, 0.22);
+  border-radius: 4px;
+  background: rgba(11, 18, 32, 0.7);
+  color: #fff;
+  font: 600 15px/1.2 var(--body);
+}
+.textForm input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+.textForm button,
+.burst {
+  all: unset;
+  cursor: pointer;
+  padding: 7px 14px;
+  border: 1px solid var(--pale);
+  border-radius: 999px;
+  font: 600 14px/1.2 var(--body);
+  color: #fff;
+  text-align: center;
+}
+.textForm button:hover,
+.burst:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.textForm button:focus-visible,
+.burst:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.burst {
+  align-self: flex-start;
+}
+.slider {
+  display: grid;
+  gap: 8px;
+  font: 400 12px/1 var(--mono);
+  color: rgba(207, 232, 255, 0.5);
+}
+.slider output {
+  color: var(--pale);
+  margin-left: 6px;
+}
+.slider input {
+  accent-color: var(--accent);
+  width: 100%;
+}
+.controls .code {
+  margin: 4px 0 0;
+}
+
+/* The \`font\` shorthand resets ligatures; Stretch Pro joins doubled letters ("dd", "ff", "EE") unless they are off. */
+.mark,
+.display,
+.h2,
+.statement,
+.outline,
+.embedTitle {
+  font-variant-ligatures: none;
+  font-feature-settings: 'liga' 0, 'dlig' 0, 'clig' 0;
+}
+
+/* ---------- narrow: the swarm's presets move to a top band, copy sits below ---------- */
+
+@media (max-width: 759px) {
+  .root {
+    font-size: 17px;
+  }
+  .band {
+    align-items: flex-end;
+    padding: 46vh var(--gut) 72px;
+  }
+  .flip {
+    justify-content: flex-start;
+  }
+  .col {
+    width: 100%;
+  }
+  .interlude {
+    justify-content: center;
+    padding-top: 120px;
+  }
+  .index {
+    background: rgba(5, 5, 6, 0.55);
+    backdrop-filter: blur(6px);
+  }
+  .outline {
+    display: none;
+  }
+  .embed {
+    padding-top: 84px;
+  }
+  .embedGrid {
+    grid-template-columns: 1fr;
+  }
+  .stage {
+    height: 60vh;
+    min-height: 0;
+  }
+  .stageStats {
+    display: none;
+  }
+  .stats {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .index button,
+  .chip {
+    transition: none;
+  }
+}
