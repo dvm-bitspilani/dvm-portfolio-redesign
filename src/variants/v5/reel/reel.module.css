@@ -1,0 +1,183 @@
+/* The strip. Desktop: a fixed gate, the track translated by the bus.
+   Phone: a vertical scroll container that snaps one frame per swipe. */
+
+.viewport {
+  --rail: 38px;
+  --line: 12px;
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  outline: none;
+}
+.travel {
+  overflow: clip;
+  touch-action: none;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.travel[data-dragging] {
+  cursor: grabbing;
+}
+.travel[data-dragging] * {
+  pointer-events: none;
+}
+
+.weave {
+  height: 100%;
+  overflow: visible;
+  animation: weave 3.2s steps(1, end) infinite;
+}
+/* gate weave: the film never sits perfectly still in the gate */
+@keyframes weave {
+  0% { transform: translate3d(0, 0, 0); }
+  11% { transform: translate3d(0.4px, -0.6px, 0); }
+  23% { transform: translate3d(-0.3px, 0.5px, 0); }
+  37% { transform: translate3d(0.2px, 0.8px, 0); }
+  49% { transform: translate3d(-0.5px, -0.2px, 0); }
+  62% { transform: translate3d(0.3px, -0.7px, 0); }
+  74% { transform: translate3d(-0.2px, 0.4px, 0); }
+  88% { transform: translate3d(0.5px, 0.1px, 0); }
+}
+
+.track {
+  position: relative;
+  display: flex;
+  height: 100%;
+  width: max-content;
+  overflow: visible;
+  will-change: transform;
+}
+
+.rail {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  background-repeat: repeat-x;
+  overflow: visible;
+}
+.railT { top: 0; left: 0; right: 0; height: var(--rail); background-position: 0 0; }
+.railB { bottom: 0; left: 0; right: 0; height: var(--rail); background-position: 0 0; }
+.railL, .railR { top: 0; bottom: 0; width: 26px; background-repeat: repeat-y; }
+.railL { left: 0; }
+.railR { right: 0; }
+
+/* ---------------------------------------------------------------- frames */
+.frame {
+  --w: 100;
+  counter-increment: frame;
+  position: relative;
+  flex: none;
+  width: calc(var(--w) * 1vw);
+  height: 100%;
+  padding: var(--rail) calc(var(--line) / 2);
+  overflow: visible;
+}
+.track {
+  counter-reset: frame;
+}
+.auto {
+  width: auto;
+}
+
+/* edge print: keycode + frame number, in the rail beside the sprocket holes */
+.frame::before,
+.frame::after {
+  position: absolute;
+  left: 18px;
+  font: 500 9px/1 "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: 0.14em;
+  color: rgba(95, 212, 230, 0.55);
+  white-space: nowrap;
+  pointer-events: none;
+  overflow: visible;
+}
+.frame::before {
+  content: "DVM 35  \25B8  " counter(frame, decimal-leading-zero) "  " attr(data-edge);
+  top: 24px;
+}
+.frame::after {
+  content: counter(frame, decimal-leading-zero) "A";
+  bottom: 24px;
+  color: rgba(95, 212, 230, 0.35);
+}
+
+.gate {
+  position: relative;
+  height: 100%;
+  border-radius: 10px;
+  overflow: clip;
+  box-shadow: inset 0 0 0 1px rgba(95, 212, 230, 0.1), inset 0 0 120px rgba(0, 0, 0, 0.55);
+}
+
+.tail {
+  flex: none;
+  width: 34vw;
+  height: 100%;
+  padding: var(--rail) 0;
+  display: grid;
+  place-items: center;
+  overflow: visible;
+}
+.tail span {
+  font: 500 0.72rem/1 "Orbitron", sans-serif;
+  letter-spacing: 0.2em;
+  color: rgba(207, 232, 255, 0.35);
+  padding: 10px 16px;
+  border: 1px dashed rgba(95, 212, 230, 0.2);
+  border-radius: 999px;
+}
+
+/* ---------------------------------------------------------------- phone: vertical film */
+.native {
+  --rail: 26px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+  height: 100svh;
+}
+.native .weave {
+  height: auto;
+  animation: none;
+}
+.native .track {
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+}
+.native .frame {
+  width: 100%;
+  height: auto;
+  min-height: 100svh;
+  padding: calc(var(--line) / 2) var(--rail);
+  scroll-snap-align: start;
+}
+.native .frame::before {
+  top: 50%;
+  left: 2px;
+  writing-mode: vertical-rl;
+  transform: translateY(-50%) rotate(180deg);
+  font-size: 8px;
+  opacity: 0;
+}
+.native .frame::after {
+  display: none;
+}
+.native .gate {
+  height: auto;
+  min-height: calc(100svh - var(--line));
+}
+.native .tail {
+  width: 100%;
+  height: 40svh;
+  padding: 0 var(--rail);
+  scroll-snap-align: end;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .weave {
+    animation: none;
+  }
+}

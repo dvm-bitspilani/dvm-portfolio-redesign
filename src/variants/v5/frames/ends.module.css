@@ -1,0 +1,100 @@
+.next {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: start;
+  gap: 16px;
+  padding: 0 5vw;
+}
+.nextKicker {
+  margin: 0;
+  font: 500 1.05rem/1 "Rajdhani", sans-serif;
+  color: #5fd4e6;
+}
+.nextName {
+  margin: 0;
+  font: normal clamp(2rem, 4.6vw, 4.2rem) / 1 "v5 Stretch", "Stretch Pro", sans-serif;
+  color: transparent;
+  -webkit-text-stroke: 1.2px rgba(207, 232, 255, 0.6);
+}
+.nextText {
+  margin: 0;
+  max-width: 34ch;
+  font: 500 1.2rem/1.45 "Rajdhani", sans-serif;
+  color: rgba(207, 232, 255, 0.8);
+}
+
+.chips {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  overflow: visible;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(95, 212, 230, 0.3);
+  font: 500 0.72rem/1 "Orbitron", sans-serif;
+  letter-spacing: 0.06em;
+  color: #cfe8ff;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.chip:hover {
+  border-color: #45e6ff;
+}
+.chip[aria-current] {
+  background: #45e6ff;
+  border-color: #45e6ff;
+  color: #031417;
+}
+.chip:focus-visible {
+  outline: 2px solid #45e6ff;
+  outline-offset: 3px;
+}
+.count {
+  font: 500 0.66rem/1 "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+  opacity: 0.7;
+}
+
+.year {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 10px;
+}
+.yearNum {
+  margin: 0;
+  font: normal clamp(2.4rem, 5.4vw, 5rem) / 1 "v5 Stretch", "Stretch Pro", sans-serif;
+  color: transparent;
+  -webkit-text-stroke: 1.2px rgba(207, 232, 255, 0.55);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+.yearCount {
+  margin: 0;
+  font: 500 0.7rem/1 "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+  color: #5fd4e6;
+}
+
+@media (max-width: 768px) {
+  .next,
+  .year {
+    position: relative;
+    min-height: calc(100svh - 12px);
+    padding: 74px 18px 64px;
+  }
+  .yearNum {
+    writing-mode: horizontal-tb;
+    transform: none;
+  }
+}

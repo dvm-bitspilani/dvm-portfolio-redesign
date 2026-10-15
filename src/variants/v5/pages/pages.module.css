@@ -1,0 +1,478 @@
+/* ================================================================ Prologue */
+.prologue {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.letters {
+  position: absolute;
+  left: 2vw;
+  bottom: -4%;
+  margin: 0;
+  font: normal 46vh/0.8 "v5 Stretch", "Stretch Pro", sans-serif;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(207, 232, 255, 0.1);
+  white-space: nowrap;
+  pointer-events: none;
+}
+.heroCopy {
+  position: absolute;
+  left: 5vw;
+  top: 20%;
+  max-width: 44vw;
+  overflow: visible;
+}
+.dept {
+  margin: 0 0 14px;
+  font: 400 1.05rem/1 "Orbitron", sans-serif;
+  letter-spacing: 0.04em;
+  color: #5fd4e6;
+}
+.heroTitle {
+  margin: 0;
+  font: normal clamp(3rem, min(7.2vw, 13vh), 7.6rem) / 0.98 "v5 Stretch", "Stretch Pro", sans-serif;
+  color: #fff;
+}
+.lede {
+  margin: 26px 0 0;
+  max-width: 30ch;
+  font: 500 1.35rem/1.45 "Rajdhani", sans-serif;
+  color: #cfe8ff;
+}
+.lampWell {
+  position: absolute;
+  left: 50%;
+  right: 3vw;
+  top: 10%;
+  bottom: 14%;
+  display: grid;
+  place-items: center;
+  overflow: visible;
+}
+.lampReticle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(76vh, 40vw);
+  height: min(76vh, 40vw);
+  transform: translate(-50%, -50%);
+  fill: none;
+  stroke: rgba(207, 232, 255, 0.14);
+  stroke-width: 0.5;
+  overflow: visible;
+}
+.lampSlot {
+  display: block;
+  height: min(52vh, 30vw);
+  aspect-ratio: 250.5 / 326.8;
+}
+.motto {
+  position: absolute;
+  left: 5vw;
+  bottom: 13%;
+  margin: 0;
+  display: flex;
+  gap: 1.4em;
+  font: 400 clamp(1.1rem, 1.6vw, 1.6rem) / 1 "Orbitron", sans-serif;
+  color: #f4fbff;
+}
+.hint {
+  all: unset;
+  position: absolute;
+  right: 4vw;
+  bottom: 13%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  font: 500 1rem/1.2 "Rajdhani", sans-serif;
+  color: rgba(207, 232, 255, 0.75);
+  border-radius: 8px;
+}
+.hint:hover {
+  color: #45e6ff;
+}
+.hint:focus-visible {
+  outline: 2px solid #45e6ff;
+  outline-offset: 6px;
+}
+.hintStrip {
+  width: 74px;
+  height: 18px;
+  border-radius: 3px;
+  background:
+    radial-gradient(ellipse 3px 2.5px at 6px 4px, #050506 95%, transparent) 0 0 / 12px 18px repeat-x,
+    radial-gradient(ellipse 3px 2.5px at 6px 14px, #050506 95%, transparent) 0 0 / 12px 18px repeat-x,
+    linear-gradient(90deg, rgba(95, 212, 230, 0.15), rgba(95, 212, 230, 0.45));
+  animation: hintRoll 1.2s linear infinite;
+}
+@keyframes hintRoll {
+  to { background-position: -12px 0, -12px 0, 0 0; }
+}
+.hintPhone {
+  display: none;
+}
+
+/* ================================================================ About */
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  column-gap: 5vw;
+  row-gap: 30px;
+  align-content: center;
+}
+.aboutHead {
+  grid-column: 1 / -1;
+  margin: 0;
+  font: normal clamp(2rem, 5vw, 4.4rem) / 1 "v5 Stretch", "Stretch Pro", sans-serif;
+  color: transparent;
+  -webkit-text-stroke: 1.2px rgba(207, 232, 255, 0.55);
+}
+.aboutLead {
+  margin: 0;
+  font: 600 clamp(1.5rem, 2.3vw, 2.3rem) / 1.3 "Rajdhani", sans-serif;
+  color: #f4fbff;
+}
+.aboutRest {
+  display: grid;
+  gap: 16px;
+  align-content: start;
+  justify-items: start;
+}
+.aboutRest p {
+  margin: 0;
+  font: 500 1.2rem/1.5 "Rajdhani", sans-serif;
+  color: rgba(207, 232, 255, 0.82);
+}
+
+/* ================================================================ Crews */
+.crews {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+}
+.crewsHead,
+.sectionHead {
+  margin: 0;
+  font: normal clamp(1.5rem, 2.8vw, 2.6rem) / 1.05 "v5 Stretch", "Stretch Pro", sans-serif;
+  color: #f4fbff;
+}
+.crewList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
+  overflow: visible;
+}
+.crew {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 1.8vw 24px;
+  border-left: 1px solid rgba(95, 212, 230, 0.18);
+  overflow: visible;
+}
+.crewName {
+  margin: 0;
+  font: normal clamp(1.1rem, 1.7vw, 1.7rem) / 1.1 "v5 Stretch", "Stretch Pro", sans-serif;
+  color: #45e6ff;
+}
+.crewText {
+  margin: 0;
+  font: 500 1.05rem/1.45 "Rajdhani", sans-serif;
+  color: rgba(207, 232, 255, 0.82);
+}
+.crewMeta {
+  margin: auto 0 0;
+  font: 500 0.7rem/1 "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+  color: #5fd4e6;
+}
+.crewWork {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+.crewWork a {
+  font: 600 0.98rem/1.25 "Rajdhani", sans-serif;
+  color: #f4fbff;
+  text-decoration: none;
+}
+.crewWork a:hover {
+  color: #45e6ff;
+}
+
+/* ================================================================ All work */
+.allWork {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 22px;
+}
+.contact {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  width: 100%;
+}
+.contact img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 3px;
+  filter: grayscale(0.6) contrast(1.05);
+  box-shadow: 0 0 0 1px rgba(95, 212, 230, 0.15);
+}
+.allHead {
+  margin: 0;
+  font: normal clamp(1.6rem, 3vw, 2.8rem) / 1.08 "v5 Stretch", "Stretch Pro", sans-serif;
+  color: #f4fbff;
+  max-width: 18ch;
+}
+.allText {
+  margin: 0;
+  font: 500 1.2rem/1.45 "Rajdhani", sans-serif;
+  color: rgba(207, 232, 255, 0.8);
+}
+
+/* ================================================================ Cast */
+.castFrame {
+  display: grid;
+  grid-template-columns: 24vw 1fr;
+  gap: 4vw;
+  align-items: center;
+}
+.castIntro {
+  display: grid;
+  gap: 18px;
+  justify-items: start;
+}
+.castHead {
+  margin: 0;
+  font: normal clamp(2rem, 4.4vw, 4rem) / 1 "v5 Stretch", "Stretch Pro", sans-serif;
+  color: transparent;
+  -webkit-text-stroke: 1.2px rgba(207, 232, 255, 0.6);
+}
+.castText {
+  margin: 0;
+  font: 500 1.15rem/1.45 "Rajdhani", sans-serif;
+  color: rgba(207, 232, 255, 0.8);
+  max-width: 34ch;
+}
+
+/* ================================================================ Journal */
+.blogs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+}
+.blogsHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+}
+.blogRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.4vw;
+}
+.artRow {
+  display: flex;
+  height: 100%;
+  gap: 2vw;
+  padding: 92px 4vw 92px;
+  overflow: visible;
+}
+.artIntro {
+  flex: none;
+  width: 24vw;
+  align-self: center;
+  display: grid;
+  gap: 18px;
+  justify-items: start;
+}
+.artRow > figure {
+  flex: none;
+}
+
+/* ================================================================ Credits */
+.credits {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 5vw;
+  align-items: center;
+}
+.formHead {
+  margin: 0;
+  font: normal clamp(1.3rem, 2.1vw, 2rem) / 1.1 "v5 Stretch", "Stretch Pro", sans-serif;
+  color: #f4fbff;
+}
+.creditsForm {
+  display: grid;
+  gap: 18px;
+  align-content: center;
+}
+
+/* ================================================================ The End */
+.end {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 22px;
+  text-align: center;
+  padding: 0 6vw;
+}
+.endTitle {
+  margin: 0;
+  font: normal clamp(3rem, 9vw, 8rem) / 1 "v5 Stretch", "Stretch Pro", sans-serif;
+  color: #f4fbff;
+}
+.endText {
+  margin: 0;
+  font: 500 1.25rem/1.45 "Rajdhani", sans-serif;
+  color: rgba(207, 232, 255, 0.82);
+}
+.endActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 6px;
+}
+.rewind {
+  all: unset;
+  padding: 11px 18px;
+  border-radius: 999px;
+  font: 500 0.74rem/1 "Orbitron", sans-serif;
+  letter-spacing: 0.08em;
+  color: rgba(207, 232, 255, 0.85);
+  cursor: pointer;
+  border: 1px dashed rgba(95, 212, 230, 0.4);
+}
+.rewind:hover {
+  color: #45e6ff;
+  border-style: solid;
+}
+.rewind:focus-visible {
+  outline: 2px solid #45e6ff;
+  outline-offset: 3px;
+}
+
+/* ================================================================ phone: vertical film */
+@media (max-width: 768px) {
+  .prologue {
+    position: relative;
+    min-height: calc(100svh - 12px);
+    display: flex;
+    flex-direction: column;
+    padding: 70px 16px 70px;
+  }
+  .letters {
+    font-size: 30vh;
+    bottom: 0;
+  }
+  .lampWell {
+    position: relative;
+    inset: auto;
+    height: 36svh;
+    order: -1;
+    margin-top: 8px;
+  }
+  .lampReticle {
+    width: 34svh;
+    height: 34svh;
+  }
+  .lampSlot {
+    height: 25svh;
+  }
+  .heroCopy {
+    position: relative;
+    inset: auto;
+    max-width: none;
+    margin-top: 10px;
+  }
+  .heroTitle {
+    font-size: clamp(2.4rem, 13vw, 3.6rem);
+  }
+  .lede {
+    font-size: 1.15rem;
+    margin-top: 14px;
+  }
+  .motto {
+    position: relative;
+    inset: auto;
+    margin-top: 22px;
+    font-size: 1rem;
+  }
+  .hint {
+    position: relative;
+    inset: auto;
+    margin-top: auto;
+    padding-top: 22px;
+  }
+  .hintDesk {
+    display: none;
+  }
+  .hintPhone {
+    display: inline;
+  }
+  .about,
+  .castFrame,
+  .credits {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .aboutLead {
+    font-size: 1.3rem;
+  }
+  .crewList,
+  .blogRow {
+    grid-template-columns: 1fr;
+  }
+  .crew {
+    border-left: 0;
+    border-top: 1px solid rgba(95, 212, 230, 0.18);
+    padding: 16px 0;
+  }
+  .contact {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .artRow {
+    flex-direction: column;
+    height: auto;
+    padding: 74px 16px 64px;
+    gap: 22px;
+  }
+  .artIntro {
+    width: 100%;
+  }
+  .artRow > figure {
+    height: auto;
+  }
+  .blogsHead {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .end {
+    position: relative;
+    min-height: calc(100svh - 12px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hintStrip {
+    animation: none;
+  }
+}

@@ -1,0 +1,393 @@
+/* Shared frame contents. Every frame's content sits in the gate between the header
+   (top) and the bottom HUD; --padT / --padB keep it clear of both. */
+.inner,
+.projectInner {
+  --padT: 78px;
+  --padB: 76px;
+  position: absolute;
+  inset: var(--padT) 4vw var(--padB);
+  overflow: visible;
+}
+.projectInner {
+  display: flex;
+}
+
+/* ---------------------------------------------------------------- chapter card */
+.card {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  text-align: center;
+  gap: 18px;
+  padding: 0 5vw;
+  overflow: visible;
+}
+.reticle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(64vh, 90%);
+  height: min(64vh, 90%);
+  transform: translate(-50%, -50%);
+  fill: none;
+  stroke: rgba(95, 212, 230, 0.13);
+  stroke-width: 0.6;
+  pointer-events: none;
+  overflow: visible;
+}
+.cardNo {
+  position: relative;
+  margin: 0;
+  font: 500 1.05rem/1 "Rajdhani", sans-serif;
+  letter-spacing: 0.04em;
+  color: #5fd4e6;
+}
+.cardTitle {
+  position: relative;
+  margin: 0;
+  font: normal clamp(2.6rem, min(11vh, 8.6vw), 8rem) / 1.02 "v5 Stretch", "Stretch Pro", sans-serif;
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "dlig" 0, "clig" 0, "calt" 0;
+  white-space: nowrap;
+  overflow: visible;
+}
+.cardOutline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(207, 232, 255, 0.5);
+}
+.cardFill {
+  position: absolute;
+  inset: 0;
+  color: #f4fbff;
+  clip-path: inset(0 100% 0 0);
+  text-shadow: 0 0 30px rgba(69, 230, 255, 0.25);
+}
+.cardLine {
+  position: relative;
+  margin: 0;
+  max-width: 34ch;
+  font: 500 1.3rem/1.4 "Rajdhani", sans-serif;
+  color: rgba(207, 232, 255, 0.85);
+}
+
+/* ---------------------------------------------------------------- captions */
+.caption {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) auto;
+  align-items: end;
+  gap: 2.4vw;
+  margin: 0;
+  padding-top: 16px;
+  border-top: 1px solid rgba(95, 212, 230, 0.16);
+  overflow: visible;
+}
+.capMeta {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0 0 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font: 500 0.7rem/1 "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: 0.08em;
+  color: #5fd4e6;
+}
+.capTitle {
+  grid-column: 1;
+  grid-row: 2;
+  margin: 0;
+  font: normal clamp(1rem, 1.6vw, 1.6rem) / 1.15 "v5 Stretch", "Stretch Pro", sans-serif;
+  color: #f4fbff;
+}
+.capText {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  margin: 0;
+  font: 500 1.02rem/1.4 "Rajdhani", sans-serif;
+  color: rgba(207, 232, 255, 0.78);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.capLink {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  align-self: end;
+}
+.capLink,
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(95, 212, 230, 0.45);
+  font: 500 0.74rem/1 "Orbitron", sans-serif;
+  letter-spacing: 0.08em;
+  color: #cfe8ff;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.capLink:hover,
+.pill:hover {
+  background: #45e6ff;
+  border-color: #45e6ff;
+  color: #031417;
+}
+.capLink:focus-visible,
+.pill:focus-visible,
+.play:focus-visible,
+.shield:focus-visible {
+  outline: 2px solid #45e6ff;
+  outline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------- film */
+.film,
+.site,
+.stillFig {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: visible;
+}
+.screen {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  align-self: center;
+  aspect-ratio: 16 / 9;
+  max-width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 0 0 1px rgba(95, 212, 230, 0.22), 0 30px 80px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+.poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* hqdefault thumbnails are 4:3 with bars: cover-cropping to 16:9 removes them */
+  filter: saturate(0.9) contrast(1.05);
+}
+.player {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #000;
+}
+.play {
+  all: unset;
+  position: absolute;
+  left: 24px;
+  bottom: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px 10px 12px;
+  border-radius: 999px;
+  background: rgba(3, 8, 10, 0.72);
+  border: 1px solid rgba(95, 212, 230, 0.45);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.play:hover {
+  background: rgba(69, 230, 255, 0.2);
+}
+.playIcon {
+  width: 0;
+  height: 0;
+  margin-left: 4px;
+  border-left: 12px solid #45e6ff;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+}
+.playText {
+  font: 500 0.74rem/1 "Orbitron", sans-serif;
+  letter-spacing: 0.08em;
+  color: #e9f6ff;
+}
+.shield {
+  all: unset;
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 22px 24px;
+}
+.shield span {
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: rgba(3, 8, 10, 0.72);
+  border: 1px solid rgba(95, 212, 230, 0.45);
+  font: 500 0.72rem/1 "Orbitron", sans-serif;
+  letter-spacing: 0.08em;
+  color: #e9f6ff;
+}
+
+/* ---------------------------------------------------------------- website: framed stills */
+.devices {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 2.2vw;
+  overflow: visible;
+}
+.monitor {
+  position: relative;
+  height: 88%;
+  aspect-ratio: 16 / 10.6;
+  max-width: 74%;
+  padding: 26px 10px 10px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #0f1a1e, #070c0e);
+  box-shadow: 0 0 0 1px rgba(95, 212, 230, 0.25), 0 30px 80px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+.monitorBar {
+  position: absolute;
+  top: 9px;
+  left: 12px;
+  display: flex;
+  gap: 6px;
+  overflow: visible;
+}
+.monitorBar i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(95, 212, 230, 0.35);
+}
+.monitorView,
+.phoneView {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #000;
+}
+.page {
+  display: block;
+  width: 100%;
+  height: auto;
+  will-change: transform;
+}
+.phone {
+  position: relative;
+  height: 100%;
+  aspect-ratio: 9 / 19.2;
+  padding: 10px;
+  border-radius: 28px;
+  background: linear-gradient(180deg, #111c20, #070c0e);
+  box-shadow: 0 0 0 1px rgba(95, 212, 230, 0.25), 0 30px 80px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+.phoneView {
+  border-radius: 20px;
+}
+
+.still {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  overflow: visible;
+}
+.still img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.6));
+}
+.noStill {
+  font: normal clamp(1.6rem, 4vw, 3rem) / 1.1 "v5 Stretch", "Stretch Pro", sans-serif;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(207, 232, 255, 0.45);
+  text-align: center;
+}
+
+/* ---------------------------------------------------------------- phone: vertical film */
+@media (max-width: 768px) {
+  .inner,
+  .projectInner {
+    position: relative;
+    inset: auto;
+    min-height: inherit;
+    padding: 74px 16px 64px;
+  }
+  .card {
+    position: relative;
+    min-height: calc(100svh - 12px);
+  }
+  .cardTitle {
+    font-size: clamp(2rem, 11vw, 3.4rem);
+    white-space: normal;
+  }
+  .cardLine {
+    font-size: 1.1rem;
+  }
+  .film,
+  .site,
+  .stillFig {
+    height: auto;
+    gap: 14px;
+  }
+  .screen {
+    flex: none;
+    width: 100%;
+  }
+  .devices {
+    flex: none;
+    height: 56svh;
+  }
+  .monitor {
+    display: none;
+  }
+  .devices:not(:has(.phone)) .monitor {
+    display: block;
+    height: auto;
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .still {
+    flex: none;
+    max-height: 50svh;
+  }
+  .still img {
+    max-height: 50svh;
+  }
+  .caption {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .capMeta,
+  .capTitle,
+  .capText,
+  .capLink {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .capLink {
+    justify-self: start;
+    margin-top: 6px;
+  }
+}

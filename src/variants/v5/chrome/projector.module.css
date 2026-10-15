@@ -1,0 +1,108 @@
+/* The screen behind the film: V2's grid + teal texture, revealed where the beam lands. */
+.screen {
+  --sx: 50vw;
+  --sy: 50vh;
+  --sr: 60vh;
+  --sf: 1;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #050506;
+  overflow: hidden;
+}
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(to right, rgba(255, 255, 255, 0.07) 0 1px, transparent 1px 30px);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.45));
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.45));
+}
+.texture {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: calc(0.95 * var(--sf));
+  -webkit-mask-image: radial-gradient(circle var(--sr) at var(--sx) var(--sy), #000 0%, rgba(0, 0, 0, 0.55) 45%, transparent 100%);
+  mask-image: radial-gradient(circle var(--sr) at var(--sx) var(--sy), #000 0%, rgba(0, 0, 0, 0.55) 45%, transparent 100%);
+}
+.wash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle calc(var(--sr) * 0.7) at var(--sx) var(--sy), rgba(69, 230, 255, 0.16), transparent 70%);
+  mix-blend-mode: screen;
+}
+
+/* the beam in the air, over the film */
+.cone {
+  --lx: 40px;
+  --ly: 60px;
+  --ca: 120deg;
+  --cw: 8deg;
+  --cd: 600px;
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: screen;
+  background: conic-gradient(
+    from calc(var(--ca) - var(--cw) * 2) at var(--lx) var(--ly),
+    transparent 0deg,
+    rgba(95, 212, 230, 0.07) calc(var(--cw) * 1),
+    rgba(207, 240, 255, 0.16) calc(var(--cw) * 2),
+    rgba(95, 212, 230, 0.07) calc(var(--cw) * 3),
+    transparent calc(var(--cw) * 4),
+    transparent 360deg
+  );
+  -webkit-mask-image: radial-gradient(circle at var(--lx) var(--ly), transparent 0, #000 110px, #000 calc(var(--cd) * 0.85), transparent calc(var(--cd) * 1.35));
+  mask-image: radial-gradient(circle at var(--lx) var(--ly), transparent 0, #000 110px, #000 calc(var(--cd) * 0.85), transparent calc(var(--cd) * 1.35));
+}
+.motes {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 3;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.glow {
+  position: fixed;
+  left: -90px;
+  top: -90px;
+  width: 180px;
+  height: 180px;
+  z-index: 1149;
+  pointer-events: none;
+  opacity: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(207, 245, 255, 0.35), rgba(69, 230, 255, 0.12) 35%, transparent 70%);
+  mix-blend-mode: screen;
+}
+
+.lamp {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 92px;
+  height: 92px;
+  z-index: 1150;
+  pointer-events: none;
+  will-change: transform;
+  transform: translate3d(-300px, -300px, 0);
+  overflow: visible;
+}
+
+@media (max-width: 768px) {
+  .cone,
+  .motes {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motes {
+    display: none;
+  }
+}

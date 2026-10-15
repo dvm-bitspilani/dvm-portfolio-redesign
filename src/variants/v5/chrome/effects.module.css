@@ -1,0 +1,57 @@
+.fx {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  pointer-events: none;
+  overflow: hidden;
+}
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 75% 70% at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.5) 100%);
+}
+.grain {
+  position: absolute;
+  inset: -200px;
+  opacity: 0.075;
+  mix-blend-mode: overlay;
+  background-size: 200px 200px;
+  animation: grain 0.5s steps(1, end) infinite;
+}
+@keyframes grain {
+  0% { transform: translate3d(0, 0, 0); }
+  12.5% { transform: translate3d(-63px, 41px, 0); }
+  25% { transform: translate3d(87px, -112px, 0); }
+  37.5% { transform: translate3d(-129px, -37px, 0); }
+  50% { transform: translate3d(31px, 143px, 0); }
+  62.5% { transform: translate3d(-17px, -151px, 0); }
+  75% { transform: translate3d(118px, 66px, 0); }
+  87.5% { transform: translate3d(-94px, 108px, 0); }
+}
+.leak {
+  position: absolute;
+  top: -10%;
+  bottom: -10%;
+  width: 34vw;
+  opacity: 0;
+  mix-blend-mode: screen;
+  filter: blur(30px);
+  transition: opacity 0.35s ease-out;
+}
+.leakL {
+  left: -14vw;
+  background: radial-gradient(ellipse 60% 45% at 40% 40%, rgba(69, 230, 255, 0.28), transparent 70%),
+    radial-gradient(ellipse 40% 30% at 60% 75%, rgba(207, 232, 255, 0.18), transparent 70%);
+}
+.leakR {
+  right: -14vw;
+  background: radial-gradient(ellipse 60% 45% at 60% 60%, rgba(69, 230, 255, 0.28), transparent 70%),
+    radial-gradient(ellipse 40% 30% at 40% 25%, rgba(207, 232, 255, 0.2), transparent 70%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain,
+  .leak {
+    display: none;
+  }
+}

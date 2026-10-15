@@ -1,0 +1,494 @@
+/* ---------------------------------------------------------------- the long take */
+.takeGate {
+  overflow: clip;
+}
+.take {
+  position: relative;
+  display: flex;
+  height: 100%;
+  padding: 78px 4vw 76px;
+  overflow: visible;
+}
+.takeIntro {
+  flex: none;
+  width: 26vw;
+  align-self: center;
+  display: grid;
+  gap: 18px;
+  justify-items: start;
+  padding-right: 3vw;
+}
+.takeTitle {
+  margin: 0;
+  font: normal clamp(1.8rem, 3.4vw, 3.2rem) / 1.05 "v5 Stretch", "Stretch Pro", sans-serif;
+}
+.takeText {
+  margin: 0;
+  font: 500 1.2rem/1.45 "Rajdhani", sans-serif;
+  color: rgba(207, 232, 255, 0.82);
+  max-width: 32ch;
+}
+.year {
+  position: relative;
+  flex: none;
+  width: calc(var(--cols, 1) * 22vw + 9vw);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 0 2.4vw 34px;
+  border-left: 1px solid rgba(95, 212, 230, 0.16);
+  overflow: visible;
+  transition: background 0.4s ease;
+}
+.year[data-on] {
+  background: linear-gradient(180deg, rgba(69, 230, 255, 0.05), transparent 70%);
+}
+.yearNum {
+  margin: 0;
+  font: normal clamp(3rem, 12vh, 7rem) / 0.9 "v5 Stretch", "Stretch Pro", sans-serif;
+  color: transparent;
+  -webkit-text-stroke: 1.2px rgba(207, 232, 255, 0.4);
+  transition: color 0.4s ease, -webkit-text-stroke-color 0.4s ease;
+}
+.year[data-on] .yearNum {
+  color: #f4fbff;
+  -webkit-text-stroke-color: transparent;
+}
+.yearBody {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  overflow: visible;
+}
+.shipped {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(var(--rows, 8), auto);
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 8px 2vw;
+  overflow: visible;
+}
+.shipLink {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  align-items: center;
+  gap: 12px;
+  color: #cfe8ff;
+  text-decoration: none;
+  font: 500 1.02rem/1.2 "Rajdhani", sans-serif;
+  border-radius: 6px;
+  transition: color 0.2s ease;
+}
+.shipLink img {
+  width: 64px;
+  height: 38px;
+  object-fit: cover;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(95, 212, 230, 0.2);
+  filter: saturate(0.7);
+}
+.shipLink span:only-child {
+  grid-column: 1 / -1;
+}
+.shipLink:hover {
+  color: #45e6ff;
+}
+.shipLink:focus-visible {
+  outline: 2px solid #45e6ff;
+  outline-offset: 3px;
+}
+.more,
+.quiet {
+  margin: 0;
+  font: 500 0.95rem/1.3 "Rajdhani", sans-serif;
+  color: rgba(207, 232, 255, 0.55);
+}
+.joined p {
+  margin: 0 0 8px;
+  font: 500 0.72rem/1 "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  color: #5fd4e6;
+}
+.faces {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.faces img {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.05);
+  box-shadow: 0 0 0 1px rgba(95, 212, 230, 0.25);
+}
+.year[data-on] .faces img {
+  filter: none;
+}
+.ruler {
+  position: absolute;
+  left: 30vw;
+  right: 0;
+  bottom: 70px;
+  height: 14px;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(to right, rgba(95, 212, 230, 0.5) 0 1px, transparent 1px 31vw) 0 0 / auto 14px no-repeat,
+    repeating-linear-gradient(to right, rgba(95, 212, 230, 0.22) 0 1px, transparent 1px calc(31vw / 12)) 0 8px / auto 6px no-repeat;
+  border-top: 1px solid rgba(95, 212, 230, 0.2);
+}
+
+/* ---------------------------------------------------------------- cast */
+.cast {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 22px 18px;
+  overflow: visible;
+}
+.castCompact {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.castCompact .castPhoto {
+  aspect-ratio: 1;
+}
+.castItem {
+  overflow: visible;
+}
+.castPhoto {
+  aspect-ratio: 4 / 5;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(95, 212, 230, 0.2);
+  background: #0b1418;
+}
+.castPhoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.06);
+  transition: filter 0.4s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.castItem:hover .castPhoto img {
+  filter: none;
+  transform: scale(1.04);
+}
+.castName {
+  margin: 10px 0 2px;
+  font: 600 1.02rem/1.15 "Rajdhani", sans-serif;
+  color: #f4fbff;
+}
+.castRole {
+  margin: 0;
+  font: 500 0.88rem/1.25 "Rajdhani", sans-serif;
+  color: rgba(95, 212, 230, 0.85);
+}
+
+/* ---------------------------------------------------------------- credits roll */
+.roll {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+}
+.rollTrack {
+  overflow: visible;
+}
+.rolling .rollTrack {
+  animation: roll 46s linear infinite;
+}
+.roll:not(.rolling) {
+  overflow-y: auto;
+}
+.roll:hover .rollTrack,
+.roll:focus-within .rollTrack {
+  animation-play-state: paused;
+}
+@keyframes roll {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(0, -50%, 0); }
+}
+.rollList {
+  margin: 0;
+  padding: 18vh 0;
+  display: grid;
+  gap: 34px;
+  overflow: visible;
+}
+.rollRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  overflow: visible;
+}
+.rollRow dt {
+  text-align: right;
+  font: 500 0.95rem/1.5 "Rajdhani", sans-serif;
+  color: #5fd4e6;
+}
+.rollRow dd {
+  margin: 0;
+  display: grid;
+  gap: 2px;
+  font: 600 1.1rem/1.45 "Rajdhani", sans-serif;
+  color: #f4fbff;
+}
+
+/* ---------------------------------------------------------------- form */
+.form {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+  overflow: visible;
+}
+.field {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  align-items: baseline;
+  column-gap: 18px;
+  overflow: visible;
+}
+.fieldLabel {
+  text-align: right;
+  font: 500 0.95rem/1 "Rajdhani", sans-serif;
+  color: #5fd4e6;
+}
+.field input,
+.field textarea {
+  all: unset;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 2px;
+  border-bottom: 1px solid rgba(207, 232, 255, 0.28);
+  font: 600 1.15rem/1.35 "Rajdhani", sans-serif;
+  color: #f4fbff;
+  caret-color: #45e6ff;
+  cursor: text;
+  user-select: text;
+  -webkit-user-select: text;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.field textarea {
+  min-height: 5.6em;
+  resize: none;
+  overflow-y: auto;
+}
+.field input:focus,
+.field textarea:focus {
+  border-color: #45e6ff;
+  background: rgba(69, 230, 255, 0.05);
+}
+.field[data-bad] input,
+.field[data-bad] textarea {
+  border-color: #ff9b8a;
+}
+.fieldErr {
+  grid-column: 2;
+  margin-top: 6px;
+  font: 500 0.88rem/1.2 "Rajdhani", sans-serif;
+  color: #ffb4a6;
+}
+.formFoot {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  column-gap: 18px;
+  align-items: center;
+  margin-top: 6px;
+}
+.send {
+  all: unset;
+  grid-column: 2;
+  justify-self: start;
+  padding: 13px 22px;
+  border-radius: 999px;
+  background: #45e6ff;
+  color: #031417;
+  font: 600 0.78rem/1 "Orbitron", sans-serif;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.send:hover {
+  background: #8af0ff;
+}
+.send:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+.send:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+.status {
+  grid-column: 2;
+  margin: 10px 0 0;
+  min-height: 1.3em;
+  font: 500 1rem/1.3 "Rajdhani", sans-serif;
+  color: rgba(207, 232, 255, 0.8);
+}
+.status[data-state="sent"] {
+  color: #45e6ff;
+}
+.status[data-state="error"] {
+  color: #ffb4a6;
+}
+
+/* ---------------------------------------------------------------- journal */
+.blog {
+  overflow: visible;
+}
+.blogLink {
+  display: grid;
+  gap: 10px;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 8px;
+}
+.blogLink:focus-visible {
+  outline: 2px solid #45e6ff;
+  outline-offset: 6px;
+}
+.blogCover {
+  aspect-ratio: 16 / 10;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(95, 212, 230, 0.2);
+  background: #0b1418;
+}
+.blogCover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.blogLink:hover .blogCover img {
+  transform: scale(1.04);
+}
+.blogMeta {
+  margin: 4px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font: 500 0.7rem/1 "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+  color: #5fd4e6;
+}
+.blogTitle {
+  margin: 0;
+  font: 600 1.3rem/1.2 "Rajdhani", sans-serif;
+  color: #f4fbff;
+}
+.blogLink:hover .blogTitle {
+  color: #45e6ff;
+}
+.blogBy {
+  margin: 0;
+  font: 500 0.95rem/1.2 "Rajdhani", sans-serif;
+  color: rgba(207, 232, 255, 0.6);
+}
+
+.art {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: visible;
+}
+.artImg {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px rgba(95, 212, 230, 0.2);
+}
+.artImg img {
+  height: 100%;
+  width: auto;
+  display: block;
+  max-width: none;
+}
+.artCap {
+  display: grid;
+  gap: 2px;
+}
+.artTitle {
+  font: 600 1rem/1.2 "Rajdhani", sans-serif;
+  color: #f4fbff;
+}
+.artBy {
+  font: 500 0.88rem/1.2 "Rajdhani", sans-serif;
+  color: rgba(95, 212, 230, 0.85);
+}
+
+/* ---------------------------------------------------------------- phone */
+@media (max-width: 768px) {
+  .take {
+    flex-direction: column;
+    height: auto;
+    padding: 74px 16px 64px;
+    gap: 34px;
+  }
+  .takeIntro,
+  .year {
+    width: 100%;
+    padding: 0;
+  }
+  .shipped {
+    grid-auto-flow: row;
+    grid-template-rows: none;
+  }
+  .year {
+    border-left: 0;
+    border-top: 1px solid rgba(95, 212, 230, 0.16);
+    padding-top: 16px;
+  }
+  .yearNum {
+    font-size: 3.2rem;
+  }
+  .ruler {
+    display: none;
+  }
+  .castCompact {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .roll {
+    height: 54svh;
+  }
+  .field,
+  .formFoot {
+    grid-template-columns: 1fr;
+  }
+  .fieldLabel {
+    text-align: left;
+    margin-bottom: 2px;
+  }
+  .send,
+  .status,
+  .fieldErr {
+    grid-column: 1;
+  }
+  .artImg img {
+    width: 100%;
+    height: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rolling .rollTrack {
+    animation: none;
+  }
+  .roll {
+    overflow-y: auto;
+  }
+}

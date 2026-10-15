@@ -1,0 +1,151 @@
+@font-face {
+  font-family: "v5 Stretch";
+  src: url("../../../assests/StretchPro.otf") format("opentype");
+  font-display: swap;
+}
+
+.leader {
+  --hx: 50vw;
+  --hy: 50vh;
+  --hole: 0px;
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background:
+    radial-gradient(ellipse 70% 70% at 50% 50%, #1a2328 0%, #0c1215 70%, #060809 100%);
+  cursor: pointer;
+  overflow: hidden;
+}
+.leader[data-resolving] {
+  -webkit-mask-image: radial-gradient(circle at var(--hx) var(--hy), transparent var(--hole), #000 calc(var(--hole) + 1.5px));
+  mask-image: radial-gradient(circle at var(--hx) var(--hy), transparent var(--hole), #000 calc(var(--hole) + 1.5px));
+}
+
+.film {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.edge {
+  position: absolute;
+  top: 22px;
+  left: 24px;
+  font: 500 10px/1 "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: 0.2em;
+  color: rgba(95, 212, 230, 0.5);
+}
+.crossH,
+.crossV {
+  position: absolute;
+  background: rgba(207, 232, 255, 0.28);
+  transition: opacity 0.3s ease;
+}
+.crossH {
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+}
+.crossV {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+}
+.leader[data-resolving] .crossH,
+.leader[data-resolving] .crossV,
+.leader[data-resolving] .edge,
+.leader[data-resolving] .skip {
+  opacity: 0;
+}
+
+.rings {
+  --r: 33vmin;
+  position: absolute;
+  left: calc(50% - var(--r));
+  top: calc(50% - var(--r));
+  width: calc(var(--r) * 2);
+  height: calc(var(--r) * 2);
+  overflow: visible;
+  will-change: transform;
+}
+.ringOuter,
+.ringInner,
+.sweep {
+  position: absolute;
+  border-radius: 50%;
+}
+.ringOuter {
+  inset: 0;
+  border: 2px solid rgba(207, 232, 255, 0.85);
+}
+.ringInner {
+  inset: 9%;
+  border: 1.5px solid rgba(207, 232, 255, 0.6);
+}
+.sweep {
+  inset: 9%;
+  background: conic-gradient(from 0deg, rgba(69, 230, 255, 0.34) 0deg, rgba(69, 230, 255, 0.34) var(--a, 0deg), transparent var(--a, 0deg));
+  animation: sweep 0.62s linear forwards;
+}
+@property --a {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes sweep {
+  from { --a: 0deg; }
+  to { --a: 360deg; }
+}
+.leader[data-resolving] .sweep {
+  animation: none;
+  opacity: 0;
+}
+.num {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font: normal 34vmin/1 "v5 Stretch", "Stretch Pro", "Orbitron", sans-serif;
+  color: #e9f6ff;
+  font-variant-ligatures: none;
+  text-shadow: 0 0 40px rgba(69, 230, 255, 0.35);
+  transition: opacity 0.25s ease;
+}
+.leader[data-resolving] .num {
+  opacity: 0;
+}
+
+.flash {
+  position: absolute;
+  inset: 0;
+  background: #e9fbff;
+  animation: flash 0.12s steps(1, end) forwards;
+}
+@keyframes flash {
+  0% { opacity: 0.9; }
+  50% { opacity: 0.35; }
+  100% { opacity: 0; }
+}
+
+.skip {
+  all: unset;
+  position: absolute;
+  right: 3.2%;
+  bottom: 64px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(95, 212, 230, 0.35);
+  font: 500 0.74rem/1 "Orbitron", sans-serif;
+  letter-spacing: 0.1em;
+  color: #cfe8ff;
+  cursor: pointer;
+  transition: opacity 0.3s ease, background 0.2s ease;
+}
+.skip:hover {
+  background: rgba(69, 230, 255, 0.12);
+}
+.skip:focus-visible {
+  outline: 2px solid #45e6ff;
+  outline-offset: 3px;
+}

@@ -1,0 +1,635 @@
+/* Shared type */
+.kicker {
+  margin: 0;
+  font: 500 1rem/1.2 "Rajdhani", sans-serif;
+  color: #5fd4e6;
+}
+.mono {
+  margin: 0;
+  font: 500 0.72rem/1.3 "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: 0.04em;
+  color: #5fd4e6;
+}
+.body {
+  margin: 0;
+  max-width: 60ch;
+  font: 500 1.15rem/1.5 "Rajdhani", sans-serif;
+  color: rgba(207, 232, 255, 0.84);
+}
+.lead {
+  margin: 0;
+  font: 600 clamp(1.25rem, 1.8vw, 1.7rem) / 1.4 "Rajdhani", sans-serif;
+  color: #f4fbff;
+}
+.by {
+  margin: 0;
+  font: 500 1rem/1.3 "Rajdhani", sans-serif;
+  color: rgba(207, 232, 255, 0.6);
+}
+.sectionTitle {
+  margin: 0;
+  font: normal clamp(1.6rem, 3.2vw, 3rem) / 1.05 "v5 Stretch", "Stretch Pro", sans-serif;
+  color: #f4fbff;
+}
+.textLink {
+  color: #cfe8ff;
+  text-decoration: underline;
+  text-decoration-color: rgba(95, 212, 230, 0.5);
+  text-underline-offset: 4px;
+}
+.textLink:hover {
+  color: #45e6ff;
+}
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 18px;
+}
+a:focus-visible.textLink,
+.workList a:focus-visible,
+.cutLink:focus-visible,
+.memberLinks a:focus-visible {
+  outline: 2px solid #45e6ff;
+  outline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------- About: crews + fests */
+.crew {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+}
+.crewTitle {
+  margin: 0;
+  font: normal clamp(1.7rem, 3vw, 2.8rem) / 1.05 "v5 Stretch", "Stretch Pro", sans-serif;
+  color: #45e6ff;
+}
+.faces {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.faces img {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.05);
+  box-shadow: 0 0 0 1px rgba(95, 212, 230, 0.25);
+  transition: filter 0.3s ease;
+}
+.faces img:hover {
+  filter: none;
+}
+.facesMore {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font: 500 0.72rem/1 "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+  color: #5fd4e6;
+  box-shadow: inset 0 0 0 1px rgba(95, 212, 230, 0.35);
+}
+.credits {
+  display: grid;
+  gap: 8px;
+}
+.workList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+.workList a {
+  font: 600 1.05rem/1.3 "Rajdhani", sans-serif;
+  color: #f4fbff;
+  text-decoration: none;
+}
+.workList a:hover {
+  color: #45e6ff;
+}
+.fest {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 4vw;
+  align-items: center;
+}
+.festText {
+  display: grid;
+  gap: 18px;
+  justify-items: start;
+}
+.festName {
+  margin: 0;
+  font: normal clamp(2.4rem, 6vw, 5.6rem) / 1 "v5 Stretch", "Stretch Pro", sans-serif;
+  color: #f4fbff;
+}
+.festStills {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  transform: rotate(-3deg);
+}
+.festStills img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(95, 212, 230, 0.2), 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------------------------------------------------------------- Journal */
+.post {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 4vw;
+  align-items: center;
+}
+.postCover {
+  display: block;
+  aspect-ratio: 16 / 10;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(95, 212, 230, 0.22), 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+.postCover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.postText {
+  display: grid;
+  gap: 16px;
+  justify-items: start;
+}
+.postTitle {
+  margin: 0;
+  font: 700 clamp(1.5rem, 2.4vw, 2.4rem) / 1.15 "Rajdhani", sans-serif;
+  color: #f4fbff;
+}
+.tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tags li {
+  padding: 5px 10px;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgba(95, 212, 230, 0.3);
+  font: 500 0.85rem/1 "Rajdhani", sans-serif;
+  color: #cfe8ff;
+}
+
+/* ---------------------------------------------------------------- Artwork */
+.piece {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  gap: 2.4vw;
+  padding: 92px 3.4vw 92px;
+  overflow: visible;
+}
+.pieceImg {
+  height: 100%;
+  flex: none;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(95, 212, 230, 0.22), 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+.pieceImg img {
+  height: 100%;
+  width: auto;
+  max-width: 64vw;
+  object-fit: cover;
+  display: block;
+}
+.pieceCap {
+  flex: none;
+  width: 22vw;
+  align-self: flex-end;
+  display: grid;
+  gap: 12px;
+}
+.pieceTitle {
+  margin: 0;
+  font: 700 clamp(1.3rem, 2vw, 2rem) / 1.15 "Rajdhani", sans-serif;
+  color: #f4fbff;
+}
+.pieceText {
+  margin: 0;
+  font: 500 1rem/1.45 "Rajdhani", sans-serif;
+  color: rgba(207, 232, 255, 0.75);
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.pieceLinks {
+  margin: 4px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+/* ---------------------------------------------------------------- Scene */
+.slateWrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 4vw;
+  align-items: center;
+}
+.slate {
+  position: relative;
+  border-radius: 8px;
+  background: #0a1114;
+  box-shadow: 0 0 0 1px rgba(207, 232, 255, 0.35), 0 30px 80px rgba(0, 0, 0, 0.6);
+  overflow: visible;
+}
+.sticks {
+  position: relative;
+  height: 46px;
+  overflow: visible;
+}
+.sticks span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 23px;
+  background: repeating-linear-gradient(-55deg, #e9f6ff 0 22px, #0a1114 22px 44px);
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1px rgba(207, 232, 255, 0.4);
+}
+.sticks span:first-child {
+  top: -10px;
+  transform-origin: 0 100%;
+  transform: rotate(-9deg);
+  background: repeating-linear-gradient(55deg, #45e6ff 0 22px, #0a1114 22px 44px);
+}
+.sticks span:last-child {
+  top: 23px;
+}
+.slateGrid {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.slateCell {
+  padding: 12px 18px 14px;
+  border-top: 1px solid rgba(207, 232, 255, 0.22);
+  overflow: visible;
+}
+.slateCell:nth-child(odd) {
+  border-right: 1px solid rgba(207, 232, 255, 0.22);
+}
+.slateCell dt {
+  font: 500 0.66rem/1 "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: 0.08em;
+  color: #5fd4e6;
+}
+.slateCell dd {
+  margin: 6px 0 0;
+  font: 600 1.25rem/1.15 "Rajdhani", sans-serif;
+  color: #f4fbff;
+}
+.slateTitle {
+  display: grid;
+  gap: 16px;
+  align-content: center;
+}
+.sceneTitle {
+  margin: 0;
+  font: normal clamp(2rem, 4vw, 3.8rem) / 1.05 "v5 Stretch", "Stretch Pro", sans-serif;
+  color: #f4fbff;
+}
+.bigFilm {
+  width: 100%;
+}
+.synopsis {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 26px;
+}
+.synCols {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 4vw;
+  align-items: start;
+}
+.sceneCredits {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+}
+.creditList {
+  margin: 0;
+  display: grid;
+  gap: 22px;
+}
+.creditList div {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: 20px;
+}
+.creditList dt {
+  text-align: right;
+  font: 500 1rem/1.4 "Rajdhani", sans-serif;
+  color: #5fd4e6;
+}
+.creditList dd {
+  margin: 0;
+  display: grid;
+  gap: 2px;
+  font: 600 1.2rem/1.4 "Rajdhani", sans-serif;
+  color: #f4fbff;
+}
+.cut {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-content: center;
+  gap: 26px 3vw;
+}
+.cut > :last-child {
+  grid-column: 1 / -1;
+  justify-self: start;
+}
+.cutLink {
+  display: grid;
+  gap: 10px;
+  padding: 22px 0;
+  border-top: 1px solid rgba(95, 212, 230, 0.25);
+  color: inherit;
+  text-decoration: none;
+}
+.cutNext {
+  text-align: right;
+}
+.cutTitle {
+  font: normal clamp(1.1rem, 2vw, 1.9rem) / 1.15 "v5 Stretch", "Stretch Pro", sans-serif;
+  color: #f4fbff;
+  transition: color 0.2s ease;
+}
+.cutLink:hover .cutTitle {
+  color: #45e6ff;
+}
+
+/* ---------------------------------------------------------------- Legacy: roll call */
+.leads {
+  display: flex;
+  height: 100%;
+  padding: 88px 4vw 88px;
+  gap: 0;
+  overflow: visible;
+}
+.leadsIntro {
+  flex: none;
+  width: 24vw;
+  align-self: center;
+  display: grid;
+  gap: 18px;
+  padding-right: 3vw;
+}
+.tenure {
+  flex: none;
+  width: 21vw;
+  padding: 0 1.8vw;
+  border-left: 1px solid rgba(95, 212, 230, 0.16);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: visible;
+}
+.tenureYear {
+  margin: 0;
+  font: normal clamp(1.4rem, 2.4vw, 2.2rem) / 1 "v5 Stretch", "Stretch Pro", sans-serif;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(207, 232, 255, 0.55);
+}
+.tenureList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 9px;
+}
+.tenureList li {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  column-gap: 10px;
+  align-items: center;
+}
+.tenureList img {
+  grid-row: span 2;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: grayscale(1);
+}
+.tName {
+  font: 600 0.98rem/1.1 "Rajdhani", sans-serif;
+  color: #f4fbff;
+}
+.tRole {
+  font: 500 0.82rem/1.15 "Rajdhani", sans-serif;
+  color: rgba(95, 212, 230, 0.85);
+}
+
+/* ---------------------------------------------------------------- Team: contact sheets */
+.sheet {
+  display: flex;
+  height: 100%;
+  gap: 2.4vw;
+  padding: 88px 3vw 92px;
+  overflow: visible;
+}
+.sheetHead {
+  flex: none;
+  width: 12vw;
+  display: grid;
+  align-content: end;
+  gap: 10px;
+}
+.sheetYear {
+  margin: 0;
+  font: normal clamp(2rem, 4.4vw, 4.4rem) / 1 "v5 Stretch", "Stretch Pro", sans-serif;
+  color: transparent;
+  -webkit-text-stroke: 1.2px rgba(207, 232, 255, 0.6);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+.sheetGrid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  grid-auto-flow: column;
+  grid-auto-columns: 15.5rem;
+  gap: 14px 16px;
+  overflow: visible;
+}
+.member {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 12px;
+  min-height: 0;
+  overflow: visible;
+}
+.memberPhoto {
+  width: clamp(64px, 11vh, 110px);
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 4px;
+  filter: grayscale(1) contrast(1.05);
+  box-shadow: 0 0 0 1px rgba(95, 212, 230, 0.22);
+  transition: filter 0.3s ease;
+}
+.member:hover .memberPhoto {
+  filter: none;
+}
+.memberText {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.memberName {
+  margin: 0;
+  font: 600 1.02rem/1.15 "Rajdhani", sans-serif;
+  color: #f4fbff;
+}
+.memberRole {
+  margin: 0;
+  font: 500 0.86rem/1.2 "Rajdhani", sans-serif;
+  color: rgba(95, 212, 230, 0.9);
+}
+.memberLinks {
+  margin: 2px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+}
+.memberLinks a {
+  font: 500 0.8rem/1.2 "Rajdhani", sans-serif;
+  color: rgba(207, 232, 255, 0.6);
+  text-decoration: none;
+}
+.memberLinks a:hover {
+  color: #45e6ff;
+}
+
+/* ---------------------------------------------------------------- Credits page */
+.message {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 5vw;
+  align-items: center;
+}
+.messageIntro {
+  display: grid;
+  gap: 18px;
+  align-content: center;
+}
+.socialList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font: 500 1.05rem/1 "Rajdhani", sans-serif;
+}
+.rollFrame {
+  display: flex;
+}
+.rollFrame > * {
+  flex: 1;
+}
+
+/* ---------------------------------------------------------------- phone */
+@media (max-width: 768px) {
+  .fest,
+  .post,
+  .slateWrap,
+  .synCols,
+  .message {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .festStills {
+    transform: none;
+  }
+  .piece,
+  .leads,
+  .sheet {
+    flex-direction: column;
+    height: auto;
+    padding: 74px 16px 64px;
+    gap: 18px;
+  }
+  .pieceImg {
+    height: auto;
+  }
+  .pieceImg img {
+    width: 100%;
+    height: auto;
+    max-width: none;
+    max-height: 60svh;
+    object-fit: contain;
+  }
+  .pieceCap,
+  .leadsIntro,
+  .sheetHead {
+    width: 100%;
+    padding: 0;
+  }
+  .tenure {
+    width: 100%;
+    padding: 14px 0 0;
+    border-left: 0;
+    border-top: 1px solid rgba(95, 212, 230, 0.16);
+  }
+  .sheetYear {
+    writing-mode: horizontal-tb;
+    transform: none;
+  }
+  .sheetGrid {
+    grid-template-rows: none;
+    grid-auto-flow: row;
+    grid-template-columns: 1fr;
+    grid-auto-columns: auto;
+  }
+  .memberPhoto {
+    width: 64px;
+  }
+  .cut {
+    grid-template-columns: 1fr;
+  }
+  .cutNext {
+    text-align: left;
+  }
+  .creditList div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .creditList dt {
+    text-align: left;
+  }
+}

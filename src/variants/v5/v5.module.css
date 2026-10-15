@@ -1,0 +1,116 @@
+@font-face {
+  font-family: "v5 Stretch";
+  src: url("../../assests/StretchPro.otf") format("opentype");
+  font-display: swap;
+}
+/* The base App.module.css declares "StretchPro" with a broken URL; re-declare it correctly. */
+@font-face {
+  font-family: "StretchPro";
+  src: url("../../assests/StretchPro.otf") format("opentype");
+  font-display: swap;
+}
+
+.root {
+  position: fixed;
+  inset: 0;
+  background: #050506;
+  color: #fff;
+  font-family: "Rajdhani", sans-serif;
+  overflow: hidden;
+  /* Stretch Pro ships doubled-letter ligatures (EE, PP…) that garble names like APOGEE */
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "dlig" 0, "clig" 0, "calt" 0;
+}
+/* The base redesign leaks `* { overflow-x: hidden }` (HomePage.module.css) onto every route,
+   which turns ordinary text boxes into scroll containers (and keyboard-focusable scrollers).
+   Zero-specificity reset: any class that sets overflow still wins. */
+:where(.root) * {
+  overflow: visible;
+}
+
+/* every `font:` shorthand resets the feature settings, so pin them for the whole variant */
+.root,
+.root * {
+  font-variant-ligatures: none !important;
+  font-feature-settings: "liga" 0, "dlig" 0, "clig" 0, "calt" 0 !important;
+}
+.stage {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+/* ---------------------------------------------------------------- splice (route change) */
+.splice {
+  --rail: 38px;
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  background: #030506;
+  box-shadow: -14px 0 0 #000, 14px 0 0 #000, inset 0 0 0 1px rgba(95, 212, 230, 0.12);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.spliceIn {
+  animation: spliceIn 0.44s cubic-bezier(0.7, 0, 0.84, 0) both;
+}
+.spliceOut {
+  animation: spliceOut 0.52s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes spliceIn {
+  from { transform: translate3d(104%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+@keyframes spliceOut {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-104%, 0, 0); }
+}
+.spliceRailT,
+.spliceRailB {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--rail);
+  background:
+    radial-gradient(ellipse 6px 5px at 16px 50%, #000 92%, transparent 100%) 0 0 / 32px 100% repeat-x,
+    #091013;
+}
+.spliceRailT { top: 0; }
+.spliceRailB { bottom: 0; }
+.spliceNum {
+  font: normal 22vmin/1 "v5 Stretch", "Stretch Pro", sans-serif;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(207, 232, 255, 0.4);
+}
+
+@media (max-width: 768px) {
+  .spliceIn {
+    animation-name: spliceInV;
+  }
+  .spliceOut {
+    animation-name: spliceOutV;
+  }
+  @keyframes spliceInV {
+    from { transform: translate3d(0, 104%, 0); }
+    to { transform: translate3d(0, 0, 0); }
+  }
+  @keyframes spliceOutV {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(0, -104%, 0); }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spliceIn {
+    animation: fadeIn 0.14s linear both;
+  }
+  .spliceOut {
+    animation: fadeOut 0.14s linear both;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+  }
+  @keyframes fadeOut {
+    to { opacity: 0; }
+  }
+}
