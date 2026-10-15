@@ -23,7 +23,7 @@ make() { # make <key> <source image>
 # first non-mobile screenshot of that variant.
 for dir in src/variants/*/; do
   id=$(basename "$dir")
-  case "$id" in v3) pick=docs/variants/v3-04-mercury.png ;; *) pick=docs/variants/$id-hero.png ;; esac
+  case "$id" in v3) pick=docs/variants/v3-04-mercury.png ;; v4) pick=docs/variants/v4-02-desktop.png ;; v7) pick=docs/variants/v7-home.png ;; *) pick=docs/variants/$id-hero.png ;; esac
   if [ ! -f "$pick" ]; then
     pick=$(ls docs/variants/"$id"-*.png 2>/dev/null | grep -v mobile | head -n 1 || true)
   fi
