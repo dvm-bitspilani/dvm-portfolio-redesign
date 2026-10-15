@@ -1,0 +1,101 @@
+.wall {
+  --mx: 30vw;
+  --my: 40vh;
+  --horizon: 72%;
+  --mark-x: 60%;
+  --mark-y: 48%;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(60% 55% at var(--mark-x) 62%, rgba(18, 52, 64, 0.55), transparent 70%),
+    linear-gradient(180deg, #04070a 0%, #050506 60%, #030405 100%);
+  pointer-events: none;
+}
+.texture {
+  position: absolute;
+  inset: -2%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.62;
+  -webkit-mask-image:
+    radial-gradient(circle 300px at var(--mx) var(--my), #000 0%, rgba(0, 0, 0, 0.45) 45%, transparent 75%),
+    radial-gradient(ellipse 34% 46% at var(--mark-x) var(--mark-y), rgba(0, 0, 0, 0.85), transparent 72%);
+  mask-image:
+    radial-gradient(circle 300px at var(--mx) var(--my), #000 0%, rgba(0, 0, 0, 0.45) 45%, transparent 75%),
+    radial-gradient(ellipse 34% 46% at var(--mark-x) var(--mark-y), rgba(0, 0, 0, 0.85), transparent 72%);
+}
+.grid {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(120, 220, 235, 0.1) 0 1px, transparent 1px 240px),
+    repeating-linear-gradient(90deg, rgba(120, 220, 235, 0.045) 0 1px, transparent 1px 60px);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 calc(var(--horizon) - 2px), transparent var(--horizon));
+  mask-image: linear-gradient(180deg, #000 0%, #000 calc(var(--horizon) - 2px), transparent var(--horizon));
+}
+.floor {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--horizon);
+  bottom: 0;
+  perspective: 360px;
+  perspective-origin: var(--mark-x) 0;
+  overflow: hidden;
+}
+.floorGrid {
+  position: absolute;
+  left: -60%;
+  right: -60%;
+  top: 0;
+  height: 260%;
+  transform-origin: 50% 0;
+  transform: rotateX(72deg);
+  background:
+    repeating-linear-gradient(90deg, rgba(95, 212, 230, 0.22) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(0deg, rgba(95, 212, 230, 0.16) 0 1px, transparent 1px 64px);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 70%);
+  mask-image: linear-gradient(180deg, #000 0%, transparent 70%);
+}
+.horizonLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--horizon);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(95, 212, 230, 0.55) 30%, rgba(160, 240, 255, 0.85) 60%, rgba(95, 212, 230, 0.4) 85%, transparent);
+  box-shadow: 0 0 24px rgba(69, 230, 255, 0.35);
+}
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 100% at 50% 40%, transparent 55%, rgba(0, 0, 0, 0.6));
+}
+
+.wall[data-mode="xray"] .texture {
+  opacity: 0.18;
+}
+.wall[data-mode="xray"] .grid {
+  background:
+    repeating-linear-gradient(90deg, rgba(120, 220, 235, 0.14) 0 1px, transparent 1px 120px),
+    repeating-linear-gradient(0deg, rgba(120, 220, 235, 0.06) 0 1px, transparent 1px 120px);
+}
+.wall[data-mode="quiet"] .texture {
+  opacity: 0.28;
+}
+.wall[data-mode="quiet"] .floor,
+.wall[data-mode="quiet"] .horizonLine {
+  opacity: 0.4;
+}
+.wall[data-mobile] .texture {
+  -webkit-mask-image: radial-gradient(ellipse 70% 40% at 50% 38%, #000, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 40% at 50% 38%, #000, transparent 75%);
+  opacity: 0.5;
+}

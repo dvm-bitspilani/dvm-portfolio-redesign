@@ -1,0 +1,266 @@
+.win {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition:
+    transform 0.36s var(--ease),
+    width 0.36s var(--ease),
+    height 0.36s var(--ease);
+  will-change: transform;
+}
+.win[data-dragging] {
+  transition: none;
+}
+.frame {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(20, 40, 50, 0.72) 0px, rgba(9, 18, 24, 0.84) 40px, rgba(6, 12, 16, 0.9) 100%);
+  backdrop-filter: blur(26px) saturate(150%);
+  -webkit-backdrop-filter: blur(26px) saturate(150%);
+  box-shadow:
+    inset 0 0 0 1px rgba(95, 212, 230, 0.16),
+    inset 0 1px 0 rgba(210, 248, 255, 0.14),
+    0 30px 70px -24px rgba(0, 0, 0, 0.9),
+    0 8px 24px -10px rgba(0, 0, 0, 0.7);
+  transition: box-shadow 0.25s;
+}
+.win[data-focused] .frame {
+  box-shadow:
+    inset 0 0 0 1px rgba(110, 230, 248, 0.42),
+    inset 0 1px 0 rgba(220, 250, 255, 0.24),
+    0 0 0 1px rgba(69, 230, 255, 0.08),
+    0 40px 90px -26px rgba(0, 0, 0, 0.95),
+    0 0 60px -20px rgba(69, 230, 255, 0.28);
+}
+.win[data-max] .frame {
+  border-radius: 0;
+}
+/* corner registration ticks: the redesign's HUD language on every window */
+.frame::before,
+.frame::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.frame::before {
+  left: 6px;
+  bottom: 6px;
+  border-left: 1px solid var(--teal);
+  border-bottom: 1px solid var(--teal);
+}
+.frame::after {
+  right: 6px;
+  bottom: 6px;
+  border-right: 1px solid var(--teal);
+  border-bottom: 1px solid var(--teal);
+}
+.win[data-focused] .frame::before,
+.win[data-focused] .frame::after {
+  opacity: 0.7;
+}
+.win[data-max] .frame::before,
+.win[data-max] .frame::after {
+  display: none;
+}
+
+.titlebar {
+  position: relative;
+  z-index: 2;
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 6px 0 12px;
+  cursor: default;
+  user-select: none;
+  touch-action: none;
+  border-bottom: 1px solid rgba(95, 212, 230, 0.1);
+}
+.win[data-focused] .titlebar {
+  border-bottom-color: rgba(95, 212, 230, 0.2);
+}
+.title {
+  flex: 1;
+  min-width: 0;
+  font: 500 11.5px/1 var(--f-ui);
+  letter-spacing: 0.1em;
+  color: var(--mute);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.2s;
+}
+.win[data-focused] .title {
+  color: var(--ink);
+}
+.controls {
+  display: flex;
+  gap: 2px;
+}
+.ctl {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 28px;
+  border-radius: 7px;
+  color: var(--mute);
+  transition: background 0.15s, color 0.15s;
+}
+.ctl svg {
+  width: 14px;
+  height: 14px;
+  stroke-width: 1.6;
+}
+.ctl:hover {
+  background: rgba(95, 212, 230, 0.14);
+  color: var(--ink);
+}
+.close:hover {
+  background: var(--teal);
+  color: #021216;
+}
+
+.body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  container-type: size;
+  container-name: app;
+  overflow: hidden;
+}
+
+.handle {
+  position: absolute;
+  z-index: 4;
+  touch-action: none;
+}
+.handle[data-h="n"] {
+  top: -4px;
+  left: 10px;
+  right: 10px;
+  height: 8px;
+  cursor: ns-resize;
+}
+.handle[data-h="s"] {
+  bottom: -4px;
+  left: 10px;
+  right: 10px;
+  height: 8px;
+  cursor: ns-resize;
+}
+.handle[data-h="e"] {
+  right: -4px;
+  top: 10px;
+  bottom: 10px;
+  width: 8px;
+  cursor: ew-resize;
+}
+.handle[data-h="w"] {
+  left: -4px;
+  top: 10px;
+  bottom: 10px;
+  width: 8px;
+  cursor: ew-resize;
+}
+.handle[data-h="ne"],
+.handle[data-h="nw"],
+.handle[data-h="se"],
+.handle[data-h="sw"] {
+  width: 16px;
+  height: 16px;
+}
+.handle[data-h="ne"] {
+  top: -5px;
+  right: -5px;
+  cursor: nesw-resize;
+}
+.handle[data-h="sw"] {
+  bottom: -5px;
+  left: -5px;
+  cursor: nesw-resize;
+}
+.handle[data-h="nw"] {
+  top: -5px;
+  left: -5px;
+  cursor: nwse-resize;
+}
+.handle[data-h="se"] {
+  bottom: -5px;
+  right: -5px;
+  cursor: nwse-resize;
+}
+
+.suspended {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px;
+  text-align: center;
+  background: repeating-linear-gradient(90deg, rgba(95, 212, 230, 0.04) 0 1px, transparent 1px 48px), #05090c;
+}
+.susTitle {
+  margin-top: 8px;
+  font: 600 17px/1.2 var(--f-body);
+}
+.susBody {
+  max-width: 34ch;
+  font: 400 15px/1.4 var(--f-body);
+  color: var(--mute);
+}
+.resume {
+  composes: btnPrimary from "./os.module.css";
+  margin-top: 6px;
+}
+
+.loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+.loading span {
+  width: 120px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, var(--teal), transparent) 0 0 / 50% 100% no-repeat, rgba(95, 212, 230, 0.12);
+  animation: load 1s linear infinite;
+}
+@keyframes load {
+  from {
+    background-position: -100% 0, 0 0;
+  }
+  to {
+    background-position: 200% 0, 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .win {
+    transition: none;
+  }
+  .loading span {
+    animation: none;
+  }
+}
+
+/* during the genie: no backdrop blur (Chrome drops it under an animated clip-path) */
+.frame[data-genie] {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: linear-gradient(180deg, #11242c 0px, #0a161c 40px, #071014 100%);
+}

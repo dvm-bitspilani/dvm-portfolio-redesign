@@ -1,0 +1,207 @@
+.desktop {
+  position: absolute;
+  inset: 0;
+}
+.desk {
+  position: absolute;
+  left: var(--rail);
+  top: var(--bar);
+  right: 0;
+  bottom: 0;
+}
+
+/* ---- icons */
+.icons {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.icon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 96px;
+  padding: 8px 4px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  border-radius: 12px;
+  pointer-events: auto;
+  touch-action: none;
+  transition: transform 0.35s var(--ease), background 0.15s;
+}
+.icon[data-dragging] {
+  transition: none;
+  z-index: 2;
+  opacity: 0.85;
+}
+.icon:hover {
+  background: rgba(95, 212, 230, 0.07);
+}
+.icon[data-selected] {
+  background: rgba(95, 212, 230, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(95, 212, 230, 0.35);
+}
+.icon:focus-visible {
+  outline-offset: -2px;
+}
+.iconLabel {
+  max-width: 100%;
+  font: 600 14px/1.15 var(--f-body);
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: #e6f6fb;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9), 0 0 12px rgba(0, 0, 0, 0.8);
+}
+.icon[data-selected] .iconLabel {
+  color: #fff;
+}
+
+/* ---- snap preview */
+.snapPreview {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 14px;
+  background: rgba(69, 230, 255, 0.1);
+  box-shadow:
+    inset 0 0 0 1px rgba(120, 235, 250, 0.6),
+    0 0 40px -6px rgba(69, 230, 255, 0.35);
+  pointer-events: none;
+  transition:
+    transform 0.25s var(--ease),
+    width 0.25s var(--ease),
+    height 0.25s var(--ease);
+  animation: pv 0.25s var(--ease) both;
+}
+@keyframes pv {
+  from {
+    opacity: 0;
+  }
+}
+
+/* ---- notification centre */
+.center {
+  composes: glass from "./os.module.css";
+  position: absolute;
+  top: calc(var(--bar) + 8px);
+  right: 8px;
+  bottom: 8px;
+  z-index: 19000;
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 18px;
+  animation: centerIn 0.4s var(--ease) both;
+}
+@keyframes centerIn {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+}
+.centerClock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px 20px 18px;
+  border-bottom: 1px solid rgba(95, 212, 230, 0.14);
+}
+.cTime {
+  font: 400 34px/1 var(--f-disp);
+  letter-spacing: 0.04em;
+  color: #eaf8ff;
+}
+.cDate {
+  font: 600 17px/1.2 var(--f-body);
+}
+.cPlace {
+  font: 400 12px/1 var(--f-mono);
+  color: var(--mute);
+}
+.centerList {
+  composes: scrollY from "./os.module.css";
+  flex: 1;
+  padding: 14px 12px;
+}
+
+/* ---- shortcuts sheet */
+.sheetScrim {
+  position: absolute;
+  inset: 0;
+  z-index: 25000;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 4, 6, 0.45);
+  animation: pv 0.2s both;
+}
+.sheet {
+  composes: glass from "./os.module.css";
+  width: min(520px, calc(100vw - 32px));
+  padding: 18px 20px 20px;
+  border-radius: 18px;
+  outline: none;
+  animation: sheetIn 0.4s var(--ease) both;
+}
+@keyframes sheetIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+}
+.sheetHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.sheetHead h2 {
+  font: 500 13px/1 var(--f-ui);
+  letter-spacing: 0.12em;
+}
+.sheetHead button {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  color: var(--mute);
+}
+.sheetHead button:hover {
+  background: rgba(95, 212, 230, 0.12);
+  color: var(--ink);
+}
+.keys {
+  display: grid;
+  gap: 2px;
+}
+.keys > div {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  align-items: center;
+  padding: 6px 4px;
+  border-bottom: 1px solid rgba(95, 212, 230, 0.07);
+}
+.keys kbd {
+  font: 400 12px/1 var(--f-mono);
+  color: var(--cyan);
+}
+.keys dd {
+  font: 500 15px/1.2 var(--f-body);
+}
+.sheetNote {
+  margin-top: 14px;
+  font: 400 14.5px/1.4 var(--f-body);
+  color: var(--mute);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon,
+  .snapPreview,
+  .center,
+  .sheet {
+    transition: none;
+    animation: none;
+  }
+}

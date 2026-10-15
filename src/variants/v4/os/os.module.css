@@ -1,0 +1,159 @@
+/* DVM OS: tokens, the leak-proof root and shared glass pieces. */
+
+@font-face {
+  font-family: "v4-stretch";
+  src: url("../../../assests/StretchPro.otf") format("opentype");
+  font-display: swap;
+}
+
+/* The base redesign ships `* { overflow-x: hidden }` globally (HomePage.module.css), which
+   turns every box into a scroller and clips tooltips/menus. Undo it inside the OS (but not
+   inside kit components, which were tuned with it). Specificity 0 + loaded later = wins
+   over the base rule, loses to every class below. */
+:where([data-v4os]) :where(*:not([data-kit], [data-kit] *, img, video, canvas, iframe, svg, embed, object)) {
+  overflow: visible;
+}
+/* Stretch Pro ships EE/PP/ff ligatures; `font:` shorthands reset ligature settings, so pin them. */
+:where([data-v4os]) * {
+  font-variant-ligatures: none !important;
+  font-feature-settings: "liga" 0, "dlig" 0, "clig" 0 !important;
+}
+
+.root {
+  --void: #050506;
+  --deep: #0b1220;
+  --teal: #45e6ff;
+  --cyan: #5fd4e6;
+  --pale: #cfe8ff;
+  --ink: #e9f7ff;
+  --mute: #7f9ca7;
+  --dim: #4f6a73;
+  --edge: rgba(95, 212, 230, 0.22);
+  --edge-hi: rgba(120, 230, 245, 0.55);
+  --glass: rgba(9, 18, 24, 0.68);
+  --glass-hi: rgba(14, 28, 36, 0.82);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+  --f-disp: "Stretch Pro", "v4-stretch", "Orbitron", sans-serif;
+  --f-ui: "Orbitron", "Rajdhani", sans-serif;
+  --f-body: "Rajdhani", "Space Grotesk", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+  --rail: 76px;
+  --bar: 36px;
+
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: var(--void);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  /* Stretch Pro merges EE/PP/ff without this */
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "dlig" 0, "clig" 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.root ::selection {
+  background: rgba(69, 230, 255, 0.35);
+  color: #fff;
+}
+.root :focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+/* text fields show focus on their own container (search boxes, mail lines) */
+.root input:not([type="range"]):focus-visible,
+.root textarea:focus-visible {
+  outline: none;
+}
+:where(.root) button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+:where(.root) a {
+  color: inherit;
+}
+:where(.root) img {
+  display: block;
+}
+
+/* utilities other modules compose (beat the reset above) */
+.scrollY {
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(95, 212, 230, 0.35) transparent;
+}
+.clip {
+  overflow: hidden;
+}
+.srOnly {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* glass panel used by menus, start menu, notification centre */
+.glass {
+  background: linear-gradient(180deg, rgba(16, 32, 40, 0.86), rgba(7, 14, 19, 0.9));
+  backdrop-filter: blur(22px) saturate(150%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  border: 1px solid var(--edge);
+  box-shadow:
+    inset 0 1px 0 rgba(200, 245, 255, 0.12),
+    0 24px 60px -18px rgba(0, 0, 0, 0.85),
+    0 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
+/* shared buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 9px;
+  font: 600 14px/1 var(--f-body);
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  text-decoration: none;
+  background: rgba(95, 212, 230, 0.08);
+  box-shadow: inset 0 0 0 1px var(--edge);
+  transition: background 0.15s, box-shadow 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.btn:hover {
+  background: rgba(95, 212, 230, 0.16);
+  box-shadow: inset 0 0 0 1px var(--edge-hi);
+}
+.btnPrimary {
+  composes: btn;
+  background: var(--cyan);
+  color: #03161a;
+  box-shadow: none;
+}
+.btnPrimary:hover {
+  background: #8beaf7;
+  box-shadow: none;
+}
+.btn svg,
+.btnPrimary svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
+
+.boot {
+  /* desktop is mounted under the boot screen while it plays */
+  position: absolute;
+  inset: 0;
+}

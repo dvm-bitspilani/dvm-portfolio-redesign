@@ -1,0 +1,28 @@
+.wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.bridge {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 17px;
+  font: 600 14px/1 var(--f-body);
+  color: #03161a;
+  background: var(--cyan);
+  box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.8);
+  animation: up 0.35s var(--ease) both;
+}
+@keyframes up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}

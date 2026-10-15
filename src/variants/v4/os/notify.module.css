@@ -1,0 +1,186 @@
+.stack {
+  position: absolute;
+  top: calc(var(--bar) + 12px);
+  right: 14px;
+  z-index: 9000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 340px;
+  pointer-events: none;
+}
+.stackPhone {
+  top: 52px;
+  left: 10px;
+  right: 10px;
+  width: auto;
+}
+.toast {
+  pointer-events: auto;
+  padding: 10px 12px 12px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(18, 36, 45, 0.88), rgba(8, 16, 21, 0.92));
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  border: 1px solid var(--edge);
+  box-shadow: 0 18px 44px -14px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(200, 245, 255, 0.1);
+  animation: toastIn 0.5s var(--ease) both;
+}
+.phone {
+  border-radius: 20px;
+  padding: 9px 12px 10px;
+  animation-name: toastDrop;
+}
+.phone .title {
+  font-size: 14.5px;
+}
+.phone .body {
+  font-size: 13px;
+}
+.phone .action {
+  margin-top: 8px;
+  height: 26px;
+}
+.leaving {
+  animation: toastOut 0.28s var(--ease-io) both;
+}
+.phone.leaving {
+  animation-name: toastLift;
+}
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(28px) scale(0.98);
+  }
+}
+@keyframes toastOut {
+  to {
+    opacity: 0;
+    transform: translateX(36px);
+  }
+}
+@keyframes toastDrop {
+  from {
+    opacity: 0;
+    transform: translateY(-24px) scale(0.96);
+  }
+}
+@keyframes toastLift {
+  to {
+    opacity: 0;
+    transform: translateY(-28px);
+  }
+}
+.head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--mute);
+  margin-bottom: 6px;
+}
+.app {
+  font: 500 10.5px/1 var(--f-ui);
+  letter-spacing: 0.08em;
+  color: var(--cyan);
+}
+.time {
+  margin-left: auto;
+  font: 400 11px/1 var(--f-mono);
+  color: var(--dim);
+}
+.x {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  color: var(--mute);
+}
+.x:hover {
+  background: rgba(95, 212, 230, 0.12);
+  color: var(--ink);
+}
+.title {
+  font: 600 15.5px/1.25 var(--f-body);
+  color: var(--ink);
+}
+.body {
+  margin-top: 3px;
+  font: 400 14px/1.35 var(--f-body);
+  color: #a9c3cc;
+}
+.action {
+  margin-top: 10px;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 8px;
+  font: 600 13px/1 var(--f-body);
+  color: #03161a;
+  background: var(--cyan);
+}
+.action:hover {
+  background: #8beaf7;
+}
+
+.empty {
+  padding: 24px 6px;
+  color: var(--mute);
+  font-size: 15px;
+}
+.listHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 4px 4px 10px;
+  font: 500 11px/1 var(--f-ui);
+  letter-spacing: 0.08em;
+  color: var(--mute);
+}
+.listHead button {
+  font: 500 13px/1 var(--f-body);
+  color: var(--cyan);
+}
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  text-align: left;
+  background: rgba(95, 212, 230, 0.05);
+  box-shadow: inset 0 0 0 1px rgba(95, 212, 230, 0.1);
+}
+.item:not(:disabled):hover {
+  background: rgba(95, 212, 230, 0.12);
+}
+.item:disabled {
+  cursor: default;
+}
+.itemText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.itemTitle {
+  font: 600 14.5px/1.25 var(--f-body);
+}
+.itemBody {
+  font: 400 13.5px/1.3 var(--f-body);
+  color: #a9c3cc;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast,
+  .leaving {
+    animation-duration: 0.01s;
+  }
+}

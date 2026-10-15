@@ -1,0 +1,79 @@
+.menu {
+  composes: glass from "./os.module.css";
+  position: fixed;
+  z-index: 30000;
+  min-width: 232px;
+  padding: 6px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  animation: menuIn 0.16s var(--ease) both;
+  transform-origin: top left;
+}
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(-4px);
+  }
+}
+.item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 30px;
+  padding: 0 10px 0 6px;
+  border-radius: 7px;
+  text-align: left;
+  font: 500 14.5px/1 var(--f-body);
+  color: var(--ink);
+}
+.item:hover,
+.item:focus-visible {
+  outline: none;
+  background: rgba(95, 212, 230, 0.9);
+  color: #03161a;
+}
+.item:hover .kbd,
+.item:focus-visible .kbd {
+  color: rgba(3, 22, 26, 0.7);
+}
+.item:disabled {
+  color: var(--dim);
+  cursor: default;
+  background: none;
+}
+.check {
+  display: grid;
+  place-items: center;
+  width: 16px;
+  flex: none;
+}
+.check svg {
+  width: 14px;
+  height: 14px;
+}
+.label {
+  flex: 1;
+  white-space: nowrap;
+}
+.kbd {
+  font: 400 11px/1 var(--f-mono);
+  color: var(--mute);
+  white-space: nowrap;
+}
+.sep {
+  height: 1px;
+  margin: 5px 6px;
+  background: rgba(95, 212, 230, 0.14);
+}
+.heading {
+  padding: 8px 8px 6px 28px;
+  font: 500 10px/1 var(--f-ui);
+  letter-spacing: 0.1em;
+  color: var(--mute);
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu {
+    animation: none;
+  }
+}
