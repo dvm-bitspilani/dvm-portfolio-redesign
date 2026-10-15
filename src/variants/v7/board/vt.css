@@ -1,0 +1,57 @@
+/* View Transitions for the board. Global by necessity (pseudo-elements live on the document),
+   but every selector is limited to the v7 transition class / names. */
+/* Tiles morph as boxes: the group carries the tile's frame and glass, and the snapshots are
+   never scaled (a thin ticker strip blown up to page size reads as a smear). Content is pinned
+   to the top-left and clipped by the moving box: the old face fades out, the new page is
+   revealed as the box opens. */
+::view-transition-group(*.v7tile) {
+  animation-duration: 0.62s;
+  animation-timing-function: cubic-bezier(0.22, 0.9, 0.18, 1);
+  border-radius: 6px;
+  background: rgba(8, 14, 21, 0.72);
+  outline: 1px solid rgba(69, 230, 255, 0.32);
+  outline-offset: -1px;
+}
+::view-transition-image-pair(*.v7tile) {
+  overflow: clip;
+  border-radius: 6px;
+}
+::view-transition-old(*.v7tile),
+::view-transition-new(*.v7tile) {
+  width: 100%;
+  height: 100%;
+  object-fit: none;
+  object-position: left top;
+}
+::view-transition-old(*.v7tile) {
+  animation: v7-vt-out 0.24s ease both;
+}
+::view-transition-new(*.v7tile) {
+  animation: v7-vt-in 0.4s 0.12s ease both;
+}
+::view-transition-group(v7-head) {
+  animation: none;
+}
+/* the masthead swaps instantly; cross-fading two lines of key hints reads as a glitch */
+::view-transition-old(v7-head) {
+  display: none;
+}
+::view-transition-new(v7-head) {
+  animation: none;
+}
+::view-transition-old(v7-cover),
+::view-transition-new(v7-cover) {
+  height: 100%;
+  object-fit: cover;
+}
+::view-transition-group(v7-cover) {
+  animation-duration: 0.62s;
+  animation-timing-function: cubic-bezier(0.22, 0.9, 0.18, 1);
+  z-index: 10;
+}
+@keyframes v7-vt-out {
+  to { opacity: 0; }
+}
+@keyframes v7-vt-in {
+  from { opacity: 0; }
+}
