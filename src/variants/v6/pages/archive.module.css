@@ -1,0 +1,26 @@
+.archive {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+}
+.wall {
+  position: absolute;
+  inset: 0;
+  pointer-events: auto;
+  animation: in 0.6s ease both;
+}
+@keyframes in {
+  from { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wall { animation: none; }
+}
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

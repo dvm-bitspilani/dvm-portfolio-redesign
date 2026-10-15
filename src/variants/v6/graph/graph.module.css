@@ -1,0 +1,117 @@
+.graph {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  outline: none;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  contain: strict;
+}
+.graph:focus-visible {
+  box-shadow: inset 0 0 0 1.5px rgba(69, 230, 255, 0.4);
+}
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: grab;
+}
+.mark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100px;
+  height: 100px;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+  will-change: transform;
+  transform: translate3d(-400px, -400px, 0);
+}
+.labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Pooled labels are created by the engine (plain DOM); they carry a v6- prefix. */
+.labels :global(.v6-label) {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  white-space: nowrap;
+  color: #cfe8ff;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.95), 0 0 2px rgba(0, 0, 0, 0.9);
+  will-change: transform, opacity;
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "dlig" 0, "clig" 0;
+}
+.labels :global(.v6-label-t) {
+  font: 600 14px/1.05 Rajdhani, sans-serif;
+  letter-spacing: 0.01em;
+}
+.labels :global(.v6-label-s) {
+  font: 500 12px/1.15 Rajdhani, sans-serif;
+  color: rgba(207, 232, 255, 0.66);
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.labels :global(.v6-label-s:empty) {
+  display: none;
+}
+.labels :global(.v6-label.minor) {
+  color: rgba(207, 232, 255, 0.86);
+}
+.labels :global(.v6-label.major .v6-label-t) {
+  font: 500 12px/1.1 Orbitron, sans-serif;
+  letter-spacing: 0.04em;
+  color: #e9f6ff;
+}
+.labels :global(.v6-label.year .v6-label-t) {
+  font: 600 15px/1 Orbitron, sans-serif;
+  letter-spacing: 0.06em;
+  color: #f0c08f;
+}
+.labels :global(.v6-label.hot .v6-label-t) {
+  color: #fff;
+  font-size: 15px;
+}
+.labels :global(.v6-label.major.hot .v6-label-t) {
+  font-size: 13px;
+}
+.labels :global(.v6-label.sel .v6-label-t) {
+  color: #45e6ff;
+}
+
+.labels :global(.v6-pic) {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  overflow: hidden;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+  background: #0b1220;
+  box-shadow: 0 0 0 2px rgba(95, 212, 230, 0.75), 0 0 22px rgba(69, 230, 255, 0.45);
+}
+.labels :global(.v6-pic[data-kind="project"]),
+.labels :global(.v6-pic[data-kind="blog"]),
+.labels :global(.v6-pic[data-kind="art"]) {
+  border-radius: 14px;
+}
+.labels :global(.v6-pic img) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  pointer-events: none;
+}

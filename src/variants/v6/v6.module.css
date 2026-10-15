@@ -1,0 +1,99 @@
+@font-face {
+  font-family: "v6 Stretch";
+  src: url("../../assests/StretchPro.otf") format("opentype");
+  font-display: swap;
+}
+
+.root {
+  position: relative;
+  min-height: 100vh;
+  background: #050506;
+  color: #fff;
+  font-family: Rajdhani, sans-serif;
+  /* Stretch Pro merges EE / PP / ff into ligatures (APOGEE) — off for the whole variant */
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "dlig" 0, "clig" 0;
+}
+.wide {
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ---------- backdrop: the redesign's teal texture through a radial mask, thin grid, outlined letters */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(120% 90% at 62% 50%, #0b1220 0%, #050506 62%);
+}
+.texture {
+  position: absolute;
+  inset: -4%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.34;
+  -webkit-mask-image: radial-gradient(46% 52% at 62% 50%, #000 0%, rgba(0, 0, 0, 0.45) 45%, transparent 78%);
+  mask-image: radial-gradient(46% 52% at 62% 50%, #000 0%, rgba(0, 0, 0, 0.45) 45%, transparent 78%);
+}
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to right, rgba(207, 232, 255, 0.055) 1px, transparent 1px);
+  background-size: calc(100% / 14) 100%;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+}
+.letters {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6vh;
+  width: 100%;
+  height: 46vh;
+  overflow: visible;
+}
+.letters text {
+  font-family: "v6 Stretch", "Stretch Pro", sans-serif;
+  font-size: 330px;
+  fill: none;
+  stroke: rgba(207, 232, 255, 0.07);
+  stroke-width: 1.4;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- graph stage */
+.stage {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+}
+.main {
+  position: relative;
+  z-index: 10;
+}
+
+/* ---------- phones: list first, compact graph on top */
+.compact {
+  padding-top: 98px;
+}
+.compact .stage {
+  position: relative;
+  inset: auto;
+  height: clamp(270px, 42vh, 400px);
+  margin: 10px 12px 0;
+  border-radius: 18px;
+  border: 1px solid rgba(95, 212, 230, 0.2);
+  background: radial-gradient(90% 80% at 50% 50%, rgba(11, 18, 32, 0.9), rgba(5, 5, 6, 0.6));
+  overflow: hidden;
+}
+.compact .letters {
+  display: none;
+}
+.compact.onArchive .stage {
+  position: fixed;
+  inset: 0;
+  height: auto;
+  margin: 0;
+  border-radius: 0;
+}
