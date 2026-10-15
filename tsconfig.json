@@ -16,5 +16,5 @@
     "isolatedModules": true,
     "verbatimModuleSyntax": true
   },
-  "include": ["src/immersive", "src/variants"]
+  "include": ["src/immersive", "src/variants", "src/lab", "src/hub"]
 }

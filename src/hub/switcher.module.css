@@ -1,0 +1,192 @@
+/* Universal switcher. It sits on top of the original and the variants, whose global CSS sets
+   `* { margin:0; padding:0; overflow-x:hidden }`, so every box here states its own overflow. */
+
+.wrap {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(5, 8, 10, 0.8);
+  border: 1px solid rgba(69, 230, 255, 0.2);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  font: 500 10.5px/1 'Orbitron', 'Rajdhani', ui-monospace, monospace;
+  letter-spacing: 0.08em;
+  color: #cfe8ff;
+  font-variant-ligatures: none;
+}
+
+.wrap,
+.wrap * {
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.wide {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.item {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  cursor: pointer;
+  color: #bfe9ef;
+  transition:
+    background 0.18s,
+    color 0.18s;
+}
+
+.item:hover {
+  background: rgba(69, 230, 255, 0.1);
+  color: #fff;
+}
+
+.item:focus-visible {
+  outline: 1px solid #45e6ff;
+  outline-offset: 1px;
+}
+
+.item[aria-current='page'] {
+  background: #45e6ff;
+  color: #031417;
+}
+
+.off {
+  cursor: default;
+  opacity: 0.35;
+}
+
+.off:hover {
+  background: none;
+  color: #bfe9ef;
+}
+
+.hub {
+  padding: 0 11px 0 9px;
+  border-right: 1px solid rgba(69, 230, 255, 0.16);
+  border-radius: 999px 6px 6px 999px;
+  margin-right: 2px;
+}
+
+.hub svg {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+}
+
+.narrow {
+  display: none;
+}
+
+.menu {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 8px);
+  display: flex;
+  flex-direction: column;
+  min-width: 220px;
+  max-height: min(70vh, 560px);
+  padding: 6px;
+  border-radius: 14px;
+  background: rgba(5, 8, 10, 0.94);
+  border: 1px solid rgba(69, 230, 255, 0.2);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+.wrap .menu {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.group {
+  margin: 0;
+  padding: 10px 10px 4px;
+  font: 600 12px/1.2 'Rajdhani', sans-serif;
+  letter-spacing: 0.04em;
+  color: rgba(207, 232, 255, 0.45);
+}
+
+.row {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 9px;
+  cursor: pointer;
+  font: 600 14px/1.2 'Rajdhani', sans-serif;
+  letter-spacing: 0.02em;
+  color: #cfe8ff;
+}
+
+.row b {
+  min-width: 22px;
+  font: 500 10px/1 'Orbitron', sans-serif;
+  color: #45e6ff;
+}
+
+.row:hover {
+  background: rgba(69, 230, 255, 0.1);
+}
+
+.row:focus-visible {
+  outline: 1px solid #45e6ff;
+}
+
+.row[aria-current='page'] {
+  background: rgba(69, 230, 255, 0.16);
+  color: #fff;
+}
+
+.row.off {
+  cursor: default;
+}
+
+.hint {
+  margin: 4px 0 0;
+  padding: 8px 10px 4px;
+  border-top: 1px solid rgba(69, 230, 255, 0.12);
+  font: 500 12px/1.2 'Rajdhani', sans-serif;
+  color: rgba(207, 232, 255, 0.4);
+}
+
+@media (max-width: 760px) {
+  .wrap {
+    left: 10px;
+    bottom: 10px;
+  }
+
+  .wide {
+    display: none;
+  }
+
+  .narrow {
+    display: inline-flex;
+    max-width: 52vw;
+  }
+
+  .hubLabel {
+    display: none;
+  }
+
+  .menu {
+    min-width: min(280px, calc(100vw - 20px));
+  }
+}

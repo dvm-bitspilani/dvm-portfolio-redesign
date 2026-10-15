@@ -1,0 +1,309 @@
+@font-face {
+  font-family: 'BootJaapokki';
+  src: url('/assets/fonts/jaapokki-subtract.otf') format('opentype');
+  font-display: swap;
+}
+
+.boot-root {
+  --ink: #7cff6b;
+  --plastic: #0e0e10;
+  --plastic-hi: #1a1a1d;
+  --chin: 64px;
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(120% 90% at 50% 40%, #0b0b0c 0%, #050505 60%, #020202 100%);
+  color: #d8d8d8;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  overflow: hidden;
+}
+
+.boot-root .boot-monitor {
+  position: absolute;
+  inset: 10px 10px 8px 10px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 26px 26px 18px 18px;
+  background:
+    linear-gradient(180deg, var(--plastic-hi) 0%, var(--plastic) 9%, #0a0a0b 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.6),
+    0 30px 80px rgba(0, 0, 0, 0.7);
+  padding: 14px 14px 0;
+}
+
+.boot-root .boot-screen {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #000;
+  /* recessed glass + faint phosphor spill onto the bezel */
+  box-shadow:
+    0 0 0 2px #050505,
+    0 0 0 3px rgba(255, 255, 255, 0.04),
+    0 0 60px -18px color-mix(in srgb, var(--ink) 40%, transparent);
+  transition: box-shadow 0.6s ease;
+}
+
+.boot-root .boot-screen::after {
+  /* inner bevel shadow of the tube inside the bezel */
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.9),
+    inset 0 0 28px 6px rgba(0, 0, 0, 0.85);
+}
+
+.boot-root .boot-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+  outline: none;
+}
+
+.boot-root .boot-input {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  border: 0;
+  padding: 0;
+  resize: none;
+  font-size: 16px; /* stops iOS zooming on focus */
+  caret-color: transparent;
+  pointer-events: none;
+}
+
+/* ---------------- chin ---------------- */
+
+.boot-root .boot-chin {
+  height: var(--chin);
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 28px;
+  padding: 0 10px 0 560px;
+}
+
+.boot-root .boot-badge {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-right: auto;
+  color: #4a4a4f;
+  user-select: none;
+}
+
+.boot-root .boot-wordmark {
+  font-family: 'BootJaapokki', 'IBM Plex Mono', monospace;
+  font-size: 19px;
+  letter-spacing: 0.42em;
+  color: #6b6b72;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.9), 0 -1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.boot-root .boot-model {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.boot-root .boot-controls {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.boot-root .boot-knob {
+  display: flex;
+  gap: 6px;
+}
+
+.boot-root .boot-key {
+  --led: var(--ink);
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 26px;
+  padding: 0 11px 0 9px;
+  border-radius: 5px;
+  border: 0;
+  background: linear-gradient(180deg, #1c1c20, #121215);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 1px 0 rgba(0, 0, 0, 0.8),
+    0 2px 6px rgba(0, 0, 0, 0.6);
+  color: #8a8a92;
+  font: 500 10px/1 'IBM Plex Mono', ui-monospace, monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.08s;
+}
+
+.boot-root .boot-key i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2a2a2e;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.8);
+}
+
+.boot-root .boot-key[aria-pressed='true'] {
+  color: #d0d0d6;
+  transform: translateY(1px);
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.8),
+    0 0 0 rgba(0, 0, 0, 0);
+}
+
+.boot-root .boot-key[aria-pressed='true'] i {
+  background: var(--led);
+  box-shadow: 0 0 8px var(--led), 0 0 2px var(--led);
+}
+
+.boot-root .boot-key:hover {
+  color: #e6e6ea;
+}
+
+.boot-root .boot-power {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 34px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 17px;
+  background: radial-gradient(circle at 50% 30%, #222226, #111114);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.7);
+  color: #7c7c84;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.boot-root .boot-power:hover {
+  color: #d8d8de;
+}
+
+.boot-root .boot-led {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3a1410;
+}
+
+.boot-root .boot-led[data-on='true'] {
+  background: var(--ink);
+  box-shadow: 0 0 10px var(--ink), 0 0 3px var(--ink);
+}
+
+.boot-root button:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* ---------------- accessible mirror ---------------- */
+
+.boot-root .boot-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* a focused mirror link surfaces as a phosphor toast at the top of the tube */
+.boot-root .boot-sr:focus-within {
+  position: fixed;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  height: auto;
+  margin: 0;
+  clip: auto;
+  clip-path: none;
+  overflow: visible;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.boot-root .boot-sr:focus-within a:not(:focus),
+.boot-root .boot-sr:focus-within :is(h1, h2, p, li, section):not(:has(a:focus)) {
+  display: none;
+}
+
+.boot-root .boot-sr:focus-within :is(ul, article, section) {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.boot-root .boot-sr a:focus {
+  display: inline-block;
+  pointer-events: auto;
+  padding: 8px 14px;
+  background: #000;
+  color: var(--ink);
+  font: 20px/1 'VT323', monospace;
+  border: 1px solid var(--ink);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--ink) 50%, transparent);
+  outline: none;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* ---------------- small screens ---------------- */
+
+@media (max-width: 720px) {
+  .boot-root {
+    --chin: 56px;
+  }
+  .boot-root .boot-monitor {
+    inset: 6px 6px 4px;
+    padding: 8px 8px 0;
+    border-radius: 18px 18px 12px 12px;
+  }
+  .boot-root .boot-screen {
+    border-radius: 14px;
+  }
+  .boot-root .boot-chin {
+    padding: 0 4px;
+    gap: 10px;
+  }
+  .boot-root .boot-badge {
+    display: none;
+  }
+  .boot-root .boot-key {
+    padding: 0 7px;
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 1100px) and (min-width: 721px) {
+  .boot-root .boot-model {
+    display: none;
+  }
+}

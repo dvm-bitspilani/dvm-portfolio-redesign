@@ -1,12 +1,12 @@
-import { lazy, Suspense, useMemo, useState, useEffect, type ComponentType } from 'react'
-import { Link, useLocation, useParams, Navigate } from 'react-router-dom'
+import { lazy, Suspense, useMemo, type ComponentType } from 'react'
+import { useParams, Navigate } from 'react-router-dom'
 
 /**
  * Immersive branch plumbing.
  *  /kit/<name>      → src/immersive/kit/<name>/demo.tsx   (component sandboxes)
  *  /v/<id>/*        → src/variants/<id>/index.(jsx|tsx)   (full-site variants)
- *  everything else  → the original redesign App
- * Both are discovered automatically; nothing here needs editing.
+ * Both are discovered automatically; nothing here needs editing. The hub (/), the original
+ * (/original/*) and the lab (/lab/*) are routed in src/main.jsx; the switcher is src/hub/Switcher.tsx.
  */
 
 type Mod = { default: ComponentType }
@@ -21,10 +21,14 @@ export interface VariantMeta {
   summary: string
 }
 
-const kitNames = Object.keys(kitDemos).map((p) => p.split('/')[2]).sort()
+export const kitNames = Object.keys(kitDemos).map((p) => p.split('/')[2]).sort()
 export const variants: VariantMeta[] = Object.values(variantMetas)
   .map((m) => m.default)
   .sort((a, b) => a.order - b.order)
+
+/** A variant can be opened once its index module exists (a meta.ts alone = still being built). */
+export const variantReady = (id: string) =>
+  Boolean(variantMods[`../variants/${id}/index.tsx`] ?? variantMods[`../variants/${id}/index.jsx`])
 
 const cache = new Map<string, ComponentType>()
 function lazyFrom(key: string, loader?: () => Promise<Mod>) {
@@ -58,52 +62,4 @@ export function VariantHost() {
       <Variant key={id} />
     </Suspense>
   )
-}
-
-/** Floating switcher between the original and the variants (press V to hide). */
-export function VariantSwitcher() {
-  const { pathname } = useLocation()
-  const [hidden, setHidden] = useState(false)
-  const [open, setOpen] = useState(false)
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if ((e.target as HTMLElement).closest('input, textarea, [contenteditable]')) return
-      if (e.key === 'v' || e.key === 'V') setHidden((h) => !h)
-    }
-    addEventListener('keydown', onKey)
-    return () => removeEventListener('keydown', onKey)
-  }, [])
-  if (hidden) return null
-  const current = pathname.startsWith('/v/') ? pathname.split('/')[2] : pathname.startsWith('/kit/') ? 'kit' : 'original'
-  const item = (to: string, label: string, active: boolean) => (
-    <Link key={to} to={to} style={{ ...s.item, ...(active ? s.active : null) }} onClick={() => setOpen(false)}>
-      {label}
-    </Link>
-  )
-  return (
-    <div style={s.wrap}>
-      {item('/', 'Original', current === 'original')}
-      {variants.map((v) => item(`/v/${v.id}`, v.name, current === v.id))}
-      {kitNames.length > 0 && (
-        <button style={s.item} onClick={() => setOpen((o) => !o)}>
-          Kit ▾
-        </button>
-      )}
-      {open && <div style={s.menu}>{kitNames.map((k) => item(`/kit/${k}`, k, pathname === `/kit/${k}`))}</div>}
-    </div>
-  )
-}
-
-const s: Record<string, React.CSSProperties> = {
-  wrap: {
-    position: 'fixed', left: 16, bottom: 16, zIndex: 100000, display: 'flex', gap: 2, padding: 4,
-    borderRadius: 999, background: 'rgba(8,14,16,.78)', border: '1px solid rgba(120,220,235,.18)',
-    backdropFilter: 'blur(12px)', font: '500 11px/1 ui-monospace, monospace', letterSpacing: '.06em',
-  },
-  item: { all: 'unset', cursor: 'pointer', padding: '8px 12px', borderRadius: 999, color: '#bfe9ef', whiteSpace: 'nowrap' },
-  active: { background: '#5fd4e6', color: '#031417' },
-  menu: {
-    position: 'absolute', left: 0, bottom: 'calc(100% + 6px)', display: 'flex', flexDirection: 'column', padding: 4,
-    borderRadius: 12, background: 'rgba(8,14,16,.92)', border: '1px solid rgba(120,220,235,.18)',
-  },
 }

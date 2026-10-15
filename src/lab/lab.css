@@ -1,0 +1,44 @@
+/* The lab's former global index.css, active only while the lab is mounted (<html data-iso="lab">).
+   :where() keeps every selector at zero specificity, exactly like the original element selectors,
+   so the designs' own scoped styles still win. Nothing here applies to the hub, the original
+   redesign or the variants. */
+:where(html[data-iso='lab']) *,
+:where(html[data-iso='lab']) *::before,
+:where(html[data-iso='lab']) *::after {
+  box-sizing: border-box;
+}
+
+:where(html[data-iso='lab']),
+:where(html[data-iso='lab']) body,
+:where(html[data-iso='lab']) #root {
+  margin: 0;
+  min-height: 100%;
+  background: #050506;
+  color: #ececec;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:where(html[data-iso='lab']) body {
+  font-family: system-ui, sans-serif;
+}
+
+:where(html[data-iso='lab']) img {
+  max-width: 100%;
+  display: block;
+}
+
+:where(html[data-iso='lab']) a {
+  color: inherit;
+}
+
+.lab-loading {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font: 500 12px/1 ui-monospace, monospace;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #666;
+}
