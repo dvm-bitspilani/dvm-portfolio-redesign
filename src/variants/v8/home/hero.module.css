@@ -1,0 +1,168 @@
+/* ===================== V8 hero: the projector ===================== */
+.wrap {
+  position: relative;
+}
+/* The stage dissolves into the room over its last rows: the opaque WebGL floor (and the CSS
+   projector, and the idle backdrop) fade to nothing, so the room's own grid and pool take over
+   with no line at the hero's bottom and the floor rings sink into the dark instead of being cut.
+   Eased stops (a plain two-stop ramp shows a visible kink where it starts). */
+.hero {
+  --stage-fade: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 64%,
+    rgba(0, 0, 0, 0.86) 72%,
+    rgba(0, 0, 0, 0.6) 80%,
+    rgba(0, 0, 0, 0.3) 88%,
+    rgba(0, 0, 0, 0.1) 95%,
+    transparent 100%
+  );
+}
+/* Height policy: one full small viewport (100svh: the viewport with the browser's bars shown),
+   so the composition never jumps as a phone's toolbar slides; on desktop svh = vh. Desktop keeps
+   a 560px floor (Boot.jsx and Hero.jsx pose for it), phones none. Older browsers: 100vh. */
+.hero {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 560px;
+  overflow: hidden;
+  /* transparent: the stage carries its own backdrop (.canvas) and fades it out at the bottom,
+     where the room's floor shows through */
+  background: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  /* vertical scrolling and the browser's own pinch-zoom (Hero.jsx never treats a pinch as a scroll) */
+  touch-action: pan-y pinch-zoom;
+  isolation: isolate;
+}
+.canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--bg);
+  -webkit-mask-image: var(--stage-fade);
+  mask-image: var(--stage-fade);
+}
+.idle {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+}
+/* No WebGL for the stage: the same projector drawn in SVG (chrome/holo/StageFallback.tsx: pedestal,
+   halo, lens, cone, dust and the radar floor), projected through the stage camera so the live
+   mark (or its static print) still hangs in its beam. This is only its backdrop. */
+.fallback {
+  background: var(--bg);
+}
+
+/* the room's grid over the opaque stage: same 30px pitch, same x origin, fading out downward as
+   the stage itself fades and the room's own grid (behind the hero) comes through, so the lines
+   run on unbroken into the next section. It thins where the beam stands (centre column), so it
+   reads as behind the light, not over it. */
+.grid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image: repeating-linear-gradient(to right, rgba(255, 255, 255, 0.2) 0 1px, transparent 1px 30px);
+  -webkit-mask-image:
+    linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%),
+    radial-gradient(ellipse 16% 44% at 50% 46%, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.6) 55%, #000 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%),
+    radial-gradient(ellipse 16% 44% at 50% 46%, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.6) 55%, #000 100%);
+  mask-composite: intersect;
+}
+/* smoke in the beam: the one place the bg_3 texture remains, at the pool's spot (the same spot
+   the hero pushes to chrome/Light); the room's own pool is a pure gradient */
+.texture {
+  --tx: 50%;
+  --ty: 40%;
+  --tr: 34vw;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.24;
+  mix-blend-mode: screen;
+  /* a touch thinner at the very centre, so the smoke hangs around the beam, not in its core */
+  /* (and it thins out with the stage at the bottom, so the smoke never ends on the hero's edge) */
+  -webkit-mask-image: radial-gradient(circle var(--tr) at var(--tx) var(--ty), rgba(0, 0, 0, 0.7) 0%, #000 28%, transparent 72%), var(--stage-fade);
+  -webkit-mask-composite: source-in;
+  mask-image: radial-gradient(circle var(--tr) at var(--tx) var(--ty), rgba(0, 0, 0, 0.7) 0%, #000 28%, transparent 72%), var(--stage-fade);
+  mask-composite: intersect;
+}
+
+/* ---- copy: "We are / DVM" + one line, a plinth beside the beam (left column, clear of the
+   mark, the cone and the puck's back rim at every measured viewport) */
+.copy {
+  position: absolute;
+  z-index: 4;
+  left: var(--gutter);
+  bottom: 22vh;
+  max-width: min(34vw, 36rem);
+  pointer-events: none;
+}
+.title {
+  margin: 0;
+  font: var(--t-h1) var(--f-display);
+  font-variation-settings: var(--fvs-display);
+  text-transform: var(--tt-display);
+  letter-spacing: var(--ls-h1);
+  color: var(--ink);
+}
+/* two deliberate lines under every face */
+.title > span {
+  display: block;
+}
+/* a caption under the title (body size, not the fluid lede): the title is the only large thing */
+.lede {
+  margin: var(--s-4) 0 0;
+  max-width: 24rem;
+  font: var(--t-body) var(--f-sans);
+  font-variation-settings: var(--fvs-text);
+  letter-spacing: var(--ls-body);
+  color: var(--ink-2);
+  text-wrap: balance;
+}
+
+@media (max-width: 759px) {
+  .hero {
+    min-height: 0;
+  }
+  /* the copy sits over the table: a scrim keeps it legible. It starts below the puck (at ~62 %
+     of the hero on phones, stageLayout's narrow camera), so the puck, its halo and the lens stay
+     clear and only the front of the floor goes under it. */
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 34%;
+    z-index: 2;
+    pointer-events: none;
+    /* it lets go again over the last rows, where the stage has dissolved into the room anyway,
+       so it never ends in a dark band against the section below */
+    background: linear-gradient(
+      to bottom,
+      rgba(5, 5, 6, 0),
+      rgba(5, 5, 6, 0.62) 30%,
+      rgba(5, 5, 6, 0.84) 56%,
+      rgba(5, 5, 6, 0.6) 80%,
+      rgba(5, 5, 6, 0) 100%
+    );
+  }
+  .copy {
+    left: var(--gutter);
+    right: var(--gutter);
+    bottom: max(32px, 7svh);
+    max-width: none;
+  }
+  .lede {
+    margin-top: var(--s-3);
+  }
+}

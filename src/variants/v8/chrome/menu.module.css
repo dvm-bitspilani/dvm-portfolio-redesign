@@ -1,0 +1,141 @@
+/* ===================== V8 menu ===================== */
+/* Visible by default: GSAP only tweens opacity and the rows, never a clip. */
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  background: rgba(5, 5, 6, 0.98);
+  color: var(--ink);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* list left (columns 1–7), the well and the contact line right (9–12; 8–12 below 1100 px) */
+.body {
+  box-sizing: border-box;
+  min-height: 100%;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: minmax(0, 1fr) auto auto minmax(0, 1fr);
+  column-gap: var(--col-gap);
+  padding: var(--nav-h) var(--gutter) var(--s-7);
+}
+.list {
+  grid-column: 1 / 8;
+  grid-row: 1 / -1;
+  align-self: center;
+  min-width: 0;
+}
+.items,
+.minor,
+.socials {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.item {
+  display: inline-block;
+  padding: 0.08em 0;
+  color: var(--ink-2);
+  font: var(--t-menu) var(--f-display);
+  font-variation-settings: var(--fvs-display);
+  text-transform: var(--tt-display);
+  letter-spacing: var(--ls-menu);
+  text-decoration: none;
+  border-radius: var(--radius);
+  transition: color 150ms ease;
+}
+.item:hover,
+.item:focus-visible {
+  color: var(--ink);
+}
+.minor {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-5);
+  margin-top: var(--s-6);
+}
+.minorItem {
+  color: var(--ink-2);
+  font: var(--t-ui) var(--f-display);
+  font-variation-settings: var(--fvs-h3);
+  letter-spacing: var(--ls-ui);
+  text-transform: var(--tt-ui);
+  text-decoration: none;
+  border-radius: var(--radius);
+  transition: color 150ms ease;
+}
+.minorItem:hover,
+.minorItem:focus-visible {
+  color: var(--ink);
+}
+.item.current,
+.minorItem.current {
+  color: var(--teal);
+}
+
+/* the hologram's place: chrome/mark.jsx poses the live mark over this box */
+.well {
+  grid-column: 9 / -1;
+  grid-row: 2;
+  height: min(52vh, 480px);
+  min-height: 200px;
+}
+.contact {
+  grid-column: 9 / -1;
+  grid-row: 3;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s-3) var(--s-5);
+  margin-top: var(--s-5);
+  font: var(--t-small) var(--f-sans);
+}
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3) var(--s-5);
+}
+.contactLink {
+  color: var(--ink-3);
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+.contactLink:hover,
+.contactLink:focus-visible {
+  color: var(--teal);
+}
+
+@media (max-width: 1099px) {
+  .well,
+  .contact {
+    grid-column: 8 / -1;
+  }
+}
+
+/* ---- phones: the well is a band at the top, contact at the bottom */
+@media (max-width: 759px) {
+  .body {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr auto;
+    row-gap: var(--s-5);
+  }
+  .well {
+    grid-column: 1;
+    grid-row: 1;
+    height: 26vh;
+    min-height: 150px;
+  }
+  .list {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: start;
+  }
+  .contact {
+    grid-column: 1;
+    grid-row: 4;
+    justify-content: flex-start;
+    margin-top: var(--s-6);
+  }
+}

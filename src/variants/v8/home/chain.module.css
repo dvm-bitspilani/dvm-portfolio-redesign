@@ -1,0 +1,41 @@
+/* ===================== Legacy → Year by year: one swarm behind both ===================== */
+.chain {
+  position: relative; /* Story's offsetTop is measured against this box */
+  isolation: isolate;
+}
+/* both sections paint over the swarm */
+.chain > :not(.layer) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Spans the whole passage; the sticky box inside rides in with Legacy (its top is Legacy's top),
+   holds the viewport through Legacy's exit and the year-by-year stage, and leaves with the end
+   of the passage. */
+.layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  /* the canvas's top edge while the passage rides in: the dust fades in over --edge (LegacyStory),
+     which is 0 once the box holds the viewport */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 var(--edge, 0px));
+  mask-image: linear-gradient(to bottom, transparent 0, #000 var(--edge, 0px));
+}
+/* Story's fade as the paper takes over, with a short follow so the cross-dissolve with the paper
+   stays soft even when the paper's first frame lands mid-scroll (Story.jsx) */
+.fade {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.3s linear;
+}
+@media (prefers-reduced-motion: reduce) {
+  .fade {
+    transition: none;
+  }
+}

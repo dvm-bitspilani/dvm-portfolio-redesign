@@ -1,0 +1,444 @@
+/* ===================== /team · C · The Lineage board */
+
+/* (the drawer is rendered after <main>: ui.page's z-index makes <main> a stacking context that
+   would keep it under the navbar) */
+.body {
+  --read-h: 52px;
+  position: relative;
+  padding: var(--s-5) var(--gutter) var(--section);
+}
+
+/* ---------- the readout over the board: who is under the pointer; the chain legend */
+.readout {
+  position: sticky;
+  top: var(--stick-top);
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3) var(--s-5);
+  box-sizing: border-box;
+  min-height: var(--read-h);
+  padding: var(--s-2) 0;
+  background: rgba(5, 5, 6, 0.97);
+}
+.readLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-1) var(--s-4);
+  min-width: 0;
+  margin: 0;
+}
+.readName {
+  font: var(--t-h3) var(--f-display);
+  font-variation-settings: var(--fvs-h3);
+  color: var(--ink);
+}
+.readRole {
+  font: var(--t-ui) var(--f-display);
+  font-variation-settings: var(--fvs-h3);
+  letter-spacing: var(--ls-ui);
+  text-transform: var(--tt-ui);
+  color: var(--teal);
+}
+.readRole i {
+  font: var(--t-mono) var(--f-mono);
+  font-style: normal;
+  color: var(--ink-2);
+}
+.readMeta,
+.readIdle {
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: var(--ls-meta);
+  text-transform: var(--tt-meta);
+  color: var(--ink-3);
+}
+.legend {
+  display: flex;
+  flex: none;
+  gap: var(--s-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.legendBtn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin: 0;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: none;
+  color: var(--ink-2);
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: var(--ls-meta);
+  text-transform: var(--tt-meta);
+  cursor: pointer;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+.legendBtn svg line {
+  stroke: currentColor;
+  stroke-width: 1;
+}
+.legendBtn svg circle {
+  fill: var(--bg);
+  stroke: currentColor;
+  stroke-width: 1;
+}
+.legendBtn:hover,
+.legendBtn:focus-visible,
+.legendBtn[aria-pressed="true"] {
+  color: var(--teal);
+  border-color: rgba(69, 230, 255, 0.45);
+}
+
+/* ---------- the board: lanes (teams) × columns (batches), hairline cells like a schedule */
+.board {
+  position: relative;
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 0.72fr) repeat(7, minmax(0, 1fr));
+  margin-top: var(--s-2);
+  border-bottom: 1px solid var(--line);
+}
+.corner {
+  grid-row: 1;
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2px;
+  padding: var(--s-4) var(--s-3) var(--s-3) 0;
+  border-top: 1px solid var(--line-2);
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: var(--ls-meta);
+  text-transform: var(--tt-meta);
+  color: var(--ink-3);
+}
+/* the head row stays under the readout while the lanes scroll (sticky inside the board) */
+.corner,
+.yearHead {
+  position: sticky;
+  top: calc(var(--stick-top) + var(--read-h));
+  z-index: 3;
+  background: rgba(5, 5, 6, 0.94);
+}
+.yearHead {
+  grid-row: 1;
+  grid-column: calc(var(--y) + 2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  padding: var(--s-4) var(--s-3) var(--s-3);
+  border-top: 1px solid var(--line-2);
+  border-left: 1px solid var(--line);
+}
+.yearNum {
+  font: var(--t-sub) var(--f-display);
+  font-size: clamp(1.25rem, 0.55rem + 1.25vw, 1.875rem);
+  font-variation-settings: var(--fvs-display);
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--ink);
+}
+.yearCount {
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: var(--ls-meta);
+  text-transform: var(--tt-meta);
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--ink-3);
+}
+.laneHead {
+  grid-row: calc(var(--t) + 2);
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  padding: var(--s-4) var(--s-3) var(--s-4) 0;
+  border-top: 1px solid var(--line-2);
+  transition: opacity 300ms ease;
+}
+.laneName {
+  margin: 0;
+  font: var(--t-h3) var(--f-display);
+  font-variation-settings: var(--fvs-h3);
+  letter-spacing: var(--ls-ui);
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.laneCount {
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: var(--ls-meta);
+  text-transform: var(--tt-meta);
+  color: var(--ink-3);
+}
+.cell {
+  position: relative;
+  grid-row: calc(var(--t) + 2);
+  grid-column: calc(var(--y) + 2);
+  min-width: 0;
+  padding: var(--s-6) var(--s-3) var(--s-4);
+  border-top: 1px solid var(--line-2);
+  border-left: 1px solid var(--line);
+  transition: opacity 300ms ease, background-color 200ms ease;
+}
+.cell:hover {
+  background: rgba(255, 255, 255, 0.015);
+}
+.laneHead[data-dim],
+.cell[data-dim] {
+  opacity: 0.22;
+}
+.cellYear {
+  display: none;
+}
+.cellCount {
+  position: absolute;
+  top: var(--s-2);
+  right: var(--s-3);
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: var(--ls-meta);
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--ink-3);
+}
+.cell[data-empty] .cellCount {
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+}
+.thumbs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(34px, 1fr));
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.thumb {
+  appearance: none;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: none;
+  cursor: pointer;
+  transition: opacity 200ms ease;
+  scroll-margin-top: calc(var(--stick-top) + 64px);
+}
+.thumb[data-off] {
+  opacity: 0.2;
+}
+/* who held a post: a teal edge on the frame */
+.thumb[data-role] > span {
+  border-color: rgba(69, 230, 255, 0.55);
+}
+.thumb:hover > span,
+.thumb:focus-visible > span,
+.thumb[data-lit] > span {
+  border-color: var(--teal);
+}
+.thumb[aria-pressed="true"] > span {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 1px var(--teal);
+}
+/* a chain lit from the legend: its faces come up, everyone else steps back */
+.chainOn .thumb {
+  opacity: 0.35;
+}
+.board[data-chain="creative"] .thumb[data-chain="creative"],
+.board[data-chain="projects"] .thumb[data-chain="projects"] {
+  opacity: 1;
+}
+.board[data-chain="creative"] .thumb[data-chain="creative"] img,
+.board[data-chain="projects"] .thumb[data-chain="projects"] img {
+  filter: none;
+}
+
+/* ---------- the chains (heads, year to year) */
+.chains {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 2;
+}
+.chain polyline {
+  fill: none;
+  stroke: rgba(69, 230, 255, 0.3);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+  transition: stroke 200ms ease;
+}
+.chain .ring {
+  fill: none;
+  stroke: rgba(69, 230, 255, 0.55);
+  stroke-width: 1.25;
+}
+.chain .node {
+  fill: rgba(69, 230, 255, 0.55);
+}
+.chainOn .chain:not([data-lit]) {
+  opacity: 0.25;
+}
+.chain[data-lit] polyline {
+  stroke: var(--teal);
+  stroke-dasharray: none;
+}
+.chain[data-lit] .ring {
+  stroke: var(--teal);
+}
+.chain[data-lit] .node {
+  fill: var(--teal);
+}
+
+.empty {
+  margin: var(--s-3) 0;
+  padding: var(--s-4) var(--s-5);
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius);
+  background: rgba(10, 12, 14, 0.8);
+  font: var(--t-body) var(--f-sans);
+  color: var(--ink-2);
+}
+.closing {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-4) var(--s-6);
+  margin-top: var(--s-7);
+}
+
+.down {
+  display: none;
+}
+
+/* ---------- 760–1099: on its side (batches down, teams across), no panning */
+@media (max-width: 1099px) {
+  .board {
+    grid-template-columns: 5.5rem repeat(5, minmax(0, 1fr));
+  }
+  .yearHead {
+    position: static;
+    grid-row: calc(var(--y) + 2);
+    grid-column: 1;
+    padding: var(--s-4) var(--s-3) var(--s-4) 0;
+    border-left: 0;
+    background: none;
+  }
+  .yearNum {
+    font-size: 1.375rem;
+  }
+  .across {
+    display: none;
+  }
+  .down {
+    display: inline;
+  }
+  .laneHead {
+    position: sticky;
+    top: calc(var(--stick-top) + var(--read-h));
+    z-index: 3;
+    grid-row: 1;
+    grid-column: calc(var(--t) + 2);
+    padding: var(--s-4) var(--s-3) var(--s-3);
+    border-left: 1px solid var(--line);
+    background: rgba(5, 5, 6, 0.94);
+  }
+  .laneName {
+    font-size: 0.9375rem;
+  }
+  .cell {
+    grid-row: calc(var(--y) + 2);
+    grid-column: calc(var(--t) + 2);
+  }
+  .readout {
+    flex-wrap: wrap;
+  }
+}
+
+/* ---------- phones: one lane after another, a row per batch */
+@media (max-width: 759px) {
+  .board {
+    grid-template-columns: minmax(0, 1fr);
+    border-bottom: 0;
+  }
+  .corner,
+  .yearHead {
+    display: none;
+  }
+  .laneHead {
+    position: static;
+    background: none;
+    grid-row: calc(var(--t) * 9 + 1);
+    grid-column: 1;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: var(--s-6) 0 var(--s-3);
+    border-left: 0;
+    border-top: 0;
+    border-bottom: 1px solid var(--line-2);
+  }
+  .laneName {
+    font-size: 1.125rem;
+  }
+  .cell {
+    grid-row: calc(var(--t) * 9 + var(--y) + 2);
+    grid-column: 1;
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    align-items: start;
+    padding: var(--s-3) 0;
+    border-left: 0;
+    border-top: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .cell[data-empty] {
+    display: none;
+  }
+  .cellYear {
+    display: flex;
+    flex-direction: column;
+    padding-top: 2px;
+    font: var(--t-mono) var(--f-mono);
+    letter-spacing: var(--ls-mono);
+    font-variant-numeric: lining-nums tabular-nums;
+    color: var(--ink-2);
+  }
+  .cellCount {
+    position: static;
+    grid-row: 2;
+    grid-column: 1;
+    font-size: 0.625rem;
+  }
+  .thumbs {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+  }
+  .readout {
+    position: relative;
+    top: auto;
+    min-height: 0;
+  }
+  .readLine {
+    display: none;
+  }
+  .legend {
+    flex-wrap: wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cell,
+  .laneHead,
+  .thumb,
+  .chain polyline {
+    transition: none;
+  }
+}

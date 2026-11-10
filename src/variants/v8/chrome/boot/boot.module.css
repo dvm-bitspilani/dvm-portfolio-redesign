@@ -1,0 +1,211 @@
+/* V8 preloader (chrome/Boot.jsx): the mark strikes in where the hologram will hang while the
+   department's name resolves where the hero copy will stand, one timeline (ms from 0):
+     mark       stroke 0–620, fill bloom 620–760
+     name       lines from 100 / 220 / 340, each sharp 420 later (the last at 760, with the bloom,
+                which also glows through the type for a beat)
+     lines      the table line (from the centre) and the rule (toward the beam) 700–900
+   Everything is CSS animation from 0 ms (no JS timers before the first frame), and the exit is
+   scoped to `.out:not(.reduced)`, so reduced motion shows the final frame and only the overlay
+   fades. */
+.boot {
+  --mx: 50vw;
+  --my: 40vh;
+  --mh: 300px;
+  --ty: 80vh;
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: var(--bg);
+  opacity: 1;
+  overflow: hidden;
+  transition: opacity 280ms var(--ease-in);
+}
+.out {
+  opacity: 0;
+  pointer-events: none;
+}
+.reduced {
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+}
+.reduced *,
+.reduced *::before,
+.reduced *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* ---- the mark: one teal line where the hologram will hang (drawn at 1.15 × its size) */
+.strike {
+  position: absolute;
+  left: var(--mx);
+  top: var(--my);
+  height: var(--mh);
+  width: calc(var(--mh) * 0.76666);
+  overflow: visible;
+  transform: translate(-50%, -50%) scale(1.15);
+  transform-origin: 50% 50%;
+  transition: transform 280ms var(--ease-in), opacity 280ms var(--ease-in);
+}
+.strikeGhost {
+  fill: none;
+  stroke: rgba(69, 230, 255, 0.14);
+  stroke-linejoin: round;
+}
+.strikePath {
+  fill: rgba(69, 230, 255, 0);
+  stroke: var(--teal);
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation:
+    strike-draw 620ms cubic-bezier(0.2, 0, 0, 1) forwards,
+    strike-fill 140ms linear 620ms forwards;
+}
+/* on exit it settles to the hologram's size and fades while the particles scatter from it */
+.out:not(.reduced) .strike {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 0;
+}
+.reduced .strikePath {
+  stroke-dashoffset: 0;
+  fill: rgba(69, 230, 255, 0.14);
+}
+
+/* ---- the 1 px line on the table, where the lens will glow */
+.tableLine {
+  position: absolute;
+  top: var(--ty);
+  left: calc(var(--mx) - 60px);
+  width: 120px;
+  height: 1px;
+  background: rgba(69, 230, 255, 0.9);
+  transform: scaleX(0);
+  transform-origin: 50% 50%;
+  animation: grow-x 200ms var(--ease-out) 700ms forwards;
+  transition: opacity 280ms var(--ease-in);
+}
+.out:not(.reduced) .tableLine {
+  opacity: 0;
+}
+.reduced .tableLine {
+  transform: scaleX(1);
+}
+
+/* ---- the name, where the hero copy stands (home/hero.module.css .copy) */
+.readout {
+  position: absolute;
+  left: var(--gutter);
+  bottom: 16vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.readLine {
+  --i: 0;
+  display: block;
+  font: var(--t-boot) var(--f-display);
+  font-variation-settings: var(--fvs-display);
+  text-transform: var(--tt-display);
+  letter-spacing: var(--ls-boot);
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(0.25em);
+  filter: blur(10px);
+  will-change: filter, transform;
+  animation:
+    read-in 420ms cubic-bezier(0.2, 0, 0, 1) calc(100ms + var(--i) * 120ms) forwards,
+    read-glow 300ms ease-out 620ms;
+}
+/* desktop: the name stands beside the struck mark, so its longest line ("Department", ~7em)
+   always ends left of the mark (drawn 0.882 × its height wide, centred on --mx) with a gap;
+   narrow desktops shrink it below the token (phones: the name is under the projector) */
+@media (min-width: 760px) {
+  .readLine {
+    font-size: min(clamp(2rem, 1.25rem + 3.8vw, 5.25rem), calc((var(--mx) - var(--mh) * 0.441 - 12px - var(--gutter)) / 7));
+  }
+}
+.readLine:nth-child(2) {
+  --i: 1;
+}
+.readLine:nth-child(3) {
+  --i: 2;
+}
+.readRule {
+  display: block;
+  align-self: stretch;
+  height: 1px;
+  margin-top: var(--s-4);
+  background: rgba(242, 245, 247, 0.25);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: opacity 280ms var(--ease-in);
+  animation: grow-x 160ms var(--ease-out) 700ms forwards;
+}
+/* on exit the lines slide up and fade as "We are DVM" rises into their place */
+.out:not(.reduced) .readLine {
+  animation: read-out 200ms var(--ease-in) calc(var(--i) * 40ms) forwards;
+}
+.out:not(.reduced) .readRule {
+  opacity: 0;
+}
+.reduced .readLine {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+.reduced .readRule {
+  transform: scaleX(1);
+}
+
+@keyframes strike-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes strike-fill {
+  0% {
+    fill: rgba(69, 230, 255, 0.14);
+  }
+  50% {
+    fill: rgba(69, 230, 255, 0.42);
+  }
+  100% {
+    fill: rgba(69, 230, 255, 0.1);
+  }
+}
+@keyframes read-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+/* the mark's fill bloom catching the type */
+@keyframes read-glow {
+  0%,
+  100% {
+    text-shadow: 0 0 0 rgba(69, 230, 255, 0);
+  }
+  45% {
+    text-shadow: 0 0 22px rgba(69, 230, 255, 0.45);
+  }
+}
+@keyframes read-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-40px);
+    filter: blur(0);
+  }
+}
+@keyframes grow-x {
+  to {
+    transform: scaleX(1);
+  }
+}

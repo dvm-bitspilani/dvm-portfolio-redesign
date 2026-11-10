@@ -14,7 +14,7 @@ import {
   type ShapeMaker,
   type Target,
 } from './targets'
-import type { SwarmPalette, SwarmPlacement, SwarmRegion, SwarmShowOptions, SwarmStats, SwarmTarget } from '../types'
+import type { SwarmPalette, SwarmPlacement, SwarmRegion, SwarmShowOptions, SwarmStats, SwarmTarget, SwarmView } from '../types'
 
 export const CAMERA = { fov: 35, dist: 6 }
 const HALF_H = CAMERA.dist * Math.tan(THREE.MathUtils.degToRad(CAMERA.fov / 2))
@@ -41,6 +41,8 @@ export interface EngineSettings {
   bloom: boolean
   interactive: boolean
   holdToAttract: boolean
+  /** Opt-in: suspend the cursor field (repel, vortex, wake, black hole); it eases back when cleared. */
+  ignoreCursor?: boolean
   parallax: number
   brightness: number
   paused: boolean
@@ -133,7 +135,13 @@ class AlphaFromLight extends Effect {
     super(
       'SwarmAlphaFromLight',
       /* glsl */ `
+      bool badf(float x){ return (floatBitsToUint(x) & 0x7f800000u) == 0x7f800000u; }
       void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor) {
+        // a NaN / Inf pixel (spread by the bloom) is clear, never an opaque black patch
+        if (badf(inputColor.r) || badf(inputColor.g) || badf(inputColor.b) || badf(inputColor.a)) {
+          outputColor = vec4(0.0);
+          return;
+        }
         float m = max(max(inputColor.r, inputColor.g), inputColor.b);
         outputColor = vec4(inputColor.rgb, clamp(max(inputColor.a, pow(clamp(m, 0.0, 1.0), 0.4545)), 0.0, 1.0));
       }`,
@@ -193,6 +201,10 @@ export class SwarmEngine {
   private disposed = false
   private rect = { left: 0, top: 0, width: 1, height: 1 }
   private rectDirty = true
+  /** Opt-in view of the formation plane (setView); null = the plain camera. */
+  private view: SwarmView | null = null
+  /** Smoothed cursor parallax of the camera, world units. */
+  private par = { x: 0, y: 0 }
 
   // pointer
   private pointer = { x: 0, y: 0, cx: -100, cy: -100, inside: false, down: false }
@@ -556,6 +568,17 @@ export class SwarmEngine {
     this.wake()
   }
 
+  /**
+   * Draw the formation plane as if the canvas were translated by (x, y) px and scaled by `scale`
+   * about its top-left corner, by moving the camera rather than the canvas: the canvas keeps
+   * filling its box, so the ambient dust always reaches its edges. null restores the plain camera.
+   */
+  setView(view: SwarmView | null) {
+    const v = view && Number.isFinite(view.x) && Number.isFinite(view.y) && Number.isFinite(view.scale) && view.scale > 0.05 ? view : null
+    this.view = v ? { x: v.x, y: v.y, scale: v.scale } : null
+    this.settle()
+  }
+
   stats(): SwarmStats {
     return { particles: this.lib.count, fps: Math.round(this.fps), dpr: this.dpr, running: this.raf !== 0, gl: this.glOk }
   }
@@ -769,9 +792,11 @@ export class SwarmEngine {
       if (k.vel.length() > 8) k.vel.setLength(8)
     }
     const live = s.interactive && !reduced
-    const wantOn = p.inside && live ? 1 : 0
-    k.on += (wantOn - k.on) * (1 - Math.exp(-dt * 5))
-    const held = p.down && live && s.holdToAttract
+    const quiet = !!s.ignoreCursor
+    const wantOn = p.inside && live && !quiet ? 1 : 0
+    // quieting is quick (a formation that has to read cleanly); the field's return stays gentle
+    k.on += (wantOn - k.on) * (1 - Math.exp(-dt * (quiet ? 9 : 5)))
+    const held = p.down && live && s.holdToAttract && !quiet
     k.hold += ((held ? 1 : 0) - k.hold) * (1 - Math.exp(-dt * (held ? 3 : 6)))
     vu.uCursor.value.copy(k.cursor)
     vu.uCursorVel.value.copy(k.vel)
@@ -789,10 +814,22 @@ export class SwarmEngine {
     const px = p.inside ? p.x : 0, py = p.inside ? p.y : 0
     const tx = px * 0.38 * k.parallax
     const ty = py * 0.2 * k.parallax
-    cam.position.x += (tx - cam.position.x) * (1 - Math.exp(-dt * 2.5))
-    cam.position.y += (ty - cam.position.y) * (1 - Math.exp(-dt * 2.5))
-    cam.position.z = CAMERA.dist
-    cam.lookAt(0, 0, 0)
+    this.par.x += (tx - this.par.x) * (1 - Math.exp(-dt * 2.5))
+    this.par.y += (ty - this.par.y) * (1 - Math.exp(-dt * 2.5))
+    // the view (setView) is applied as is, never smoothed: it follows the page's scroll
+    let vx = 0, vy = 0, vz = CAMERA.dist
+    const v = this.view
+    if (v) {
+      const W = this.width, H = this.height, sc = v.scale
+      // px per world unit on the z = 0 plane with the plain camera
+      const unit = H / 2 / HALF_H
+      vx = (W / 2 - v.x - (sc * W) / 2) / (sc * unit)
+      vy = (v.y + (sc * H) / 2 - H / 2) / (sc * unit)
+      vz = CAMERA.dist / sc
+    }
+    cam.position.set(vx + this.par.x, vy + this.par.y, vz)
+    cam.lookAt(vx, vy, 0)
+    ru.uFocus.value = vz
 
     const density = Math.sqrt(200704 / this.lib.count)
     k.alpha += (s.brightness - k.alpha) * (1 - Math.exp(-dt * 3))

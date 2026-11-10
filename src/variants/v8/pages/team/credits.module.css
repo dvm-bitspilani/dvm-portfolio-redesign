@@ -1,0 +1,283 @@
+/* ===================== /team · B · The Credits */
+
+/* (the drawer is rendered after <main>: ui.page's z-index makes <main> a stacking context that
+   would keep it under the navbar) */
+.body {
+  position: relative;
+  padding: 0 var(--gutter) var(--section);
+}
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(17.5rem, 22vw, 21rem);
+  column-gap: var(--s-8);
+  align-items: start;
+}
+.credits {
+  position: relative;
+  min-width: 0;
+}
+
+/* ---------- a reel: one batch */
+.reel {
+  scroll-margin-top: var(--stick-top);
+  padding: var(--s-8) 0 var(--s-7);
+}
+.reel + .reel {
+  border-top: 1px solid var(--line);
+}
+.reelHead {
+  margin-bottom: var(--s-6);
+  text-align: center;
+}
+.reelKicker,
+.reelMeta {
+  margin: 0;
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: 0.24em;
+  text-transform: var(--tt-meta);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.reelKicker {
+  margin-bottom: var(--s-3);
+  color: var(--ink-3);
+}
+.reelMeta {
+  margin-top: var(--s-4);
+  color: var(--ink-2);
+}
+/* the year as a ghost: an outlined display numeral (the Figma's outline title) */
+.reelYear {
+  margin: 0;
+  font: var(--t-h1) var(--f-display);
+  font-size: clamp(4.5rem, 1.75rem + 8vw, 10rem);
+  line-height: 0.8;
+  font-variation-settings: var(--fvs-display);
+  font-variant-numeric: lining-nums tabular-nums;
+  letter-spacing: -0.01em;
+  /* the glyphs' overlapping contours (the 4's crossbar, the 0's bar) would each draw their own
+     outline: stroke first at twice the width, then fill with the room's black over the inner half */
+  color: var(--bg);
+  -webkit-text-stroke: 2px rgba(242, 245, 247, 0.42);
+  paint-order: stroke fill;
+}
+
+/* ---------- a team's section of the credits */
+.group {
+  margin-top: var(--s-6);
+  transition: opacity 300ms ease;
+}
+.group[data-dim] {
+  opacity: 0.16;
+}
+.groupHead {
+  margin: 0 0 var(--s-3);
+  text-align: center;
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: 0.28em;
+  text-transform: var(--tt-meta);
+  color: var(--teal);
+}
+.groupHead span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+.groupHead span::before,
+.groupHead span::after {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: rgba(69, 230, 255, 0.4);
+}
+.names {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* a credit: the post (if any) left of the axis, the name right of it */
+.credit {
+  appearance: none;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: var(--s-5);
+  align-items: baseline;
+  width: 100%;
+  margin: 0;
+  padding: 3px 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  scroll-margin-top: calc(var(--stick-top) + var(--s-6));
+  scroll-margin-bottom: var(--s-6);
+}
+.role {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  text-align: right;
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: var(--ls-meta);
+  text-transform: var(--tt-meta);
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--ink-2);
+}
+.roleLine i {
+  font-style: normal;
+  color: var(--teal);
+}
+.name {
+  position: relative;
+  font: var(--t-sub) var(--f-display);
+  font-size: clamp(1.25rem, 0.8rem + 1.05vw, 1.875rem);
+  line-height: 1.22;
+  font-variation-settings: var(--fvs-display);
+  color: var(--ink);
+  text-wrap: balance;
+  transition: color 160ms ease, opacity 160ms ease;
+}
+/* hover dims the rest (the Figma's "play with opacities") */
+@media (hover: hover) {
+  .credits:has(.credit:hover) .credit:not(:hover) .name {
+    opacity: 0.36;
+  }
+  .credit:hover .name {
+    color: var(--ink);
+  }
+}
+.credit:focus-visible .name {
+  color: var(--ink);
+}
+.credit[aria-pressed="true"] .name {
+  color: var(--teal);
+  opacity: 1;
+}
+/* pinned: the leader line's ring after the name */
+.credit[aria-pressed="true"] .name::after {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left: 0.4em;
+  vertical-align: 0.3em;
+  border: 1px solid var(--teal);
+  border-radius: 50%;
+}
+
+.empty {
+  margin: var(--s-6) 0;
+  padding: var(--s-4) var(--s-5);
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius);
+  background: rgba(10, 12, 14, 0.8);
+  font: var(--t-body) var(--f-sans);
+  color: var(--ink-2);
+}
+.none .reel {
+  opacity: 0.5;
+}
+
+/* ---------- the end card */
+.end {
+  padding: var(--s-9) 0 var(--s-5);
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+.endMark {
+  margin: 0;
+  font: var(--t-end) var(--f-mark);
+  color: var(--ink);
+}
+.endLine {
+  margin: var(--s-4) 0 0;
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: 0.24em;
+  text-transform: var(--tt-meta);
+  color: var(--ink-3);
+}
+.endLinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s-4) var(--s-6);
+  margin-top: var(--s-7);
+}
+
+/* ---------- the dossier column */
+.aside {
+  position: sticky;
+  top: calc(var(--stick-top) + var(--s-5));
+  min-width: 0;
+  padding-top: var(--s-6);
+}
+
+/* ---------- the portrait that follows the cursor */
+.follow {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 30;
+  width: 176px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 160ms ease;
+  will-change: transform;
+}
+.follow[data-on] {
+  opacity: 1;
+}
+.followFrame.followFrame {
+  width: 100%;
+  border-color: rgba(69, 230, 255, 0.5);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+}
+.followCap {
+  display: inline-block;
+  margin-top: var(--s-2);
+  padding: 4px 8px 3px;
+  border-radius: var(--radius);
+  background: rgba(5, 5, 6, 0.88);
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: var(--ls-meta);
+  text-transform: var(--tt-meta);
+  color: var(--teal);
+}
+
+/* ---------- widths */
+@media (max-width: 1099px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+/* phones: one centred column; the post sits over the name */
+@media (max-width: 759px) {
+  .reel {
+    padding: var(--s-7) 0 var(--s-6);
+  }
+  .credit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 5px 0;
+    text-align: center;
+  }
+  .role {
+    align-items: center;
+    text-align: center;
+  }
+  .name {
+    font-size: 1.3125rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .group,
+  .name,
+  .follow {
+    transition: none;
+  }
+}

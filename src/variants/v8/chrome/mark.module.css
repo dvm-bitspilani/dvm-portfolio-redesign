@@ -1,0 +1,50 @@
+/* The one live hologram mark: a fixed square posed by chrome/mark.jsx. The canvas inside is
+   opaque black and screen-blended, so only its light reaches the page. Hidden (and not
+   rendering) whenever nobody owns it. */
+.box {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 92px;
+  height: 92px;
+  z-index: 1001;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transform: translate3d(-200px, -200px, 0);
+  visibility: hidden;
+  mix-blend-mode: screen;
+  overflow: visible;
+}
+/* The canvas keeps a quantised resolution and is CSS-scaled to the box (no per-frame GL resizes). */
+.wrap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 92px;
+  height: 92px;
+  transform-origin: 0 0;
+  overflow: visible;
+  /* No box, anywhere: a radial fade that reaches zero inside the canvas edge, so no edge can
+     show. Percentages are of the farthest-corner radius (0.707 × the side). The mark is
+     1/MARK_K = 45 % of the side high; its geometric corners sit at ~40.5 % of that radius, so
+     the fade starts just outside them (42 %) and is gone at 56 % (= 0.40 × the side, inside the
+     inscribed circle). The canvas itself is never masked: R3F sizes it inline and Safari drops
+     masks on elements that resize. */
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 42%, rgba(0, 0, 0, 0.6) 50%, transparent 56%);
+  mask-image: radial-gradient(circle at 50% 50%, #000 42%, rgba(0, 0, 0, 0.6) 50%, transparent 56%);
+}
+.wrap canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+/* No WebGL: a static print in the box, at the hologram's size and place (the mark is
+   1 / MARK_K = 45 % of the box high, centred). Screen-blended like the canvas. */
+.fallback {
+  position: absolute;
+  left: 27.5%;
+  top: 27.5%;
+  width: 45%;
+  height: 45%;
+  overflow: visible;
+}

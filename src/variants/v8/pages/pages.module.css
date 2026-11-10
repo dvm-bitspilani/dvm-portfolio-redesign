@@ -1,0 +1,297 @@
+/* ===================== Inner pages (layout only; components in ui.module.css) */
+
+/* the body under a page head: same gutter, the section's bottom padding */
+.pageBody {
+  position: relative;
+  padding: 0 var(--gutter) var(--section);
+}
+.headTabs {
+  margin-top: var(--s-6);
+}
+.closingRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-4) var(--s-5);
+  margin-top: var(--s-7);
+}
+
+/* ---------- archive: the kit's wall fills the screen under the bar (it paints its own floor) */
+.archive {
+  position: fixed;
+  inset: 0;
+  background: transparent;
+}
+/* the active filter and its reset (the kit's tabs are hidden), under the bar */
+.archiveFilter {
+  position: absolute;
+  z-index: 6;
+  top: calc(var(--nav-h) + var(--s-4));
+  left: var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  margin: 0;
+  padding: 8px 16px;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  background: rgba(10, 12, 14, 0.82);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: var(--ls-meta);
+  text-transform: var(--tt-meta);
+  color: var(--ink-2);
+}
+/* V8's faces in the kit's chip, tabs, HUD and dossier, through the custom properties the kit
+   declares on its root and reads via var() (src/immersive/kit/archive/archive.css) */
+.archive :global(.imm-archive-root) {
+  --a-display: var(--f-display);
+  --a-label: var(--f-display);
+  --a-body: var(--f-sans);
+  --a-mono: var(--f-mono);
+}
+/* V8's weights, widths and registers over the kit's own (it sets 400, no stretch, fixed px).
+   Longhands only, so `font-stretch` takes a percentage. The kit's HUD / dossier mono sizes stay
+   its own; its narrow-wall tab sizes (higher specificity) still win under 760 px. */
+/* the chip is the wordmark */
+.archive :global(.imm-archive-title) {
+  font: var(--t-mark) var(--f-mark);
+  letter-spacing: 0;
+}
+.archive :global(.imm-archive-title small) {
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: var(--ls-meta);
+  text-transform: var(--tt-meta);
+}
+/* tabs and the kit's other buttons: the Label register */
+.archive :global(.imm-archive-tab),
+.archive :global(.imm-archive-listbtn),
+.archive :global(.imm-archive-panel__foot button),
+.archive :global(.imm-archive-index__close) {
+  font-family: var(--f-display) !important; /* the kit's own rule is !important */
+  font-size: 0.8125rem !important;
+  font-weight: 600;
+  font-stretch: 112.5%;
+  letter-spacing: var(--ls-ui);
+  text-transform: var(--tt-ui);
+}
+.archive :global(.imm-archive-panel h2),
+.archive :global(.imm-archive-index__head h2) {
+  font-weight: 600;
+  font-stretch: 125%;
+  letter-spacing: var(--ls-h3);
+}
+.archive :global(.imm-archive-index__group h3) {
+  font-weight: 600;
+  font-stretch: 112.5%;
+  letter-spacing: var(--ls-h3);
+}
+.archive :global(.imm-archive-stats dd) {
+  font-weight: 600;
+  font-stretch: 125%;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* ---------- card grids: 3 per row, 2 under 1100px, 1 on phones */
+.cardGrid {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--s-7) var(--col-gap);
+}
+.cardItem {
+  grid-column: span 4;
+}
+
+/* ---------- team: the roster lives in team.module.css */
+
+/* ---------- about: the copy and its numbers in columns 1–7, the contact sheet in 8–12 */
+.heroGrid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--col-gap);
+  align-items: start;
+}
+.heroCopy {
+  grid-column: 1 / span 7;
+  min-width: 0;
+}
+.headProse {
+  margin-top: var(--s-6);
+}
+.headStats {
+  max-width: 44rem;
+  margin-top: var(--s-7);
+}
+/* the contact sheet: the latest batch, one still each, in the pool of light. At rest the stills
+   are grey prints; the one under the pointer (or focused) develops into colour and names itself
+   in the caption, one at a time, like the companies in Legacy. */
+.sheet {
+  grid-column: 8 / -1;
+  align-self: center;
+  justify-self: end;
+  /* the whole of columns 8–12 (532 px at 1440: 7 cells of ≈ 69 × 92) */
+  width: min(100%, 560px);
+}
+.sheetGrid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: var(--s-2);
+}
+.sheetCell.sheetCell {
+  display: block;
+}
+.sheetFrame.sheetFrame {
+  aspect-ratio: 3 / 4;
+}
+.sheetFrame.sheetFrame img {
+  object-position: top;
+  filter: grayscale(1) opacity(0.72);
+  transition: filter 240ms ease, transform 500ms var(--ease-out);
+}
+.sheetCell:hover .sheetFrame img,
+.sheetCell:focus-visible .sheetFrame img {
+  filter: none;
+}
+.sheetInitial.sheetInitial {
+  font: var(--t-strong) var(--f-display);
+}
+.sheetCap {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--s-4);
+  margin-top: var(--s-4);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--line);
+}
+/* one line whatever the name, so the caption never changes height under the pointer */
+.sheetNow {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.sheetCap > a {
+  flex: none;
+}
+
+/* the year-by-year strip's per-year note in the page's mono (the kit falls back to a serif; the
+   home's flow strip has the same override, story.module.css) */
+.years :global([class*="capNote"]) {
+  font: 400 12px/1.4 var(--f-mono);
+  font-style: normal;
+  letter-spacing: 0.04em;
+  color: var(--ink-3, rgba(242, 245, 247, 0.55));
+}
+
+/* ---------- blog: rows, frame left (1–4), text right (5–12) */
+.rows {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+}
+.row.row {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--s-4) var(--col-gap);
+  align-items: start;
+  padding: var(--s-6) 0;
+  border-top: 1px solid var(--line);
+}
+.rows > li:first-child .row {
+  padding-top: 0;
+  border-top: 0;
+}
+.rowFrame {
+  grid-column: 1 / span 4;
+}
+.rowText {
+  grid-column: 5 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  min-width: 0;
+}
+.rowLine {
+  max-width: 44rem;
+  font: var(--t-small) var(--f-sans);
+  color: var(--ink-2);
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---------- artwork: three columns at natural aspect */
+.artGrid {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  columns: 3;
+  column-gap: var(--col-gap);
+}
+.artItem {
+  break-inside: avoid;
+  margin-bottom: var(--s-7);
+}
+.artFrame.artFrame {
+  aspect-ratio: auto;
+  min-height: 120px;
+}
+.artFrame.artFrame img {
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 1100px) {
+  .cardItem {
+    grid-column: span 6;
+  }
+}
+@media (max-width: 759px) {
+  .cardItem {
+    grid-column: 1 / -1;
+  }
+  .heroCopy,
+  .sheet {
+    grid-column: 1 / -1;
+  }
+  .sheet {
+    width: 100%;
+    margin-top: var(--s-8);
+  }
+  .sheetGrid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  /* (no hover on phones: the caption may wrap, the link goes under it) */
+  .sheetCap {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--s-3);
+  }
+  .sheetNow {
+    white-space: normal;
+  }
+  .rowFrame,
+  .rowText {
+    grid-column: 1 / -1;
+  }
+  .rowLine {
+    -webkit-line-clamp: 2;
+  }
+  .artGrid {
+    columns: 2;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sheetFrame.sheetFrame img {
+    transition: none;
+  }
+}

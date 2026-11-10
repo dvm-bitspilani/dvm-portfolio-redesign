@@ -1,0 +1,208 @@
+/* V8's site cursor (chrome/Cursor.jsx). Three fixed, pointer-events: none movers above
+   everything V8 draws (boot overlay 999999, hub switcher 100000, menu 20000, mark 1001). The
+   root is `display: contents`: no box, no stacking context, so the dot's difference blend
+   reaches the page underneath. Movers carry the per-frame translate only; the state styling
+   lives on their children (.shape, ::before), so nothing but transforms changes per frame. */
+.cursor {
+  display: contents;
+}
+
+.ring,
+.dot,
+.tick {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  z-index: 1000000;
+  pointer-events: none;
+  will-change: transform;
+  transition: opacity 120ms linear;
+}
+
+/* ---- the ring: a 24 px circle, centred on the mover */
+.shape {
+  --k: 1;
+  --p: 1;
+  --bc: rgba(242, 245, 247, 0.7);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  box-sizing: border-box;
+  border: 1px solid rgba(242, 245, 247, 0.55);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(calc(var(--k) * var(--p)));
+  transition:
+    transform 160ms var(--ease-out),
+    border-color 160ms var(--ease-out),
+    border-radius 160ms var(--ease-out),
+    width 160ms var(--ease-out),
+    height 160ms var(--ease-out),
+    opacity 120ms linear;
+}
+/* grab brackets: four 6 px corners (two pseudo-elements + two spans), shown in grab states */
+.shape::before,
+.shape::after,
+.bracket {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  box-sizing: border-box;
+  border: 0 solid var(--bc);
+  opacity: 0;
+  transition:
+    opacity 120ms linear,
+    border-color 160ms var(--ease-out);
+}
+.shape::before {
+  top: -1px;
+  left: -1px;
+  border-top-width: 1px;
+  border-left-width: 1px;
+}
+.shape::after {
+  top: -1px;
+  right: -1px;
+  border-top-width: 1px;
+  border-right-width: 1px;
+}
+.bracket:nth-child(1) {
+  bottom: -1px;
+  left: -1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+}
+.bracket:nth-child(2) {
+  bottom: -1px;
+  right: -1px;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+}
+
+/* ---- the dot: 4 px, inverts over images (the only blend) */
+.dot {
+  mix-blend-mode: difference;
+}
+.dot::before {
+  --d: 1;
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--ink);
+  transform: scale(var(--d));
+  transition: transform 160ms var(--ease-out);
+}
+
+/* ---- the stage tick: an 18 px teal hairline through the dot (hero only) */
+.tick::before {
+  content: "";
+  position: absolute;
+  left: -9px;
+  top: -0.5px;
+  width: 18px;
+  height: 1px;
+  background: rgba(69, 230, 255, 0.7);
+  opacity: 0;
+  transition: opacity 120ms linear;
+}
+
+/* ===================== states ===================== */
+/* link: 40 px, teal (large surfaces: cards, tiles, rows); a compact control is locked onto
+   instead (Cursor.jsx: one box ≤ 420 × 64, or data-cursor="lock"): its rect + 8 px a side,
+   rounded like a control, or round when the control itself is round */
+.cursor[data-state="link"] .shape {
+  --k: 1.6667;
+  border-color: rgba(69, 230, 255, 0.9);
+}
+.cursor[data-state="link"][data-lock] .shape {
+  --k: 1;
+  width: var(--lw, 40px);
+  height: var(--lh, 40px);
+  border-radius: 6px;
+}
+.cursor[data-state="link"][data-lock="round"] .shape {
+  border-radius: 9999px;
+}
+.cursor[data-state="link"] .dot::before,
+.cursor[data-state="grabbing"] .dot::before {
+  --d: 0.5;
+}
+
+/* stage (the hero): 28 px and the tick */
+.cursor[data-state="stage"] .shape {
+  --k: 1.1667;
+}
+.cursor[data-state="stage"] .tick::before {
+  opacity: 1;
+}
+
+/* grab / grabbing (the archive wall): corner brackets, 34 px ink / 28 px teal */
+.cursor[data-state="grab"] .shape,
+.cursor[data-state="grabbing"] .shape {
+  width: 34px;
+  height: 34px;
+  border-color: transparent;
+  border-radius: 0;
+}
+.cursor[data-state="grabbing"] .shape {
+  --bc: rgba(69, 230, 255, 0.9);
+  width: 28px;
+  height: 28px;
+}
+.cursor[data-state="grab"] .shape::before,
+.cursor[data-state="grab"] .shape::after,
+.cursor[data-state="grab"] .bracket,
+.cursor[data-state="grabbing"] .shape::before,
+.cursor[data-state="grabbing"] .shape::after,
+.cursor[data-state="grabbing"] .bracket {
+  opacity: 1;
+}
+
+/* press (default / link / stage): the ring tightens, the dot grows */
+.cursor[data-press]:not([data-state="grab"], [data-state="grabbing"]) .shape {
+  --p: 0.85;
+  transition-duration: 90ms, 160ms, 160ms, 160ms, 160ms, 120ms;
+}
+.cursor[data-press]:not([data-state="grab"], [data-state="grabbing"]) .dot::before {
+  --d: 1.5;
+}
+
+/* dot (data-cursor="dot" regions: the /alumni wall, map and branch): no ring, a teal dot */
+.cursor[data-state="dot"] .shape {
+  opacity: 0;
+}
+.cursor[data-state="dot"] .dot::before {
+  background: var(--teal);
+}
+
+/* text fields keep the native I-beam; over the hub switcher, outside the window, hidden tab */
+.cursor[data-state="text"] .ring,
+.cursor[data-state="text"] .dot,
+.cursor[data-state="text"] .tick,
+.cursor[data-state="hidden"] .ring,
+.cursor[data-state="hidden"] .dot,
+.cursor[data-state="hidden"] .tick {
+  opacity: 0;
+}
+
+/* reduced motion: still the custom cursor, but states switch at once (opacity keeps 120 ms) */
+@media (prefers-reduced-motion: reduce) {
+  .shape,
+  .shape::before,
+  .shape::after,
+  .bracket,
+  .dot::before {
+    transition: opacity 120ms linear;
+  }
+  .cursor[data-press]:not([data-state="grab"], [data-state="grabbing"]) .shape {
+    transition-duration: 120ms;
+  }
+}

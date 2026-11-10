@@ -1,5 +1,5 @@
 import type { SwarmEngine } from './engine/SwarmEngine'
-import type { SwarmController, SwarmShowOptions, SwarmStats, SwarmTarget } from './types'
+import type { SwarmController, SwarmShowOptions, SwarmStats, SwarmTarget, SwarmView } from './types'
 
 interface Req {
   target: SwarmTarget
@@ -16,9 +16,11 @@ export class SwarmHandle implements SwarmController {
   private base: Req | null = null
   private over: Req | null = null
   private preloads = new Set<SwarmTarget>()
+  private view: SwarmView | null = null
 
   attach(engine: SwarmEngine) {
     this.engine = engine
+    if (this.view) engine.setView(this.view)
     if (this.preloads.size) void engine.preload([...this.preloads])
     if (this.base) void engine.show(this.base.target, this.base.opts, 'base')
     if (this.over) void engine.show(this.over.target, this.over.opts, 'override')
@@ -52,6 +54,11 @@ export class SwarmHandle implements SwarmController {
   scrub(a: SwarmTarget, b: SwarmTarget, t: number, oa?: SwarmShowOptions, ob?: SwarmShowOptions) {
     this.base = { target: t < 0.5 ? a : b, opts: t < 0.5 ? oa : ob ?? oa }
     this.engine?.scrub(a, b, t, oa, ob)
+  }
+
+  setView(view: SwarmView | null) {
+    this.view = view
+    this.engine?.setView(view)
   }
 
   explode(strength?: number) {

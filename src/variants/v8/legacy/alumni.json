@@ -1,0 +1,3530 @@
+{
+  "generatedAt": "2026-11-08",
+  "source": "research/v8-alumni-v2.json (confidence high only)",
+  "batches": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023
+  ],
+  "companies": [
+    {
+      "id": "alphagrep",
+      "name": "AlphaGrep",
+      "url": "https://alphagrep.com",
+      "logo": {
+        "src": "/assets/legacy/logos/alphagrep.png",
+        "kind": "mark",
+        "source": "favicon alphagrep.com"
+      }
+    },
+    {
+      "id": "amazon",
+      "name": "Amazon",
+      "url": "https://amazon.com",
+      "logo": {
+        "src": "/assets/legacy/logos/amazon.svg",
+        "kind": "glyph",
+        "source": "simple-icons@9.21.0 (CC0; since removed from Simple Icons)",
+        "color": "#FF9900"
+      }
+    },
+    {
+      "id": "amd",
+      "name": "AMD",
+      "url": "https://amd.com",
+      "logo": {
+        "src": "/assets/legacy/logos/amd.svg",
+        "kind": "glyph",
+        "source": "simple-icons@16.30.0 (CC0)",
+        "color": "#ED1C24"
+      }
+    },
+    {
+      "id": "american-express",
+      "name": "American Express",
+      "url": "https://americanexpress.com",
+      "logo": {
+        "src": "/assets/legacy/logos/american-express.svg",
+        "kind": "glyph",
+        "source": "simple-icons@16.30.0 (CC0)",
+        "color": "#2E77BC"
+      }
+    },
+    {
+      "id": "amikus-ai",
+      "name": "Amikus AI"
+    },
+    {
+      "id": "amplus-solar",
+      "name": "Amplus Solar"
+    },
+    {
+      "id": "anaconda",
+      "name": "Anaconda",
+      "url": "https://anaconda.com",
+      "logo": {
+        "src": "/assets/legacy/logos/anaconda.svg",
+        "kind": "glyph",
+        "source": "simple-icons@16.30.0 (CC0)",
+        "color": "#44A833"
+      }
+    },
+    {
+      "id": "axis-bank",
+      "name": "Axis Bank",
+      "url": "https://axisbank.com",
+      "logo": {
+        "src": "/assets/legacy/logos/axis-bank.svg",
+        "kind": "glyph",
+        "source": "simple-icons@16.30.0 (CC0)",
+        "color": "#B1537A"
+      }
+    },
+    {
+      "id": "barclays",
+      "name": "Barclays",
+      "url": "https://barclays.com",
+      "logo": {
+        "src": "/assets/legacy/logos/barclays.svg",
+        "kind": "glyph",
+        "source": "simple-icons@16.30.0 (CC0)",
+        "color": "#00AEEF"
+      }
+    },
+    {
+      "id": "bcg",
+      "name": "BCG",
+      "url": "https://bcg.com",
+      "logo": {
+        "src": "/assets/legacy/logos/bcg.png",
+        "kind": "tile",
+        "source": "favicon bcg.com (Google favicon service)"
+      }
+    },
+    {
+      "id": "bisag-n",
+      "name": "BISAG-N",
+      "url": "https://bisag-n.gov.in"
+    },
+    {
+      "id": "c-dac",
+      "name": "C-DAC",
+      "url": "https://cdac.in",
+      "logo": {
+        "src": "/assets/legacy/logos/c-dac.svg",
+        "kind": "glyph",
+        "source": "Wikimedia Commons: Logo for the Centre for Development of Advanced Computing.svg",
+        "color": "#6974A6"
+      }
+    },
+    {
+      "id": "capital-one",
+      "name": "Capital One",
+      "url": "https://capitalone.com",
+      "logo": {
+        "src": "/assets/legacy/logos/capital-one.png",
+        "kind": "mark",
+        "source": "apple-touch-icon capitalone.com (white keyed out)"
+      }
+    },
+    {
+      "id": "cardboard",
+      "name": "Cardboard",
+      "url": "https://cardboard.ai",
+      "logo": {
+        "src": "/assets/legacy/logos/cardboard.png",
+        "kind": "tile",
+        "source": "apple-touch-icon cardboard.ai"
+      }
+    },
+    {
+      "id": "carscan-ai",
+      "name": "Carscan.ai"
+    },
+    {
+      "id": "cenizas-labs",
+      "name": "Cenizas Labs",
+      "url": "https://cenizaslabs.com",
+      "logo": {
+        "src": "/assets/legacy/logos/cenizas-labs.png",
+        "kind": "mark",
+        "source": "favicon cenizaslabs.com"
+      }
+    },
+    {
+      "id": "cisco",
+      "name": "Cisco",
+      "url": "https://cisco.com",
+      "logo": {
+        "src": "/assets/legacy/logos/cisco.svg",
+        "kind": "glyph",
+        "source": "simple-icons@16.30.0 (CC0)",
+        "color": "#1BA0D7"
+      }
+    },
+    {
+      "id": "confluent",
+      "name": "Confluent",
+      "url": "https://confluent.io",
+      "logo": {
+        "src": "/assets/legacy/logos/confluent.png",
+        "kind": "glyph",
+        "source": "apple-touch-icon confluent.io (alpha used as the mask)",
+        "color": "#687A98"
+      }
+    },
+    {
+      "id": "crc-ib",
+      "name": "CRC-IB",
+      "url": "https://crc-ib.com",
+      "logo": {
+        "src": "/assets/legacy/logos/crc-ib.png",
+        "kind": "mark",
+        "source": "apple-touch-icon crc-ib.com"
+      }
+    },
+    {
+      "id": "cred",
+      "name": "CRED",
+      "url": "https://cred.club",
+      "logo": {
+        "src": "/assets/legacy/logos/cred.png",
+        "kind": "glyph",
+        "source": "cred.club icon (ground keyed out)"
+      }
+    },
+    {
+      "id": "credit-suisse",
+      "name": "Credit Suisse",
+      "url": "https://credit-suisse.com",
+      "logo": {
+        "src": "/assets/legacy/logos/credit-suisse.svg",
+        "kind": "glyph",
+        "source": "Wikimedia Commons: Credit Suisse Logo 2022.svg (the sails)",
+        "color": "#5F7597"
+      }
+    },
+    {
+      "id": "cyberhaven",
+      "name": "Cyberhaven",
+      "url": "https://cyberhaven.com",
+      "logo": {
+        "src": "/assets/legacy/logos/cyberhaven.png",
+        "kind": "tile",
+        "source": "favicon cyberhaven.com"
+      }
+    },
+    {
+      "id": "d-e-shaw",
+      "name": "D. E. Shaw",
+      "url": "https://deshaw.com",
+      "logo": {
+        "src": "/assets/legacy/logos/d-e-shaw.svg",
+        "kind": "glyph",
+        "source": "Wikimedia Commons: D. E. Shaw & Co. Logo.svg (public-domain text logo), viewBox cropped to the \"DE\" initials"
+      }
+    },
+    {
+      "id": "deloitte",
+      "name": "Deloitte",
+      "url": "https://deloitte.com",
+      "logo": {
+        "src": "/assets/legacy/logos/deloitte.png",
+        "kind": "tile",
+        "source": "favicon deloitte.com"
+      }
+    },
+    {
+      "id": "detrace",
+      "name": "DeTrace"
+    },
+    {
+      "id": "dodge-ai",
+      "name": "Dodge AI",
+      "url": "https://getdodge.ai",
+      "logo": {
+        "src": "/assets/legacy/logos/dodge-ai.png",
+        "kind": "tile",
+        "source": "apple-touch-icon getdodge.ai"
+      }
+    },
+    {
+      "id": "eddy-finance",
+      "name": "Eddy Finance",
+      "url": "https://eddy.finance"
+    },
+    {
+      "id": "eightfold-ai",
+      "name": "Eightfold AI",
+      "url": "https://eightfold.ai",
+      "logo": {
+        "src": "/assets/legacy/logos/eightfold-ai.png",
+        "kind": "mark",
+        "source": "apple-touch-icon eightfold.ai"
+      }
+    },
+    {
+      "id": "elucidata",
+      "name": "Elucidata",
+      "url": "https://elucidata.io",
+      "logo": {
+        "src": "/assets/legacy/logos/elucidata.png",
+        "kind": "mark",
+        "source": "favicon elucidata.io"
+      }
+    },
+    {
+      "id": "enkrypt-ai",
+      "name": "Enkrypt AI",
+      "url": "https://enkryptai.com",
+      "logo": {
+        "src": "/assets/legacy/logos/enkrypt-ai.png",
+        "kind": "mark",
+        "source": "favicon enkryptai.com"
+      }
+    },
+    {
+      "id": "entelligence-ai",
+      "name": "Entelligence AI",
+      "url": "https://entelligence.ai",
+      "logo": {
+        "src": "/assets/legacy/logos/entelligence-ai.png",
+        "kind": "tile",
+        "source": "favicon entelligence.ai"
+      }
+    },
+    {
+      "id": "ericsson",
+      "name": "Ericsson",
+      "url": "https://ericsson.com",
+      "logo": {
+        "src": "/assets/legacy/logos/ericsson.svg",
+        "kind": "glyph",
+        "source": "simple-icons@16.30.0 (CC0)",
+        "color": "#0082F0"
+      }
+    },
+    {
+      "id": "evermorrow-labs",
+      "name": "Evermorrow Labs"
+    },
+    {
+      "id": "expert-systems-inc",
+      "name": "Expert Systems",
+      "fullName": "Expert Systems, Inc."
+    },
+    {
+      "id": "fibr",
+      "name": "Fibr",
+      "url": "https://fibr.ai",
+      "logo": {
+        "src": "/assets/legacy/logos/fibr.png",
+        "kind": "tile",
+        "source": "favicon fibr.ai"
+      }
+    },
+    {
+      "id": "firstclub",
+      "name": "FirstClub",
+      "url": "https://firstclub.co.in",
+      "logo": {
+        "src": "/assets/legacy/logos/firstclub.png",
+        "kind": "tile",
+        "source": "firstclub.co.in Logo.png"
+      }
+    },
+    {
+      "id": "flint",
+      "name": "Flint"
+    },
+    {
+      "id": "flippy",
+      "name": "Flippy"
+    },
+    {
+      "id": "generalmind",
+      "name": "GeneralMind",
+      "url": "https://generalmind.com"
+    },
+    {
+      "id": "gleebo",
+      "name": "Gleebo"
+    },
+    {
+      "id": "goldman-sachs",
+      "name": "Goldman Sachs",
+      "url": "https://goldmansachs.com",
+      "logo": {
+        "src": "/assets/legacy/logos/goldman-sachs.svg",
+        "kind": "glyph",
+        "source": "simple-icons@16.30.0 (CC0)",
+        "color": "#7399C6"
+      }
+    },
+    {
+      "id": "google",
+      "name": "Google",
+      "url": "https://google.com",
+      "logo": {
+        "src": "/assets/legacy/logos/google.png",
+        "kind": "mark",
+        "source": "repo (src/assests/Legacy)"
+      }
+    },
+    {
+      "id": "google-deepmind",
+      "name": "Google DeepMind",
+      "url": "https://deepmind.google",
+      "logo": {
+        "src": "/assets/legacy/logos/google-deepmind.svg",
+        "kind": "glyph",
+        "source": "simple-icons@16.30.0 (CC0)",
+        "color": "#4285F4"
+      }
+    },
+    {
+      "id": "graviton-research-capital",
+      "name": "Graviton",
+      "fullName": "Graviton Research Capital",
+      "url": "https://gravitontrading.com",
+      "logo": {
+        "src": "/assets/legacy/logos/graviton-research-capital.png",
+        "kind": "mark",
+        "source": "gravitontrading.com favicon.png"
+      }
+    },
+    {
+      "id": "harness",
+      "name": "Harness",
+      "url": "https://harness.io",
+      "logo": {
+        "src": "/assets/legacy/logos/harness.png",
+        "kind": "mark",
+        "source": "favicon harness.io"
+      }
+    },
+    {
+      "id": "hashlock",
+      "name": "Hashlock",
+      "url": "https://hashlock.com",
+      "logo": {
+        "src": "/assets/legacy/logos/hashlock.png",
+        "kind": "mark",
+        "source": "apple-touch-icon hashlock.com"
+      }
+    },
+    {
+      "id": "hexa-climate",
+      "name": "Hexa Climate",
+      "logo": {
+        "src": "/assets/legacy/logos/hexa-climate.png",
+        "kind": "mark",
+        "source": "favicon hexaclimate.com (white keyed out)"
+      }
+    },
+    {
+      "id": "honda-motorcycle-and-scooter-india",
+      "name": "Honda",
+      "fullName": "Honda Motorcycle & Scooter India",
+      "url": "https://honda2wheelersindia.com",
+      "logo": {
+        "src": "/assets/legacy/logos/honda-motorcycle-and-scooter-india.svg",
+        "kind": "glyph",
+        "source": "simple-icons@16.30.0 (CC0)",
+        "color": "#E40521"
+      }
+    },
+    {
+      "id": "houseware",
+      "name": "Houseware",
+      "url": "https://houseware.io"
+    },
+    {
+      "id": "hubblemoney",
+      "name": "HubbleMoney",
+      "url": "https://myhubble.money",
+      "logo": {
+        "src": "/assets/legacy/logos/hubblemoney.svg",
+        "kind": "glyph",
+        "source": "favicon myhubble.money (ground removed)"
+      }
+    },
+    {
+      "id": "indeed",
+      "name": "Indeed",
+      "url": "https://indeed.com",
+      "logo": {
+        "src": "/assets/legacy/logos/indeed.svg",
+        "kind": "glyph",
+        "source": "simple-icons@16.30.0 (CC0)",
+        "color": "#4D75B9"
+      }
+    },
+    {
+      "id": "interface-ai",
+      "name": "Interface AI"
+    },
+    {
+      "id": "iterate-ai",
+      "name": "Iterate AI"
+    },
+    {
+      "id": "jaguar-land-rover",
+      "name": "Jaguar Land Rover",
+      "url": "https://jaguarlandrover.com",
+      "logo": {
+        "src": "/assets/legacy/logos/jaguar-land-rover.png",
+        "kind": "glyph",
+        "source": "favicon jlr.com"
+      }
+    },
+    {
+      "id": "jarvis-technology-and-strategy-consulting",
+      "name": "Jarvis Consulting",
+      "fullName": "Jarvis Technology and Strategy Consulting",
+      "url": "https://jarvis.consulting",
+      "logo": {
+        "src": "/assets/legacy/logos/jarvis-technology-and-strategy-consulting.png",
+        "kind": "mark",
+        "source": "apple-touch-icon jarvis.consulting"
+      }
+    },
+    {
+      "id": "jpmorgan-chase",
+      "name": "JPMorgan Chase",
+      "url": "https://jpmorganchase.com",
+      "logo": {
+        "src": "/assets/legacy/logos/jpmorgan-chase.png",
+        "kind": "tile",
+        "source": "favicon jpmorganchase.com"
+      }
+    },
+    {
+      "id": "jupiter",
+      "name": "Jupiter",
+      "url": "https://jupiter.money",
+      "logo": {
+        "src": "/assets/legacy/logos/jupiter.png",
+        "kind": "tile",
+        "source": "favicon jupiter.money"
+      }
+    },
+    {
+      "id": "launchdarkly",
+      "name": "LaunchDarkly",
+      "url": "https://launchdarkly.com",
+      "logo": {
+        "src": "/assets/legacy/logos/launchdarkly.png",
+        "kind": "glyph",
+        "source": "favicon launchdarkly.com"
+      }
+    },
+    {
+      "id": "leena-ai",
+      "name": "Leena AI",
+      "url": "https://leena.ai",
+      "logo": {
+        "src": "/assets/legacy/logos/leena-ai.svg",
+        "kind": "glyph",
+        "source": "leena.ai leenaLogo.svg (the icon)",
+        "color": "#0F72EE"
+      }
+    },
+    {
+      "id": "licious",
+      "name": "Licious",
+      "url": "https://licious.in",
+      "logo": {
+        "src": "/assets/legacy/logos/licious.png",
+        "kind": "mark",
+        "source": "Wikimedia Commons: Licious-Logo.png"
+      }
+    },
+    {
+      "id": "masth-ultrahive-healthcare",
+      "name": "MASTH",
+      "fullName": "MASTH (UltraHive Healthcare)"
+    },
+    {
+      "id": "max-planck-institute-for-biology-tubingen",
+      "name": "Max Planck",
+      "fullName": "Max Planck Institute for Biology Tübingen",
+      "url": "https://bio.mpg.de",
+      "logo": {
+        "src": "/assets/legacy/logos/max-planck-institute-for-biology-tubingen.svg",
+        "kind": "glyph",
+        "source": "simple-icons@16.30.0 (CC0)",
+        "color": "#26827D"
+      }
+    },
+    {
+      "id": "media-net",
+      "name": "Media.net",
+      "url": "https://media.net",
+      "logo": {
+        "src": "/assets/legacy/logos/media-net.png",
+        "kind": "glyph",
+        "source": "favicon media.net (white keyed out)"
+      }
+    },
+    {
+      "id": "medsupervision",
+      "name": "Medsupervision"
+    },
+    {
+      "id": "meesho",
+      "name": "Meesho",
+      "url": "https://meesho.com",
+      "logo": {
+        "src": "/assets/legacy/logos/meesho.png",
+        "kind": "tile",
+        "source": "Wikimedia Commons: Meesho logo.png"
+      }
+    },
+    {
+      "id": "mercari",
+      "name": "Mercari",
+      "url": "https://mercari.com",
+      "logo": {
+        "src": "/assets/legacy/logos/mercari.png",
+        "kind": "tile",
+        "source": "favicon mercari.com (Google favicon service)"
+      }
+    },
+    {
+      "id": "mesh-ergonomics",
+      "name": "Mesh Ergonomics"
+    },
+    {
+      "id": "meta",
+      "name": "Meta",
+      "url": "https://meta.com",
+      "logo": {
+        "src": "/assets/legacy/logos/meta.png",
+        "kind": "mark",
+        "source": "repo (src/assests/Legacy)"
+      }
+    },
+    {
+      "id": "microsoft",
+      "name": "Microsoft",
+      "url": "https://microsoft.com",
+      "logo": {
+        "src": "/assets/legacy/logos/microsoft.png",
+        "kind": "mark",
+        "source": "repo (src/assests/Legacy)"
+      }
+    },
+    {
+      "id": "mila-quebec-ai-institute",
+      "name": "Mila",
+      "fullName": "Mila - Quebec AI Institute",
+      "url": "https://mila.quebec",
+      "logo": {
+        "src": "/assets/legacy/logos/mila-quebec-ai-institute.png",
+        "kind": "mark",
+        "source": "favicon mila.quebec"
+      }
+    },
+    {
+      "id": "navi",
+      "name": "Navi",
+      "url": "https://navi.com",
+      "logo": {
+        "src": "/assets/legacy/logos/navi.png",
+        "kind": "tile",
+        "source": "favicon navi.com"
+      }
+    },
+    {
+      "id": "newton-school",
+      "name": "Newton School",
+      "url": "https://newtonschool.co",
+      "logo": {
+        "src": "/assets/legacy/logos/newton-school.png",
+        "kind": "mark",
+        "source": "newtonschool.co icon"
+      }
+    },
+    {
+      "id": "nielsen",
+      "name": "Nielsen",
+      "url": "https://nielsen.com",
+      "logo": {
+        "src": "/assets/legacy/logos/nielsen.png",
+        "kind": "mark",
+        "source": "favicon nielsen.com"
+      }
+    },
+    {
+      "id": "nykaa",
+      "name": "Nykaa",
+      "url": "https://nykaa.com",
+      "logo": {
+        "src": "/assets/legacy/logos/nykaa.png",
+        "kind": "tile",
+        "source": "favicon nykaa.com"
+      }
+    },
+    {
+      "id": "ola",
+      "name": "Ola",
+      "url": "https://olacabs.com",
+      "logo": {
+        "src": "/assets/legacy/logos/ola.png",
+        "kind": "glyph",
+        "source": "olacabs.com favicon_logo.png"
+      }
+    },
+    {
+      "id": "oracle",
+      "name": "Oracle",
+      "url": "https://oracle.com",
+      "logo": {
+        "src": "/assets/legacy/logos/oracle.svg",
+        "kind": "glyph",
+        "source": "simple-icons@9.21.0 (CC0; since removed from Simple Icons)",
+        "color": "#F80000"
+      }
+    },
+    {
+      "id": "pepper-content",
+      "name": "Pepper Content",
+      "url": "https://peppercontent.io",
+      "logo": {
+        "src": "/assets/legacy/logos/pepper-content.png",
+        "kind": "tile",
+        "source": "apple-touch-icon peppercontent.io"
+      }
+    },
+    {
+      "id": "petasense",
+      "name": "Petasense",
+      "url": "https://petasense.com"
+    },
+    {
+      "id": "pixelup-labs",
+      "name": "PixelUp Labs",
+      "url": "https://pixeluplabs.com",
+      "logo": {
+        "src": "/assets/legacy/logos/pixelup-labs.png",
+        "kind": "tile",
+        "source": "favicon pixeluplabs.com"
+      }
+    },
+    {
+      "id": "pixxel",
+      "name": "Pixxel",
+      "url": "https://pixxel.space",
+      "logo": {
+        "src": "/assets/legacy/logos/pixxel.png",
+        "kind": "tile",
+        "source": "favicon pixxel.space"
+      }
+    },
+    {
+      "id": "polygon-labs",
+      "name": "Polygon Labs",
+      "url": "https://polygon.technology",
+      "logo": {
+        "src": "/assets/legacy/logos/polygon-labs.svg",
+        "kind": "glyph",
+        "source": "simple-icons@16.30.0 (CC0)",
+        "color": "#8852E7"
+      }
+    },
+    {
+      "id": "postman",
+      "name": "Postman",
+      "url": "https://postman.com",
+      "logo": {
+        "src": "/assets/legacy/logos/postman.svg",
+        "kind": "glyph",
+        "source": "simple-icons@16.30.0 (CC0)",
+        "color": "#FF6C37"
+      }
+    },
+    {
+      "id": "prashanu-hospital",
+      "name": "Prashanu Hospital"
+    },
+    {
+      "id": "pwc",
+      "name": "PwC",
+      "url": "https://pwc.com",
+      "logo": {
+        "src": "/assets/legacy/logos/pwc.svg",
+        "kind": "glyph",
+        "source": "Wikimedia Commons: PwC 2025 Logo.svg",
+        "color": "#FD5108"
+      }
+    },
+    {
+      "id": "pyor",
+      "name": "PYOR",
+      "url": "https://pyor.xyz",
+      "logo": {
+        "src": "/assets/legacy/logos/pyor.png",
+        "kind": "mark",
+        "source": "favicon pyor.xyz"
+      }
+    },
+    {
+      "id": "radalis",
+      "name": "Radalis"
+    },
+    {
+      "id": "razorpay",
+      "name": "Razorpay",
+      "url": "https://razorpay.com",
+      "logo": {
+        "src": "/assets/legacy/logos/razorpay.svg",
+        "kind": "glyph",
+        "source": "simple-icons@16.30.0 (CC0)",
+        "color": "#3395FF"
+      }
+    },
+    {
+      "id": "reflexis-systems",
+      "name": "Reflexis Systems",
+      "url": "https://reflexisinc.com"
+    },
+    {
+      "id": "ripplica",
+      "name": "Ripplica"
+    },
+    {
+      "id": "rupeek",
+      "name": "Rupeek",
+      "url": "https://rupeek.com",
+      "logo": {
+        "src": "/assets/legacy/logos/rupeek.png",
+        "kind": "mark",
+        "source": "rupeek.com 192 icon"
+      }
+    },
+    {
+      "id": "salesforce",
+      "name": "Salesforce",
+      "url": "https://salesforce.com",
+      "logo": {
+        "src": "/assets/legacy/logos/salesforce.svg",
+        "kind": "glyph",
+        "source": "simple-icons@9.21.0 (CC0; since removed from Simple Icons)",
+        "color": "#00A1E0"
+      }
+    },
+    {
+      "id": "samsung-r-and-d-institute-india",
+      "name": "Samsung R&D",
+      "fullName": "Samsung R&D Institute India",
+      "url": "https://samsung.com",
+      "logo": {
+        "src": "/assets/legacy/logos/samsung-r-and-d-institute-india.svg",
+        "kind": "glyph",
+        "source": "simple-icons@16.30.0 (CC0)",
+        "color": "#6673C1"
+      }
+    },
+    {
+      "id": "samsung-semiconductor",
+      "name": "Samsung Semiconductor",
+      "url": "https://semiconductor.samsung.com",
+      "logo": {
+        "src": "/assets/legacy/logos/samsung-semiconductor.svg",
+        "kind": "glyph",
+        "source": "simple-icons@16.30.0 (CC0)",
+        "color": "#6673C1"
+      }
+    },
+    {
+      "id": "schmooze",
+      "name": "Schmooze",
+      "url": "https://schmoozedating.com",
+      "logo": {
+        "src": "/assets/legacy/logos/schmooze.png",
+        "kind": "mark",
+        "source": "schmoozedating.com icon-512"
+      }
+    },
+    {
+      "id": "sharechat",
+      "name": "ShareChat",
+      "url": "https://sharechat.com",
+      "logo": {
+        "src": "/assets/legacy/logos/sharechat.png",
+        "kind": "mark",
+        "source": "sharechat.com favicon-96"
+      }
+    },
+    {
+      "id": "simpl",
+      "name": "Simpl",
+      "url": "https://getsimpl.com",
+      "logo": {
+        "src": "/assets/legacy/logos/simpl.png",
+        "kind": "tile",
+        "source": "favicon getsimpl.com"
+      }
+    },
+    {
+      "id": "simplismart",
+      "name": "Simplismart",
+      "url": "https://simplismart.ai",
+      "logo": {
+        "src": "/assets/legacy/logos/simplismart.png",
+        "kind": "mark",
+        "source": "favicon simplismart.ai"
+      }
+    },
+    {
+      "id": "skit-ai",
+      "name": "Skit.ai",
+      "url": "https://skit.ai",
+      "logo": {
+        "src": "/assets/legacy/logos/skit-ai.png",
+        "kind": "tile",
+        "source": "favicon skit.ai"
+      }
+    },
+    {
+      "id": "slice",
+      "name": "Slice",
+      "url": "https://sliceit.com",
+      "logo": {
+        "src": "/assets/legacy/logos/slice.png",
+        "kind": "tile",
+        "source": "apple-touch-icon sliceit.com"
+      }
+    },
+    {
+      "id": "smartqna",
+      "name": "SmartQnA"
+    },
+    {
+      "id": "societe-generale",
+      "name": "Societe Generale",
+      "url": "https://societegenerale.com",
+      "logo": {
+        "src": "/assets/legacy/logos/societe-generale.svg",
+        "kind": "mark",
+        "source": "Wikimedia Commons: Logo-SG-Société-Générale.svg (the square, with a keyline for dark grounds)"
+      }
+    },
+    {
+      "id": "spanda-ai",
+      "name": "Spanda AI",
+      "url": "https://spanda.ai",
+      "logo": {
+        "src": "/assets/legacy/logos/spanda-ai.png",
+        "kind": "tile",
+        "source": "apple-icon spanda.ai"
+      }
+    },
+    {
+      "id": "stripe",
+      "name": "Stripe",
+      "url": "https://stripe.com",
+      "logo": {
+        "src": "/assets/legacy/logos/stripe.svg",
+        "kind": "glyph",
+        "source": "simple-icons@16.30.0 (CC0)",
+        "color": "#635BFF"
+      }
+    },
+    {
+      "id": "sundial",
+      "name": "Sundial",
+      "url": "https://sundial.so",
+      "logo": {
+        "src": "/assets/legacy/logos/sundial.png",
+        "kind": "tile",
+        "source": "favicon sundial.so"
+      }
+    },
+    {
+      "id": "tenstorrent",
+      "name": "Tenstorrent",
+      "url": "https://tenstorrent.com",
+      "logo": {
+        "src": "/assets/legacy/logos/tenstorrent.png",
+        "kind": "mark",
+        "source": "apple-touch-icon tenstorrent.com"
+      }
+    },
+    {
+      "id": "texas-instruments",
+      "name": "Texas Instruments",
+      "url": "https://ti.com",
+      "logo": {
+        "src": "/assets/legacy/logos/texas-instruments.svg",
+        "kind": "glyph",
+        "source": "Wikimedia Commons: TexasInstruments-Logo.svg (the state shape)",
+        "color": "#D63333"
+      }
+    },
+    {
+      "id": "uber",
+      "name": "Uber",
+      "url": "https://uber.com",
+      "logo": {
+        "src": "/assets/legacy/logos/uber.svg",
+        "kind": "glyph",
+        "source": "simple-icons@16.30.0 (CC0)"
+      }
+    },
+    {
+      "id": "ubs",
+      "name": "UBS",
+      "url": "https://ubs.com",
+      "logo": {
+        "src": "/assets/legacy/logos/ubs.png",
+        "kind": "glyph",
+        "source": "favicon ubs.com (white keyed out)"
+      }
+    },
+    {
+      "id": "unifyapps",
+      "name": "UnifyApps",
+      "url": "https://unifyapps.com",
+      "logo": {
+        "src": "/assets/legacy/logos/unifyapps.png",
+        "kind": "mark",
+        "source": "favicon unifyapps.com"
+      }
+    },
+    {
+      "id": "upstox",
+      "name": "Upstox",
+      "url": "https://upstox.com",
+      "logo": {
+        "src": "/assets/legacy/logos/upstox.png",
+        "kind": "tile",
+        "source": "favicon upstox.com"
+      }
+    },
+    {
+      "id": "vegapay",
+      "name": "Vegapay",
+      "url": "https://vegapay.tech"
+    },
+    {
+      "id": "virtuelly",
+      "name": "Virtuelly"
+    },
+    {
+      "id": "walmart",
+      "name": "Walmart",
+      "url": "https://walmart.com",
+      "logo": {
+        "src": "/assets/legacy/logos/walmart.png",
+        "kind": "mark",
+        "source": "apple-touch-icon walmart.com"
+      }
+    },
+    {
+      "id": "wander",
+      "name": "Wander"
+    },
+    {
+      "id": "wells-fargo",
+      "name": "Wells Fargo",
+      "url": "https://wellsfargo.com",
+      "logo": {
+        "src": "/assets/legacy/logos/wells-fargo.svg",
+        "kind": "glyph",
+        "source": "simple-icons@16.30.0 (CC0)",
+        "color": "#D92933"
+      }
+    },
+    {
+      "id": "weswap-mobility",
+      "name": "WeSwap Mobility"
+    },
+    {
+      "id": "wex",
+      "name": "WEX",
+      "url": "https://wexinc.com",
+      "logo": {
+        "src": "/assets/legacy/logos/wex.png",
+        "kind": "mark",
+        "source": "favicon wexinc.com"
+      }
+    },
+    {
+      "id": "windfall-research",
+      "name": "Windfall Research"
+    },
+    {
+      "id": "worldquant",
+      "name": "WorldQuant",
+      "url": "https://worldquant.com"
+    },
+    {
+      "id": "yap-network",
+      "name": "Yap Network"
+    },
+    {
+      "id": "zenon",
+      "name": "Zenon",
+      "url": "https://zenon.ai",
+      "logo": {
+        "src": "/assets/legacy/logos/zenon.png",
+        "kind": "tile",
+        "source": "apple-touch-icon zenon.ai"
+      }
+    }
+  ],
+  "people": [
+    {
+      "name": "Yash Bhagat",
+      "confidence": "high",
+      "latest": {
+        "companyId": "hubblemoney",
+        "kind": "full-time",
+        "role": "Design",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "hubblemoney",
+          "kind": "full-time",
+          "role": "Design",
+          "year": null
+        },
+        {
+          "companyId": "slice",
+          "kind": "full-time",
+          "role": "Product Designer",
+          "year": null
+        },
+        {
+          "companyId": "cred",
+          "kind": "full-time",
+          "role": "Product Designer",
+          "year": null
+        },
+        {
+          "companyId": "pepper-content",
+          "kind": "full-time",
+          "role": "Design",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Abhinav Tiwari",
+      "confidence": "high",
+      "latest": {
+        "companyId": "jarvis-technology-and-strategy-consulting",
+        "kind": "full-time",
+        "role": "Product Manager",
+        "year": 2022
+      },
+      "history": [
+        {
+          "companyId": "jarvis-technology-and-strategy-consulting",
+          "kind": "full-time",
+          "role": "Product Manager",
+          "year": 2022
+        }
+      ]
+    },
+    {
+      "name": "Divyansh Agarwal",
+      "confidence": "high",
+      "latest": {
+        "companyId": "meta",
+        "kind": "full-time",
+        "role": "Software Engineer",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "meta",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": 2025
+        },
+        {
+          "companyId": "salesforce",
+          "kind": "full-time",
+          "role": "Associate MTS",
+          "year": 2022
+        }
+      ]
+    },
+    {
+      "name": "Pradyumna Bang",
+      "confidence": "high",
+      "latest": {
+        "companyId": "radalis",
+        "kind": "full-time",
+        "role": "CEO",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "radalis",
+          "kind": "full-time",
+          "role": "CEO",
+          "year": null
+        },
+        {
+          "companyId": "pixxel",
+          "kind": "full-time",
+          "role": "Satellite Ground Segment Engineer",
+          "year": 2022
+        }
+      ]
+    },
+    {
+      "name": "Shivanshu Ayachi",
+      "confidence": "high",
+      "latest": {
+        "companyId": "media-net",
+        "kind": "full-time",
+        "role": "Software Development Engineer 2",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "media-net",
+          "kind": "full-time",
+          "role": "Software Development Engineer 2",
+          "year": null
+        },
+        {
+          "companyId": "reflexis-systems",
+          "kind": "intern",
+          "role": "Software Development Intern",
+          "year": 2021
+        }
+      ]
+    },
+    {
+      "name": "Akshit Patel",
+      "confidence": "high",
+      "latest": {
+        "companyId": "samsung-semiconductor",
+        "kind": "full-time",
+        "role": "Associate Staff Engineer",
+        "year": 2022
+      },
+      "history": [
+        {
+          "companyId": "samsung-semiconductor",
+          "kind": "full-time",
+          "role": "Associate Staff Engineer",
+          "year": 2022
+        }
+      ]
+    },
+    {
+      "name": "Anupam Srivastva",
+      "confidence": "high",
+      "latest": {
+        "companyId": "cyberhaven",
+        "kind": "full-time",
+        "role": "Software Engineer",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "cyberhaven",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": 2025
+        },
+        {
+          "companyId": "barclays",
+          "kind": "full-time",
+          "role": "Graduate Analyst",
+          "year": 2022
+        },
+        {
+          "companyId": "schmooze",
+          "kind": "intern",
+          "role": "Software Engineering Intern",
+          "year": 2021
+        }
+      ]
+    },
+    {
+      "name": "Chirag Singhal",
+      "confidence": "high",
+      "latest": {
+        "companyId": "indeed",
+        "kind": "full-time",
+        "role": "Software Engineer II",
+        "year": 2022
+      },
+      "history": [
+        {
+          "companyId": "indeed",
+          "kind": "full-time",
+          "role": "Software Engineer II",
+          "year": 2022
+        },
+        {
+          "companyId": "microsoft",
+          "kind": "intern",
+          "role": "Software Engineering Intern",
+          "year": 2021
+        }
+      ]
+    },
+    {
+      "name": "Mukul Gupta",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Shreyans Jain",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Anant Verma",
+      "confidence": "high",
+      "latest": {
+        "companyId": "microsoft",
+        "kind": "full-time",
+        "role": "Software Engineer",
+        "year": 2023
+      },
+      "history": [
+        {
+          "companyId": "microsoft",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": 2023
+        },
+        {
+          "companyId": "microsoft",
+          "kind": "intern",
+          "role": "Software Engineer Intern",
+          "year": 2022
+        }
+      ]
+    },
+    {
+      "name": "Devansh Agarwal",
+      "confidence": "high",
+      "latest": {
+        "companyId": "sundial",
+        "kind": "full-time",
+        "role": "Software Engineer",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "sundial",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": null
+        },
+        {
+          "companyId": "skit-ai",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Manikya Varshney",
+      "confidence": "high",
+      "latest": {
+        "companyId": "american-express",
+        "kind": "full-time",
+        "role": "Analyst - Data Science",
+        "year": 2024
+      },
+      "history": [
+        {
+          "companyId": "american-express",
+          "kind": "full-time",
+          "role": "Analyst - Data Science",
+          "year": 2024
+        },
+        {
+          "companyId": "expert-systems-inc",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": 2023
+        }
+      ]
+    },
+    {
+      "name": "Mohul Maheshwari",
+      "confidence": "high",
+      "latest": {
+        "companyId": "google-deepmind",
+        "kind": "full-time",
+        "role": "Software Engineer",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "google-deepmind",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": 2025
+        },
+        {
+          "companyId": "amazon",
+          "kind": "full-time",
+          "role": "SDE-1",
+          "year": 2022
+        },
+        {
+          "companyId": "walmart",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": 2021
+        }
+      ]
+    },
+    {
+      "name": "Akshath Kothari",
+      "confidence": "high",
+      "latest": {
+        "companyId": "harness",
+        "kind": "full-time",
+        "role": "Senior Software Engineer",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "harness",
+          "kind": "full-time",
+          "role": "Senior Software Engineer",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Pratheek Athuri",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Jaideep Khare",
+      "confidence": "high",
+      "latest": {
+        "companyId": "amd",
+        "kind": "full-time",
+        "role": "Graphic Silicon Design Engineer",
+        "year": 2022
+      },
+      "history": [
+        {
+          "companyId": "amd",
+          "kind": "full-time",
+          "role": "Graphic Silicon Design Engineer",
+          "year": 2022
+        }
+      ]
+    },
+    {
+      "name": "Samir K Patro",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Dushyant Yadav",
+      "confidence": "high",
+      "latest": {
+        "companyId": "wander",
+        "kind": "full-time",
+        "role": "Principal Engineer",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "wander",
+          "kind": "full-time",
+          "role": "Principal Engineer",
+          "year": null
+        },
+        {
+          "companyId": "cisco",
+          "kind": "intern",
+          "role": "Network Engineer Intern",
+          "year": 2021
+        },
+        {
+          "companyId": "postman",
+          "kind": "intern",
+          "role": "Intern",
+          "year": 2020
+        }
+      ]
+    },
+    {
+      "name": "Prarabdh Garg",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Akshat Gupta",
+      "confidence": "high",
+      "latest": {
+        "companyId": "schmooze",
+        "kind": "full-time",
+        "role": "Lead Software Engineer / AI Engineer & Backend Lead",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "schmooze",
+          "kind": "full-time",
+          "role": "Lead Software Engineer / AI Engineer & Backend Lead",
+          "year": null
+        },
+        {
+          "companyId": "ola",
+          "kind": "full-time",
+          "role": "Software Development Engineer 1",
+          "year": 2022
+        },
+        {
+          "companyId": "licious",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": 2021
+        }
+      ]
+    },
+    {
+      "name": "Ishita Aggarwal",
+      "confidence": "high",
+      "latest": {
+        "companyId": "amazon",
+        "kind": "full-time",
+        "role": "Software Development Engineer II",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "amazon",
+          "kind": "full-time",
+          "role": "Software Development Engineer II",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Suyash Soni",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Ayush Suman",
+      "confidence": "high",
+      "latest": {
+        "companyId": "cenizas-labs",
+        "kind": "full-time",
+        "role": "System Software Engineer",
+        "year": 2024
+      },
+      "history": [
+        {
+          "companyId": "cenizas-labs",
+          "kind": "full-time",
+          "role": "System Software Engineer",
+          "year": 2024
+        }
+      ]
+    },
+    {
+      "name": "Shikhar Uttam",
+      "confidence": "high",
+      "latest": {
+        "companyId": "amazon",
+        "kind": "full-time",
+        "role": "Software Engineer",
+        "year": 2023
+      },
+      "history": [
+        {
+          "companyId": "amazon",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": 2023
+        }
+      ]
+    },
+    {
+      "name": "Anshal Shukla",
+      "confidence": "high",
+      "latest": {
+        "companyId": "polygon-labs",
+        "kind": "full-time",
+        "role": "Blockchain Engineer",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "polygon-labs",
+          "kind": "full-time",
+          "role": "Blockchain Engineer",
+          "year": null
+        },
+        {
+          "companyId": "cisco",
+          "kind": "intern",
+          "role": "Intern",
+          "year": null
+        },
+        {
+          "companyId": "flint",
+          "kind": "intern",
+          "role": "Intern",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Darsh Mishra",
+      "confidence": "high",
+      "latest": {
+        "companyId": "hexa-climate",
+        "kind": "full-time",
+        "year": 2023
+      },
+      "history": [
+        {
+          "companyId": "hexa-climate",
+          "kind": "full-time",
+          "year": 2023
+        },
+        {
+          "companyId": "amplus-solar",
+          "kind": "full-time",
+          "role": "All Things Tech",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Sarthak Choudhary",
+      "confidence": "high",
+      "latest": {
+        "companyId": "google",
+        "kind": "intern",
+        "role": "Research Intern",
+        "year": 2026
+      },
+      "history": [
+        {
+          "companyId": "google",
+          "kind": "intern",
+          "role": "Research Intern",
+          "year": 2026
+        }
+      ]
+    },
+    {
+      "name": "Tirth Jain",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Uday Singla",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Chirag Wadhwa",
+      "confidence": "high",
+      "latest": {
+        "companyId": "confluent",
+        "kind": "full-time",
+        "role": "Software Engineer",
+        "year": 2023
+      },
+      "history": [
+        {
+          "companyId": "confluent",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": 2023
+        },
+        {
+          "companyId": "microsoft",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Ishan Garg",
+      "confidence": "high",
+      "latest": {
+        "companyId": "zenon",
+        "kind": "full-time",
+        "role": "Software Engineer II",
+        "year": 2023
+      },
+      "history": [
+        {
+          "companyId": "zenon",
+          "kind": "full-time",
+          "role": "Software Engineer II",
+          "year": 2023
+        },
+        {
+          "companyId": "amikus-ai",
+          "kind": "intern",
+          "role": "Machine Learning Engineer",
+          "year": null
+        },
+        {
+          "companyId": "virtuelly",
+          "kind": "intern",
+          "role": "SDE",
+          "year": null
+        },
+        {
+          "companyId": "weswap-mobility",
+          "kind": "intern",
+          "role": "Back End Developer",
+          "year": 2021
+        },
+        {
+          "companyId": "gleebo",
+          "kind": "intern",
+          "role": "Full-stack Developer",
+          "year": 2021
+        }
+      ]
+    },
+    {
+      "name": "Manan Agrawal",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Nidheesh Jain",
+      "confidence": "high",
+      "latest": {
+        "companyId": "graviton-research-capital",
+        "kind": "full-time",
+        "role": "Quantitative Analyst",
+        "year": 2026
+      },
+      "history": [
+        {
+          "companyId": "graviton-research-capital",
+          "kind": "full-time",
+          "role": "Quantitative Analyst",
+          "year": 2026
+        },
+        {
+          "companyId": "goldman-sachs",
+          "kind": "full-time",
+          "role": "Analyst / Quantitative Analyst",
+          "year": 2023
+        }
+      ]
+    },
+    {
+      "name": "Priyanshu Shukla",
+      "confidence": "high",
+      "latest": {
+        "companyId": "launchdarkly",
+        "kind": "full-time",
+        "role": "Software Engineer",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "launchdarkly",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": null
+        },
+        {
+          "companyId": "houseware",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Siddharth katyal",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Daksh Aswal",
+      "confidence": "high",
+      "latest": {
+        "companyId": "pixelup-labs",
+        "kind": "full-time",
+        "role": "Founder / Creative Director",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "pixelup-labs",
+          "kind": "full-time",
+          "role": "Founder / Creative Director",
+          "year": null
+        },
+        {
+          "companyId": "razorpay",
+          "kind": "full-time",
+          "role": "Product Designer",
+          "year": null
+        },
+        {
+          "companyId": "upstox",
+          "kind": "intern",
+          "role": "Design intern",
+          "year": null
+        },
+        {
+          "companyId": "newton-school",
+          "kind": "intern",
+          "role": "Product designer",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Harshit Lohani",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Kanupriya Tola",
+      "confidence": "high",
+      "latest": {
+        "companyId": "pwc",
+        "kind": "full-time",
+        "role": "Associate",
+        "year": 2023
+      },
+      "history": [
+        {
+          "companyId": "pwc",
+          "kind": "full-time",
+          "role": "Associate",
+          "year": 2023
+        },
+        {
+          "companyId": "credit-suisse",
+          "kind": "intern",
+          "role": "Global Market Risk Management Intern",
+          "year": 2022
+        }
+      ]
+    },
+    {
+      "name": "Ayan Rajvanshi",
+      "confidence": "high",
+      "latest": {
+        "companyId": "meesho",
+        "kind": "full-time",
+        "role": "Associate Product Manager",
+        "year": 2024
+      },
+      "history": [
+        {
+          "companyId": "meesho",
+          "kind": "full-time",
+          "role": "Associate Product Manager",
+          "year": 2024
+        },
+        {
+          "companyId": "meesho",
+          "kind": "intern",
+          "role": "Product Management Intern",
+          "year": 2024
+        },
+        {
+          "companyId": "jupiter",
+          "kind": "intern",
+          "role": "Product intern",
+          "year": 2022
+        }
+      ]
+    },
+    {
+      "name": "Lokin Thirunathan",
+      "confidence": "high",
+      "latest": {
+        "companyId": "ubs",
+        "kind": "full-time",
+        "role": "Analyst",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "ubs",
+          "kind": "full-time",
+          "role": "Analyst",
+          "year": null
+        },
+        {
+          "companyId": "credit-suisse",
+          "kind": "full-time",
+          "role": "Analyst",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Josh Wadhwa",
+      "confidence": "high",
+      "latest": {
+        "companyId": "wells-fargo",
+        "kind": "full-time",
+        "role": "Software Engineer",
+        "year": 2024
+      },
+      "history": [
+        {
+          "companyId": "wells-fargo",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": 2024
+        },
+        {
+          "companyId": "goldman-sachs",
+          "kind": "intern",
+          "role": "Intern",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Astitva Agnihotri",
+      "confidence": "high",
+      "latest": {
+        "companyId": "credit-suisse",
+        "kind": "intern",
+        "role": "PS-II Intern",
+        "year": 2024
+      },
+      "history": [
+        {
+          "companyId": "credit-suisse",
+          "kind": "intern",
+          "role": "PS-II Intern",
+          "year": 2024
+        }
+      ]
+    },
+    {
+      "name": "Pradyut Kumar",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Osho Jain",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Mohit Sharma",
+      "confidence": "high",
+      "latest": {
+        "companyId": "navi",
+        "kind": "full-time",
+        "role": "Data Scientist",
+        "year": 2023
+      },
+      "history": [
+        {
+          "companyId": "navi",
+          "kind": "full-time",
+          "role": "Data Scientist",
+          "year": 2023
+        },
+        {
+          "companyId": "sharechat",
+          "kind": "intern",
+          "role": "Data Science Intern",
+          "year": 2023
+        },
+        {
+          "companyId": "elucidata",
+          "kind": "intern",
+          "role": "Data Science Intern",
+          "year": 2022
+        }
+      ]
+    },
+    {
+      "name": "Shivi Mittal",
+      "confidence": "high",
+      "latest": {
+        "companyId": "rupeek",
+        "kind": "full-time",
+        "role": "CEO's Office",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "rupeek",
+          "kind": "full-time",
+          "role": "CEO's Office",
+          "year": null
+        },
+        {
+          "companyId": "bcg",
+          "kind": "full-time",
+          "role": "Associate",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Adarsh Bhardwaj",
+      "confidence": "high",
+      "latest": {
+        "companyId": "evermorrow-labs",
+        "kind": "full-time",
+        "role": "Co-Founder & CEO",
+        "year": 2024
+      },
+      "history": [
+        {
+          "companyId": "evermorrow-labs",
+          "kind": "full-time",
+          "role": "Co-Founder & CEO",
+          "year": 2024
+        }
+      ]
+    },
+    {
+      "name": "Devashish Siwatch",
+      "confidence": "high",
+      "latest": {
+        "companyId": "unifyapps",
+        "kind": "full-time",
+        "role": "Product Engineer",
+        "year": 2024
+      },
+      "history": [
+        {
+          "companyId": "unifyapps",
+          "kind": "full-time",
+          "role": "Product Engineer",
+          "year": 2024
+        },
+        {
+          "companyId": "ericsson",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": null
+        },
+        {
+          "companyId": "societe-generale",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Praneet Karna",
+      "confidence": "high",
+      "latest": {
+        "companyId": "navi",
+        "kind": "full-time",
+        "role": "Software Engineer",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "navi",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Aditya Thakur",
+      "confidence": "high",
+      "latest": {
+        "companyId": "dodge-ai",
+        "kind": "full-time",
+        "role": "CTO & Co-Founder",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "dodge-ai",
+          "kind": "full-time",
+          "role": "CTO & Co-Founder",
+          "year": 2025
+        },
+        {
+          "companyId": "interface-ai",
+          "kind": "full-time",
+          "role": "CTO & Co-Founder",
+          "year": 2024
+        }
+      ]
+    },
+    {
+      "name": "Akshat Kumar",
+      "confidence": "high",
+      "latest": {
+        "companyId": "jpmorgan-chase",
+        "kind": "intern",
+        "role": "MRGR Intern",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "jpmorgan-chase",
+          "kind": "intern",
+          "role": "MRGR Intern",
+          "year": 2025
+        },
+        {
+          "companyId": "jaguar-land-rover",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": 2024
+        },
+        {
+          "companyId": "worldquant",
+          "kind": "intern",
+          "role": "Quantitative Research Consultant",
+          "year": 2023
+        },
+        {
+          "companyId": "samsung-r-and-d-institute-india",
+          "kind": "intern",
+          "role": "System Structure Design",
+          "year": 2022
+        }
+      ]
+    },
+    {
+      "name": "Dhruv Popuri",
+      "confidence": "high",
+      "latest": {
+        "companyId": "generalmind",
+        "kind": "full-time",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "generalmind",
+          "kind": "full-time",
+          "year": null
+        },
+        {
+          "companyId": "fibr",
+          "kind": "full-time",
+          "role": "Lead",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Mohit Dilip Makwana",
+      "confidence": "high",
+      "latest": {
+        "companyId": "stripe",
+        "kind": "full-time",
+        "role": "Software Engineer",
+        "year": 2024
+      },
+      "history": [
+        {
+          "companyId": "stripe",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": 2024
+        },
+        {
+          "companyId": "cisco",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": 2024
+        },
+        {
+          "companyId": "mercari",
+          "kind": "intern",
+          "role": "Software Engineering Intern",
+          "year": 2023
+        },
+        {
+          "companyId": "leena-ai",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": 2022
+        }
+      ]
+    },
+    {
+      "name": "Rutva Lingapuri",
+      "confidence": "high",
+      "latest": {
+        "companyId": "prashanu-hospital",
+        "kind": "intern",
+        "role": "PS-II Intern",
+        "year": 2024
+      },
+      "history": [
+        {
+          "companyId": "prashanu-hospital",
+          "kind": "intern",
+          "role": "PS-II Intern",
+          "year": 2024
+        }
+      ]
+    },
+    {
+      "name": "Sarthak Arora",
+      "confidence": "high",
+      "latest": {
+        "companyId": "eightfold-ai",
+        "kind": "full-time",
+        "role": "Software Engineer",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "eightfold-ai",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": 2025
+        },
+        {
+          "companyId": "entelligence-ai",
+          "kind": "full-time",
+          "role": "Founding Engineer",
+          "year": 2024
+        },
+        {
+          "companyId": "samsung-r-and-d-institute-india",
+          "kind": "intern",
+          "role": "Software Development Intern",
+          "year": 2023
+        }
+      ]
+    },
+    {
+      "name": "Alvin A. Kumar",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Saksham Aggarwal",
+      "confidence": "high",
+      "latest": {
+        "companyId": "cardboard",
+        "kind": "full-time",
+        "role": "Co-founder & CEO",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "cardboard",
+          "kind": "full-time",
+          "role": "Co-founder & CEO",
+          "year": 2025
+        },
+        {
+          "companyId": "iterate-ai",
+          "kind": "full-time",
+          "role": "Co-founder & CTO",
+          "year": null
+        },
+        {
+          "companyId": "pyor",
+          "kind": "full-time",
+          "role": "First engineer",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Akshun Jain",
+      "confidence": "high",
+      "latest": {
+        "companyId": "crc-ib",
+        "kind": "full-time",
+        "role": "Investment Banking Analyst",
+        "year": 2024
+      },
+      "history": [
+        {
+          "companyId": "crc-ib",
+          "kind": "full-time",
+          "role": "Investment Banking Analyst",
+          "year": 2024
+        }
+      ]
+    },
+    {
+      "name": "Madhav Garg",
+      "confidence": "high",
+      "latest": {
+        "companyId": "mesh-ergonomics",
+        "kind": "full-time",
+        "role": "Co-Founder",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "mesh-ergonomics",
+          "kind": "full-time",
+          "role": "Co-Founder",
+          "year": 2025
+        },
+        {
+          "companyId": "simplismart",
+          "kind": "intern",
+          "role": "Product Designer",
+          "year": 2022
+        }
+      ]
+    },
+    {
+      "name": "Satvik Jain",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Karmanya Khanna",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Keshav Bansal",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Nikhil Ratnaparkhi",
+      "confidence": "high",
+      "latest": {
+        "companyId": "max-planck-institute-for-biology-tubingen",
+        "kind": "intern",
+        "role": "Research Intern",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "max-planck-institute-for-biology-tubingen",
+          "kind": "intern",
+          "role": "Research Intern",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Arnav Gujrathi",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Ansh Gupta",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Gurupam Dixit",
+      "confidence": "high",
+      "latest": {
+        "companyId": "simplismart",
+        "kind": "full-time",
+        "role": "Product Designer / Product",
+        "year": 2024
+      },
+      "history": [
+        {
+          "companyId": "simplismart",
+          "kind": "full-time",
+          "role": "Product Designer / Product",
+          "year": 2024
+        }
+      ]
+    },
+    {
+      "name": "Archit Jain",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Gaurav Mishra",
+      "confidence": "high",
+      "latest": {
+        "companyId": "ubs",
+        "kind": "intern",
+        "role": "Quant Analyst Intern",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "ubs",
+          "kind": "intern",
+          "role": "Quant Analyst Intern",
+          "year": null
+        },
+        {
+          "companyId": "carscan-ai",
+          "kind": "intern",
+          "role": "Front-End Intern",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Rohit Raj",
+      "confidence": "high",
+      "latest": {
+        "companyId": "oracle",
+        "kind": "full-time",
+        "role": "AI Application Engineer",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "oracle",
+          "kind": "full-time",
+          "role": "AI Application Engineer",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Pratham Birla",
+      "confidence": "high",
+      "latest": {
+        "companyId": "jpmorgan-chase",
+        "kind": "full-time",
+        "role": "Credit Risk Analyst",
+        "year": 2024
+      },
+      "history": [
+        {
+          "companyId": "jpmorgan-chase",
+          "kind": "full-time",
+          "role": "Credit Risk Analyst",
+          "year": 2024
+        },
+        {
+          "companyId": "jpmorgan-chase",
+          "kind": "intern",
+          "role": "Intern",
+          "year": 2023
+        }
+      ]
+    },
+    {
+      "name": "Harsh Rathi",
+      "confidence": "high",
+      "latest": {
+        "companyId": "simpl",
+        "kind": "intern",
+        "role": "SWE Intern",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "simpl",
+          "kind": "intern",
+          "role": "SWE Intern",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Pritish Dakhole",
+      "confidence": "high",
+      "latest": {
+        "companyId": "amazon",
+        "kind": "full-time",
+        "role": "Software Development Engineer",
+        "year": 2024
+      },
+      "history": [
+        {
+          "companyId": "amazon",
+          "kind": "full-time",
+          "role": "Software Development Engineer",
+          "year": 2024
+        },
+        {
+          "companyId": "amazon",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Harsh Singh",
+      "confidence": "high",
+      "latest": {
+        "companyId": "vegapay",
+        "kind": "full-time",
+        "role": "Software Engineer",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "vegapay",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": 2025
+        }
+      ]
+    },
+    {
+      "name": "Shwetabh Niket",
+      "confidence": "high",
+      "latest": {
+        "companyId": "windfall-research",
+        "kind": "full-time",
+        "role": "Founding Blockchain Developer",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "windfall-research",
+          "kind": "full-time",
+          "role": "Founding Blockchain Developer",
+          "year": null
+        },
+        {
+          "companyId": "eddy-finance",
+          "kind": "intern",
+          "role": "Web3",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Shashvat Singh",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Sejal Agarwal",
+      "confidence": "high",
+      "latest": {
+        "companyId": "wex",
+        "kind": "full-time",
+        "role": "Software engineer",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "wex",
+          "kind": "full-time",
+          "role": "Software engineer",
+          "year": 2025
+        }
+      ]
+    },
+    {
+      "name": "Prateek Kashyap",
+      "confidence": "high",
+      "latest": {
+        "companyId": "capital-one",
+        "kind": "full-time",
+        "role": "Senior Associate Software Engineer",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "capital-one",
+          "kind": "full-time",
+          "role": "Senior Associate Software Engineer",
+          "year": 2025
+        },
+        {
+          "companyId": "capital-one",
+          "kind": "intern",
+          "role": "SWE Intern",
+          "year": 2024
+        }
+      ]
+    },
+    {
+      "name": "HARSHIT SARAF",
+      "confidence": "high",
+      "latest": {
+        "companyId": "tenstorrent",
+        "kind": "intern",
+        "role": "PS-II Intern",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "tenstorrent",
+          "kind": "intern",
+          "role": "PS-II Intern",
+          "year": 2025
+        }
+      ]
+    },
+    {
+      "name": "Nitin Aravind Birur",
+      "confidence": "high",
+      "latest": {
+        "companyId": "anaconda",
+        "kind": "full-time",
+        "role": "Associate AI Research Engineer",
+        "year": 2026
+      },
+      "history": [
+        {
+          "companyId": "anaconda",
+          "kind": "full-time",
+          "role": "Associate AI Research Engineer",
+          "year": 2026
+        },
+        {
+          "companyId": "enkrypt-ai",
+          "kind": "full-time",
+          "role": "Founding Engineer / AI Researcher",
+          "year": 2024
+        }
+      ]
+    },
+    {
+      "name": "Santosh Reddy Dwarampudi",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Achinthya Hebbar S",
+      "confidence": "high",
+      "latest": {
+        "companyId": "oracle",
+        "kind": "full-time",
+        "role": "Member of Technical Staff-1",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "oracle",
+          "kind": "full-time",
+          "role": "Member of Technical Staff-1",
+          "year": 2025
+        },
+        {
+          "companyId": "oracle",
+          "kind": "intern",
+          "role": "Graphic Project Intern",
+          "year": 2025
+        },
+        {
+          "companyId": "samsung-r-and-d-institute-india",
+          "kind": "intern",
+          "role": "Graphic Software Engineer Intern",
+          "year": 2024
+        }
+      ]
+    },
+    {
+      "name": "Maanas M Singh",
+      "confidence": "high",
+      "latest": {
+        "companyId": "uber",
+        "kind": "intern",
+        "role": "SDE Intern",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "uber",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Mayank Garg",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Jay Goyal",
+      "confidence": "high",
+      "latest": {
+        "companyId": "texas-instruments",
+        "kind": "intern",
+        "role": "PS-II Intern",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "texas-instruments",
+          "kind": "intern",
+          "role": "PS-II Intern",
+          "year": 2025
+        },
+        {
+          "companyId": "medsupervision",
+          "kind": "intern",
+          "role": "PS-I Intern",
+          "year": 2023
+        }
+      ]
+    },
+    {
+      "name": "Azzaam Usmani",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Prakhar Gurunani",
+      "confidence": "high",
+      "latest": {
+        "companyId": "unifyapps",
+        "kind": "full-time",
+        "role": "Product Analyst",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "unifyapps",
+          "kind": "full-time",
+          "role": "Product Analyst",
+          "year": 2025
+        },
+        {
+          "companyId": "simplismart",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": 2024
+        },
+        {
+          "companyId": "flippy",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Vaibhav Singla",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Siddharth Gupta",
+      "confidence": "high",
+      "latest": {
+        "companyId": "honda-motorcycle-and-scooter-india",
+        "kind": "full-time",
+        "role": "Graduate Engineering Trainee - Assembly Frame",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "honda-motorcycle-and-scooter-india",
+          "kind": "full-time",
+          "role": "Graduate Engineering Trainee - Assembly Frame",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Arinjay Saxena",
+      "confidence": "high",
+      "latest": {
+        "companyId": "simplismart",
+        "kind": "full-time",
+        "role": "Founder's Office",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "simplismart",
+          "kind": "full-time",
+          "role": "Founder's Office",
+          "year": 2025
+        }
+      ]
+    },
+    {
+      "name": "Ritvik Mittal",
+      "confidence": "high",
+      "latest": {
+        "companyId": "walmart",
+        "kind": "intern",
+        "role": "SDE Intern",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "walmart",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": 2025
+        }
+      ]
+    },
+    {
+      "name": "Jayesh Harlalka",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Satyadev",
+      "confidence": "high",
+      "latest": {
+        "companyId": "nielsen",
+        "kind": "full-time",
+        "role": "Member of Technical Staff",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "nielsen",
+          "kind": "full-time",
+          "role": "Member of Technical Staff",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "NAGASIVA SAITEJA BUDDU",
+      "confidence": "high",
+      "latest": {
+        "companyId": "bisag-n",
+        "kind": "intern",
+        "role": "PS-I Intern",
+        "year": 2023
+      },
+      "history": [
+        {
+          "companyId": "bisag-n",
+          "kind": "intern",
+          "role": "PS-I Intern",
+          "year": 2023
+        }
+      ]
+    },
+    {
+      "name": "Lovenya Jain",
+      "confidence": "high",
+      "latest": {
+        "companyId": "mila-quebec-ai-institute",
+        "kind": "intern",
+        "role": "Research Intern",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "mila-quebec-ai-institute",
+          "kind": "intern",
+          "role": "Research Intern",
+          "year": 2025
+        }
+      ]
+    },
+    {
+      "name": "Vedant Vyas",
+      "confidence": "high",
+      "latest": {
+        "companyId": "nielsen",
+        "kind": "full-time",
+        "role": "Member of Technical Staff-1",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "nielsen",
+          "kind": "full-time",
+          "role": "Member of Technical Staff-1",
+          "year": 2025
+        }
+      ]
+    },
+    {
+      "name": "Alamuri Prabhas Kumar",
+      "confidence": "high",
+      "latest": {
+        "companyId": "spanda-ai",
+        "kind": "intern",
+        "role": "Artificial Intelligence Intern",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "spanda-ai",
+          "kind": "intern",
+          "role": "Artificial Intelligence Intern",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Utkarsh Sharma",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Harshith Vasireddy",
+      "confidence": "high",
+      "latest": {
+        "companyId": "d-e-shaw",
+        "kind": "full-time",
+        "role": "Member Technical",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "d-e-shaw",
+          "kind": "full-time",
+          "role": "Member Technical",
+          "year": 2025
+        },
+        {
+          "companyId": "d-e-shaw",
+          "kind": "intern",
+          "role": "Technology Developer Intern",
+          "year": 2024
+        }
+      ]
+    },
+    {
+      "name": "Aditya Patil",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Shivang Rai",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Swaha Pati",
+      "confidence": "high",
+      "latest": {
+        "companyId": "unifyapps",
+        "kind": "intern",
+        "role": "PS-II Intern",
+        "year": 2024
+      },
+      "history": [
+        {
+          "companyId": "unifyapps",
+          "kind": "intern",
+          "role": "PS-II Intern",
+          "year": 2024
+        }
+      ]
+    },
+    {
+      "name": "Luv Gupta",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Sunpreet Brar",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Himanshu Kumar",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Dhruv Verma",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Arnav Bharti",
+      "confidence": "high",
+      "latest": {
+        "companyId": "stripe",
+        "kind": "intern",
+        "role": "Software Engineer Intern",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "stripe",
+          "kind": "intern",
+          "role": "Software Engineer Intern",
+          "year": null
+        },
+        {
+          "companyId": "masth-ultrahive-healthcare",
+          "kind": "intern",
+          "role": "PS-I Intern",
+          "year": 2024
+        }
+      ]
+    },
+    {
+      "name": "Pushkar Mishra",
+      "confidence": "high",
+      "latest": {
+        "companyId": "yap-network",
+        "kind": "full-time",
+        "role": "Co-Founder & CTO",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "yap-network",
+          "kind": "full-time",
+          "role": "Co-Founder & CTO",
+          "year": null
+        },
+        {
+          "companyId": "hashlock",
+          "kind": "full-time",
+          "role": "Security Auditor",
+          "year": 2025
+        }
+      ]
+    },
+    {
+      "name": "Praneel Maddula",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Krishay Prakash",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Manish Goyal",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Chayan Jain",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Malay Dwivedi",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Raj Clerk",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Sundar Matu",
+      "confidence": "high",
+      "latest": {
+        "companyId": "alphagrep",
+        "kind": "full-time",
+        "role": "Quantitative Researcher and Trader",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "alphagrep",
+          "kind": "full-time",
+          "role": "Quantitative Researcher and Trader",
+          "year": null
+        },
+        {
+          "companyId": "alphagrep",
+          "kind": "intern",
+          "role": "Six-month internship",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Rahul Gupta",
+      "confidence": "high",
+      "latest": {
+        "companyId": "firstclub",
+        "kind": "full-time",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "firstclub",
+          "kind": "full-time",
+          "year": null
+        },
+        {
+          "companyId": "ripplica",
+          "kind": "intern",
+          "role": "Founder's Office",
+          "year": 2025
+        }
+      ]
+    },
+    {
+      "name": "Satyam",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Rakshit Sakhuja",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Arsh Singh",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Ritik Chandra",
+      "confidence": "high",
+      "latest": {
+        "companyId": "amazon",
+        "kind": "intern",
+        "role": "SDE Intern",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "amazon",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": 2025
+        }
+      ]
+    },
+    {
+      "name": "Bharat Raj Singal",
+      "confidence": "high",
+      "latest": {
+        "companyId": "detrace",
+        "kind": "intern",
+        "role": "Founding Team",
+        "year": 2023
+      },
+      "history": [
+        {
+          "companyId": "detrace",
+          "kind": "intern",
+          "role": "Founding Team",
+          "year": 2023
+        }
+      ]
+    },
+    {
+      "name": "Srinivasa Shankar",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Shiva Adithya M",
+      "confidence": "high",
+      "latest": {
+        "companyId": "nykaa",
+        "kind": "intern",
+        "role": "Software Development Engineer Intern",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "nykaa",
+          "kind": "intern",
+          "role": "Software Development Engineer Intern",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Arnav Trehan",
+      "confidence": "high",
+      "latest": {
+        "companyId": "petasense",
+        "kind": "intern",
+        "role": "PS-I Intern",
+        "year": 2024
+      },
+      "history": [
+        {
+          "companyId": "petasense",
+          "kind": "intern",
+          "role": "PS-I Intern",
+          "year": 2024
+        }
+      ]
+    },
+    {
+      "name": "Himanshu",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Shreyas Gantayet",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Rudradatt Dave",
+      "confidence": "high",
+      "latest": {
+        "companyId": "detrace",
+        "kind": "intern",
+        "role": "PS-I Intern",
+        "year": 2024
+      },
+      "history": [
+        {
+          "companyId": "detrace",
+          "kind": "intern",
+          "role": "PS-I Intern",
+          "year": 2024
+        }
+      ]
+    },
+    {
+      "name": "Akshit Garg",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Tarun S",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Nabisha Obaid",
+      "confidence": "high",
+      "latest": {
+        "companyId": "axis-bank",
+        "kind": "intern",
+        "role": "Product Intern",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "axis-bank",
+          "kind": "intern",
+          "role": "Product Intern",
+          "year": null
+        },
+        {
+          "companyId": "deloitte",
+          "kind": "intern",
+          "role": "Consultant Intern",
+          "year": 2025
+        }
+      ]
+    },
+    {
+      "name": "Vatsal Agrawal",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Gurekas Singh Sahney",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Tejansh Gautam",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Manas Choudhary",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Chaitanya Jain",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Atharv Agarwal",
+      "confidence": "high",
+      "latest": {
+        "companyId": "smartqna",
+        "kind": "intern",
+        "role": "Summer Intern",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "smartqna",
+          "kind": "intern",
+          "role": "Summer Intern",
+          "year": 2025
+        }
+      ]
+    },
+    {
+      "name": "Animesh Datta Jaiswal",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Samyak Jain",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Ayush Gupta",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Daksh Jain",
+      "confidence": "high",
+      "latest": {
+        "companyId": "simplismart",
+        "kind": "intern",
+        "year": null
+      },
+      "history": [
+        {
+          "companyId": "simplismart",
+          "kind": "intern",
+          "year": null
+        }
+      ]
+    },
+    {
+      "name": "Ashutosh Desai",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Avyakt Verma",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Dhayanidhi Purushothaman",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Ankit Khatua",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Madhur Jain",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Satyasheel Singh",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Bhavesh Jangir",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Varsha Rana",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Ashish Sam",
+      "confidence": "high",
+      "latest": {
+        "companyId": "c-dac",
+        "kind": "intern",
+        "role": "Summer Intern",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "c-dac",
+          "kind": "intern",
+          "role": "Summer Intern",
+          "year": 2025
+        }
+      ]
+    },
+    {
+      "name": "Tripti Malik",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Siddharth Kakar",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Priyanshu Narayan",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Anurag",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Akshaya Shubh Agarwal",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Raza Hasnain",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Sitaram prajapat",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Shiven Sharma",
+      "confidence": "high",
+      "latest": {
+        "companyId": "amazon",
+        "kind": "intern",
+        "role": "PS-I Intern",
+        "year": 2025
+      },
+      "history": [
+        {
+          "companyId": "amazon",
+          "kind": "intern",
+          "role": "PS-I Intern",
+          "year": 2025
+        }
+      ]
+    },
+    {
+      "name": "Dhruv Gupta",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Sahil Mishra",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Abhi Pruthi",
+      "confidence": "unconfirmed",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Prathmesh Chandra",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Yash",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Puranjay Marothia",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    },
+    {
+      "name": "Sai Surya Vujuri",
+      "confidence": "none",
+      "latest": null,
+      "history": []
+    }
+  ]
+}

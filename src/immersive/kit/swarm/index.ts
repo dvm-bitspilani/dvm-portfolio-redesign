@@ -20,4 +20,5 @@ export type {
   SwarmShowOptions,
   SwarmStats,
   SwarmTarget,
+  SwarmView,
 } from './types'

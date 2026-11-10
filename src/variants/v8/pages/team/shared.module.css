@@ -1,0 +1,752 @@
+/* ===================== /team, every version: the page, the sticky bar, the portrait treatment,
+   the dossier (detail panel), the drawer, socials as glyphs. Versions add their own module. */
+
+.teamPage {
+  --bar-h: 96px;
+  /* where sticky things under the bar start (the bar's real height is written by the page) */
+  --stick-top: calc(var(--nav-h) + var(--bar-h));
+}
+/* Sticky needs <body> not to be a scroll container (the original's global `* { overflow-x:
+   hidden }` makes it one). Undone here while /team is mounted, whichever version. */
+:global(body):has(.teamPage) {
+  overflow: visible;
+}
+
+/* ---------- the head: h1 + lede, and (phones) the search under them */
+.headSearch {
+  margin-top: var(--s-5);
+}
+
+/* ---------- the sticky bar: tabs · search, then years · count */
+.bar {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 5;
+  padding: var(--s-3) var(--gutter) var(--s-2);
+  /* (opaque rather than a backdrop blur: the blur re-ran over the wall on every scrolled frame) */
+  background: rgba(5, 5, 6, 0.96);
+  border-bottom: 1px solid var(--line);
+}
+.barGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(14rem, 22rem);
+  column-gap: var(--col-gap);
+  row-gap: var(--s-1);
+  align-items: end;
+}
+.tabs.tabs {
+  grid-column: 1;
+  min-width: 0;
+  /* the tabs scroll sideways rather than wrap; the padding keeps focus rings inside the box */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  padding: 6px;
+  margin: -6px;
+}
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+.barSearch {
+  grid-column: 2;
+}
+/* no year chips (wide screens): the count sits between the tabs and the search, one row */
+@media (min-width: 1100px) {
+  .barCompact .barGrid {
+    grid-template-columns: minmax(0, 1fr) auto minmax(14rem, 22rem);
+  }
+  .barCompact .barSearch {
+    grid-column: 3;
+  }
+  .barCompact .barFoot {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+  }
+}
+.barFoot {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  min-width: 0;
+  min-height: 28px;
+}
+.years {
+  display: flex;
+  gap: var(--s-1);
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 3px;
+  margin: -3px;
+}
+.years::-webkit-scrollbar {
+  display: none;
+}
+.year {
+  appearance: none;
+  flex: none;
+  margin: 0;
+  padding: 5px 7px 4px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background: none;
+  color: var(--ink-3);
+  font: var(--t-mono) var(--f-mono);
+  letter-spacing: var(--ls-mono);
+  font-variant-numeric: lining-nums tabular-nums;
+  cursor: pointer;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+.year:hover,
+.year:focus-visible {
+  color: var(--ink);
+}
+.year[aria-current="true"] {
+  color: var(--ink);
+  border-color: rgba(69, 230, 255, 0.45);
+}
+.year:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.count {
+  margin: 0 0 0 auto;
+  flex: none;
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: var(--ls-meta);
+  text-transform: var(--tt-meta);
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.count b {
+  font-weight: 500;
+  color: var(--teal);
+}
+
+/* ---------- search: a glyph and the one underline field */
+.search {
+  position: relative;
+  display: block;
+  min-width: 0;
+}
+.searchGlyph {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -7px;
+  color: var(--ink-3);
+  pointer-events: none;
+}
+.searchInput.searchInput {
+  padding: 8px 0 8px 24px;
+  font: var(--t-small) var(--f-sans);
+  font-size: 0.9375rem;
+}
+.searchInput::-webkit-search-cancel-button {
+  filter: grayscale(1) brightness(1.4);
+}
+.search:focus-within .searchGlyph {
+  color: var(--teal);
+}
+
+/* ---------- a portrait: the frame at 3:4, the photo develops in as it loads */
+.portrait.portrait {
+  aspect-ratio: 3 / 4;
+  container-type: inline-size;
+  /* the tint's blend stays inside the frame (not over the room's moving light) */
+  isolation: isolate;
+}
+.portrait img {
+  position: absolute;
+  inset: 0;
+  object-position: center 28%;
+  opacity: 0;
+  transition:
+    opacity 160ms ease,
+    filter 90ms ease-out,
+    transform 160ms var(--ease-out);
+}
+.portrait[data-state="loaded"] img {
+  opacity: 1;
+}
+/* the initial letter, sized to the frame (a 40 px thumb and a 300 px dossier alike) */
+.initial.initial {
+  font-size: 42cqi;
+  text-transform: none;
+}
+.tint {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  background: var(--teal);
+  mix-blend-mode: color;
+  transition: opacity 90ms ease-out;
+}
+/* rest: grey with a breath of teal, a 3 px scan over it ("print on the floor") */
+.duo img {
+  filter: grayscale(1) contrast(1.08) brightness(0.78);
+}
+.duo .tint {
+  opacity: 0.22;
+}
+.duo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 3px);
+}
+/* lit: hover (pointers that hover), keyboard focus, pinned, or lit by the page */
+@media (hover: hover) {
+  [data-lights]:hover .duo img {
+    filter: none;
+  }
+  [data-lights]:hover .duo .tint {
+    opacity: 0;
+  }
+}
+[data-lights]:focus-visible .duo img,
+[data-lights][data-lit] .duo img,
+[data-lights][aria-pressed="true"] .duo img {
+  filter: none;
+}
+[data-lights]:focus-visible .duo .tint,
+[data-lights][data-lit] .duo .tint,
+[data-lights][aria-pressed="true"] .duo .tint {
+  opacity: 0;
+}
+
+/* ---------- the dossier */
+.dossier {
+  --dossier-text: 24rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  min-width: 0;
+}
+.hud {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 28px;
+  padding-top: var(--s-2);
+  border-top: 1px solid var(--line-2);
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: var(--ls-meta);
+  text-transform: var(--tt-meta);
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--ink-3);
+}
+.hudState {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  color: var(--ink-2);
+}
+.hudState::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 1px solid var(--ink-3);
+}
+.dossier[data-state="pinned"] .hudState {
+  color: var(--teal);
+}
+.dossier[data-state="pinned"] .hudState::before {
+  background: var(--teal);
+  border-color: var(--teal);
+}
+.dossier[data-state="preview"] .hudState::before {
+  border-color: var(--teal);
+}
+.hudNum {
+  margin-left: auto;
+}
+.hudClose {
+  appearance: none;
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin: -4px -4px -4px 0;
+  padding: 0;
+  border: 1px solid var(--line-2);
+  border-radius: 50%;
+  background: none;
+  color: var(--ink-2);
+  font: 400 1rem / 1 var(--f-sans);
+  cursor: pointer;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+.hudClose:hover,
+.hudClose:focus-visible {
+  color: var(--teal);
+  border-color: var(--teal);
+}
+
+/* the projector: 3:4, as wide as the column or as the viewport's free height allows */
+.projector.projector {
+  aspect-ratio: 3 / 4;
+  width: min(100%, max(160px, (100vh - var(--stick-top) - var(--s-5) - var(--dossier-text)) * 3 / 4));
+  width: min(100%, max(160px, (100dvh - var(--stick-top) - var(--s-5) - var(--dossier-text)) * 3 / 4));
+  transition: border-color 200ms ease;
+}
+.projector[data-pinned] {
+  border-color: rgba(69, 230, 255, 0.5);
+}
+.projector .layer {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 28%;
+  background: var(--bg-3);
+  opacity: 0;
+  transition: opacity 100ms ease-out;
+}
+.projector .layer.isReady {
+  opacity: 1;
+}
+.scan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 3px);
+}
+/* the hologram's re-scan: one teal line down the frame on each change */
+.sweep {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  pointer-events: none;
+  background: var(--teal);
+  box-shadow: 0 0 10px 1px rgba(69, 230, 255, 0.55);
+  opacity: 0;
+  animation: sweep 280ms var(--ease-out) both;
+}
+.sweep::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1px;
+  height: 48px;
+  background: linear-gradient(to top, rgba(69, 230, 255, 0.14), transparent);
+}
+@keyframes sweep {
+  0% {
+    top: 0;
+    opacity: 0.85;
+  }
+  85% {
+    opacity: 0.6;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+/* pinned: the cursor's grab brackets on the frame's corners ("the thing in hand") */
+.brackets {
+  --c: var(--teal);
+  --l: 16px;
+  position: absolute;
+  inset: 10px;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 120ms ease, transform 120ms var(--ease-out);
+  background:
+    linear-gradient(var(--c), var(--c)) top left / var(--l) 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) top left / 1px var(--l) no-repeat,
+    linear-gradient(var(--c), var(--c)) top right / var(--l) 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) top right / 1px var(--l) no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom left / var(--l) 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom left / 1px var(--l) no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom right / var(--l) 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom right / 1px var(--l) no-repeat;
+}
+.projector[data-pinned] .brackets {
+  opacity: 1;
+  transform: none;
+}
+
+.dText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+.dName {
+  margin: 0;
+  font: var(--t-sub) var(--f-display);
+  font-size: clamp(1.375rem, 1rem + 0.9vw, 1.875rem);
+  font-variation-settings: var(--fvs-display);
+  letter-spacing: var(--ls-sub);
+  color: var(--ink);
+  text-wrap: balance;
+}
+.dRoles {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  margin: var(--s-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.dRoles li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-1) var(--s-3);
+}
+.dRole {
+  font: var(--t-ui) var(--f-display);
+  font-variation-settings: var(--fvs-h3);
+  letter-spacing: var(--ls-ui);
+  text-transform: var(--tt-ui);
+  color: var(--teal);
+}
+.dTenure {
+  font: var(--t-mono) var(--f-mono);
+  letter-spacing: var(--ls-mono);
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--ink-2);
+}
+.dMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin: var(--s-3) 0 0;
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: var(--ls-meta);
+  text-transform: var(--tt-meta);
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--ink-3);
+}
+.dBlurb {
+  margin: var(--s-3) 0 0;
+  font: var(--t-small) var(--f-sans);
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+.dHint {
+  margin: var(--s-4) 0 var(--s-3);
+  font: var(--t-small) var(--f-sans);
+  color: var(--ink-3);
+}
+.dStats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-4) var(--s-5);
+  width: 100%;
+  margin: var(--s-5) 0 0;
+}
+.dStats > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--line);
+}
+.dStats dd {
+  order: -1;
+  margin: 0;
+  font: var(--t-sub) var(--f-display);
+  font-variation-settings: var(--fvs-display);
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--ink);
+}
+.dStats dt {
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: var(--ls-meta);
+  text-transform: var(--tt-meta);
+  color: var(--ink-3);
+}
+.dTeams {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3) var(--s-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.still.still {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+}
+.still img {
+  object-fit: cover;
+}
+
+/* socials: glyphs in one round box each, the handle under them */
+.dSocials {
+  margin-top: var(--s-3);
+}
+.socials {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin: 0 0 0 -8px;
+  padding: 0;
+  list-style: none;
+}
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: var(--ink-2);
+  transition: color 150ms ease;
+}
+.icon svg {
+  display: block;
+  flex: none;
+}
+.icon[data-on] {
+  color: var(--ink);
+}
+.icon:hover,
+.icon:focus-visible {
+  color: var(--teal);
+}
+.handle {
+  margin: 0;
+  font: var(--t-mono) var(--f-mono);
+  letter-spacing: var(--ls-mono);
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+.handleNet {
+  margin-right: var(--s-1);
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: var(--ls-meta);
+  text-transform: var(--tt-meta);
+  color: var(--ink-3);
+}
+.noLinks {
+  margin: var(--s-3) 0 0;
+  font: var(--t-mono) var(--f-mono);
+  color: var(--ink-3);
+}
+
+/* same batch: up to eight small faces, each pins */
+.mates {
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--line);
+}
+.matesHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  margin: 0 0 var(--s-2);
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: var(--ls-meta);
+  text-transform: var(--tt-meta);
+  color: var(--ink-3);
+}
+.matesLink {
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-decoration-color: var(--line-2);
+  text-underline-offset: 4px;
+  transition: color 150ms ease;
+}
+.matesLink:hover,
+.matesLink:focus-visible {
+  color: var(--teal);
+  text-decoration-color: var(--teal);
+}
+.matesList {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mate {
+  appearance: none;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: none;
+  cursor: pointer;
+}
+.mate:hover .portrait,
+.mate:focus-visible .portrait {
+  border-color: var(--line-2);
+}
+
+/* ---------- the drawer: a panel from the right, a bottom sheet on phones */
+.drawerWrap {
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+}
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 5, 6, 0.62);
+  animation: fadeIn 120ms ease both;
+}
+.drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(420px, 92vw);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: var(--s-6) var(--s-5) var(--s-6);
+  background: var(--bg-2);
+  border-left: 1px solid var(--line-2);
+  box-shadow: inset 1px 0 0 rgba(69, 230, 255, 0.3);
+  outline: none;
+  animation: fromRight 180ms var(--ease-out) both;
+}
+.drawer .projector.projector {
+  width: 100%;
+}
+.grip {
+  display: none;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes fromRight {
+  from {
+    transform: translateX(32px);
+    opacity: 0;
+  }
+}
+@keyframes fromBelow {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 1099px) {
+  .barGrid {
+    grid-template-columns: minmax(0, 1fr) minmax(12rem, 18rem);
+  }
+}
+
+@media (max-width: 759px) {
+  .bar {
+    padding-top: var(--s-2);
+  }
+  .barGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .tabs.tabs {
+    grid-column: 1;
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+    padding-right: 28px;
+  }
+  .barSearch {
+    grid-column: 1;
+  }
+  .barFoot {
+    flex-wrap: nowrap;
+  }
+  .years {
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 20px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 20px), transparent);
+    padding-right: 20px;
+  }
+  .drawer {
+    top: auto;
+    left: 0;
+    width: auto;
+    max-height: 88dvh;
+    padding: 0 var(--gutter) var(--s-6);
+    border-left: 0;
+    border-top: 1px solid var(--line-2);
+    border-radius: 14px 14px 0 0;
+    box-shadow: inset 0 1px 0 rgba(69, 230, 255, 0.3);
+    animation-name: fromBelow;
+  }
+  .grip {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    margin: 0 calc(-1 * var(--gutter));
+    padding: 10px 0 14px;
+    background: var(--bg-2);
+    touch-action: none;
+    cursor: grab;
+  }
+  .grip span {
+    width: 40px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--line-2);
+  }
+  /* the sheet: portrait left, who it is right; the rest full width */
+  .drawer .dossier {
+    display: grid;
+    grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
+    gap: var(--s-4);
+  }
+  .drawer .hud,
+  .drawer .mates {
+    grid-column: 1 / -1;
+  }
+  .drawer .dossier[data-state="idle"] .dText {
+    grid-column: 1 / -1;
+  }
+  .drawer .still {
+    align-self: start;
+  }
+  .drawer .dName {
+    font-size: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portrait img,
+  .tint,
+  .projector .layer,
+  .brackets,
+  .backdrop,
+  .drawer {
+    transition: none;
+    animation: none;
+  }
+  .sweep {
+    display: none;
+  }
+}
+.still0 .backdrop,
+.still0 .drawer {
+  animation: none;
+}

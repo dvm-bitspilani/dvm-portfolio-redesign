@@ -1,0 +1,300 @@
+/* ===================== Year by year: swarm → paper → strip ===================== */
+/* Transparent: the room's grid and pool are the backdrop. */
+.track {
+  position: relative;
+}
+.stage {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+  background: transparent;
+}
+.layer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  will-change: transform;
+}
+/* The strip's canvas: its ends fade off, and everything below the strip goes (Story.jsx sets
+   --cut / --cut-end from the strip's phase). That is where the kit's shadow catcher lays the cast
+   shadow, which on this transparent page reads as dark slabs under the strip. */
+.layer canvas {
+  -webkit-mask-image:
+    linear-gradient(to bottom, #000 var(--cut, 100%), transparent var(--cut-end, 100%)),
+    linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to bottom, #000 var(--cut, 100%), transparent var(--cut-end, 100%)),
+    linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%);
+  mask-composite: intersect;
+}
+/* Only the year under the camera shows its list (a focused one shows too: focusing scrolls to it). */
+.layer ol > li:not([data-active]):not(:focus-within) {
+  opacity: 0;
+  pointer-events: none;
+}
+.fade {
+  opacity: 0;
+  /* a short follow: the paper still cross-dissolves when its first frame lands mid-scroll */
+  transition: opacity 0.3s linear;
+}
+
+/* the chapter head, in the slot every chapter's title takes (--head-y); the rail's "Year by year"
+   label takes the same slot once the copy has gone */
+.copy {
+  position: absolute;
+  z-index: 3;
+  left: var(--gutter);
+  top: var(--head-y);
+  width: min(26vw, 380px);
+  pointer-events: none;
+}
+
+/* ---- where the reader is in the years: a rail across the top of the stage */
+.rail {
+  position: absolute;
+  z-index: 4;
+  left: var(--gutter);
+  right: var(--gutter);
+  top: 92px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  gap: var(--s-6);
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: var(--ls-meta);
+  text-transform: var(--tt-meta);
+  color: var(--ink-3);
+  opacity: 0;
+}
+.railLabel {
+  color: var(--ink-2);
+}
+.railCount {
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.railTrack {
+  position: relative;
+  height: 30px;
+  margin: 0 2.4em; /* the first and last years sit centred on the ends of the line */
+  padding: 0;
+  list-style: none;
+}
+/* the line, and how far along it the reader is (--p, from Story.jsx) */
+.railTrack::before,
+.railTrack::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 6px;
+  height: 1px;
+  background: var(--line-2);
+}
+.railTrack::after {
+  background: var(--teal);
+  transform: scaleX(var(--p, 0));
+  transform-origin: 0 50%;
+  box-shadow: 0 0 8px rgba(69, 230, 255, 0.35);
+}
+.railTrack li {
+  position: absolute;
+  top: 0;
+  translate: -50% 0;
+}
+.railYear {
+  appearance: none;
+  display: block;
+  margin: 0;
+  padding: 14px 4px 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: color 200ms ease;
+}
+/* each year's tick on the line */
+.railYear::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 3px;
+  width: 1px;
+  height: 7px;
+  background: var(--ink-3);
+  transition: background 200ms ease, transform 200ms ease;
+}
+.railYear:hover,
+.railYear:focus-visible {
+  color: var(--ink);
+}
+.railTrack li[data-active] .railYear {
+  color: var(--teal);
+}
+.railTrack li[data-active] .railYear::before {
+  background: var(--teal);
+  transform: scaleY(1.8);
+}
+
+/* ---- the year dossier: hung beside its year's list, on a thread from the year's stop. Placed
+   (transform, width, --reach, --card-max-h) by Story.jsx every frame. */
+.panelSlot {
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  top: 0;
+  width: 420px;
+  container-type: inline-size;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+/* the thread, from the stop's dot to the card */
+.panelSlot::before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 3px;
+  width: var(--reach, 0px);
+  height: 1px;
+  background: linear-gradient(to right, rgba(69, 230, 255, 0.55), var(--line-2) 60%);
+  pointer-events: none;
+}
+/* short viewports: the dossier scrolls inside its card rather than being cut off */
+.panel.panel {
+  max-height: var(--card-max-h, calc(100vh - 128px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  /* the shared panel material (ui.module.css .panel); blurred, as it floats over a moving strip */
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+/* wide enough: the still beside the text rather than under it */
+@container (min-width: 380px) {
+  .panel.panelWithStill {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
+    column-gap: var(--s-5);
+    align-content: start;
+  }
+  .panel.panelWithStill > * {
+    grid-column: 1;
+  }
+  .panel.panelWithStill > .panelStill {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    margin: 0;
+  }
+}
+.panelHeadline {
+  margin: var(--s-2) 0 0;
+  font: var(--t-body) var(--f-sans);
+  color: var(--ink-2);
+}
+.panelEditions {
+  list-style: none;
+  margin: var(--s-4) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-1);
+  font: var(--t-small) var(--f-sans);
+}
+.panelFest {
+  font: var(--t-strong) var(--f-sans);
+  font-variation-settings: var(--fvs-text);
+  color: var(--ink);
+}
+.panelTheme {
+  color: var(--ink-2);
+}
+.panelStill {
+  margin: var(--s-4) 0 0;
+}
+.panelFrame.panelFrame {
+  aspect-ratio: 16 / 9;
+}
+.panelCaption {
+  margin-top: var(--s-2);
+  font: var(--t-small) var(--f-sans);
+  color: var(--ink-3);
+}
+.panelFacts {
+  margin: var(--s-4) 0 0;
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: var(--s-2);
+}
+.panelFacts div {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: var(--s-2);
+  font: var(--t-small) var(--f-sans);
+}
+/* keys ("Shipped / Joined / Artwork") are Meta; values stay small */
+.panelFacts dt {
+  padding-top: 2px;
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: var(--ls-meta);
+  text-transform: var(--tt-meta);
+  color: var(--ink-3);
+}
+.panelFacts dd {
+  margin: 0;
+  color: var(--ink);
+}
+.panelLink {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--line-2);
+  text-underline-offset: 3px;
+  transition: color 150ms ease, text-decoration-color 150ms ease;
+}
+.panelLink:hover,
+.panelLink:focus-visible {
+  color: var(--teal);
+  text-decoration-color: var(--teal);
+}
+
+/* ---- phones / reduced motion: the vertical paper strip in the flow */
+.flowLinks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-4) var(--s-5);
+  margin-top: var(--s-7);
+}
+
+@media (max-width: 1100px) {
+  .copy {
+    width: min(30vw, 320px);
+  }
+  .panelStill {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fade {
+    transition: none;
+  }
+}
+
+/* The timeline kit's per-year note asks for Instrument Serif italic, which V8 never loads (it fell
+   back to Georgia). Set it in V8's data register instead, like the rest of the strip's labels:
+   on the pinned stage and on the phones' vertical strip in the flow. */
+.flow {
+  position: relative;
+}
+.stage :global([class*="capNote"]),
+.flow :global([class*="capNote"]) {
+  font: 400 12px/1.4 var(--f-mono);
+  font-style: normal;
+  letter-spacing: 0.04em;
+  color: var(--ink-3, rgba(242, 245, 247, 0.55));
+}

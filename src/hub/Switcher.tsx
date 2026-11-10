@@ -1,13 +1,17 @@
-import { useEffect, useRef, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { original, variantEntries, kitEntries, type Entry } from './catalog'
 import { LOGO_PATHS, LOGO_TRANSFORM, LOGO_VIEWBOX } from '../immersive/shared/logo'
+// V8's knobs: a tiny import-free module (V8's own chunk stays out of the hub bundle)
+import { V8_TEAMS, V8_TEAM_NAMES, V8_TEAM_TITLES, getV8Controls, setV8Team, subscribeV8Controls } from '../variants/v8/controls'
 import s from './switcher.module.css'
 
 /**
  * One switcher for the whole preview app: Hub · Original · V1…V7 · Lab · Kit.
  * Bottom-left, V hides it. On /lab the lab's own HUD (which has a Hub link) takes over, so this
  * one is not rendered there. Phones get a single button that opens the full list.
+ * On /v/v8 it is V8's own control strip instead: Hub (and, on /v/v8/team, which version of the
+ * team page: A · Wall / B · Credits / C · Lineage / Current).
  */
 type Where = { key: string; label: string }
 
@@ -24,6 +28,39 @@ function useWhere(pathname: string): Where {
     return { key: id, label: v ? `${v.code ?? ''} ${v.name}`.trim() : id }
   }
   return { key: '', label: 'Menu' }
+}
+
+const isV8 = (pathname: string) => pathname === '/v/v8' || pathname.startsWith('/v/v8/')
+const isV8Team = (pathname: string) => pathname.replace(/\/+$/, '') === '/v/v8/team'
+
+/** V8, on the team page only: which version of /team is shown (applies at once, remembered). */
+function V8TeamKnob() {
+  const { team } = useSyncExternalStore(subscribeV8Controls, getV8Controls, getV8Controls)
+  const { search, hash } = useLocation()
+  const navigate = useNavigate()
+  const pick = (id: string) => {
+    setV8Team(id)
+    // a ?team= in the address would win again on reload: keep it in step with the choice
+    const q = new URLSearchParams(search)
+    if (q.has('team') && q.get('team') !== id) {
+      q.set('team', id)
+      navigate({ search: `?${q}`, hash }, { replace: true, preventScrollReset: true })
+    }
+  }
+  return (
+    <span className={s.cluster}>
+      <span className={s.label} id="v8-team-label">
+        Team
+      </span>
+      <span className={s.set} role="group" aria-labelledby="v8-team-label">
+        {V8_TEAMS.map((id) => (
+          <button key={id} type="button" className={s.item} aria-pressed={team === id} title={V8_TEAM_TITLES[id]} onClick={() => pick(id)}>
+            {V8_TEAM_NAMES[id]}
+          </button>
+        ))}
+      </span>
+    </span>
+  )
 }
 
 export default function Switcher() {
@@ -54,6 +91,23 @@ export default function Switcher() {
   useEffect(() => setMenu(null), [pathname])
 
   if (hidden || pathname === '/lab' || pathname.startsWith('/lab/')) return null
+
+  if (isV8(pathname))
+    return (
+      <div ref={wrap} className={`${s.wrap} ${s.v8}`} data-dvm-switcher="">
+        <Link to="/" className={`${s.item} ${s.hub}`} title="Hub: everything in one place">
+          <svg viewBox={`0 0 ${LOGO_VIEWBOX} ${LOGO_VIEWBOX}`} aria-hidden="true">
+            <g transform={`translate(${LOGO_TRANSFORM.x} ${LOGO_TRANSFORM.y})`}>
+              {LOGO_PATHS.map((d) => (
+                <path key={d} d={d} />
+              ))}
+            </g>
+          </svg>
+          <span className={s.hubLabel}>Hub</span>
+        </Link>
+        {isV8Team(pathname) && <V8TeamKnob />}
+      </div>
+    )
 
   const close = () => setMenu(null)
   const current = (e: Entry) => (pathname === e.to || pathname.startsWith(`${e.to}/`) ? 'page' : undefined)

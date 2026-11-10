@@ -51,6 +51,7 @@ const VARIANT_LINKS: Record<string, [string, string][]> = {
   v1: [['About', 'about'], ['Team', 'team'], ['Archive', 'archive']],
   v2: [['Legacy', 'legacy'], ['Projects', 'projects'], ['Team', 'team'], ['Archive', 'archive'], ['Contact', 'contactus']],
   v3: [['Projects', 'projects'], ['Team', 'team'], ['Archive', 'archive']],
+  v8: [['Projects', 'projects'], ['Team', 'team'], ['Alumni', 'alumni'], ['Archive', 'archive']],
 }
 const DEFAULT_LINKS: [string, string][] = [['Projects', 'projects'], ['Team', 'team'], ['Legacy', 'legacy'], ['Archive', 'archive']]
 

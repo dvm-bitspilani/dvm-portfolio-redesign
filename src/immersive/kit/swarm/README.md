@@ -65,6 +65,7 @@ const bind = useSwarmHover({ placement: 'right' })        // nearest provider
 | `quality` | `'auto'` | `'low'` 102k / DPR 1, `'high'` 262k / DPR 2 (touch: 32k / 102k) |
 | `interactive` | `true` | Cursor wake + parallax |
 | `holdToAttract` | `true` | Mouse/pen hold on empty space (not on text, links or `[data-swarm-nohold]`) |
+| `ignoreCursor` | `false` | Opt-in: while `true` the cursor leaves the swarm alone (no repel, vortex, wake or black hole), e.g. while a hover name is showing. Eases back in when cleared. Parallax is unaffected |
 | `background` | `'#050506'` | `'transparent'` composites as light over your DOM, without dark discs |
 | `bloom` | `true` | |
 | `parallax`, `brightness` | `0.35`, `1` | |
@@ -75,7 +76,7 @@ const bind = useSwarmHover({ placement: 'right' })        // nearest provider
 
 ## Controller (`ref` / `useSwarm()`)
 
-`setTarget(t, opts?)`, `override(t, opts?)`, `clearOverride()`, `preload(targets[])`, `scrub(a, b, t, optsA?, optsB?)` (drive from a GSAP ScrollTrigger `progress`; preload first), `explode(strength?)`, `stats()`. The controller outlives engine rebuilds and replays the current formation onto a new engine.
+`setTarget(t, opts?)`, `override(t, opts?)`, `clearOverride()`, `preload(targets[])`, `scrub(a, b, t, optsA?, optsB?)` (drive from a GSAP ScrollTrigger `progress`; preload first), `explode(strength?)`, `setView({ x, y, scale } | null)`, `stats()`. `setView` (opt-in) draws the formation as if the canvas were translated by `x, y` px and scaled by `scale` about its top-left corner, by moving the camera: use it to carry a formation across the page on scroll without CSS-transforming the canvas, so its edges never come into view. The controller outlives engine rebuilds and replays the current formation onto a new engine.
 
 ## Performance
 

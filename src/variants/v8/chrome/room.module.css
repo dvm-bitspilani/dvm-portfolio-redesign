@@ -1,0 +1,29 @@
+/* The one grid: 1px hairlines every 30px, from x = 0 of the viewport (the hero's overlay uses the
+   same pitch and origin, so the lines run on across the seam). */
+.grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(to right, var(--grid) 0 1px, transparent 1px 30px);
+}
+
+/* The one pool of light: a pure gradient (its own falloff, no texture, no mask), screen-blended
+   onto the .root floor (keep .root's background dark). */
+.light {
+  --lx: 50vw;
+  --ly: 45vh;
+  --lr: 34vw;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.8;
+  background: radial-gradient(
+    circle var(--lr) at var(--lx) var(--ly),
+    rgba(69, 230, 255, 0.14) 0%,
+    rgba(69, 230, 255, 0.06) 38%,
+    transparent 72%
+  );
+  mix-blend-mode: screen;
+}

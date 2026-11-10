@@ -59,6 +59,17 @@ export interface SwarmShowOptions {
   burst?: number
 }
 
+/**
+ * A view of the formation plane: drawn as if the canvas were translated by (x, y) px and scaled by
+ * `scale` about its top-left corner. The engine moves its camera instead, so the canvas (and its
+ * ambient dust) still fills its box.
+ */
+export interface SwarmView {
+  x: number
+  y: number
+  scale: number
+}
+
 /** Imperative handle (via `ref` on SwarmField, or `useSwarm()` under a SwarmProvider). */
 export interface SwarmController {
   /** Set the base formation. Resolves when the shape is built and on stage (or superseded). */
@@ -74,6 +85,11 @@ export interface SwarmController {
    * Targets must already be built (call preload first); otherwise this builds them and is a no-op until ready.
    */
   scrub(a: SwarmTarget, b: SwarmTarget, t: number, options?: SwarmShowOptions, optionsB?: SwarmShowOptions): void
+  /**
+   * Opt-in: carry the formation across the canvas without moving the canvas (e.g. a scroll-driven
+   * glide). null (the default) is the plain view. Applied on the next frame, unsmoothed.
+   */
+  setView(view: SwarmView | null): void
   /** Throw particles outward from the formation's centre. */
   explode(strength?: number): void
   /** Engine stats for debugging / perf HUDs. */

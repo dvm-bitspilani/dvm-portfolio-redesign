@@ -1,0 +1,159 @@
+/* ===================== Contact + footer ===================== */
+.contact {
+  min-height: auto;
+}
+.page {
+  min-height: 100vh;
+  padding-top: var(--s-9);
+}
+
+/* the rig: the ASCII mark (5 columns) beside the terminal (7) */
+.rig {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--col-gap);
+  align-items: start;
+}
+/* as tall as the terminal beside it (about square at 5 columns) */
+.ascii.ascii {
+  position: relative;
+  align-self: stretch;
+  min-height: 420px;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ---- footer: a div with role contentinfo (the base CSS positions every <footer>) */
+.footer {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--col-gap);
+  row-gap: var(--s-6);
+  margin-top: var(--s-9);
+  padding-top: var(--s-7);
+  border-top: 1px solid var(--line);
+}
+.endWord {
+  grid-column: 1 / span 5;
+  margin: 0;
+  font: var(--t-end) var(--f-mark);
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "dlig" 0, "clig" 0;
+  color: var(--ink);
+}
+.siteLinks {
+  grid-column: 7 / span 3;
+}
+.siteLinks ul,
+.socials {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.siteLinks ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-3) var(--s-5);
+}
+.socials {
+  grid-column: 10 / -1;
+  display: grid;
+  gap: var(--s-3);
+  align-content: start;
+}
+.footLink {
+  font: var(--t-ui) var(--f-display);
+  font-variation-settings: var(--fvs-h3);
+  letter-spacing: var(--ls-ui);
+  text-transform: var(--tt-ui);
+  color: var(--ink-2);
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+.footLink:hover,
+.footLink:focus-visible {
+  color: var(--teal);
+}
+.legal,
+.made {
+  margin: 0;
+  font: var(--t-small) var(--f-sans);
+  color: var(--ink-3);
+}
+.legal {
+  grid-column: 1 / span 6;
+}
+.made {
+  grid-column: 7 / -1;
+  justify-self: end;
+}
+/* the credit's heart: the mark's print (the same gradient and hairline as chrome.module.css
+   .print / .printEdge), faceted, at the text's x-height */
+.heart {
+  display: inline-block;
+  width: 13px;
+  height: 12px;
+  margin: 0 0.1em;
+  vertical-align: -1px;
+  overflow: visible;
+  transition: filter 150ms ease;
+}
+.heartEdge {
+  fill: none;
+  stroke: rgba(242, 245, 247, 0.35);
+  stroke-width: 1;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+/* "DVM" in the credit links home: the sentence's own type, the footer links' teal on hover */
+.madeLink.madeLink {
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: none;
+  font-variation-settings: normal;
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: color 150ms ease, text-decoration-color 150ms ease;
+}
+.madeLink.madeLink:hover,
+.madeLink.madeLink:focus-visible {
+  color: var(--teal);
+  text-decoration-color: var(--teal);
+}
+.made:has(.madeLink:hover, .madeLink:focus-visible) .heart {
+  filter: brightness(1.15) drop-shadow(0 0 4px rgba(69, 230, 255, 0.45));
+}
+
+@media (max-width: 900px) {
+  .rig {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ascii.ascii {
+    width: min(100%, 420px);
+    aspect-ratio: 1;
+    min-height: 0;
+  }
+}
+@media (max-width: 759px) {
+  .footer {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--s-6);
+  }
+  .endWord,
+  .siteLinks,
+  .socials,
+  .legal,
+  .made {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .heart,
+  .madeLink.madeLink {
+    transition: none;
+  }
+}

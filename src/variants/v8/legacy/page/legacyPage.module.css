@@ -1,0 +1,1083 @@
+/* /alumni (round 3: research/v8-alumni-page-r3.md): the head (h1 and the mark, three counters, the
+   wall of big names), Companies (the sector map), People (the loom), three links. The chapter
+   skeleton is ui.module.css; this file is the page's own pieces. One company disc everywhere (.co),
+   one people language (the pills, legacy/branch.module.css), one status word (.tag). Teal only for
+   state: an open disc, its branch, a lit row. Nothing is encoded that needs a legend. */
+
+/* Sticky (the loom's team captions) needs <body> not to be a scroll container; the original's global
+   overflow makes it one (see pages/team.module.css). Undone while this page is mounted. */
+:global(body):has(.page) {
+  overflow: visible;
+}
+
+/* ===================== head: the h1 (the mark behind the intro's right side), the readout, the wall */
+.head.head {
+  padding-top: 40px;
+  padding-bottom: var(--s-4);
+}
+.headIntro {
+  position: relative;
+}
+.headTitle,
+.names,
+.readout {
+  position: relative;
+  z-index: 1;
+}
+/* the mark's layer: the intro's right side, reaching up under the nav; it fades out before the wall */
+.headMark {
+  position: absolute;
+  top: calc(-1 * var(--s-9));
+  bottom: calc(-1 * var(--s-5));
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 64%, transparent 98%);
+  mask-image: linear-gradient(to bottom, #000 64%, transparent 98%);
+}
+@media (min-width: 760px) {
+  .headIntro {
+    display: flex;
+    align-items: flex-end;
+    min-height: 210px;
+  }
+}
+
+/* the readout: three counters, value over key, between hairlines */
+.readout {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: var(--s-5) 0 0;
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--line);
+}
+.counter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  min-width: 0;
+  padding: 0 var(--s-5);
+  border-left: 1px solid var(--line);
+}
+.counter:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+.counterVal {
+  order: -1;
+  margin: 0;
+  font: var(--t-num) var(--f-display);
+  font-variation-settings: var(--fvs-display);
+  font-variant-numeric: lining-nums tabular-nums;
+  letter-spacing: var(--ls-num);
+  color: var(--ink);
+  white-space: nowrap;
+}
+.counterKey {
+  margin: 0;
+}
+
+/* ===================== the wall of big names: the tier-1 companies in the sector panels' frame */
+.names {
+  margin-top: var(--s-6);
+  padding: 16px 16px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(10, 12, 14, 0.42);
+}
+.names::before,
+.names::after,
+.panelBox::before,
+.panelBox::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+}
+.names::before,
+.panelBox::before {
+  top: -1px;
+  left: -1px;
+  border-top: 1px solid rgba(69, 230, 255, 0.55);
+  border-left: 1px solid rgba(69, 230, 255, 0.55);
+  border-top-left-radius: var(--radius);
+}
+.names::after,
+.panelBox::after {
+  right: -1px;
+  bottom: -1px;
+  border-right: 1px solid rgba(69, 230, 255, 0.55);
+  border-bottom: 1px solid rgba(69, 230, 255, 0.55);
+  border-bottom-right-radius: var(--radius);
+}
+.namesGrid {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.plate {
+  display: flex;
+  min-width: 0;
+}
+
+/* ===================== a company (CompanyDisc): the same button on the wall and on the map */
+.co {
+  appearance: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 160ms var(--ease-out);
+}
+.co:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: -2px;
+}
+.coDisc {
+  /* wordmarks (Samsung, Goldman Sachs, Cisco, AmEx, Uber…) get a wider box in LegacyCircle */
+  --glyph-w: 84%;
+  --glyph-h: 60%;
+  position: relative;
+  flex: none;
+  width: var(--d);
+  height: var(--d);
+  border-radius: 50%;
+  outline: 1.5px solid transparent;
+  outline-offset: 4px;
+  transition: outline-color 160ms var(--ease-out);
+}
+/* the logo plate: a lifted disc with a faint rim of light, so a logo sits on something, not in a hole */
+.coDisc > span {
+  background: radial-gradient(circle at 50% 30%, #1a2125 0%, #0d1113 72%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition:
+    border-color 160ms var(--ease-out),
+    box-shadow 160ms var(--ease-out);
+}
+.coName {
+  font: var(--t-small) var(--f-sans);
+  font-size: 0.8125rem;
+  line-height: 1.25;
+  color: var(--ink-2);
+  transition: color 160ms var(--ease-out);
+}
+.coCount.coCount {
+  margin-top: 2px;
+  font-size: 0.625rem;
+  white-space: nowrap;
+}
+/* open (hover, focus, its people out) and kin (open from its other disc, or a person at it hovered):
+   the logo in full colour (LegacyCircle `lit`), a teal rim and a glow */
+.co:is([data-open], [data-kin], :focus-visible) .coDisc > span {
+  border-color: var(--teal);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 0 18px rgba(69, 230, 255, 0.22);
+}
+.co:is([data-open], [data-kin], :focus-visible) .coName {
+  color: var(--ink);
+}
+@media (hover: hover) {
+  .page:not([data-co-open="pinned"]) .co:hover .coDisc > span {
+    border-color: var(--teal);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 0 18px rgba(69, 230, 255, 0.22);
+  }
+  .co:hover .coName {
+    color: var(--ink);
+  }
+}
+/* pinned: the one full ring on the page, and it means "selected" */
+.co[data-pinned] .coDisc {
+  outline-color: var(--teal);
+}
+/* while one company is open, every other disc steps back */
+.page[data-co-open] .co:not([data-open], [data-kin]) {
+  opacity: 0.38;
+}
+
+/* on the wall: names in ink, a size up */
+.co[data-variant="wall"] {
+  padding: 12px 4px 12px;
+}
+.co[data-variant="wall"] .coName {
+  max-width: 100%;
+  margin-top: 8px;
+  font: var(--t-strong) var(--f-sans);
+  font-size: 0.875rem;
+  line-height: 1.2;
+  color: var(--ink);
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+/* on the map: the cell is the button; disc 6 px from the top (mapLayout DISC_Y = 30), the name at 60 */
+.co[data-variant="map"] {
+  position: absolute;
+  inset: 0;
+  justify-content: flex-start;
+  padding-top: 6px;
+}
+.co[data-variant="map"] .coName {
+  align-self: stretch;
+  margin-top: 6px;
+  padding: 0 4px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+.co[data-variant="map"] .coName[data-long] {
+  padding: 0;
+  margin-inline: -2px;
+  font-size: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+/* ===================== chapters */
+.sec.sec {
+  padding-top: var(--s-8);
+  scroll-margin-top: calc(var(--nav-h) + var(--s-5) - var(--s-8));
+}
+.secTitle.secTitle {
+  margin-bottom: var(--s-6);
+}
+
+/* ===================== Companies: the sector map (research/v8-legacy-companies-viz.md §3–§5)
+   Nine framed panels; in each, a strict grid of discs. Geometry: mapLayout.js (panels are placed
+   absolutely in their balanced column, so the DOM stays in reading order). */
+.map {
+  --gap: var(--col-gap);
+  --pw: calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));
+  position: relative;
+}
+.panel {
+  position: absolute;
+  left: calc(var(--col) * (var(--pw) + var(--gap)));
+  width: var(--pw);
+  margin: 0;
+}
+.panelBox {
+  position: relative;
+  box-sizing: border-box;
+  height: 100%;
+  /* 13 + 13 + the two borders = mapLayout's PAD (28) */
+  padding: 13px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(10, 12, 14, 0.35);
+  transition: border-color 200ms ease;
+}
+.panel[data-active] .panelBox {
+  border-color: var(--line-2);
+}
+/* the head (20) + 16 = mapLayout's HEAD (36) */
+.panelHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  height: 20px;
+  margin-bottom: 16px;
+}
+.mapSector.mapSector {
+  margin: 0;
+  min-width: 0;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.panelNums {
+  flex: none;
+  margin: 0;
+}
+.field {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.star {
+  position: absolute;
+}
+
+/* the entrance, panel by panel as each comes into view (Companies sets data-in): the panel rises,
+   its discs settle — a row of panels in turn, left to right */
+@media (prefers-reduced-motion: no-preference) {
+  .panel {
+    transition:
+      opacity 500ms var(--ease-out),
+      translate 500ms var(--ease-out);
+    transition-delay: calc(var(--col) * 90ms);
+  }
+  .panel:not([data-in]) {
+    opacity: 0;
+    translate: 0 16px;
+  }
+  .star .coDisc {
+    transition:
+      scale 400ms var(--ease-out),
+      outline-color 160ms var(--ease-out);
+    transition-delay: calc(120ms + var(--col, 0) * 90ms + var(--k) * 12ms), 0ms;
+  }
+  .panel:not([data-in]) .coDisc {
+    scale: 0.82;
+  }
+}
+
+/* ===================== the branch layer (Branch.jsx): fixed over the page, below the nav; only the
+   pills and the band to them take the pointer. The pill and connector look: branch.module.css */
+.branch {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  transition: opacity 120ms ease;
+}
+.branch[data-away] {
+  visibility: hidden;
+}
+.branch[data-out] {
+  opacity: 0;
+}
+.branchList {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+}
+/* (a button sizes to its content where a link stretches: held to the pill's width, so it ellipsises) */
+.pillBtn {
+  appearance: none;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.pillMore {
+  height: 38px;
+  box-sizing: border-box;
+  padding: 0 14px;
+  font: 600 12px / 1 var(--f-sans);
+  color: var(--ink-2);
+}
+/* the Intern tag: the page's one status mark, a word (full-time is the unmarked default) */
+.tag {
+  display: inline-block;
+  flex: none;
+  padding: 1px 5px 0;
+  border: 1px solid var(--line-2);
+  border-radius: 3px;
+  font: 500 0.5625rem / 1.5 var(--f-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+/* in a pill it keeps to the role line's height, so every pill is as tall as the others */
+.branch .tag {
+  padding: 0 4px;
+  line-height: 1.25;
+}
+@media (prefers-reduced-motion: reduce) {
+  .branch {
+    transition-duration: 80ms;
+  }
+}
+
+/* ===================== the sheet (touch screens, phones): a company's people from the bottom */
+.sheetRoot {
+  position: fixed;
+  inset: 0;
+  z-index: 1002;
+}
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  animation: scrimIn 240ms ease both;
+}
+@keyframes scrimIn {
+  from {
+    opacity: 0;
+  }
+}
+.sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  max-height: 72vh;
+  padding: var(--s-4) var(--s-4) calc(var(--s-4) + env(safe-area-inset-bottom, 0px));
+  border: 1px solid var(--line-2);
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;
+  background: rgba(10, 12, 14, 0.96);
+  box-shadow: 0 -24px 60px rgba(0, 0, 0, 0.6);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  text-align: left;
+  animation: sheetIn 240ms var(--ease-out) both;
+}
+@keyframes sheetIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+.sheetHead {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  column-gap: var(--s-3);
+  align-items: center;
+  padding-bottom: var(--s-3);
+  border-bottom: 1px solid var(--line);
+}
+.sheetTitle {
+  min-width: 0;
+}
+.sheetName,
+.sheetCount {
+  margin: 0;
+}
+.sheetName {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sheetCount {
+  margin-top: 2px;
+}
+.sheetClose {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  margin: -12px -8px -12px 0;
+  padding: 0 8px 0 12px;
+  border: 0;
+  background: none;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.sheetClose > span {
+  font-size: 1rem;
+  line-height: 1;
+}
+.sheetClose:focus-visible {
+  outline-offset: -2px;
+}
+.sheetList {
+  flex: 1;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.person {
+  border-bottom: 1px solid var(--line);
+  animation: develop 240ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 30ms);
+}
+.person:last-child {
+  border-bottom: 0;
+}
+@keyframes develop {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+.personBtn {
+  appearance: none;
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  column-gap: var(--s-3);
+  align-items: center;
+  width: 100%;
+  min-height: 60px;
+  margin: 0;
+  padding: var(--s-2) 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.personBtn:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: -2px;
+}
+.photo.photo {
+  flex: none;
+  height: auto;
+  aspect-ratio: 3 / 4;
+}
+.photo img {
+  object-position: top;
+}
+.photoInitial.photoInitial {
+  font: var(--t-strong) var(--f-display);
+}
+.who {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.personName,
+.roleText {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.oneLine {
+  white-space: nowrap;
+}
+.role.role {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: var(--ink-2);
+}
+
+/* ===================== People: the loom (research/v8-legacy-alumni-viz.md §3–§4)
+   A year per batch over a hairline, crossed by a lane per team (a plain hairline down its left,
+   captioned once and sticky). Where they meet: the rows (people with a published role) and, under
+   a rule, the names of the rest. ≥ 1280 the five lanes; below, per batch, team blocks. */
+.alumni {
+  position: relative;
+}
+
+/* the five team captions: stick under the nav while the loom scrolls; only once stuck do they get
+   a floor (reaching up under the nav), so at rest the room's grid runs through them */
+.threadRow {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 3;
+  container-type: scroll-state;
+}
+.threadRowIn,
+.lanes {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  column-gap: var(--col-gap);
+}
+.threadRowIn {
+  position: relative;
+}
+.threadRowIn::before {
+  content: "";
+  position: absolute;
+  inset: 0 calc(-1 * var(--s-3));
+  z-index: -1;
+  background: rgba(5, 5, 6, 0.9);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  pointer-events: none;
+}
+@container scroll-state(stuck: top) {
+  .threadRowIn::before {
+    top: calc(-1 * var(--nav-h));
+    opacity: 1;
+  }
+}
+/* no scroll-state queries (Safari, Firefox): the floor is always there, so rows never show through */
+@supports not (container-type: scroll-state) {
+  .threadRowIn::before {
+    opacity: 1;
+  }
+}
+.threadHead,
+.cellHead {
+  min-width: 0;
+  margin: 0;
+  white-space: nowrap;
+  color: var(--ink);
+}
+.threadHead {
+  padding: 10px 0 10px 14px;
+  border-bottom: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+/* a batch: the year over a hairline (drawn by ::after) */
+.railYear {
+  position: relative;
+  margin: var(--s-6) 0 0;
+  padding: 0 0 10px;
+  font: var(--t-sub) var(--f-display);
+  font-variation-settings: var(--fvs-display);
+  font-variant-numeric: lining-nums tabular-nums;
+  letter-spacing: var(--ls-sub);
+  color: var(--ink);
+}
+.railGroup:first-child > .railYear {
+  margin-top: var(--s-5);
+}
+.railYear::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--line-2);
+  transform-origin: left;
+}
+
+/* where a batch meets a team: the lane is the cell's left hairline */
+.cell {
+  position: relative;
+  min-width: 0;
+  min-height: 56px;
+  padding: 10px 8px 12px 14px;
+  border-left: 1px solid var(--line);
+}
+.cellHead {
+  margin: 0 0 8px;
+}
+.beads,
+.quiet {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* a person: photo, then name / company now / role / earlier */
+.bead {
+  position: relative;
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  column-gap: var(--s-3);
+  align-items: start;
+  /* the floor (hover / lit) reaches a little past the photo */
+  margin-left: -6px;
+  padding: 6px;
+  border-radius: var(--radius);
+  transition:
+    background-color 150ms ease,
+    box-shadow 150ms ease;
+}
+.bead + .bead {
+  margin-top: 10px;
+}
+.beadPhoto.beadPhoto {
+  margin-top: 2px;
+}
+.beadBody {
+  min-width: 0;
+}
+/* (the 4 px of padding, taken back by the margin, keep the link's focus ring inside the clip) */
+.beadName {
+  margin: -4px;
+  padding: 4px;
+  font: 600 0.9375rem / 1.25 var(--f-sans);
+  font-variation-settings: var(--fvs-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--ink);
+}
+.beadName a,
+.quietName a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+.beadName svg {
+  display: inline;
+  margin-left: 6px;
+  vertical-align: -1px;
+  color: var(--ink-3);
+  transition: color 150ms ease;
+}
+.beadName a:hover svg,
+.beadName a:focus-visible svg {
+  color: var(--teal);
+}
+.beadName a:hover,
+.quietName a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--line-2);
+}
+.beadName a:focus-visible,
+.quietName a:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 1px;
+  border-radius: 2px;
+}
+/* now: the company (a button that finds it on the map), and the Intern tag when it is that */
+.beadNow {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+  margin: 4px 0 0;
+}
+.chip {
+  appearance: none;
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 7px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: 500 0.8125rem / 1.3 var(--f-sans);
+  color: var(--ink-2);
+  text-align: left;
+  cursor: pointer;
+}
+.chipDisc.chipDisc {
+  margin-top: -2px;
+}
+.chipName {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.chipText {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition:
+    color 150ms ease,
+    text-decoration-color 150ms ease;
+}
+.chipName .tag {
+  margin-left: 7px;
+  vertical-align: 1px;
+}
+.chip:hover .chipText,
+.chip:focus-visible .chipText {
+  color: var(--ink);
+  text-decoration-color: var(--line-2);
+}
+.chip:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+.beadRole {
+  margin: 3px 0 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  font: var(--t-small) var(--f-sans);
+  font-size: 0.8125rem;
+  line-height: 1.3;
+  color: var(--ink-3);
+}
+.beadEarlier {
+  margin: 3px 0 0;
+  font: var(--t-small) var(--f-sans);
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--ink-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* lit (a company open above, or this company hovered): a floor and a teal bar, findable at a glance */
+.bead[data-kin] {
+  background: rgba(69, 230, 255, 0.05);
+  box-shadow: inset 2px 0 0 var(--teal);
+}
+.bead[data-kin] .chipText {
+  color: var(--ink);
+}
+
+/* the names of the rest of the team-year: no photo, no company */
+.beads + .quiet {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+.quietName {
+  /* room for the focus ring inside the clip */
+  margin: 0 -4px;
+  padding: 0 4px;
+  font: var(--t-small) var(--f-sans);
+  font-size: 0.8125rem;
+  line-height: 24px;
+  color: var(--ink-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 150ms ease;
+}
+.quietName a:hover,
+.quietName[data-kin] {
+  color: var(--ink);
+}
+
+/* below 1280: per batch, team blocks (empty teams omitted) */
+.blocks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-4) var(--col-gap);
+  margin-top: var(--s-3);
+}
+
+@media (hover: hover) {
+  .bead:hover {
+    background: rgba(17, 20, 23, 0.72);
+  }
+  .bead[data-kin]:hover {
+    background: rgba(69, 230, 255, 0.07);
+  }
+}
+
+/* a person found from a company's branch: the row lights and its bar pulses, then settles to lit */
+.bead[data-found] {
+  background: rgba(69, 230, 255, 0.09);
+  box-shadow:
+    inset 2px 0 0 var(--teal),
+    inset 0 0 0 1px rgba(69, 230, 255, 0.4);
+  animation: found 900ms var(--ease-out) 3;
+}
+@keyframes found {
+  0% {
+    box-shadow:
+      inset 2px 0 0 var(--teal),
+      inset 0 0 0 1px rgba(69, 230, 255, 0.4),
+      0 0 0 0 rgba(69, 230, 255, 0.5);
+  }
+  100% {
+    box-shadow:
+      inset 2px 0 0 var(--teal),
+      inset 0 0 0 1px rgba(69, 230, 255, 0.4),
+      0 0 0 8px rgba(69, 230, 255, 0);
+  }
+}
+
+/* the entrance, batch by batch as each comes into view (Alumni sets data-in on the batch's section):
+   the rule draws, the cells rise lane by lane */
+@media (prefers-reduced-motion: no-preference) {
+  .railYear::after {
+    transition: transform 600ms var(--ease-out);
+  }
+  .railGroup:not([data-in]) .railYear::after {
+    transform: scaleX(0);
+  }
+  .cell {
+    transition:
+      opacity 400ms var(--ease-out),
+      translate 400ms var(--ease-out);
+    transition-delay: calc(120ms + var(--t, 0) * 60ms);
+  }
+  .railGroup:not([data-in]) .cell {
+    opacity: 0;
+    translate: 0 8px;
+  }
+}
+
+/* ===================== the closing links */
+.close.close {
+  padding-top: var(--s-7);
+}
+.closeIn {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-4) var(--s-5);
+  padding-block: var(--s-7);
+  border-top: 1px solid var(--line);
+}
+
+/* ===================== other widths */
+@media (max-width: 1099px) {
+  .co[data-variant="wall"] {
+    padding-inline: 2px;
+  }
+  .co[data-variant="wall"] .coName {
+    font-size: 0.8125rem;
+    overflow-wrap: normal;
+  }
+}
+@media (max-width: 899px) {
+  .namesGrid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+@media (max-width: 759px) {
+  .head.head {
+    padding-top: var(--s-6);
+  }
+  .readout {
+    margin-top: var(--s-5);
+  }
+  .counter {
+    padding: 0 var(--s-3);
+  }
+  .counterVal {
+    font-size: clamp(2rem, 11vw, 3.5rem);
+  }
+  .names {
+    margin-top: var(--s-5);
+    padding: 8px 6px 4px;
+  }
+  .co[data-variant="wall"] {
+    padding: 10px 2px;
+  }
+  .co[data-variant="wall"] .coName {
+    font-size: 0.75rem;
+  }
+  /* the map: less padding, so four discs fit a row (mapLayout.panelPad) */
+  .panelBox {
+    padding-inline: 10px;
+  }
+  /* four a row: the names a size down, whole words (no mid-word breaks) */
+  .co[data-variant="map"] .coName {
+    padding: 0 1px;
+    font-size: 0.6875rem;
+    line-height: 1.2;
+    overflow-wrap: normal;
+    -webkit-hyphens: manual;
+    hyphens: manual;
+  }
+  .co[data-variant="map"] .coName[data-long] {
+    margin-inline: -4px;
+    font-size: 0.625rem;
+    letter-spacing: -0.015em;
+  }
+  .blocks {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--s-2);
+  }
+  /* (mapLayout ROW_H_NARROW: two lines of name and the count in 100 px) */
+  .co[data-variant="map"] .coCount {
+    line-height: 1.2;
+  }
+  .beadEarlier {
+    display: none;
+  }
+  /* a phone's 87 rows: tighter, the same four lines */
+  .cell {
+    padding: 8px 0 8px 14px;
+  }
+  .cellHead {
+    margin-bottom: 4px;
+  }
+  .railYear {
+    margin-top: 20px;
+  }
+  .bead {
+    padding: 3px 6px;
+  }
+  .bead + .bead {
+    margin-top: 2px;
+  }
+  .beadName {
+    line-height: 1.2;
+  }
+  .beadNow {
+    margin-top: 2px;
+  }
+  .chip {
+    line-height: 1.25;
+  }
+  .beadRole {
+    margin-top: 1px;
+    line-height: 1.25;
+  }
+  .beads + .quiet {
+    margin-top: 6px;
+    padding-top: 6px;
+  }
+  .quietName {
+    line-height: 21px;
+  }
+  .closeIn {
+    padding-block: var(--s-6);
+  }
+  .secTitle.secTitle {
+    margin-bottom: var(--s-5);
+  }
+  /* the full width holds two or three quiet names a line: they run on, dot-separated (each line's
+     leading dot sits in the 18 px the list is pulled left by, outside the clip) */
+  .quiet {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -18px;
+    clip-path: inset(-4px -4px -4px 16px);
+  }
+  .quietName {
+    max-width: 100%;
+  }
+  .quietName::before {
+    content: "·";
+    display: inline-block;
+    width: 18px;
+    text-align: center;
+    color: var(--ink-3);
+  }
+}
+@media (max-width: 559px) {
+  .namesGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .co,
+  .coDisc,
+  .coDisc > span,
+  .coName,
+  .panelBox,
+  .bead,
+  .beadName a,
+  .beadName svg,
+  .chipText,
+  .quietName,
+  .quietName a {
+    transition: none;
+  }
+  .person,
+  .scrim,
+  .sheet,
+  .bead[data-found] {
+    animation: none;
+  }
+}

@@ -1,0 +1,4462 @@
+{
+  "generatedAt": "2026-11-08",
+  "method": "Per-person public web search (WebSearch) on full name + 'BITS Pilani' + LinkedIn and on the exact LinkedIn slug from TeamInfo.json; LinkedIn result titles/snippets, plus GitHub profile company/bio fields (GitHub API) and other public pages clearly tied to the same person. Only companies tied to the person by exact LinkedIn slug, GitHub account, or name plus BITS Pilani/DVM context were kept. BITS Pilani, DVM, student clubs, fests, BITS research roles and open-source mentorship programs (GSoC, LFX) were excluded. Scope: batches 2022, 2021, 2020, 2019, 2018, 2017. LinkedIn pages were not fetched directly, so entries reflect what search snippets exposed and may be incomplete or out of date.",
+  "people": [
+    {
+      "id": 111,
+      "name": "Luv Gupta",
+      "batch": "2022",
+      "team": "Frontend",
+      "linkedin": "https://www.linkedin.com/in/luv-guptaa/",
+      "companies": [],
+      "notes": "not found (only GPLAN, a BITS research project, and campus clubs listed)"
+    },
+    {
+      "id": 112,
+      "name": "Sunpreet Brar",
+      "batch": "2022",
+      "team": "Design",
+      "linkedin": "https://www.linkedin.com/in/sunpreet-brar-a7806a251",
+      "companies": [],
+      "notes": "not found"
+    },
+    {
+      "id": 113,
+      "name": "Himanshu Kumar",
+      "batch": "2022",
+      "team": "Backend",
+      "linkedin": "https://www.linkedin.com/in/himanshu-kumar-679ab31b0",
+      "companies": [
+        {
+          "company": "CarWale",
+          "kind": "full-time",
+          "role": "Software Developer",
+          "year": null,
+          "source": "https://www.zoominfo.com/p/Himanshu-Kumar/10218052272",
+          "confidence": "medium"
+        },
+        {
+          "company": "Plux AI",
+          "kind": "intern",
+          "role": "Software Engineer & Intern",
+          "year": null,
+          "source": "https://www.zoominfo.com/p/Himanshu-Kumar/10218052272",
+          "confidence": "medium"
+        },
+        {
+          "company": "Oracle",
+          "kind": "intern",
+          "role": "Project Intern (NoSQL Migrator)",
+          "year": null,
+          "source": "https://www.zoominfo.com/p/Himanshu-Kumar/10218052272",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "ZoomInfo profile describes a DVM Core Backend Developer and Oasis Joint-Coordinator, matching this member, but links a different LinkedIn slug (himanshu8862)"
+    },
+    {
+      "id": 114,
+      "name": "Dhruv Verma",
+      "batch": "2022",
+      "team": "Video",
+      "linkedin": "https://www.linkedin.com/in/dhruv-verma-70582a249",
+      "companies": [],
+      "notes": "not found (common name; slug not indexed)"
+    },
+    {
+      "id": 115,
+      "name": "Arnav Bharti",
+      "batch": "2022",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/arnavbharti01/",
+      "companies": [],
+      "notes": "not found (PS-I 2024 placement listed in a BITS PDF but company not clearly attributable)"
+    },
+    {
+      "id": 116,
+      "name": "Pushkar Mishra",
+      "batch": "2022",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/pushkarm029/",
+      "companies": [
+        {
+          "company": "Yap Network",
+          "kind": "full-time",
+          "role": "Co-Founder & CTO",
+          "year": null,
+          "source": "https://www.linkedin.com/in/pushkarm029/",
+          "confidence": "high"
+        },
+        {
+          "company": "Hashlock",
+          "kind": "unknown",
+          "role": "Engineer (blockchain security audits)",
+          "year": null,
+          "source": "https://in.linkedin.com/in/pushkarm029",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Also LFX'24 mentee (CNCF/Jaeger) and NautilusTrader open-source contributor, not counted as employers"
+    },
+    {
+      "id": 117,
+      "name": "Praneel Maddula",
+      "batch": "2022",
+      "team": "Design",
+      "linkedin": "https://www.linkedin.com/in/praneel-maddula-409421261/",
+      "companies": [
+        {
+          "company": "IMC Trading",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://api.github.com/users/PraWater",
+          "confidence": "high"
+        }
+      ],
+      "notes": "From the company field of his GitHub profile (linked in TeamInfo)"
+    },
+    {
+      "id": 119,
+      "name": "Krishay Prakash",
+      "batch": "2022",
+      "team": "Design",
+      "linkedin": "https://www.linkedin.com/in/krishay-prakash-404130193",
+      "companies": [],
+      "notes": "not found"
+    },
+    {
+      "id": 121,
+      "name": "Manish Goyal",
+      "batch": "2022",
+      "team": "Video",
+      "linkedin": "https://www.linkedin.com/in/manish-goyal-30b884240",
+      "companies": [],
+      "notes": "not found (common name; slug not indexed)"
+    },
+    {
+      "id": 122,
+      "name": "Chayan Jain",
+      "batch": "2022",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/chayan-jain-558556258/",
+      "companies": [],
+      "notes": "not found"
+    },
+    {
+      "id": 123,
+      "name": "Malay Dwivedi",
+      "batch": "2022",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/malay-dwivedi-1038a6272",
+      "companies": [],
+      "notes": "not found"
+    },
+    {
+      "id": 124,
+      "name": "Raj Clerk",
+      "batch": "2022",
+      "team": "Backend",
+      "linkedin": "https://www.linkedin.com/in/rajclerk/",
+      "companies": [
+        {
+          "company": "Otto Money",
+          "kind": "intern",
+          "role": "Intern",
+          "year": "2026",
+          "source": "https://rocketreach.co/raj-clerk-email_756877121",
+          "confidence": "medium"
+        },
+        {
+          "company": "CogniX",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://rocketreach.co/raj-clerk-email_756877121",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "RocketReach profile (Pilani, BITS Pilani 2022, DVM back-end developer 2023-2025) matches this member; LinkedIn page itself not indexed"
+    },
+    {
+      "id": 125,
+      "name": "Sundar Matu",
+      "batch": "2022",
+      "team": "Video",
+      "linkedin": "https://www.linkedin.com/in/sundar-matu-516530275",
+      "companies": [
+        {
+          "company": "AlphaGrep",
+          "kind": "full-time",
+          "role": "Quantitative Researcher and Trader (after a six-month internship)",
+          "year": null,
+          "source": "https://www.linkedin.com/in/sundar-matu-516530275/",
+          "confidence": "high"
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "id": 127,
+      "name": "Satyam",
+      "batch": "2022",
+      "team": "Video",
+      "linkedin": "https://www.linkedin.com/in/satyam-kumar-811543275",
+      "companies": [],
+      "notes": "not found (common name; slug not indexed)"
+    },
+    {
+      "id": 128,
+      "name": "Rakshit Sakhuja",
+      "batch": "2022",
+      "team": "Backend",
+      "linkedin": "https://www.linkedin.com/in/rakshit-sakhuja-61ab00138",
+      "companies": [],
+      "notes": "not found"
+    },
+    {
+      "id": 129,
+      "name": "Arsh Singh",
+      "batch": "2022",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/arshsingh816b/",
+      "companies": [],
+      "notes": "not found"
+    },
+    {
+      "id": 130,
+      "name": "Ritik Chandra",
+      "batch": "2022",
+      "team": "Frontend",
+      "linkedin": "https://www.linkedin.com/in/ritik-chandra-016ba9187/",
+      "companies": [
+        {
+          "company": "Amazon",
+          "kind": "intern",
+          "role": "SDE Intern (incoming)",
+          "year": null,
+          "source": "https://www.linkedin.com/in/ritik-chandra-016ba9187/",
+          "confidence": "high"
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "id": 131,
+      "name": "Bharat Raj Singal",
+      "batch": "2022",
+      "team": "Frontend",
+      "linkedin": "https://www.linkedin.com/in/bharatrajsingal000/",
+      "companies": [
+        {
+          "company": "DeTrace",
+          "kind": "intern",
+          "role": "Founding Team (PS-I station, Braunschweig)",
+          "year": "2023-2024",
+          "source": "https://www.linkedin.com/in/bharat-raj-singal-012559250/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "BITS PS-I document also lists De Trace, Braunschweig as his station"
+    },
+    {
+      "id": 132,
+      "name": "Srinivasa Shankar",
+      "batch": "2022",
+      "team": "Video",
+      "linkedin": null,
+      "companies": [
+        {
+          "company": "Swecha",
+          "kind": "intern",
+          "role": "Intern",
+          "year": null,
+          "source": "https://www.linkedin.com/in/srinivasa-shankar-b1662524b/",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "TeamInfo has a Drive link instead of LinkedIn; matched by name + DVM graphic/video roles on the LinkedIn profile. Swecha Telangana is a free-software non-profit"
+    },
+    {
+      "id": 135,
+      "name": "Shiva Adithya M",
+      "batch": "2022",
+      "team": "Video",
+      "linkedin": "http://linkedin.com/in/shiva-adithya-555205254",
+      "companies": [
+        {
+          "company": "Nykaa",
+          "kind": "intern",
+          "role": "Software Development Engineer & Intern",
+          "year": null,
+          "source": "https://www.zoominfo.com/p/Shiva-Adithya/10262636163",
+          "confidence": "high"
+        },
+        {
+          "company": "T-Hub",
+          "kind": "intern",
+          "role": "Intern",
+          "year": null,
+          "source": "https://www.zoominfo.com/p/Shiva-Adithya/10262636163",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "ZoomInfo record links the exact LinkedIn slug from TeamInfo"
+    },
+    {
+      "id": 136,
+      "name": "Arnav Trehan",
+      "batch": "2022",
+      "team": "Design",
+      "linkedin": "https://www.linkedin.com/in/arnavtrehan/",
+      "companies": [],
+      "notes": "not found (PS-I 2024 entry exists but station not clearly attributable)"
+    },
+    {
+      "id": 137,
+      "name": "Himanshu",
+      "batch": "2022",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/himanshu-yadav-837682258?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BHUsuS8h0TH2d9M%2FMuBnIQA%3D%3D",
+      "companies": [],
+      "notes": "not found (common name; slug not indexed)"
+    },
+    {
+      "id": 138,
+      "name": "Shreyas Gantayet",
+      "batch": "2022",
+      "team": "Frontend",
+      "linkedin": "https://www.linkedin.com/in/shreyas-gantayet-4b5993280/",
+      "companies": [
+        {
+          "company": "OC Dermatology",
+          "kind": "intern",
+          "role": "Software Engineer & Intern",
+          "year": "2024-2025",
+          "source": "https://www.zoominfo.com/p/Shreyas-Gantayet/10191188863",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "ZoomInfo record lists DVM Frontend Web Developer and BITS Pilani, matching this member"
+    },
+    {
+      "id": 140,
+      "name": "Rudradatt Dave",
+      "batch": "2022",
+      "team": "Backend",
+      "linkedin": "https://www.linkedin.com/in/rudradatt-dave-65896b268/",
+      "companies": [],
+      "notes": "not found"
+    },
+    {
+      "id": 141,
+      "name": "Akshit Garg",
+      "batch": "2022",
+      "team": "Frontend",
+      "linkedin": "https://www.linkedin.com/in/akshit-garg-345a86201",
+      "companies": [
+        {
+          "company": "StampMyVisa",
+          "kind": "intern",
+          "role": "Software Development Engineer & Intern",
+          "year": null,
+          "source": "https://www.zoominfo.com/p/Akshit-Garg/12612888644",
+          "confidence": "medium"
+        },
+        {
+          "company": "Northern Railway",
+          "kind": "intern",
+          "role": "Summer intern, Locomotive Workshop",
+          "year": "2024",
+          "source": "https://www.zoominfo.com/p/Akshit-Garg/12612888644",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "ZoomInfo record lists DVM Frontend Developer 2023-2025 and BITS Pilani, matching this member"
+    },
+    {
+      "id": 142,
+      "name": "Tarun S",
+      "batch": "2022",
+      "team": "Video",
+      "linkedin": "https://www.linkedin.com/in/tarun-s-055967261",
+      "companies": [],
+      "notes": "not found"
+    },
+    {
+      "id": 144,
+      "name": "Nabisha Obaid",
+      "batch": "2022",
+      "team": "Design",
+      "linkedin": "https://www.linkedin.com/in/nabisha-obaid-19175a264",
+      "companies": [
+        {
+          "company": "Axis Bank",
+          "kind": "intern",
+          "role": "Product intern, Business Solutions Group (received pre-placement offer)",
+          "year": null,
+          "source": "https://www.linkedin.com/in/nabisha-obaid-19175a264/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "From her own LinkedIn post as surfaced in search snippets"
+    },
+    {
+      "id": 145,
+      "name": "Vatsal Agrawal",
+      "batch": "2022",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/vatsalkagrawal/",
+      "companies": [],
+      "notes": "not found (only DVM, BITS ACM and a BITS research assistantship)"
+    },
+    {
+      "id": 146,
+      "name": "Gurekas Singh Sahney",
+      "batch": "2022",
+      "team": "Backend",
+      "linkedin": "https://www.linkedin.com/in/gurekas/",
+      "companies": [
+        {
+          "company": "Flipkart",
+          "kind": "unknown",
+          "role": "Software Engineer",
+          "year": null,
+          "source": "https://www.zoominfo.com/p/Gurekas-Sahney/10219174434",
+          "confidence": "high"
+        }
+      ],
+      "notes": "ZoomInfo record links the exact LinkedIn slug (in/gurekas) and DVM backend/Projects Head roles"
+    },
+    {
+      "id": 147,
+      "name": "Tejansh Gautam",
+      "batch": "2022",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/tejansh-gautam-a4716527b/",
+      "companies": [
+        {
+          "company": "Staqo",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.zoominfo.com/p/Tejansh-Gautam/12475494449",
+          "confidence": "medium"
+        },
+        {
+          "company": "Manodayam",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.zoominfo.com/p/Tejansh-Gautam/12475494449",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "ZoomInfo record (BITS Pilani, DVM, PMP mentor) matches this member but links a different LinkedIn slug"
+    },
+    {
+      "id": 126,
+      "name": "Rahul Gupta",
+      "batch": "2022",
+      "team": "Video",
+      "linkedin": "https://www.linkedin.com/in/rahul-gupta-234446208/",
+      "companies": [
+        {
+          "company": "FirstClub",
+          "kind": "full-time",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/rahul-gupta-234446208/",
+          "confidence": "high"
+        },
+        {
+          "company": "Ripplica",
+          "kind": "unknown",
+          "role": "Gen AI Engineer",
+          "year": "2025",
+          "source": "https://in.linkedin.com/in/rahul-gupta-234446208",
+          "confidence": "high"
+        },
+        {
+          "company": "CSIR-CEERI",
+          "kind": "intern",
+          "role": "Research Intern",
+          "year": "2024-2025",
+          "source": "https://rocketreach.co/rahul-gupta-email_736191016",
+          "confidence": "medium"
+        },
+        {
+          "company": "Foozie.Fit",
+          "kind": "intern",
+          "role": "Marketing Intern",
+          "year": "2023",
+          "source": "https://rocketreach.co/rahul-gupta-email_736191016",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "DVM StuCCAn (head) for Oasis 2025"
+    },
+    {
+      "id": 79,
+      "name": "Harsh Singh",
+      "batch": "2021",
+      "team": "Backend",
+      "linkedin": "https://www.linkedin.com/in/harsh-singh-049838227/",
+      "companies": [],
+      "notes": "not found (common name; slug not indexed)"
+    },
+    {
+      "id": 80,
+      "name": "Shwetabh Niket",
+      "batch": "2021",
+      "team": "Frontend",
+      "linkedin": "https://www.linkedin.com/in/niketshwetabh/",
+      "companies": [
+        {
+          "company": "Windfall Research",
+          "kind": "full-time",
+          "role": "Founding blockchain developer",
+          "year": null,
+          "source": "https://www.linkedin.com/in/niketshwetabh/",
+          "confidence": "high"
+        },
+        {
+          "company": "Eddy Finance",
+          "kind": "unknown",
+          "role": "web3",
+          "year": null,
+          "source": "https://www.linkedin.com/in/niketshwetabh/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Eddy Finance from an earlier LinkedIn headline ('web3 @ eddy.finance | DVM')"
+    },
+    {
+      "id": 81,
+      "name": "Shashvat Singh",
+      "batch": "2021",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/shashvatsingh/",
+      "companies": [
+        {
+          "company": "Clueso",
+          "kind": "intern",
+          "role": "Software developer intern",
+          "year": null,
+          "source": "https://www.linkedin.com/in/shashvatsingh/",
+          "confidence": "high"
+        },
+        {
+          "company": "Fello",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/shashvatsingh/",
+          "confidence": "high"
+        },
+        {
+          "company": "Multipl",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/shashvatsingh/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Headline: 'intern @ clueso (yc w23) | prev: fello (yc w22), multipl'"
+    },
+    {
+      "id": 82,
+      "name": "Sejal Agarwal",
+      "batch": "2021",
+      "team": "Design",
+      "linkedin": "https://www.linkedin.com/in/sejal-agarwal-618176228/",
+      "companies": [
+        {
+          "company": "WEX",
+          "kind": "full-time",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/sejal-agarwal-618176228/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Joined WEX India after graduating"
+    },
+    {
+      "id": 83,
+      "name": "Prateek Kashyap",
+      "batch": "2021",
+      "team": "Frontend",
+      "linkedin": "https://www.linkedin.com/in/prateek-kashyap-770647226/",
+      "companies": [
+        {
+          "company": "Capital One",
+          "kind": "full-time",
+          "role": "SWE Intern, then Associate",
+          "year": "2024-",
+          "source": "https://www.apollo.io/people/Prateek/Kashyap/61f374a32baa22000132a4ed",
+          "confidence": "high"
+        },
+        {
+          "company": "Clueso",
+          "kind": "unknown",
+          "role": "Software",
+          "year": null,
+          "source": "https://www.apollo.io/people/Prateek/Kashyap/61f374a32baa22000132a4ed",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "LinkedIn headlines seen in sidebars: 'Associate @Capital One • BITS Pilani CSE 25', earlier 'Software @Clueso • DVM StuCCAn'; own profile URL not indexed"
+    },
+    {
+      "id": 84,
+      "name": "HARSHIT SARAF",
+      "batch": "2021",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/harshit-saraf-494450230/",
+      "companies": [
+        {
+          "company": "CSIR-CDRI",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.zoominfo.com/p/Harshit-Saraf/8388367777",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "CSIR-CDRI appears in a LinkedIn headline ('DVM | Postman API LAB | CSIR-CDRI | ACM | KXR Lab'); ZoomInfo links the exact slug"
+    },
+    {
+      "id": 86,
+      "name": "Nitin Aravind Birur",
+      "batch": "2021",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/nitin-a-b-921285229",
+      "companies": [
+        {
+          "company": "Enkrypt AI",
+          "kind": "full-time",
+          "role": "Founding Engineer / AI security researcher",
+          "year": null,
+          "source": "https://www.linkedin.com/in/nitin-birur-921285229/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Slug suffix matches TeamInfo"
+    },
+    {
+      "id": 87,
+      "name": "Santosh Reddy Dwarampudi",
+      "batch": "2021",
+      "team": "Video",
+      "linkedin": "https://www.linkedin.com/in/santosh-reddy-dwarampudi-6b9728234",
+      "companies": [],
+      "notes": "not found (a namesake at Zaggle is a different person)"
+    },
+    {
+      "id": 88,
+      "name": "Achinthya Hebbar S",
+      "batch": "2021",
+      "team": "AppDev",
+      "linkedin": "http://www.linkedin.com/in/achinthya-hebbar",
+      "companies": [
+        {
+          "company": "Oracle",
+          "kind": "full-time",
+          "role": "Project Intern (Jan 2025), then Member of Technical Staff-1",
+          "year": "2025",
+          "source": "https://www.linkedin.com/in/achinthya-hebbar/",
+          "confidence": "high"
+        },
+        {
+          "company": "Samsung R&D Institute India",
+          "kind": "intern",
+          "role": "Graphic Software Engineer Intern",
+          "year": "2024",
+          "source": "https://www.linkedin.com/in/achinthya-hebbar/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "MTS-1 title from theorg.com (unverified there)"
+    },
+    {
+      "id": 89,
+      "name": "Maanas M Singh",
+      "batch": "2021",
+      "team": "Backend",
+      "linkedin": "https://www.linkedin.com/mwlite/in/maanas-singh-482318240",
+      "companies": [
+        {
+          "company": "Uber",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": null,
+          "source": "https://www.linkedin.com/in/maanas-singh-482318240/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Current experience listed as Uber; full-time status not confirmed"
+    },
+    {
+      "id": 90,
+      "name": "Mayank Garg",
+      "batch": "2021",
+      "team": "Video",
+      "linkedin": null,
+      "companies": [],
+      "notes": "not found (no LinkedIn in TeamInfo; common name)"
+    },
+    {
+      "id": 92,
+      "name": "Jay Goyal",
+      "batch": "2021",
+      "team": "Frontend",
+      "linkedin": "https://www.linkedin.com/in/jay-goyal-41395b224/",
+      "companies": [
+        {
+          "company": "Medsupervision",
+          "kind": "intern",
+          "role": "PS-I intern (web/medical-data platform)",
+          "year": null,
+          "source": "https://www.bits-pilani.ac.in/wp-content/uploads/Healthcare-Final-version-PS-I-Chronicles.pdf",
+          "confidence": "high"
+        }
+      ],
+      "notes": "BITS PS-I Chronicles lists JAY GOYAL (2021A7PS2418P) at Medsupervision Pvt. Ltd., Faridabad; DVM frontend credit on BOSM developers page"
+    },
+    {
+      "id": 93,
+      "name": "Azzaam Usmani",
+      "batch": "2021",
+      "team": "Video",
+      "linkedin": "https://www.linkedin.com/in/azzaam-usmani-73aa06240",
+      "companies": [],
+      "notes": "not found"
+    },
+    {
+      "id": 95,
+      "name": "Prakhar Gurunani",
+      "batch": "2021",
+      "team": "Backend",
+      "linkedin": "https://www.linkedin.com/in/prakhargurunani/",
+      "companies": [
+        {
+          "company": "Simplismart",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": "2024",
+          "source": "https://www.linkedin.com/in/prakhargurunani/",
+          "confidence": "high"
+        },
+        {
+          "company": "UnifyApps",
+          "kind": "full-time",
+          "role": "Product Analyst",
+          "year": null,
+          "source": "https://www.zoominfo.com/p/Prakhar-Gurunani/7757493534",
+          "confidence": "medium"
+        },
+        {
+          "company": "Flippy",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": null,
+          "source": "https://www.linkedin.com/in/prakhargurunani/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Also GSoC 2022 (52North) and GSoC 2024 (MetaCall), not counted as employers"
+    },
+    {
+      "id": 96,
+      "name": "Vaibhav Singla",
+      "batch": "2021",
+      "team": "Frontend",
+      "linkedin": "https://www.linkedin.com/in/vaibhav-singla-8128321b3",
+      "companies": [
+        {
+          "company": "Microsoft",
+          "kind": "intern",
+          "role": "SWE Intern",
+          "year": null,
+          "source": "https://www.linkedin.com/in/vaibhav-singla-8128321b3/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Headline said 'Upcoming SWE Intern @ Microsoft'"
+    },
+    {
+      "id": 97,
+      "name": "Siddharth Gupta",
+      "batch": "2021",
+      "team": "Video",
+      "linkedin": "https://www.linkedin.com/in/siddharth-gupta-8a5373221/",
+      "companies": [
+        {
+          "company": "Honda Motorcycle & Scooter India",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/siddharth-gupta-8a5373221/",
+          "confidence": "high"
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "id": 98,
+      "name": "Arinjay Saxena",
+      "batch": "2021",
+      "team": "Video",
+      "linkedin": "https://www.linkedin.com/in/arinjay-saxena",
+      "companies": [
+        {
+          "company": "Simplismart",
+          "kind": "full-time",
+          "role": "Founder's Office",
+          "year": "2025-",
+          "source": "https://profiles.crustdata.com/company/simplismart",
+          "confidence": "high"
+        },
+        {
+          "company": "TrueFoundry",
+          "kind": "unknown",
+          "role": "Founders' Office",
+          "year": "2023-2024",
+          "source": "https://rocketreach.co/arinjay-saxena-email_628099155",
+          "confidence": "medium"
+        },
+        {
+          "company": "MarianaAI",
+          "kind": "unknown",
+          "role": "Product Management",
+          "year": "2024",
+          "source": "https://rocketreach.co/arinjay-saxena-email_628099155",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "Also co-hosted a Simplismart x LiveKit webinar as 'CEO's Office @ SimpliSmart' (luma.com/jg93tpel)"
+    },
+    {
+      "id": 99,
+      "name": "Ritvik Mittal",
+      "batch": "2021",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/ritvik-mittal-384531237/",
+      "companies": [
+        {
+          "company": "Walmart",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": null,
+          "source": "https://www.linkedin.com/in/ritvik-mittal/",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "Only seen as a LinkedIn 'others named' sidebar headline ('SDE Intern @Walmart | Senior @BITS Pilani'); exact slug not indexed"
+    },
+    {
+      "id": 100,
+      "name": "Jayesh Harlalka",
+      "batch": "2021",
+      "team": "Video",
+      "linkedin": "https://www.linkedin.com/in/jayesh-harlalka-6b226221b/",
+      "companies": [],
+      "notes": "not found"
+    },
+    {
+      "id": 101,
+      "name": "Satyadev",
+      "batch": "2021",
+      "team": "Video",
+      "linkedin": "https://www.linkedin.com/in/satyadev-tatiparthi-23342b230",
+      "companies": [
+        {
+          "company": "Nielsen",
+          "kind": "full-time",
+          "role": "Member of Technical Staff",
+          "year": null,
+          "source": "https://www.zoominfo.com/p/Satyadev-Tatiparthi/14195870333",
+          "confidence": "high"
+        }
+      ],
+      "notes": "ZoomInfo record links the exact LinkedIn slug"
+    },
+    {
+      "id": 102,
+      "name": "NAGASIVA SAITEJA BUDDU",
+      "batch": "2021",
+      "team": "Video",
+      "linkedin": "https://www.linkedin.com/in/saiteja-b-4a3a3222b",
+      "companies": [],
+      "notes": "not found (only DVM and campus clubs listed)"
+    },
+    {
+      "id": 103,
+      "name": "Lovenya Jain",
+      "batch": "2021",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/lovenya-jain-44848818a/",
+      "companies": [
+        {
+          "company": "Mila - Quebec AI Institute",
+          "kind": "intern",
+          "role": "Research Intern (Audio AI)",
+          "year": null,
+          "source": "https://github.com/lovenya",
+          "confidence": "high"
+        },
+        {
+          "company": "People Interactive",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/lovenya-jain-44848818a/",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "People Interactive is only the title of the LinkedIn search result for his exact slug; role not visible"
+    },
+    {
+      "id": 104,
+      "name": "Vedant Vyas",
+      "batch": "2021",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/vedant-vyas-ab0742223",
+      "companies": [
+        {
+          "company": "Nielsen",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/vedant-vyas-ab0742223/",
+          "confidence": "high"
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "id": 105,
+      "name": "Alamuri Prabhas Kumar",
+      "batch": "2021",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/prabhas-kumar-alamuri-b2b257230",
+      "companies": [
+        {
+          "company": "Spanda AI",
+          "kind": "intern",
+          "role": "Artificial Intelligence Intern",
+          "year": null,
+          "source": "https://www.linkedin.com/in/prabhas-kumar-alamuri-b2b257230/",
+          "confidence": "high"
+        },
+        {
+          "company": "Pacify Medical Technologies",
+          "kind": "unknown",
+          "role": "Website Developer",
+          "year": null,
+          "source": "https://contactout.com/company/Pacify-Medical-Technologies-Pvt-Ltd-33313",
+          "confidence": "medium"
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "id": 106,
+      "name": "Utkarsh Sharma",
+      "batch": "2021",
+      "team": "Backend",
+      "linkedin": "http://linkedin.com/in/utkarsh314",
+      "companies": [],
+      "notes": "not found"
+    },
+    {
+      "id": 107,
+      "name": "Harshith Vasireddy",
+      "batch": "2021",
+      "team": "Backend",
+      "linkedin": "https://in.linkedin.com/in/harshith-vasireddy-22a484184",
+      "companies": [
+        {
+          "company": "D. E. Shaw",
+          "kind": "full-time",
+          "role": "Technology Developer Intern, then Member Technical",
+          "year": null,
+          "source": "https://www.linkedin.com/in/harshith-vasireddy/",
+          "confidence": "high"
+        },
+        {
+          "company": "SellerSetu",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/harshith-vasireddy-22a484184/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "GitHub (ode) company field @deshaw; later post suggests a PhD at TTIC (not counted)"
+    },
+    {
+      "id": 108,
+      "name": "Aditya Patil",
+      "batch": "2021",
+      "team": "Design",
+      "linkedin": "https://www.linkedin.com/in/theadityapatil",
+      "companies": [
+        {
+          "company": "Flint",
+          "kind": "unknown",
+          "role": "Growth (Flint Labs)",
+          "year": "2023-",
+          "source": "https://peerlist.io/adityaxpatil/resume",
+          "confidence": "medium"
+        },
+        {
+          "company": "Figr",
+          "kind": "unknown",
+          "role": "Building figr.design",
+          "year": null,
+          "source": "https://peerlist.io/adityaxpatil/resume",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "Matched via read.cv/Peerlist (BITS ECE 2021-2025, DVM UI/UX designer 2022-23), not the exact LinkedIn slug"
+    },
+    {
+      "id": 109,
+      "name": "Shivang Rai",
+      "batch": "2021",
+      "team": "Design",
+      "linkedin": "https://www.linkedin.com/in/shivang-rai-36a0481bb/",
+      "companies": [
+        {
+          "company": "Eddy Finance",
+          "kind": "unknown",
+          "role": "Product Designer",
+          "year": null,
+          "source": "https://www.linkedin.com/in/shivang-rai-36a0481bb/",
+          "confidence": "high"
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "id": 110,
+      "name": "Swaha Pati",
+      "batch": "2021",
+      "team": "Design",
+      "linkedin": "http://www.linkedin.com/in/swahapati",
+      "companies": [],
+      "notes": "not found"
+    },
+    {
+      "id": 40,
+      "name": "Adarsh Bhardwaj",
+      "batch": "2020",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/adarsh-bhardwaj-5b0ab720b/",
+      "companies": [
+        {
+          "company": "Evermorrow Labs",
+          "kind": "full-time",
+          "role": "Co-Founder",
+          "year": null,
+          "source": "https://www.linkedin.com/in/adarsh-alchemist-bhardwaj/",
+          "confidence": "high"
+        },
+        {
+          "company": "Planet Pokemon",
+          "kind": "unknown",
+          "role": "Founding Engineer",
+          "year": null,
+          "source": "https://www.linkedin.com/in/adarsh-alchemist-bhardwaj/",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "LinkedIn slug differs from TeamInfo but profile shows DVM Head of Department / APOGEE CoStAAn and BITS 2020-2024; also an Entrepreneur First participant (not counted)"
+    },
+    {
+      "id": 41,
+      "name": "Devashish Siwatch",
+      "batch": "2020",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/devashish-siwatch-487669176/",
+      "companies": [
+        {
+          "company": "UnifyApps",
+          "kind": "full-time",
+          "role": "Product Engineer",
+          "year": "2024-",
+          "source": "https://www.linkedin.com/in/devashish-siwatch/",
+          "confidence": "high"
+        },
+        {
+          "company": "Ericsson",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": null,
+          "source": "https://www.linkedin.com/in/devashish-siwatch/",
+          "confidence": "high"
+        },
+        {
+          "company": "Societe Generale",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": null,
+          "source": "https://www.linkedin.com/in/devashish-siwatch/",
+          "confidence": "high"
+        },
+        {
+          "company": "Firmi",
+          "kind": "unknown",
+          "role": "Founding Member",
+          "year": null,
+          "source": "https://www.zoominfo.com/p/Devashish-Siwatch/9024892485",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "LinkedIn vanity slug differs from TeamInfo but profile shows DVM OASIS Joint Coordinator"
+    },
+    {
+      "id": 43,
+      "name": "Praneet Karna",
+      "batch": "2020",
+      "team": "AppDev",
+      "linkedin": null,
+      "companies": [
+        {
+          "company": "Navi",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/praneet-karna-a3a005218/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "No LinkedIn in TeamInfo; matched via GitHub praneetk77 (App developer - DVM). Now a graduate student at CMU (not counted)"
+    },
+    {
+      "id": 44,
+      "name": "Aditya Thakur",
+      "batch": "2020",
+      "team": "Backend",
+      "linkedin": "https://linkedin.com/in/aditya11-thakur",
+      "companies": [
+        {
+          "company": "Dodge AI",
+          "kind": "full-time",
+          "role": "CTO & Co-Founder",
+          "year": "2025-",
+          "source": "https://www.crunchbase.com/person/aditya-thakur-fdd9",
+          "confidence": "high"
+        },
+        {
+          "company": "Interface AI",
+          "kind": "full-time",
+          "role": "CTO & Co-Founder",
+          "year": "2024-2025",
+          "source": "https://www.crunchbase.com/person/aditya-thakur-fdd9",
+          "confidence": "high"
+        },
+        {
+          "company": "Jar",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.crunchbase.com/person/aditya-thakur-fdd9",
+          "confidence": "medium"
+        },
+        {
+          "company": "PYOR",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.crunchbase.com/person/aditya-thakur-fdd9",
+          "confidence": "medium"
+        },
+        {
+          "company": "Mila - Quebec AI Institute",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.crunchbase.com/person/aditya-thakur-fdd9",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "Exact LinkedIn slug matches; GitHub company @Dodge-AI. Also Antler-backed (not counted)"
+    },
+    {
+      "id": 45,
+      "name": "Akshat Kumar",
+      "batch": "2020",
+      "team": "Backend",
+      "linkedin": "https://www.linkedin.com/in/akshat-kumar-b6a7411b6/",
+      "companies": [
+        {
+          "company": "JPMorgan Chase",
+          "kind": "intern",
+          "role": "MRGR Intern",
+          "year": null,
+          "source": "https://www.linkedin.com/in/akshat-kumar-0610/",
+          "confidence": "high"
+        },
+        {
+          "company": "Samsung R&D Institute India",
+          "kind": "intern",
+          "role": "System Structure Design",
+          "year": "2022",
+          "source": "https://www.linkedin.com/in/akshat-kumar-0610/",
+          "confidence": "high"
+        },
+        {
+          "company": "WorldQuant",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/akshat-kumar-akshat-kumar-0610",
+          "confidence": "medium"
+        },
+        {
+          "company": "Atlan",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/akshat-kumar-akshat-kumar-0610",
+          "confidence": "medium"
+        },
+        {
+          "company": "Jaguar Land Rover",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/akshat-kumar-akshat-kumar-0610",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "Matched via GitHub Akshat-Kumar-0610 (TeamInfo) = LinkedIn akshat-kumar-0610 (DVM Back End Developer 2021-22)"
+    },
+    {
+      "id": 46,
+      "name": "Dhruv Popuri",
+      "batch": "2020",
+      "team": "Backend",
+      "linkedin": null,
+      "companies": [
+        {
+          "company": "GeneralMind",
+          "kind": "full-time",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/dhruv-popuri-24540192/",
+          "confidence": "high"
+        },
+        {
+          "company": "Fibr",
+          "kind": "full-time",
+          "role": "Lead (joined out of college)",
+          "year": null,
+          "source": "https://www.linkedin.com/in/dhruv-popuri-24540192/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "No LinkedIn in TeamInfo; BITS hostel portal lists him as 2020-batch backend developer"
+    },
+    {
+      "id": 47,
+      "name": "Mohit Dilip Makwana",
+      "batch": "2020",
+      "team": "Backend",
+      "linkedin": "https://www.linkedin.com/in/mohitdmak/",
+      "companies": [
+        {
+          "company": "Stripe",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/mohitdmak/",
+          "confidence": "high"
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "id": 48,
+      "name": "Rutva Lingapuri",
+      "batch": "2020",
+      "team": "Frontend",
+      "linkedin": "https://www.linkedin.com/in/rutva-l-937587201/",
+      "companies": [],
+      "notes": "not found"
+    },
+    {
+      "id": 49,
+      "name": "Sarthak Arora",
+      "batch": "2020",
+      "team": "Frontend",
+      "linkedin": "https://www.linkedin.com/in/sarthak-arora-aa92b9201/",
+      "companies": [
+        {
+          "company": "Eightfold AI",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": null,
+          "source": "https://www.linkedin.com/in/sarthak-arora-aa92b9201/",
+          "confidence": "high"
+        },
+        {
+          "company": "Entelligence AI",
+          "kind": "full-time",
+          "role": "Founding Engineer (Full Stack + GenAI)",
+          "year": "2024-2025",
+          "source": "https://rocketreach.co/sarthak-arora-email_242281311",
+          "confidence": "high"
+        },
+        {
+          "company": "Samsung R&D Institute India",
+          "kind": "intern",
+          "role": "Intern",
+          "year": "2023",
+          "source": "https://rocketreach.co/sarthak-arora-email_242281311",
+          "confidence": "high"
+        },
+        {
+          "company": "Cenizas Labs",
+          "kind": "intern",
+          "role": "Intern",
+          "year": null,
+          "source": "https://rocketreach.co/sarthak-arora-email_242281311",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "GitHub bio 'Engineering @Eightfold.ai | CS 24 BITS Pilani'; earlier headline 'Founding Engineer @EntelligenceAI | Ex-Samsung R&D | GSoC @Apache'"
+    },
+    {
+      "id": 50,
+      "name": "Alvin A. Kumar",
+      "batch": "2020",
+      "team": "Frontend",
+      "linkedin": "https://www.linkedin.com/in/alvin-adarsh-kumar/",
+      "companies": [],
+      "notes": "not found (only DVM / Placement Unit roles visible)"
+    },
+    {
+      "id": 52,
+      "name": "Saksham Aggarwal",
+      "batch": "2020",
+      "team": "Frontend",
+      "linkedin": "https://www.linkedin.com/in/sakshamagg27/",
+      "companies": [
+        {
+          "company": "Cardboard",
+          "kind": "full-time",
+          "role": "Co-founder & CEO (YC W26)",
+          "year": "2025-",
+          "source": "https://www.ycombinator.com/founders/saksham-aggarwal",
+          "confidence": "high"
+        },
+        {
+          "company": "Iterate AI",
+          "kind": "full-time",
+          "role": "Co-founder",
+          "year": null,
+          "source": "https://www.linkedin.com/in/saksham-aggarwal-6425031b4/",
+          "confidence": "high"
+        },
+        {
+          "company": "PYOR",
+          "kind": "full-time",
+          "role": "Founding engineer",
+          "year": null,
+          "source": "https://cfp.in.pycon.org/2025/speaker/VDYJHY/",
+          "confidence": "high"
+        },
+        {
+          "company": "Flint",
+          "kind": "unknown",
+          "role": "Growth",
+          "year": null,
+          "source": "https://cfp.in.pycon.org/2025/speaker/VDYJHY/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Exact LinkedIn slug (sakshamagg27) shows Cardboard Inc. and BITS Pilani"
+    },
+    {
+      "id": 53,
+      "name": "Akshun Jain",
+      "batch": "2020",
+      "team": "Design",
+      "linkedin": "https://www.linkedin.com/in/akshun-jain-71340b203",
+      "companies": [
+        {
+          "company": "CRC-IB",
+          "kind": "full-time",
+          "role": "Investment Banking Analyst",
+          "year": null,
+          "source": "https://www.zoominfo.com/p/Akshun-Jain/8351810710",
+          "confidence": "high"
+        },
+        {
+          "company": "ASA Industries",
+          "kind": "unknown",
+          "role": "User Experience Designer",
+          "year": "2021",
+          "source": "https://www.zoominfo.com/p/Akshun-Jain/8351810710",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "LinkedIn (in/akshun-jain) shows CRC-IB + BITS Pilani; ZoomInfo/Apollo tie it to his DVM UI/UX role (OASIS 2021, APOGEE 2022)"
+    },
+    {
+      "id": 54,
+      "name": "Madhav Garg",
+      "batch": "2020",
+      "team": "Design",
+      "linkedin": "https://www.linkedin.com/in/madhav-garg-37b694207/",
+      "companies": [
+        {
+          "company": "Mesh Ergonomics",
+          "kind": "full-time",
+          "role": "Co-Founder",
+          "year": "2025-",
+          "source": "https://www.linkedin.com/in/madhav-garg-37b694207/",
+          "confidence": "high"
+        },
+        {
+          "company": "Simplismart",
+          "kind": "full-time",
+          "role": "Product Designer, then Founders Office (Design, Business Ops, Marketing)",
+          "year": "2022-2025",
+          "source": "https://rocketreach.co/madhav-garg-email_634687849",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Earlier LinkedIn headline: 'Building Simplismart | DVM | BITS Pilani'"
+    },
+    {
+      "id": 55,
+      "name": "Satvik Jain",
+      "batch": "2020",
+      "team": "Design",
+      "linkedin": null,
+      "companies": [
+        {
+          "company": "NVIDIA",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/satvik-jain-697700165/",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "No LinkedIn in TeamInfo. Profile 'NVIDIA | BITS Pilani 25' (Pilani campus, NSS graphic exec, two hidden Pilani roles) fits this DVM designer but is not explicitly tied to DVM; other Satvik Jains exist at BITS Goa"
+    },
+    {
+      "id": 56,
+      "name": "Karmanya Khanna",
+      "batch": "2020",
+      "team": "Video",
+      "linkedin": null,
+      "companies": [
+        {
+          "company": "Ciena",
+          "kind": "intern",
+          "role": "Software Engineer and Developer Tools Intern",
+          "year": null,
+          "source": "https://theorg.com/org/ciena/org-chart/karmanya-khanna",
+          "confidence": "medium"
+        },
+        {
+          "company": "STEM4All",
+          "kind": "intern",
+          "role": "Software Developer & Intern",
+          "year": null,
+          "source": "https://www.zoominfo.com/p/Karmanya-Khanna/8113530882",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "No LinkedIn in TeamInfo; ZoomInfo record mentions DVM Executive Committee and BITS Pilani (2020 batch ID in PS-I report). Later studied at SFU, Canada"
+    },
+    {
+      "id": 57,
+      "name": "Keshav Bansal",
+      "batch": "2020",
+      "team": "Video",
+      "linkedin": "https://www.linkedin.com/in/keshav-bansal-522004203/",
+      "companies": [
+        {
+          "company": "Ditto Insurance",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/keshav-bansal14/",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "LinkedIn slug differs from TeamInfo; profile lists BITS Pilani plus Department of Visual Media volunteer role"
+    },
+    {
+      "id": 58,
+      "name": "Nikhil Ratnaparkhi",
+      "batch": "2020",
+      "team": "Video",
+      "linkedin": null,
+      "companies": [
+        {
+          "company": "Max Planck Institute for Biology Tübingen",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/nikhil-ratnaparkhi/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "No LinkedIn in TeamInfo; profile headline '4th Year at BITS Pilani', name is distinctive and he is on DVM's APOGEE 2023 executive committee list. Likely a research internship/thesis"
+    },
+    {
+      "id": 68,
+      "name": "Arnav Gujrathi",
+      "batch": "2020",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/arnav-gujarathi-0b6aa8209/",
+      "companies": [
+        {
+          "company": "Amazon",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": null,
+          "source": "https://www.weekday.works/people/arnav-gujarathi-arnav-gujarathi",
+          "confidence": "high"
+        },
+        {
+          "company": "DRDO (ARDE)",
+          "kind": "intern",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/arnav-gujarathi-arnav-gujarathi",
+          "confidence": "medium"
+        },
+        {
+          "company": "Plutus Labs",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/arnav-gujarathi-arnav-gujarathi",
+          "confidence": "medium"
+        },
+        {
+          "company": "STEM4All",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/arnav-gujarathi-arnav-gujarathi",
+          "confidence": "medium"
+        },
+        {
+          "company": "Coinzy",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/arnav-gujarathi-arnav-gujarathi",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "Headline 'Ex-SDE Intern @Amazon | CS Senior @BITSPilani'; Weekday says currently at Amazon (full-time not confirmed)"
+    },
+    {
+      "id": 70,
+      "name": "Ansh Gupta",
+      "batch": "2020",
+      "team": "Video",
+      "linkedin": "http://www.linkedin.com/in/ansh-gupta-417829201",
+      "companies": [
+        {
+          "company": "Samsung R&D Institute India",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/ansh-gupta-417829201/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Profile lists DVM 3D Animator 2020-2022"
+    },
+    {
+      "id": 71,
+      "name": "Gurupam Dixit",
+      "batch": "2020",
+      "team": "Video",
+      "linkedin": "https://www.linkedin.com/in/gurupam-dixit-5b4b64166/",
+      "companies": [
+        {
+          "company": "Simplismart",
+          "kind": "full-time",
+          "role": "Product",
+          "year": null,
+          "source": "https://www.linkedin.com/in/gurupam/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Also a summer intern with the Indian Army (not counted)"
+    },
+    {
+      "id": 72,
+      "name": "Archit Jain",
+      "batch": "2020",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/archit-jain-673b47186/",
+      "companies": [],
+      "notes": "not found (only DVM / BOSM sports design roles visible)"
+    },
+    {
+      "id": 74,
+      "name": "Gaurav Mishra",
+      "batch": "2020",
+      "team": "Video",
+      "linkedin": "https://www.linkedin.com/in/gaurav-mishra-23a907214",
+      "companies": [
+        {
+          "company": "UBS",
+          "kind": "intern",
+          "role": "Quant Analyst Intern",
+          "year": null,
+          "source": "https://www.weekday.works/people/gaurav-mishra-gaurav-mishra-23a907214",
+          "confidence": "high"
+        },
+        {
+          "company": "Carscan.ai",
+          "kind": "intern",
+          "role": "Front-End Intern",
+          "year": null,
+          "source": "https://www.weekday.works/people/gaurav-mishra-gaurav-mishra-23a907214",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Weekday page mirrors the exact LinkedIn slug"
+    },
+    {
+      "id": 75,
+      "name": "Rohit Raj",
+      "batch": "2020",
+      "team": "Design",
+      "linkedin": "https://www.linkedin.com/in/rohit-raj-387baa20a/",
+      "companies": [
+        {
+          "company": "Oracle",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/rohit-raj-387baa20a/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "A sidebar headline 'ROHIT RAJ - Walmart | Atlassian | CRIS | BITS Pilani' (also Dhanbad) may be the same person but is not tied to the slug, so not counted"
+    },
+    {
+      "id": 76,
+      "name": "Pratham Birla",
+      "batch": "2020",
+      "team": "Video",
+      "linkedin": null,
+      "companies": [
+        {
+          "company": "JPMorgan Chase",
+          "kind": "full-time",
+          "role": "Credit Risk Analyst (after a 2023 internship)",
+          "year": "2024-",
+          "source": "https://www.linkedin.com/in/pratham-birla-a6b33a219/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "No LinkedIn in TeamInfo; profile lists DVM video editor 2021-2023 and BITS CSE 2020-2024. Also web developer for Indian Red Cross Society Karnataka (non-profit, not counted)"
+    },
+    {
+      "id": 78,
+      "name": "Harsh Rathi",
+      "batch": "2020",
+      "team": "Backend",
+      "linkedin": "https://www.linkedin.com/in/harshrathi2511/",
+      "companies": [
+        {
+          "company": "Simpl",
+          "kind": "intern",
+          "role": "SWE Intern",
+          "year": null,
+          "source": "https://www.zoominfo.com/p/Harsh-Rathi/11583751850",
+          "confidence": "high"
+        },
+        {
+          "company": "Zomato",
+          "kind": "intern",
+          "role": "SWE Intern",
+          "year": null,
+          "source": "https://www.zoominfo.com/p/Harsh-Rathi/11583751850",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "LinkedIn (harsh-rathi-532a4720a) shows Simpl + BITS Pilani, Mumbai (matches his Codeforces). ZoomInfo page mixes in another namesake, so Zomato is medium"
+    },
+    {
+      "id": 85,
+      "name": "Pritish Dakhole",
+      "batch": "2020",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/pritish-dakhole-2094a7200/",
+      "companies": [
+        {
+          "company": "Amazon",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": null,
+          "source": "https://www.linkedin.com/in/pritish-dakhole-2094a7200/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Profile currently lists Amazon (Bengaluru); full-time status not confirmed"
+    },
+    {
+      "id": 18,
+      "name": "Ayush Suman",
+      "batch": "2019",
+      "team": "AppDev",
+      "linkedin": "https://linkedin.com/in/ayushsuman",
+      "companies": [
+        {
+          "company": "Cenizas Labs",
+          "kind": "full-time",
+          "role": "System Engineer",
+          "year": null,
+          "source": "https://www.linkedin.com/in/ayushsuman/",
+          "confidence": "high"
+        },
+        {
+          "company": "Donut",
+          "kind": "full-time",
+          "role": "Founder",
+          "year": null,
+          "source": "https://www.weekday.works/people/ayush-suman-ayushsuman",
+          "confidence": "medium"
+        },
+        {
+          "company": "CSIR-CEERI",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/ayush-suman-ayushsuman",
+          "confidence": "medium"
+        },
+        {
+          "company": "Newton School",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/ayush-suman-ayushsuman",
+          "confidence": "medium"
+        },
+        {
+          "company": "Better",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/ayush-suman-ayushsuman",
+          "confidence": "medium"
+        },
+        {
+          "company": "Pepper Content",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/ayush-suman-ayushsuman",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "Exact LinkedIn slug; Cenizas Labs team page also lists him. Donut was his own bootstrapped social-welfare project"
+    },
+    {
+      "id": 19,
+      "name": "Shikhar Uttam",
+      "batch": "2019",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/shikhar-uttam/",
+      "companies": [
+        {
+          "company": "Amazon",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": null,
+          "source": "https://www.linkedin.com/in/shikhar-uttam/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "GitHub bio 'Software Engineer | Bits Pilani 24'"
+    },
+    {
+      "id": 20,
+      "name": "Anshal Shukla",
+      "batch": "2019",
+      "team": "Backend",
+      "linkedin": null,
+      "companies": [
+        {
+          "company": "Polygon Labs",
+          "kind": "full-time",
+          "role": "Blockchain Engineer",
+          "year": null,
+          "source": "https://devfolio.co/@anshalshukla/readme-md",
+          "confidence": "high"
+        }
+      ],
+      "notes": "No LinkedIn in TeamInfo; GitHub (anshalshukla) bio 'Prev: Engineer @maticnetwork, Protocol Fellow @EthereumFoundation'. EF fellowship not counted"
+    },
+    {
+      "id": 21,
+      "name": "Darsh Mishra",
+      "batch": "2019",
+      "team": "Backend",
+      "linkedin": "https://www.linkedin.com/in/darsh-mishra-9b7b7b18b/",
+      "companies": [
+        {
+          "company": "Hexa Climate",
+          "kind": "full-time",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/darsh-mishra-9b7b7b18b/",
+          "confidence": "high"
+        },
+        {
+          "company": "Amplus Solar",
+          "kind": "full-time",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/darsh-mishra-darsh-mishra-9b7b7b18b",
+          "confidence": "high"
+        },
+        {
+          "company": "Flippy",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/darsh-mishra-darsh-mishra-9b7b7b18b",
+          "confidence": "medium"
+        },
+        {
+          "company": "Flint",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/darsh-mishra-darsh-mishra-9b7b7b18b",
+          "confidence": "medium"
+        },
+        {
+          "company": "Hindustan Petroleum",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/darsh-mishra-darsh-mishra-9b7b7b18b",
+          "confidence": "medium"
+        },
+        {
+          "company": "Great Learning",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/darsh-mishra-darsh-mishra-9b7b7b18b",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "Exact LinkedIn slug. Weekday also lists EPFL (academic, not counted)"
+    },
+    {
+      "id": 22,
+      "name": "Sarthak Choudhary",
+      "batch": "2019",
+      "team": "Backend",
+      "linkedin": null,
+      "companies": [
+        {
+          "company": "Google",
+          "kind": "intern",
+          "role": "Research Intern",
+          "year": "2026",
+          "source": "https://www.alphaxiv.org/@sarthak-choudhary",
+          "confidence": "high"
+        }
+      ],
+      "notes": "No LinkedIn in TeamInfo; matched via GitHub sarthak-choudhary (BITS CS 2023). Now a PhD student at UW-Madison; NUS research not counted"
+    },
+    {
+      "id": 23,
+      "name": "Tirth Jain",
+      "batch": "2019",
+      "team": "Backend",
+      "linkedin": null,
+      "companies": [
+        {
+          "company": "Microsoft",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": null,
+          "source": "https://github.com/hedonhermdev",
+          "confidence": "high"
+        },
+        {
+          "company": "Maya Labs",
+          "kind": "full-time",
+          "role": null,
+          "year": null,
+          "source": "https://github.com/hedonhermdev",
+          "confidence": "high"
+        },
+        {
+          "company": "Apple",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/tirthjain/",
+          "confidence": "medium"
+        },
+        {
+          "company": "Hallparty",
+          "kind": "unknown",
+          "role": "Deployment work",
+          "year": null,
+          "source": "https://hedonhermdev.github.io/about/",
+          "confidence": "medium"
+        },
+        {
+          "company": "Inria",
+          "kind": "intern",
+          "role": "Research intern (Datamove team, Grenoble)",
+          "year": null,
+          "source": "https://hedonhermdev.github.io/about/",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "No LinkedIn in TeamInfo; matched via GitHub hedonhermdev. Headline 'Software Engineer @ Microsoft | Prev Maya Labs (YC 22)'. Apple appears on LinkedIn in/tirthjain (handle from his resume). University of Utah research internship not counted"
+    },
+    {
+      "id": 24,
+      "name": "Uday Singla",
+      "batch": "2019",
+      "team": "Backend",
+      "linkedin": null,
+      "companies": [
+        {
+          "company": "IGCAR",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/uday-singla-uday-singla-366001195",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "No LinkedIn in TeamInfo. Research internship at USC ISI and IISER (academic, not counted); now a PhD student at UW-Madison"
+    },
+    {
+      "id": 25,
+      "name": "Chirag Wadhwa",
+      "batch": "2019",
+      "team": "Frontend",
+      "linkedin": "https://www.linkedin.com/in/chirag-wadhwa-6767231aa/",
+      "companies": [
+        {
+          "company": "Confluent",
+          "kind": "full-time",
+          "role": "Software Engineer (SDE-1)",
+          "year": null,
+          "source": "https://www.linkedin.com/in/chirag-wadhwa-6767231aa/",
+          "confidence": "high"
+        },
+        {
+          "company": "Microsoft",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": null,
+          "source": "https://www.weekday.works/people/chirag-wadhwa-chirag-wadhwa",
+          "confidence": "high"
+        },
+        {
+          "company": "CSIR-CEERI",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/chirag-wadhwa-chirag-wadhwa",
+          "confidence": "medium"
+        },
+        {
+          "company": "ZedScore",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/chirag-wadhwa-chirag-wadhwa",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "Exact LinkedIn slug"
+    },
+    {
+      "id": 26,
+      "name": "Ishan Garg",
+      "batch": "2019",
+      "team": "Frontend",
+      "linkedin": "https://www.linkedin.com/in/igarg2001/",
+      "companies": [
+        {
+          "company": "Zenon",
+          "kind": "full-time",
+          "role": "Software Engineer II",
+          "year": null,
+          "source": "https://www.linkedin.com/in/ishan-garg-3737691ab/",
+          "confidence": "high"
+        },
+        {
+          "company": "WeSwap Mobility",
+          "kind": "intern",
+          "role": "Back End Developer",
+          "year": "2021",
+          "source": "https://www.linkedin.com/in/ishan-garg-3737691ab/",
+          "confidence": "high"
+        },
+        {
+          "company": "Gleebo",
+          "kind": "intern",
+          "role": "Full-stack Developer",
+          "year": "2021",
+          "source": "https://www.linkedin.com/in/ishan-garg-3737691ab/",
+          "confidence": "high"
+        },
+        {
+          "company": "Amikus AI",
+          "kind": "unknown",
+          "role": "Machine Learning Engineer",
+          "year": null,
+          "source": "https://theorg.com/org/zenon/org-chart/ishan-garg",
+          "confidence": "medium"
+        },
+        {
+          "company": "Virtuelly",
+          "kind": "unknown",
+          "role": "SDE",
+          "year": null,
+          "source": "https://theorg.com/org/zenon/org-chart/ishan-garg",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "LinkedIn metadata links in/igarg2001 (TeamInfo slug)"
+    },
+    {
+      "id": 27,
+      "name": "Manan Agrawal",
+      "batch": "2019",
+      "team": "Frontend",
+      "linkedin": "https://www.linkedin.com/in/manan-agrawal-850b911a0",
+      "companies": [],
+      "notes": "not found"
+    },
+    {
+      "id": 29,
+      "name": "Priyanshu Shukla",
+      "batch": "2019",
+      "team": "Frontend",
+      "linkedin": "https://linkedin.com/in/priyanshu-3109",
+      "companies": [
+        {
+          "company": "Houseware",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": null,
+          "source": "https://theorg.com/org/houseware/org-chart/priyanshu-shukla",
+          "confidence": "high"
+        },
+        {
+          "company": "LaunchDarkly",
+          "kind": "full-time",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/priyanshu-3109/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Exact LinkedIn slug; LaunchDarkly acquired Houseware. GitHub company @housewareHQ"
+    },
+    {
+      "id": 30,
+      "name": "Siddharth katyal",
+      "batch": "2019",
+      "team": "Frontend",
+      "linkedin": null,
+      "companies": [],
+      "notes": "not found (no LinkedIn in TeamInfo)"
+    },
+    {
+      "id": 31,
+      "name": "Daksh Aswal",
+      "batch": "2019",
+      "team": "Design",
+      "linkedin": "https://www.linkedin.com/in/dakshdesigns",
+      "companies": [
+        {
+          "company": "PixelUp Labs",
+          "kind": "full-time",
+          "role": "Founder / Creative Director",
+          "year": null,
+          "source": "https://www.linkedin.com/in/dakshdesigns/",
+          "confidence": "high"
+        },
+        {
+          "company": "Razorpay",
+          "kind": "full-time",
+          "role": "Product Designer",
+          "year": null,
+          "source": "https://www.linkedin.com/in/dakshdesigns/",
+          "confidence": "high"
+        },
+        {
+          "company": "Upstox",
+          "kind": "intern",
+          "role": "Design intern",
+          "year": null,
+          "source": "https://www.wallofportfolios.in/portfolios/daksh-aswal/",
+          "confidence": "high"
+        },
+        {
+          "company": "Newton School",
+          "kind": "unknown",
+          "role": "Product designer (one of the first designers)",
+          "year": null,
+          "source": "https://medium.com/design-bootcamp/designing-an-interview-feedback-experience-for-students-at-newton-school-case-study-627854ec31f8",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Exact LinkedIn slug (dakshdesigns)"
+    },
+    {
+      "id": 32,
+      "name": "Harshit Lohani",
+      "batch": "2019",
+      "team": "Design",
+      "linkedin": "https://www.linkedin.com/in/harshit-lohani-701b02212",
+      "companies": [
+        {
+          "company": "Cisco",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": null,
+          "source": "https://www.linkedin.com/in/harshit-lohani/",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "Headline 'Software Engineer @ Cisco Systems | BITS Pilani CS 2023'; slug differs from TeamInfo"
+    },
+    {
+      "id": 33,
+      "name": "Kanupriya Tola",
+      "batch": "2019",
+      "team": "Design",
+      "linkedin": "https://www.linkedin.com/in/kanupriyatola/",
+      "companies": [
+        {
+          "company": "PwC",
+          "kind": "full-time",
+          "role": "Associate, PwC Acceleration Centers",
+          "year": "2023-",
+          "source": "https://www.linkedin.com/in/kanupriya-tola-4b4021179/",
+          "confidence": "high"
+        },
+        {
+          "company": "Credit Suisse",
+          "kind": "intern",
+          "role": "Global Market Risk Management Intern",
+          "year": "2022",
+          "source": "https://www.linkedin.com/in/kanupriya-tola-4b4021179/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Profile also served at in.linkedin.com/in/kanupriyatola (TeamInfo slug)"
+    },
+    {
+      "id": 35,
+      "name": "Ayan Rajvanshi",
+      "batch": "2019",
+      "team": "Video",
+      "linkedin": "https://www.linkedin.com/in/ayanrajvanshi/",
+      "companies": [
+        {
+          "company": "Meesho",
+          "kind": "full-time",
+          "role": "Associate Product Manager (after a 2024 PM internship)",
+          "year": "2024-",
+          "source": "https://www.zoominfo.com/p/Ayan-Rajvanshi/9244696868",
+          "confidence": "high"
+        },
+        {
+          "company": "Jupiter",
+          "kind": "intern",
+          "role": "Product intern",
+          "year": "2022-2023",
+          "source": "https://www.zoominfo.com/p/Ayan-Rajvanshi/9244696868",
+          "confidence": "high"
+        },
+        {
+          "company": "Salt",
+          "kind": "intern",
+          "role": null,
+          "year": "2022",
+          "source": "https://www.zoominfo.com/p/Ayan-Rajvanshi/9244696868",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "ZoomInfo record links the exact LinkedIn slug (ayanrajvanshi)"
+    },
+    {
+      "id": 36,
+      "name": "Lokin Thirunathan",
+      "batch": "2019",
+      "team": "Video",
+      "linkedin": "https://www.linkedin.com/in/lokin-thirunathan-a403991b4/",
+      "companies": [
+        {
+          "company": "UBS",
+          "kind": "full-time",
+          "role": "Analyst",
+          "year": null,
+          "source": "https://www.linkedin.com/in/lokinthirunathan/",
+          "confidence": "high"
+        },
+        {
+          "company": "Credit Suisse",
+          "kind": "full-time",
+          "role": "Analyst",
+          "year": null,
+          "source": "https://www.linkedin.com/in/lokinthirunathan/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Headline 'Former Analyst at UBS & Credit Suisse | MS Finance at Boston College | B.E. from BITS Pilani'; distinctive name, slug differs from TeamInfo"
+    },
+    {
+      "id": 38,
+      "name": "Josh Wadhwa",
+      "batch": "2019",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/josh-wadhwa/",
+      "companies": [
+        {
+          "company": "Wells Fargo",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": null,
+          "source": "https://www.linkedin.com/in/josh-wadhwa/",
+          "confidence": "high"
+        },
+        {
+          "company": "Goldman Sachs",
+          "kind": "intern",
+          "role": "Intern",
+          "year": null,
+          "source": "https://www.linkedin.com/in/josh-wadhwa/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Exact LinkedIn slug"
+    },
+    {
+      "id": 39,
+      "name": "Astitva Agnihotri",
+      "batch": "2019",
+      "team": "Video",
+      "linkedin": "http://www.linkedin.com/in/astitva-agnihotri",
+      "companies": [],
+      "notes": "not found"
+    },
+    {
+      "id": 67,
+      "name": "Pradyut Kumar",
+      "batch": "2019",
+      "team": "Video",
+      "linkedin": "https://www.linkedin.com/in/pradyut-kumar-b8a354191/",
+      "companies": [
+        {
+          "company": "Aurigo Software",
+          "kind": "intern",
+          "role": "PS-II intern",
+          "year": "2024",
+          "source": "https://www.bits-pilani.ac.in/wp-content/uploads/PS-II_Chronicles_II_Semester_2023-24.pdf",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "BITS PS-II Chronicles list PRADYUT KUMAR (2019B1A80943P, Pilani) at Aurigo Software Technologies, Bengaluru; matched by name and 2019 Pilani batch only"
+    },
+    {
+      "id": 69,
+      "name": "Osho Jain",
+      "batch": "2019",
+      "team": "Video",
+      "linkedin": "http://www.linkedin.com/in/osho-jain-13200b4192",
+      "companies": [
+        {
+          "company": "ARB Group",
+          "kind": "full-time",
+          "role": "Trader",
+          "year": null,
+          "source": "https://www.linkedin.com/in/osho-jain-581416182/",
+          "confidence": "medium"
+        },
+        {
+          "company": "JPMorgan Chase",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/osho-jain-581416182/",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "Only seen as a LinkedIn 'others named' sidebar headline ('Trader at ARB group | Ex- J.P.Morgan | BITS Pilani 23 | Agra'); exact slug not indexed"
+    },
+    {
+      "id": 73,
+      "name": "Mohit Sharma",
+      "batch": "2019",
+      "team": "Design",
+      "linkedin": "https://www.linkedin.com/in/mohit-sharma-42952219b",
+      "companies": [
+        {
+          "company": "Navi",
+          "kind": "full-time",
+          "role": "Data Scientist (DS-1)",
+          "year": "2023-",
+          "source": "https://www.linkedin.com/in/mohit-sharma-42952219b/",
+          "confidence": "high"
+        },
+        {
+          "company": "ShareChat",
+          "kind": "intern",
+          "role": "Data Science Intern",
+          "year": "2023",
+          "source": "https://www.linkedin.com/in/mohit-sharma-42952219b/",
+          "confidence": "high"
+        },
+        {
+          "company": "Elucidata",
+          "kind": "intern",
+          "role": "Data Science Intern",
+          "year": "2022",
+          "source": "https://www.linkedin.com/in/mohit-sharma-42952219b/",
+          "confidence": "high"
+        },
+        {
+          "company": "DevRev",
+          "kind": "full-time",
+          "role": "Engineering",
+          "year": null,
+          "source": "https://www.linkedin.com/in/mohit-sharma-42952219b/",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "Exact LinkedIn slug; profile lists DVM Graphic Designer 2019-2023. DevRev appears in a newer snippet headline"
+    },
+    {
+      "id": 77,
+      "name": "Shivi Mittal",
+      "batch": "2019",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/shivi-mittal-487ba3195/",
+      "companies": [
+        {
+          "company": "Rupeek",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/shivi-mittal-487ba3195/",
+          "confidence": "high"
+        },
+        {
+          "company": "BCG",
+          "kind": "full-time",
+          "role": "Associate",
+          "year": null,
+          "source": "https://www.linkedin.com/in/shivi-mittal-487ba3195/",
+          "confidence": "medium"
+        },
+        {
+          "company": "JPMorgan Chase",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/shivi-mittal-487ba3195/",
+          "confidence": "medium"
+        },
+        {
+          "company": "BEENEXT",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/shivi-mittal-487ba3195/",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "Rupeek from the exact slug; BCG/JP Morgan/BEENEXT from a sidebar headline 'Associate at BCG | JP Morgan | BEENEXT | BITS Pilani 23' (Bengaluru) likely the same person"
+    },
+    {
+      "id": 28,
+      "name": "Nidheesh Jain",
+      "batch": "2019",
+      "team": "Frontend",
+      "linkedin": "https://www.linkedin.com/in/nidheesh-jain-ba7652193",
+      "companies": [
+        {
+          "company": "Goldman Sachs",
+          "kind": "full-time",
+          "role": "Analyst / Quantitative Analyst",
+          "year": null,
+          "source": "https://www.linkedin.com/in/nidheesh-jain-ba7652193/",
+          "confidence": "high"
+        },
+        {
+          "company": "Graviton Research Capital",
+          "kind": "full-time",
+          "role": "Quantitative Analyst (Risk)",
+          "year": "2026",
+          "source": "https://www.linkedin.com/in/nidheesh-jain-ba7652193/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Exact LinkedIn slug; GitHub bio 'Quant @ Graviton | Goldman Sachs | BITS Pilani CS 23'"
+    },
+    {
+      "id": 3,
+      "name": "Abhinav Tiwari",
+      "batch": "2018",
+      "team": "Backend",
+      "linkedin": "https://www.linkedin.com/in/abhinav-tiwari-54a968192",
+      "companies": [
+        {
+          "company": "Jarvis Technology and Strategy Consulting",
+          "kind": "full-time",
+          "role": "Product Manager (PoliTech)",
+          "year": null,
+          "source": "https://www.linkedin.com/in/abhinav-tiwari-54a968192/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Exact LinkedIn slug; DVM Graphic Head of Department 2021-22"
+    },
+    {
+      "id": 4,
+      "name": "Divyansh Agarwal",
+      "batch": "2018",
+      "team": "Backend",
+      "linkedin": "http://linkedin.com/in/divyansh1199",
+      "companies": [
+        {
+          "company": "Meta",
+          "kind": "full-time",
+          "role": "Software Engineer (London)",
+          "year": null,
+          "source": "https://uk.linkedin.com/in/divyansh1199",
+          "confidence": "high"
+        },
+        {
+          "company": "Salesforce",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": null,
+          "source": "https://github.com/Senpai1199",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Exact LinkedIn slug; GitHub company field Meta"
+    },
+    {
+      "id": 5,
+      "name": "Pradyumna Bang",
+      "batch": "2018",
+      "team": "Backend",
+      "linkedin": "https://www.linkedin.com/in/pradyumna-bang-28011b168/",
+      "companies": [
+        {
+          "company": "Pixxel",
+          "kind": "full-time",
+          "role": "Satellite Ground Segment Engineer, later Senior",
+          "year": "2022-",
+          "source": "https://theorg.com/org/pixxel/org-chart/pradyumna-bang",
+          "confidence": "high"
+        },
+        {
+          "company": "Radalis",
+          "kind": "full-time",
+          "role": "CEO",
+          "year": null,
+          "source": "https://github.com/bangpradyumna",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Exact LinkedIn slug (now 'Stealth'); GitHub bio 'CEO @RADALIS | Ex-Engineer @pixxelhq'. GSoC 2019 not counted"
+    },
+    {
+      "id": 6,
+      "name": "Shivanshu Ayachi",
+      "batch": "2018",
+      "team": "Backend",
+      "linkedin": "https://www.linkedin.com/in/shivanshuayachi",
+      "companies": [
+        {
+          "company": "Media.net",
+          "kind": "full-time",
+          "role": "Software Development Engineer",
+          "year": null,
+          "source": "https://www.zoominfo.com/p/Shivanshu-Ayachi/8107612925",
+          "confidence": "high"
+        },
+        {
+          "company": "Reflexis Systems",
+          "kind": "intern",
+          "role": "Software Development Intern",
+          "year": null,
+          "source": "https://www.zoominfo.com/p/Shivanshu-Ayachi/8107612925",
+          "confidence": "high"
+        },
+        {
+          "company": "Kalam Labs",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.zoominfo.com/p/Shivanshu-Ayachi/8107612925",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "ZoomInfo record links the exact LinkedIn slug"
+    },
+    {
+      "id": 7,
+      "name": "Akshit Patel",
+      "batch": "2018",
+      "team": "Frontend",
+      "linkedin": "https://www.linkedin.com/in/akshit-patel-39075476/",
+      "companies": [
+        {
+          "company": "Samsung Semiconductor",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/akshit-patel-39075476/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Exact LinkedIn slug"
+    },
+    {
+      "id": 8,
+      "name": "Anupam Srivastva",
+      "batch": "2018",
+      "team": "Frontend",
+      "linkedin": "https://www.linkedin.com/in/anupam-srivastava-9b6369186/",
+      "companies": [
+        {
+          "company": "Cyberhaven",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": "2025-",
+          "source": "https://www.linkedin.com/in/anupam-srivastava-9b6369186/",
+          "confidence": "high"
+        },
+        {
+          "company": "Barclays",
+          "kind": "full-time",
+          "role": "Graduate Analyst",
+          "year": "2022-2024",
+          "source": "https://rocketreach.co/anupam-srivastava-email_310136783",
+          "confidence": "high"
+        },
+        {
+          "company": "Eddyfi",
+          "kind": "full-time",
+          "role": "Founding Engineer",
+          "year": "2023-2025",
+          "source": "https://rocketreach.co/anupam-srivastava-email_310136783",
+          "confidence": "medium"
+        },
+        {
+          "company": "Schmooze",
+          "kind": "intern",
+          "role": "Intern",
+          "year": null,
+          "source": "https://rocketreach.co/anupam-srivastava-email_310136783",
+          "confidence": "high"
+        },
+        {
+          "company": "Hindalco",
+          "kind": "intern",
+          "role": "Intern",
+          "year": null,
+          "source": "https://rocketreach.co/anupam-srivastava-email_310136783",
+          "confidence": "medium"
+        },
+        {
+          "company": "Elixar Systems",
+          "kind": "intern",
+          "role": "Intern",
+          "year": null,
+          "source": "https://rocketreach.co/anupam-srivastava-email_310136783",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "Exact LinkedIn slug; headline 'Software Engineer @Cyberhaven | Ex - Barclays | Ex - Schmooze'. 'Eddyfi' is as written by RocketReach; it may be Eddy Finance but that is unconfirmed"
+    },
+    {
+      "id": 9,
+      "name": "Chirag Singhal",
+      "batch": "2018",
+      "team": "Frontend",
+      "linkedin": "https://www.linkedin.com/in/chirag-singhal-389a6a16a/",
+      "companies": [
+        {
+          "company": "Indeed",
+          "kind": "full-time",
+          "role": "Software Engineer II",
+          "year": null,
+          "source": "https://www.linkedin.com/in/csinghal208/",
+          "confidence": "high"
+        },
+        {
+          "company": "Microsoft",
+          "kind": "intern",
+          "role": "Software Engineering Intern",
+          "year": "2021",
+          "source": "https://chirag-singhal.github.io/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "GitHub (chirag-singhal) bio 'SWE 2 @indeed'; old resume links the TeamInfo slug. MLH Fellowship and GSoC not counted"
+    },
+    {
+      "id": 10,
+      "name": "Mukul Gupta",
+      "batch": "2018",
+      "team": "Frontend",
+      "linkedin": "https://www.linkedin.com/in/mukul-gupta-7931b4171",
+      "companies": [
+        {
+          "company": "MYO",
+          "kind": "intern",
+          "role": "Software development intern",
+          "year": "2020",
+          "source": "https://mukul0596.github.io/",
+          "confidence": "high"
+        },
+        {
+          "company": "ItsCredible",
+          "kind": "full-time",
+          "role": "Full stack developer",
+          "year": null,
+          "source": "https://www.weekday.works/people/mukul-gupta-mukul-bits",
+          "confidence": "medium"
+        },
+        {
+          "company": "Zluri",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/mukul-gupta-mukul-bits",
+          "confidence": "medium"
+        },
+        {
+          "company": "TruckX",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/mukul-gupta-mukul-bits",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "Matched via GitHub mukul0596 personal site (DVM frontend 2018-2021); exact LinkedIn slug not indexed"
+    },
+    {
+      "id": 11,
+      "name": "Shreyans Jain",
+      "batch": "2018",
+      "team": "Frontend",
+      "linkedin": "https://www.linkedin.com/in/shreyans-jain-7a02aa169",
+      "companies": [],
+      "notes": "not found (did a BITS PS-II in 2022; station not visible)"
+    },
+    {
+      "id": 12,
+      "name": "Anant Verma",
+      "batch": "2018",
+      "team": "Design",
+      "linkedin": "https://in.linkedin.com/in/anant-verma-74a9b919b",
+      "companies": [
+        {
+          "company": "Microsoft",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": null,
+          "source": "https://www.linkedin.com/in/anant-verma-74a9b919b/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Exact LinkedIn slug"
+    },
+    {
+      "id": 13,
+      "name": "Devansh Agarwal",
+      "batch": "2018",
+      "team": "Design",
+      "linkedin": "https://www.linkedin.com/in/devansh-agarwal-739702189",
+      "companies": [
+        {
+          "company": "Sundial",
+          "kind": "full-time",
+          "role": "Software Engineer (Sundial was acquired by Meta)",
+          "year": null,
+          "source": "https://devanshag.com/",
+          "confidence": "high"
+        },
+        {
+          "company": "Skit.ai",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": null,
+          "source": "https://github.com/DevanshCodes",
+          "confidence": "high"
+        },
+        {
+          "company": "Societe Generale",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/devansh-agarwal-devansh-agarwal-739702189",
+          "confidence": "medium"
+        },
+        {
+          "company": "Texas Instruments",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/devansh-agarwal-devansh-agarwal-739702189",
+          "confidence": "medium"
+        },
+        {
+          "company": "Haast",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.weekday.works/people/devansh-agarwal-devansh-agarwal-739702189",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "Exact LinkedIn slug ('Sundial (Acq. by Meta)'); GitHub DevanshCodes bio 'Software Engineer @sundialso | ex-SDE Intern @skit-ai'"
+    },
+    {
+      "id": 14,
+      "name": "Manikya Varshney",
+      "batch": "2018",
+      "team": "Design",
+      "linkedin": "https://www.linkedin.com/in/manikya-varshney",
+      "companies": [
+        {
+          "company": "American Express",
+          "kind": "full-time",
+          "role": "Analyst - Data Science (Model Risk Management)",
+          "year": "2024-",
+          "source": "https://www.linkedin.com/in/manikya-varshney/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Exact LinkedIn slug. UCSD research internship not counted"
+    },
+    {
+      "id": 15,
+      "name": "Mohul Maheshwari",
+      "batch": "2018",
+      "team": "Design",
+      "linkedin": "https://www.linkedin.com/in/mohul-maheshwari-a2899a173",
+      "companies": [
+        {
+          "company": "Google DeepMind",
+          "kind": "full-time",
+          "role": "Software Engineer",
+          "year": "2025-",
+          "source": "https://www.linkedin.com/in/mohul-maheshwari-a2899a173/",
+          "confidence": "high"
+        },
+        {
+          "company": "Amazon",
+          "kind": "full-time",
+          "role": "SDE-1, promoted to SDE-2",
+          "year": "2022-2025",
+          "source": "https://www.facebook.com/mohul.maheshwari.3/",
+          "confidence": "high"
+        },
+        {
+          "company": "Walmart",
+          "kind": "intern",
+          "role": "SDE Intern, Walmart Global Tech India",
+          "year": "2021",
+          "source": "https://www.linkedin.com/in/mohul-maheshwari-a2899a173/",
+          "confidence": "high"
+        },
+        {
+          "company": "CRIS",
+          "kind": "intern",
+          "role": "Summer intern",
+          "year": "2020",
+          "source": "https://www.linkedin.com/in/mohul-maheshwari-a2899a173/",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "Exact LinkedIn slug; older headline 'SI 21 @Walmart Global Tech | BITS Pilani CSE | SI 20 CRIS'"
+    },
+    {
+      "id": 16,
+      "name": "Akshath Kothari",
+      "batch": "2018",
+      "team": "Video",
+      "linkedin": "https://www.linkedin.com/in/akshath-kothari/",
+      "companies": [
+        {
+          "company": "Harness",
+          "kind": "full-time",
+          "role": "Senior Software Engineer (security)",
+          "year": null,
+          "source": "https://www.linkedin.com/in/ricekot/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "GitHub ricekot (TeamInfo) company @harness; also ZAP core team (open source) and GSoC, not counted"
+    },
+    {
+      "id": 17,
+      "name": "Pratheek Athuri",
+      "batch": "2018",
+      "team": "Video",
+      "linkedin": "https://www.linkedin.com/in/pratheek-athuri-97395317a",
+      "companies": [],
+      "notes": "not found (only DVM artwork credits)"
+    },
+    {
+      "id": 37,
+      "name": "Jaideep Khare",
+      "batch": "2018",
+      "team": "Video",
+      "linkedin": "https://www.linkedin.com/in/jaideepkhare",
+      "companies": [
+        {
+          "company": "AMD",
+          "kind": "unknown",
+          "role": "Silicon Design",
+          "year": null,
+          "source": "https://www.linkedin.com/in/jaideep-khare-99399b17a/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Profile 'Silicon Design | ex-AMD | BITS Pilani' whose metadata points to in/jaideepkhare (TeamInfo slug); later MS ECE at UMass Amherst (not counted)"
+    },
+    {
+      "id": 61,
+      "name": "Samir K Patro",
+      "batch": "2018",
+      "team": "Video",
+      "linkedin": "http://linkedin.com/in/samir-patro-6a7412192",
+      "companies": [
+        {
+          "company": "GoKwik",
+          "kind": "full-time",
+          "role": "SDE-1",
+          "year": null,
+          "source": "https://www.linkedin.com/in/samir-kumar-patro-44478b16a/",
+          "confidence": "medium"
+        },
+        {
+          "company": "Samsung R&D Institute India",
+          "kind": "intern",
+          "role": "Research Intern (Samsung Research, Bengaluru)",
+          "year": null,
+          "source": "https://www.linkedin.com/in/samir-kumar-patro-44478b16a/",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "Only seen as LinkedIn 'others named' sidebar headlines ('BITS Pilani 23 SDE-1 at Gokwik' and 'BITS Pilani 23 | Ex-Research Intern at NUS and Samsung Research'); exact slug not indexed. NUS not counted"
+    },
+    {
+      "id": 62,
+      "name": "Dushyant Yadav",
+      "batch": "2018",
+      "team": "Backend",
+      "linkedin": null,
+      "companies": [
+        {
+          "company": "Wander",
+          "kind": "full-time",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/dushyant9309/",
+          "confidence": "high"
+        },
+        {
+          "company": "Cisco",
+          "kind": "intern",
+          "role": "Intern",
+          "year": "2021",
+          "source": "https://www.linkedin.com/in/dushyant9309/",
+          "confidence": "high"
+        },
+        {
+          "company": "Postman",
+          "kind": "intern",
+          "role": "Intern",
+          "year": "2020",
+          "source": "https://www.linkedin.com/in/dushyant9309/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "No LinkedIn in TeamInfo; LinkedIn lists DVM Software Developer and is linked from a DVM colleague's article referencing github.com/dush-t. Older headline 'CS Senior at BITS Pilani | Cisco 2021 | Postman 2020'"
+    },
+    {
+      "id": 63,
+      "name": "Prarabdh Garg",
+      "batch": "2018",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/prarabdhgarg/",
+      "companies": [],
+      "notes": "not found"
+    },
+    {
+      "id": 64,
+      "name": "Akshat Gupta",
+      "batch": "2018",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/akshat1499/",
+      "companies": [
+        {
+          "company": "Schmooze",
+          "kind": "full-time",
+          "role": "Lead Software Engineer / AI Engineer & Backend Lead",
+          "year": null,
+          "source": "https://www.linkedin.com/in/akshat-gupta-600108187/",
+          "confidence": "high"
+        },
+        {
+          "company": "Ola",
+          "kind": "full-time",
+          "role": "Software Development Engineer 1",
+          "year": "2022",
+          "source": "https://theorg.com/org/schmooze-dating/org-chart/akshat-gupta",
+          "confidence": "high"
+        },
+        {
+          "company": "Licious",
+          "kind": "intern",
+          "role": "SDE Intern",
+          "year": "2021",
+          "source": "https://theorg.com/org/schmooze-dating/org-chart/akshat-gupta",
+          "confidence": "high"
+        }
+      ],
+      "notes": "LinkedIn metadata links in/akshat1499 (TeamInfo slug); GitHub company 'Schmooze Pvt Ltd'"
+    },
+    {
+      "id": 65,
+      "name": "Ishita Aggarwal",
+      "batch": "2018",
+      "team": "AppDev",
+      "linkedin": "https://www.linkedin.com/in/ishitaaggarwal98",
+      "companies": [
+        {
+          "company": "Amazon",
+          "kind": "full-time",
+          "role": "Software Development Engineer II",
+          "year": null,
+          "source": "https://www.linkedin.com/in/ishitaaggarwal98/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Exact LinkedIn slug"
+    },
+    {
+      "id": 66,
+      "name": "Suyash Soni",
+      "batch": "2018",
+      "team": "AppDev",
+      "linkedin": null,
+      "companies": [
+        {
+          "company": "Microsoft",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://www.linkedin.com/in/suyash-soni-abaa37217/",
+          "confidence": "medium"
+        }
+      ],
+      "notes": "No LinkedIn in TeamInfo; profile lists Microsoft + BITS Pilani (activity suggests a Samsung SRIB internship, not counted). Not explicitly tied to DVM"
+    },
+    {
+      "id": 2,
+      "name": "Yash Bhagat",
+      "batch": "2017",
+      "team": "Design",
+      "linkedin": "https://www.linkedin.com/in/yashbhagat99/",
+      "companies": [
+        {
+          "company": "HubbleMoney",
+          "kind": "full-time",
+          "role": "Design",
+          "year": null,
+          "source": "https://yashbhagat.com/",
+          "confidence": "high"
+        },
+        {
+          "company": "Slice",
+          "kind": "full-time",
+          "role": "Product Designer",
+          "year": null,
+          "source": "https://yashbhagat.com/",
+          "confidence": "high"
+        },
+        {
+          "company": "CRED",
+          "kind": "full-time",
+          "role": "Design",
+          "year": null,
+          "source": "https://yashbhagat.com/",
+          "confidence": "high"
+        },
+        {
+          "company": "Pepper Content",
+          "kind": "unknown",
+          "role": null,
+          "year": null,
+          "source": "https://yashbhagat.com/",
+          "confidence": "high"
+        }
+      ],
+      "notes": "Matched via personal site and Behance (BITS Pilani CS 2017-2021, DVM designer for OASIS 2018 and APOGEE 2019); TeamInfo LinkedIn slug not indexed"
+    }
+  ],
+  "companies": [
+    {
+      "company": "Amazon",
+      "domain": "amazon.com",
+      "people": [
+        130,
+        68,
+        85,
+        19,
+        15,
+        65
+      ],
+      "count": 6
+    },
+    {
+      "company": "Microsoft",
+      "domain": "microsoft.com",
+      "people": [
+        96,
+        23,
+        25,
+        9,
+        12,
+        66
+      ],
+      "count": 6
+    },
+    {
+      "company": "Samsung R&D Institute India",
+      "domain": "samsung.com",
+      "people": [
+        88,
+        45,
+        49,
+        70,
+        61
+      ],
+      "count": 5
+    },
+    {
+      "company": "JPMorgan Chase",
+      "domain": "jpmorganchase.com",
+      "people": [
+        45,
+        76,
+        69,
+        77
+      ],
+      "count": 4
+    },
+    {
+      "company": "Simplismart",
+      "domain": "simplismart.ai",
+      "people": [
+        95,
+        98,
+        54,
+        71
+      ],
+      "count": 4
+    },
+    {
+      "company": "CSIR-CEERI",
+      "domain": "ceeri.res.in",
+      "people": [
+        126,
+        18,
+        25
+      ],
+      "count": 3
+    },
+    {
+      "company": "Flint",
+      "domain": null,
+      "people": [
+        108,
+        52,
+        21
+      ],
+      "count": 3
+    },
+    {
+      "company": "Oracle",
+      "domain": "oracle.com",
+      "people": [
+        113,
+        88,
+        75
+      ],
+      "count": 3
+    },
+    {
+      "company": "Cenizas Labs",
+      "domain": null,
+      "people": [
+        49,
+        18
+      ],
+      "count": 2
+    },
+    {
+      "company": "Cisco",
+      "domain": "cisco.com",
+      "people": [
+        32,
+        62
+      ],
+      "count": 2
+    },
+    {
+      "company": "Clueso",
+      "domain": "clueso.io",
+      "people": [
+        81,
+        83
+      ],
+      "count": 2
+    },
+    {
+      "company": "Credit Suisse",
+      "domain": "credit-suisse.com",
+      "people": [
+        33,
+        36
+      ],
+      "count": 2
+    },
+    {
+      "company": "Eddy Finance",
+      "domain": "eddy.finance",
+      "people": [
+        80,
+        109
+      ],
+      "count": 2
+    },
+    {
+      "company": "Flippy",
+      "domain": null,
+      "people": [
+        95,
+        21
+      ],
+      "count": 2
+    },
+    {
+      "company": "Goldman Sachs",
+      "domain": "goldmansachs.com",
+      "people": [
+        38,
+        28
+      ],
+      "count": 2
+    },
+    {
+      "company": "Mila - Quebec AI Institute",
+      "domain": "mila.quebec",
+      "people": [
+        103,
+        44
+      ],
+      "count": 2
+    },
+    {
+      "company": "Navi",
+      "domain": "navi.com",
+      "people": [
+        43,
+        73
+      ],
+      "count": 2
+    },
+    {
+      "company": "Newton School",
+      "domain": "newtonschool.co",
+      "people": [
+        18,
+        31
+      ],
+      "count": 2
+    },
+    {
+      "company": "Nielsen",
+      "domain": "nielsen.com",
+      "people": [
+        101,
+        104
+      ],
+      "count": 2
+    },
+    {
+      "company": "Pepper Content",
+      "domain": "peppercontent.io",
+      "people": [
+        18,
+        2
+      ],
+      "count": 2
+    },
+    {
+      "company": "PYOR",
+      "domain": "pyor.xyz",
+      "people": [
+        44,
+        52
+      ],
+      "count": 2
+    },
+    {
+      "company": "Schmooze",
+      "domain": null,
+      "people": [
+        8,
+        64
+      ],
+      "count": 2
+    },
+    {
+      "company": "Societe Generale",
+      "domain": "societegenerale.com",
+      "people": [
+        41,
+        13
+      ],
+      "count": 2
+    },
+    {
+      "company": "STEM4All",
+      "domain": null,
+      "people": [
+        56,
+        68
+      ],
+      "count": 2
+    },
+    {
+      "company": "UBS",
+      "domain": "ubs.com",
+      "people": [
+        74,
+        36
+      ],
+      "count": 2
+    },
+    {
+      "company": "UnifyApps",
+      "domain": "unifyapps.com",
+      "people": [
+        95,
+        41
+      ],
+      "count": 2
+    },
+    {
+      "company": "Walmart",
+      "domain": "walmart.com",
+      "people": [
+        99,
+        15
+      ],
+      "count": 2
+    },
+    {
+      "company": "AlphaGrep",
+      "domain": "alphagrep.com",
+      "people": [
+        125
+      ],
+      "count": 1
+    },
+    {
+      "company": "AMD",
+      "domain": "amd.com",
+      "people": [
+        37
+      ],
+      "count": 1
+    },
+    {
+      "company": "American Express",
+      "domain": "americanexpress.com",
+      "people": [
+        14
+      ],
+      "count": 1
+    },
+    {
+      "company": "Amikus AI",
+      "domain": null,
+      "people": [
+        26
+      ],
+      "count": 1
+    },
+    {
+      "company": "Amplus Solar",
+      "domain": null,
+      "people": [
+        21
+      ],
+      "count": 1
+    },
+    {
+      "company": "Apple",
+      "domain": "apple.com",
+      "people": [
+        23
+      ],
+      "count": 1
+    },
+    {
+      "company": "ARB Group",
+      "domain": null,
+      "people": [
+        69
+      ],
+      "count": 1
+    },
+    {
+      "company": "ASA Industries",
+      "domain": null,
+      "people": [
+        53
+      ],
+      "count": 1
+    },
+    {
+      "company": "Atlan",
+      "domain": "atlan.com",
+      "people": [
+        45
+      ],
+      "count": 1
+    },
+    {
+      "company": "Aurigo Software",
+      "domain": "aurigo.com",
+      "people": [
+        67
+      ],
+      "count": 1
+    },
+    {
+      "company": "Axis Bank",
+      "domain": "axisbank.com",
+      "people": [
+        144
+      ],
+      "count": 1
+    },
+    {
+      "company": "Barclays",
+      "domain": "barclays.com",
+      "people": [
+        8
+      ],
+      "count": 1
+    },
+    {
+      "company": "BCG",
+      "domain": "bcg.com",
+      "people": [
+        77
+      ],
+      "count": 1
+    },
+    {
+      "company": "BEENEXT",
+      "domain": "beenext.com",
+      "people": [
+        77
+      ],
+      "count": 1
+    },
+    {
+      "company": "Better",
+      "domain": "better.com",
+      "people": [
+        18
+      ],
+      "count": 1
+    },
+    {
+      "company": "Capital One",
+      "domain": "capitalone.com",
+      "people": [
+        83
+      ],
+      "count": 1
+    },
+    {
+      "company": "Cardboard",
+      "domain": null,
+      "people": [
+        52
+      ],
+      "count": 1
+    },
+    {
+      "company": "Carscan.ai",
+      "domain": null,
+      "people": [
+        74
+      ],
+      "count": 1
+    },
+    {
+      "company": "CarWale",
+      "domain": "carwale.com",
+      "people": [
+        113
+      ],
+      "count": 1
+    },
+    {
+      "company": "Ciena",
+      "domain": "ciena.com",
+      "people": [
+        56
+      ],
+      "count": 1
+    },
+    {
+      "company": "CogniX",
+      "domain": null,
+      "people": [
+        124
+      ],
+      "count": 1
+    },
+    {
+      "company": "Coinzy",
+      "domain": null,
+      "people": [
+        68
+      ],
+      "count": 1
+    },
+    {
+      "company": "Confluent",
+      "domain": "confluent.io",
+      "people": [
+        25
+      ],
+      "count": 1
+    },
+    {
+      "company": "CRC-IB",
+      "domain": null,
+      "people": [
+        53
+      ],
+      "count": 1
+    },
+    {
+      "company": "CRED",
+      "domain": "cred.club",
+      "people": [
+        2
+      ],
+      "count": 1
+    },
+    {
+      "company": "CRIS",
+      "domain": "cris.org.in",
+      "people": [
+        15
+      ],
+      "count": 1
+    },
+    {
+      "company": "CSIR-CDRI",
+      "domain": "cdri.res.in",
+      "people": [
+        84
+      ],
+      "count": 1
+    },
+    {
+      "company": "Cyberhaven",
+      "domain": "cyberhaven.com",
+      "people": [
+        8
+      ],
+      "count": 1
+    },
+    {
+      "company": "D. E. Shaw",
+      "domain": "deshaw.com",
+      "people": [
+        107
+      ],
+      "count": 1
+    },
+    {
+      "company": "DeTrace",
+      "domain": null,
+      "people": [
+        131
+      ],
+      "count": 1
+    },
+    {
+      "company": "DevRev",
+      "domain": "devrev.ai",
+      "people": [
+        73
+      ],
+      "count": 1
+    },
+    {
+      "company": "Ditto Insurance",
+      "domain": "joinditto.in",
+      "people": [
+        57
+      ],
+      "count": 1
+    },
+    {
+      "company": "Dodge AI",
+      "domain": null,
+      "people": [
+        44
+      ],
+      "count": 1
+    },
+    {
+      "company": "Donut",
+      "domain": null,
+      "people": [
+        18
+      ],
+      "count": 1
+    },
+    {
+      "company": "DRDO (ARDE)",
+      "domain": "drdo.gov.in",
+      "people": [
+        68
+      ],
+      "count": 1
+    },
+    {
+      "company": "Eddyfi",
+      "domain": null,
+      "people": [
+        8
+      ],
+      "count": 1
+    },
+    {
+      "company": "Eightfold AI",
+      "domain": "eightfold.ai",
+      "people": [
+        49
+      ],
+      "count": 1
+    },
+    {
+      "company": "Elixar Systems",
+      "domain": null,
+      "people": [
+        8
+      ],
+      "count": 1
+    },
+    {
+      "company": "Elucidata",
+      "domain": "elucidata.io",
+      "people": [
+        73
+      ],
+      "count": 1
+    },
+    {
+      "company": "Enkrypt AI",
+      "domain": "enkryptai.com",
+      "people": [
+        86
+      ],
+      "count": 1
+    },
+    {
+      "company": "Entelligence AI",
+      "domain": "entelligence.ai",
+      "people": [
+        49
+      ],
+      "count": 1
+    },
+    {
+      "company": "Ericsson",
+      "domain": "ericsson.com",
+      "people": [
+        41
+      ],
+      "count": 1
+    },
+    {
+      "company": "Evermorrow Labs",
+      "domain": null,
+      "people": [
+        40
+      ],
+      "count": 1
+    },
+    {
+      "company": "Fello",
+      "domain": null,
+      "people": [
+        81
+      ],
+      "count": 1
+    },
+    {
+      "company": "Fibr",
+      "domain": "fibr.ai",
+      "people": [
+        46
+      ],
+      "count": 1
+    },
+    {
+      "company": "Figr",
+      "domain": "figr.design",
+      "people": [
+        108
+      ],
+      "count": 1
+    },
+    {
+      "company": "Firmi",
+      "domain": null,
+      "people": [
+        41
+      ],
+      "count": 1
+    },
+    {
+      "company": "FirstClub",
+      "domain": null,
+      "people": [
+        126
+      ],
+      "count": 1
+    },
+    {
+      "company": "Flipkart",
+      "domain": "flipkart.com",
+      "people": [
+        146
+      ],
+      "count": 1
+    },
+    {
+      "company": "Foozie.Fit",
+      "domain": null,
+      "people": [
+        126
+      ],
+      "count": 1
+    },
+    {
+      "company": "GeneralMind",
+      "domain": null,
+      "people": [
+        46
+      ],
+      "count": 1
+    },
+    {
+      "company": "Gleebo",
+      "domain": null,
+      "people": [
+        26
+      ],
+      "count": 1
+    },
+    {
+      "company": "GoKwik",
+      "domain": "gokwik.co",
+      "people": [
+        61
+      ],
+      "count": 1
+    },
+    {
+      "company": "Google",
+      "domain": "google.com",
+      "people": [
+        22
+      ],
+      "count": 1
+    },
+    {
+      "company": "Google DeepMind",
+      "domain": "deepmind.google",
+      "people": [
+        15
+      ],
+      "count": 1
+    },
+    {
+      "company": "Graviton Research Capital",
+      "domain": "gravitontrading.com",
+      "people": [
+        28
+      ],
+      "count": 1
+    },
+    {
+      "company": "Great Learning",
+      "domain": "mygreatlearning.com",
+      "people": [
+        21
+      ],
+      "count": 1
+    },
+    {
+      "company": "Haast",
+      "domain": null,
+      "people": [
+        13
+      ],
+      "count": 1
+    },
+    {
+      "company": "Hallparty",
+      "domain": null,
+      "people": [
+        23
+      ],
+      "count": 1
+    },
+    {
+      "company": "Harness",
+      "domain": "harness.io",
+      "people": [
+        16
+      ],
+      "count": 1
+    },
+    {
+      "company": "Hashlock",
+      "domain": null,
+      "people": [
+        116
+      ],
+      "count": 1
+    },
+    {
+      "company": "Hexa Climate",
+      "domain": null,
+      "people": [
+        21
+      ],
+      "count": 1
+    },
+    {
+      "company": "Hindalco",
+      "domain": "hindalco.com",
+      "people": [
+        8
+      ],
+      "count": 1
+    },
+    {
+      "company": "Hindustan Petroleum",
+      "domain": "hindustanpetroleum.com",
+      "people": [
+        21
+      ],
+      "count": 1
+    },
+    {
+      "company": "Honda Motorcycle & Scooter India",
+      "domain": "honda2wheelersindia.com",
+      "people": [
+        97
+      ],
+      "count": 1
+    },
+    {
+      "company": "Houseware",
+      "domain": "houseware.io",
+      "people": [
+        29
+      ],
+      "count": 1
+    },
+    {
+      "company": "HubbleMoney",
+      "domain": null,
+      "people": [
+        2
+      ],
+      "count": 1
+    },
+    {
+      "company": "IGCAR",
+      "domain": "igcar.gov.in",
+      "people": [
+        24
+      ],
+      "count": 1
+    },
+    {
+      "company": "IMC Trading",
+      "domain": "imc.com",
+      "people": [
+        117
+      ],
+      "count": 1
+    },
+    {
+      "company": "Indeed",
+      "domain": "indeed.com",
+      "people": [
+        9
+      ],
+      "count": 1
+    },
+    {
+      "company": "Inria",
+      "domain": "inria.fr",
+      "people": [
+        23
+      ],
+      "count": 1
+    },
+    {
+      "company": "Interface AI",
+      "domain": null,
+      "people": [
+        44
+      ],
+      "count": 1
+    },
+    {
+      "company": "Iterate AI",
+      "domain": null,
+      "people": [
+        52
+      ],
+      "count": 1
+    },
+    {
+      "company": "ItsCredible",
+      "domain": "itscredible.com",
+      "people": [
+        10
+      ],
+      "count": 1
+    },
+    {
+      "company": "Jaguar Land Rover",
+      "domain": "jaguarlandrover.com",
+      "people": [
+        45
+      ],
+      "count": 1
+    },
+    {
+      "company": "Jar",
+      "domain": "myjar.app",
+      "people": [
+        44
+      ],
+      "count": 1
+    },
+    {
+      "company": "Jarvis Technology and Strategy Consulting",
+      "domain": null,
+      "people": [
+        3
+      ],
+      "count": 1
+    },
+    {
+      "company": "Jupiter",
+      "domain": "jupiter.money",
+      "people": [
+        35
+      ],
+      "count": 1
+    },
+    {
+      "company": "Kalam Labs",
+      "domain": null,
+      "people": [
+        6
+      ],
+      "count": 1
+    },
+    {
+      "company": "LaunchDarkly",
+      "domain": "launchdarkly.com",
+      "people": [
+        29
+      ],
+      "count": 1
+    },
+    {
+      "company": "Licious",
+      "domain": "licious.in",
+      "people": [
+        64
+      ],
+      "count": 1
+    },
+    {
+      "company": "Manodayam",
+      "domain": null,
+      "people": [
+        147
+      ],
+      "count": 1
+    },
+    {
+      "company": "MarianaAI",
+      "domain": null,
+      "people": [
+        98
+      ],
+      "count": 1
+    },
+    {
+      "company": "Max Planck Institute for Biology Tübingen",
+      "domain": "bio.mpg.de",
+      "people": [
+        58
+      ],
+      "count": 1
+    },
+    {
+      "company": "Maya Labs",
+      "domain": null,
+      "people": [
+        23
+      ],
+      "count": 1
+    },
+    {
+      "company": "Media.net",
+      "domain": "media.net",
+      "people": [
+        6
+      ],
+      "count": 1
+    },
+    {
+      "company": "Medsupervision",
+      "domain": null,
+      "people": [
+        92
+      ],
+      "count": 1
+    },
+    {
+      "company": "Meesho",
+      "domain": "meesho.com",
+      "people": [
+        35
+      ],
+      "count": 1
+    },
+    {
+      "company": "Mesh Ergonomics",
+      "domain": null,
+      "people": [
+        54
+      ],
+      "count": 1
+    },
+    {
+      "company": "Meta",
+      "domain": "meta.com",
+      "people": [
+        4
+      ],
+      "count": 1
+    },
+    {
+      "company": "Multipl",
+      "domain": null,
+      "people": [
+        81
+      ],
+      "count": 1
+    },
+    {
+      "company": "MYO",
+      "domain": null,
+      "people": [
+        10
+      ],
+      "count": 1
+    },
+    {
+      "company": "Northern Railway",
+      "domain": "nr.indianrailways.gov.in",
+      "people": [
+        141
+      ],
+      "count": 1
+    },
+    {
+      "company": "NVIDIA",
+      "domain": "nvidia.com",
+      "people": [
+        55
+      ],
+      "count": 1
+    },
+    {
+      "company": "Nykaa",
+      "domain": "nykaa.com",
+      "people": [
+        135
+      ],
+      "count": 1
+    },
+    {
+      "company": "OC Dermatology",
+      "domain": null,
+      "people": [
+        138
+      ],
+      "count": 1
+    },
+    {
+      "company": "Ola",
+      "domain": "olacabs.com",
+      "people": [
+        64
+      ],
+      "count": 1
+    },
+    {
+      "company": "Otto Money",
+      "domain": null,
+      "people": [
+        124
+      ],
+      "count": 1
+    },
+    {
+      "company": "Pacify Medical Technologies",
+      "domain": null,
+      "people": [
+        105
+      ],
+      "count": 1
+    },
+    {
+      "company": "People Interactive",
+      "domain": "peopleinteractive.in",
+      "people": [
+        103
+      ],
+      "count": 1
+    },
+    {
+      "company": "PixelUp Labs",
+      "domain": "pixeluplabs.com",
+      "people": [
+        31
+      ],
+      "count": 1
+    },
+    {
+      "company": "Pixxel",
+      "domain": "pixxel.space",
+      "people": [
+        5
+      ],
+      "count": 1
+    },
+    {
+      "company": "Planet Pokemon",
+      "domain": null,
+      "people": [
+        40
+      ],
+      "count": 1
+    },
+    {
+      "company": "Plutus Labs",
+      "domain": null,
+      "people": [
+        68
+      ],
+      "count": 1
+    },
+    {
+      "company": "Plux AI",
+      "domain": null,
+      "people": [
+        113
+      ],
+      "count": 1
+    },
+    {
+      "company": "Polygon Labs",
+      "domain": "polygon.technology",
+      "people": [
+        20
+      ],
+      "count": 1
+    },
+    {
+      "company": "Postman",
+      "domain": "postman.com",
+      "people": [
+        62
+      ],
+      "count": 1
+    },
+    {
+      "company": "PwC",
+      "domain": "pwc.com",
+      "people": [
+        33
+      ],
+      "count": 1
+    },
+    {
+      "company": "Radalis",
+      "domain": null,
+      "people": [
+        5
+      ],
+      "count": 1
+    },
+    {
+      "company": "Razorpay",
+      "domain": "razorpay.com",
+      "people": [
+        31
+      ],
+      "count": 1
+    },
+    {
+      "company": "Reflexis Systems",
+      "domain": "reflexisinc.com",
+      "people": [
+        6
+      ],
+      "count": 1
+    },
+    {
+      "company": "Ripplica",
+      "domain": null,
+      "people": [
+        126
+      ],
+      "count": 1
+    },
+    {
+      "company": "Rupeek",
+      "domain": "rupeek.com",
+      "people": [
+        77
+      ],
+      "count": 1
+    },
+    {
+      "company": "Salesforce",
+      "domain": "salesforce.com",
+      "people": [
+        4
+      ],
+      "count": 1
+    },
+    {
+      "company": "Salt",
+      "domain": null,
+      "people": [
+        35
+      ],
+      "count": 1
+    },
+    {
+      "company": "Samsung Semiconductor",
+      "domain": "semiconductor.samsung.com",
+      "people": [
+        7
+      ],
+      "count": 1
+    },
+    {
+      "company": "SellerSetu",
+      "domain": null,
+      "people": [
+        107
+      ],
+      "count": 1
+    },
+    {
+      "company": "ShareChat",
+      "domain": "sharechat.com",
+      "people": [
+        73
+      ],
+      "count": 1
+    },
+    {
+      "company": "Simpl",
+      "domain": "getsimpl.com",
+      "people": [
+        78
+      ],
+      "count": 1
+    },
+    {
+      "company": "Skit.ai",
+      "domain": "skit.ai",
+      "people": [
+        13
+      ],
+      "count": 1
+    },
+    {
+      "company": "Slice",
+      "domain": "sliceit.com",
+      "people": [
+        2
+      ],
+      "count": 1
+    },
+    {
+      "company": "Spanda AI",
+      "domain": null,
+      "people": [
+        105
+      ],
+      "count": 1
+    },
+    {
+      "company": "StampMyVisa",
+      "domain": "stampmyvisa.com",
+      "people": [
+        141
+      ],
+      "count": 1
+    },
+    {
+      "company": "Staqo",
+      "domain": "staqo.com",
+      "people": [
+        147
+      ],
+      "count": 1
+    },
+    {
+      "company": "Stripe",
+      "domain": "stripe.com",
+      "people": [
+        47
+      ],
+      "count": 1
+    },
+    {
+      "company": "Sundial",
+      "domain": "sundial.so",
+      "people": [
+        13
+      ],
+      "count": 1
+    },
+    {
+      "company": "Swecha",
+      "domain": null,
+      "people": [
+        132
+      ],
+      "count": 1
+    },
+    {
+      "company": "T-Hub",
+      "domain": "t-hub.co",
+      "people": [
+        135
+      ],
+      "count": 1
+    },
+    {
+      "company": "Texas Instruments",
+      "domain": "ti.com",
+      "people": [
+        13
+      ],
+      "count": 1
+    },
+    {
+      "company": "TruckX",
+      "domain": "truckx.com",
+      "people": [
+        10
+      ],
+      "count": 1
+    },
+    {
+      "company": "TrueFoundry",
+      "domain": "truefoundry.com",
+      "people": [
+        98
+      ],
+      "count": 1
+    },
+    {
+      "company": "Uber",
+      "domain": "uber.com",
+      "people": [
+        89
+      ],
+      "count": 1
+    },
+    {
+      "company": "Upstox",
+      "domain": "upstox.com",
+      "people": [
+        31
+      ],
+      "count": 1
+    },
+    {
+      "company": "Virtuelly",
+      "domain": null,
+      "people": [
+        26
+      ],
+      "count": 1
+    },
+    {
+      "company": "Wander",
+      "domain": null,
+      "people": [
+        62
+      ],
+      "count": 1
+    },
+    {
+      "company": "Wells Fargo",
+      "domain": "wellsfargo.com",
+      "people": [
+        38
+      ],
+      "count": 1
+    },
+    {
+      "company": "WeSwap Mobility",
+      "domain": null,
+      "people": [
+        26
+      ],
+      "count": 1
+    },
+    {
+      "company": "WEX",
+      "domain": "wexinc.com",
+      "people": [
+        82
+      ],
+      "count": 1
+    },
+    {
+      "company": "Windfall Research",
+      "domain": null,
+      "people": [
+        80
+      ],
+      "count": 1
+    },
+    {
+      "company": "WorldQuant",
+      "domain": "worldquant.com",
+      "people": [
+        45
+      ],
+      "count": 1
+    },
+    {
+      "company": "Yap Network",
+      "domain": null,
+      "people": [
+        116
+      ],
+      "count": 1
+    },
+    {
+      "company": "ZedScore",
+      "domain": null,
+      "people": [
+        25
+      ],
+      "count": 1
+    },
+    {
+      "company": "Zenon",
+      "domain": null,
+      "people": [
+        26
+      ],
+      "count": 1
+    },
+    {
+      "company": "Zluri",
+      "domain": "zluri.com",
+      "people": [
+        10
+      ],
+      "count": 1
+    },
+    {
+      "company": "Zomato",
+      "domain": "zomato.com",
+      "people": [
+        78
+      ],
+      "count": 1
+    }
+  ]
+}

@@ -1,0 +1,508 @@
+/* ===================== /team · Current: the roster (research/v8-team-hero.md §1.3) */
+
+.page {
+  --bar-h: 88px;
+  /* where sticky things under the bar start (the bar's real height is written by TeamPage) */
+  --stick-top: calc(var(--nav-h) + var(--bar-h));
+  /* the viewer: its top when stuck (under the bar, plus the body's own top padding so the frame
+     never shifts as it starts to stick), the room kept free under it, and the room its text takes
+     (name on two lines, role, meta, links), reserved so the photo never resizes between people */
+  --viewer-top: calc(var(--stick-top) + var(--s-6));
+  --viewer-foot: var(--s-5);
+  --viewer-text-h: 12rem;
+}
+
+/* Sticky needs <body> not to be a scroll container. The original's global
+   `* { overflow-x: hidden }` makes it one (overflow-y computes to auto), so the bar and the viewer
+   stuck to <body>, which never scrolls, i.e. they scrolled away with the page. v8.module.css means
+   to undo this for <body>, but its selector names `#root` inside `:has()` without `:global()`,
+   so CSS Modules hashes the id and the rule never matches. Undone here while /team is mounted. */
+:global(body):has(.page) {
+  overflow: visible;
+}
+
+/* ---------- the sticky bar: team tabs · batch · search, live count under it */
+.bar {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 5;
+  padding: var(--s-3) var(--gutter);
+  background: rgba(5, 5, 6, 0.92);
+  border-bottom: 1px solid var(--line);
+}
+.barGrid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--col-gap);
+  align-items: end;
+}
+.tabs {
+  grid-column: 1 / span 5;
+  min-width: 0;
+}
+/* nine buttons need four columns: cols 6–9 (cols 7–9 alone are ~310 px at 1440, the row ~350) */
+.batches {
+  grid-column: 6 / span 4;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--s-3);
+  min-width: 0;
+}
+.batchBtn {
+  appearance: none;
+  flex: none;
+  margin: 0;
+  padding: 8px 0;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: none;
+  color: var(--ink-2);
+  font: var(--t-mono) var(--f-mono);
+  letter-spacing: var(--ls-mono);
+  font-variant-numeric: lining-nums tabular-nums;
+  cursor: pointer;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+.batchBtn:hover,
+.batchBtn:focus-visible {
+  color: var(--ink);
+}
+.batchBtn[aria-pressed="true"] {
+  color: var(--ink);
+  border-bottom-color: var(--teal);
+}
+.search {
+  grid-column: 10 / -1;
+  padding: 8px 0;
+}
+.search::-webkit-search-cancel-button {
+  filter: grayscale(1) brightness(1.4);
+}
+.count {
+  grid-column: 1 / -1;
+  justify-self: end;
+  margin: var(--s-2) 0 0;
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: var(--ls-meta);
+  text-transform: var(--tt-meta);
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--ink-3);
+}
+
+/* ---------- body: roster left, viewer right */
+.body {
+  position: relative;
+  padding: var(--s-6) var(--gutter) var(--section);
+}
+.bodyGrid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--col-gap);
+  align-items: start;
+}
+.roster {
+  grid-column: 1 / span 8;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--line);
+}
+/* ≥ 760 the roster is one grid and every row a subgrid of it: year · thumb · who · team · links
+   line up down the whole ledger, and the links column is as wide as the longest set of links
+   (five words), so a row's links never wrap */
+@media (min-width: 760px) {
+  .roster {
+    display: grid;
+    grid-template-columns: 3.5rem 36px minmax(0, 1fr) max-content max-content;
+    column-gap: var(--s-4);
+  }
+  .roster.oneTeam {
+    grid-template-columns: 3.5rem 36px minmax(0, 1fr) max-content;
+  }
+  .roster > li {
+    grid-column: 1 / -1;
+  }
+  .roster .row {
+    grid-template-columns: subgrid;
+  }
+  /* (a member without links leaves the column empty instead of shifting into it) */
+  .rowLinks {
+    grid-column: -2;
+  }
+}
+/* pinned under the bar while the roster scrolls, and always whole: the frame scales down (3:4
+   kept) to what the viewport leaves after the bar, the text and a margin. On a window too short
+   for even the floor, only its bottom can go out of view, never its top. */
+.viewer {
+  grid-column: 10 / -1;
+  align-self: start;
+  position: sticky;
+  top: var(--viewer-top);
+}
+
+/* ---------- a row */
+.row {
+  position: relative;
+  /* arrow keys bring a row into view below the bar, not under it */
+  scroll-margin-top: calc(var(--stick-top) + var(--s-2));
+  scroll-margin-bottom: var(--s-2);
+  display: grid;
+  column-gap: var(--s-4);
+  align-items: center;
+  min-height: 56px;
+  padding: 6px 0;
+  border-top: 1px solid var(--line);
+  transition: background-color 150ms ease;
+}
+.groupStart {
+  border-top-color: var(--line-2);
+}
+.oneTeam .team {
+  display: none;
+}
+/* the slide in the beam: a faint fill and a teal edge */
+.lit {
+  background: rgba(255, 255, 255, 0.03);
+}
+.lit::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * var(--s-4));
+  top: 0;
+  bottom: -1px;
+  width: 2px;
+  background: var(--teal);
+}
+.year,
+.yearEnd {
+  font: var(--t-mono) var(--f-mono);
+  letter-spacing: var(--ls-mono);
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--ink-3);
+}
+.lit .year {
+  color: var(--ink-2);
+}
+.yearEnd {
+  display: none;
+}
+.thumb.thumb {
+  width: 36px;
+  aspect-ratio: 3 / 4;
+}
+.thumb.thumb img {
+  object-position: center 30%;
+}
+/* an initial letter, not a label: the label face without its casing */
+.thumbInitial.thumbInitial {
+  font: var(--t-ui) var(--f-display);
+  font-variation-settings: var(--fvs-h3);
+  text-transform: none;
+}
+.who {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+.name {
+  font: var(--t-strong) var(--f-sans);
+  font-variation-settings: var(--fvs-text);
+  color: var(--ink);
+}
+.role {
+  overflow: hidden;
+  margin-top: 2px;
+  font: var(--t-small) var(--f-sans);
+  color: var(--ink-3);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.team {
+  font: var(--t-small) var(--f-sans);
+  color: var(--ink-2);
+}
+
+.links {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--s-1) var(--s-3);
+  justify-content: flex-end;
+  white-space: nowrap;
+}
+
+/* links as brand glyphs: every one in the same round 28 px box (the cursor's lock ring and the
+   focus ring are the same for all), packed from the right in the roster */
+.icons {
+  gap: var(--s-1);
+}
+.linkIcon {
+  --slot: 28px;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--slot);
+  height: var(--slot);
+  border-radius: 50%;
+  color: var(--ink-3);
+  transition: color 150ms ease;
+}
+.linkIcon svg {
+  display: block;
+  flex: none;
+}
+.linkIcon:hover,
+.linkIcon:focus-visible {
+  color: var(--teal);
+}
+
+.empty {
+  padding: var(--s-5) 0;
+  border-top: 1px solid var(--line);
+  font: var(--t-body) var(--f-sans);
+  color: var(--ink-2);
+}
+
+/* ---------- the viewer: one portrait in the beam, then who it is
+   (two classes: ui's `.frame img` would otherwise win and drop the opacity transition) */
+.viewerFrame.viewerFrame {
+  aspect-ratio: 3 / 4;
+  /* the column's width, or less when the viewport is short: (free height) × 3/4, floor 144 px */
+  width: min(100%, max(144px, (100vh - var(--viewer-top) - var(--viewer-text-h) - var(--viewer-foot)) * 3 / 4));
+  width: min(100%, max(144px, (100dvh - var(--viewer-top) - var(--viewer-text-h) - var(--viewer-foot)) * 3 / 4));
+}
+.viewerFrame .viewerLayer {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  background: var(--bg-3);
+  opacity: 0;
+  transition: opacity 240ms var(--ease-out);
+}
+.viewerFrame .viewerLayer.isReady {
+  opacity: 1;
+}
+.viewerText {
+  box-sizing: border-box;
+  min-height: var(--viewer-text-h);
+  padding-top: var(--s-4);
+}
+.viewerName {
+  margin: 0;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.viewerRole {
+  margin: var(--s-2) 0 0;
+  font: var(--t-small) var(--f-sans);
+  color: var(--ink-2);
+}
+.viewerMeta {
+  margin: var(--s-1) 0 0;
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: var(--ls-meta);
+  text-transform: var(--tt-meta);
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--ink-3);
+}
+/* the viewer is a text block: its links may take two lines */
+.viewerLinks.viewerLinks {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: var(--s-3);
+}
+/* glyphs in the viewer: the first one's ink lines up with the text above, not its box */
+.viewerLinks.icons {
+  margin-left: -5px;
+}
+
+.closing {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-4) var(--s-5);
+  margin-top: var(--s-7);
+}
+
+/* ≥ 1280 the six team tabs (All + five uppercase labels) share the row with batch + search in
+   columns 1–5 (~470 px at 1280, ~530 at 1440). Belt and braces: the row scrolls sideways
+   (scrollbar hidden) rather than spilling into the batch column; the 6 px padding / -6 px margin
+   keeps the focus rings inside the scroll box. */
+@media (min-width: 1280px) {
+  /* doubled: beats ui.module.css's own `.tabs` (padding / margin 0, gap) whatever the order */
+  .tabs.tabs {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    padding: 6px;
+    margin: -6px;
+  }
+  .tabs::-webkit-scrollbar {
+    display: none;
+  }
+}
+/* 1280–1439, the tight band: closer tabs, half the label tracking, so the row fits outright */
+@media (min-width: 1280px) and (max-width: 1439px) {
+  .tabs.tabs {
+    gap: var(--s-4);
+  }
+  .tabs > button {
+    letter-spacing: calc(var(--ls-ui) / 2);
+  }
+}
+
+/* ---------- 1100–1439: roster 1–7, viewer 9–12 */
+@media (max-width: 1439px) {
+  .roster {
+    grid-column: 1 / span 7;
+  }
+  .viewer {
+    grid-column: 9 / -1;
+  }
+}
+/* 1100–1279: seven columns can't hold name, team and five links; the team column goes (the tabs
+   filter by team and the viewer names it), so the name keeps its room */
+@media (min-width: 1100px) and (max-width: 1279px) {
+  .roster.roster {
+    grid-template-columns: 3.5rem 36px minmax(0, 1fr) max-content;
+  }
+  .team {
+    display: none;
+  }
+}
+/* below 1280 the nine batch buttons no longer fit four columns: batch + search take a second line */
+@media (max-width: 1279px) {
+  .tabs {
+    grid-column: 1 / -1;
+  }
+  .batches {
+    grid-column: 1 / span 7;
+    margin-top: var(--s-2);
+  }
+  .search {
+    grid-column: 8 / -1;
+    margin-top: var(--s-2);
+  }
+}
+/* 760–1099: no viewer, rows span the width */
+@media (max-width: 1099px) {
+  .roster {
+    grid-column: 1 / -1;
+  }
+  .viewer {
+    display: none;
+  }
+}
+
+/* ---------- phones: select + search stacked, rows of thumb · who · year, tap for links */
+@media (max-width: 759px) {
+  /* stacked, the bar is ~190 px tall: pinned it would take a third of the screen, and phones have
+     no viewer to keep company. It scrolls with the page here. */
+  /* (--stick-top, not --bar-h: TeamPage writes --bar-h inline, which a class rule can't beat) */
+  .page {
+    --stick-top: var(--nav-h);
+  }
+  .bar {
+    position: relative;
+    top: auto;
+  }
+  .barGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .tabs,
+  .search,
+  .batchSelect {
+    grid-column: 1 / -1;
+  }
+  .batchSelect {
+    margin-top: var(--s-3);
+    padding: 8px 0;
+    color-scheme: dark;
+  }
+  .search {
+    margin-top: var(--s-3);
+  }
+  .count {
+    justify-self: start;
+  }
+  .row {
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    column-gap: var(--s-3);
+    min-height: 64px;
+  }
+  /* the row's tap target (TeamPage): a button laid over the summary; the links sit above it */
+  .rowToggle {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .rowToggle:focus-visible {
+    outline: 1px solid var(--teal);
+    outline-offset: -1px;
+  }
+  .year,
+  .team {
+    display: none;
+  }
+  .yearEnd {
+    display: block;
+  }
+  .thumb.thumb {
+    width: 40px;
+  }
+  /* the links: a second line that opens on tap */
+  /* (five links take two clean lines here) */
+  .rowLinks {
+    grid-column: 2 / -1;
+    grid-row: 2;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    position: relative;
+    z-index: 1;
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    transition: max-height 240ms var(--ease-out), visibility 0s linear 240ms;
+  }
+  .open .rowLinks {
+    max-height: 64px;
+    padding-top: var(--s-2);
+    visibility: visible;
+    transition: max-height 240ms var(--ease-out), visibility 0s;
+  }
+  /* glyphs on touch: a bigger box to tap, the first one's ink under the name */
+  .rowLinks.icons {
+    gap: var(--s-2);
+    margin-left: -10px;
+  }
+  .rowLinks .linkIcon {
+    --slot: 36px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar,
+  .row,
+  .viewerFrame .viewerLayer,
+  .rowLinks,
+  .open .rowLinks {
+    transition: none;
+  }
+}
+.reduced .row,
+.reduced .viewerFrame .viewerLayer,
+.reduced .rowLinks {
+  transition: none;
+}

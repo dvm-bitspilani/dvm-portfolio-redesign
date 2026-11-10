@@ -1,0 +1,184 @@
+/* V8 design tokens (one system for the whole variant). Every page, section and chrome piece
+   reads these; nothing restyles them locally. Shared components live in ui.module.css. */
+.root {
+  /* ---- colour */
+  --bg: #050506;
+  --bg-2: #0a0c0e;
+  --bg-3: #111417;
+  --line: rgba(255, 255, 255, 0.08);
+  --line-2: rgba(255, 255, 255, 0.16);
+  --grid: rgba(255, 255, 255, 0.06);
+  --ink: #f2f5f7;
+  --ink-2: #a9b2b8;
+  --ink-3: #6c767d;
+  --teal: #45e6ff;
+  --teal-ink: #031417;
+
+  /* ---- type (research/v8-typography-6.md, system C "Hubot", final). Hubot Sans throughout
+     (display 125 % / 650, title + label 112.5 % / 600, text at normal width / 450; loaded by
+     lib/fonts.js), JetBrains Mono for data, Stretch Pro for the wordmark. Hubot's text instance
+     is ~5 % narrower than Geist, so text sizes step up. Squared faces want zero or positive
+     tracking. */
+  --f-display: "Hubot Sans", "Arial", sans-serif;
+  --f-sans: "Hubot Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --f-mark: "v8 Stretch", "Stretch Pro", sans-serif;
+
+  /* weight [stretch] size / line-height (family is appended where used: `font: var(--t-h2) var(--f-display)`).
+     Every clamp is `min, base + slope, max`, so the display : text ratio holds across widths. */
+  /* display · Hubot 125 % · 650 */
+  --t-h1: 650 expanded clamp(2.625rem, 1.5rem + 4.2vw, 6rem) / 0.95;
+  --t-h2: 650 expanded clamp(2rem, 1.25rem + 2.75vw, 4rem) / 1;
+  --t-menu: 650 expanded clamp(2rem, 1.25rem + 3.4vw, 4.25rem) / 1;
+  --t-boot: 650 expanded clamp(2rem, 1.25rem + 3.8vw, 5.25rem) / 1;
+  --t-num: 650 expanded clamp(2.25rem, 1.5rem + 2vw, 3.25rem) / 1;
+  --t-sub: 650 expanded clamp(1.5rem, 1rem + 1.4vw, 2.125rem) / 1.08;
+  /* title · Hubot 112.5 % · 600 (so card titles stay on one line) */
+  --t-h3: 600 semi-expanded clamp(1.0625rem, 0.95rem + 0.45vw, 1.3125rem) / 1.2;
+  /* label · Hubot 112.5 % · 600 · uppercase (13 px is the floor) */
+  --t-ui: 600 semi-expanded 0.8125rem / 1;
+  /* text · Hubot */
+  --t-lede: 400 clamp(1.125rem, 1rem + 0.4vw, 1.3125rem) / 1.45;
+  --t-body: 450 1.125rem / 1.6;
+  --t-small: 450 0.875rem / 1.45;
+  --t-strong: 600 1rem / 1.3;
+  /* data · JetBrains Mono (values as written; keys as uppercase meta) */
+  --t-mono: 400 0.75rem / 1.5;
+  --t-mono-lg: 400 0.9375rem / 1.5;
+  --t-meta: 500 0.6875rem / 1.4;
+  /* wordmark */
+  --t-mark: 400 1.125rem / 1;
+  --t-end: 400 clamp(2.75rem, 7vw, 6rem) / 0.85;
+
+  --ls-h1: -0.005em;
+  --ls-h2: 0;
+  --ls-menu: 0;
+  --ls-boot: -0.005em;
+  --ls-num: 0;
+  --ls-sub: 0;
+  --ls-h3: 0.005em;
+  --ls-ui: 0.08em;
+  --ls-lede: 0;
+  --ls-body: 0.005em;
+  --ls-mono: 0.02em;
+  --ls-meta: 0.08em;
+
+  /* axes (applied after every `font:` shorthand, which resets them) and casing. Every `--fvs-*`
+     is `normal`; the hooks stay. */
+  --fvs-display: normal;
+  --fvs-h3: normal;
+  --fvs-text: normal;
+  --tt-display: none;
+  --tt-ui: uppercase;
+  --tt-meta: uppercase;
+
+  /* ---- space and grid */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
+  --s-10: 128px;
+  --s-11: 160px;
+  --gutter: clamp(20px, 4.5vw, 64px);
+  /* one breath between chapters (research/v8-cohesion.md §3.1): 90 px at 900 tall */
+  --section: clamp(80px, 10vh, 120px);
+  /* the y a chapter's title sits at when its chapter tops the viewport (flowing sections: their
+     top padding; the pinned stages place their head at the same y) */
+  --head-y: var(--section);
+  --max: 1520px;
+  --cols: 12;
+  --col-gap: 24px;
+  --radius: 4px;
+  --nav-h: 72px;
+
+  /* ---- motion */
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+  min-height: 100vh;
+  /* not a scroll container (the original's `* { overflow-x: hidden }` would make it one), so
+     `position: sticky` inside V8 sticks to the viewport; see the ancestors rule below */
+  overflow: visible;
+  background: var(--bg);
+  color: var(--ink);
+  font: var(--t-body) var(--f-sans);
+  font-variation-settings: var(--fvs-text);
+  letter-spacing: var(--ls-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  /* Stretch Pro ships doubled-letter ligatures (EE, CC…) that garble names like APOGEE. */
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "dlig" 0, "clig" 0;
+  /* a fallback face must never fake the 600 / 650 instances while the real one loads */
+  font-synthesis: none;
+}
+
+@media (max-width: 759px) {
+  .root {
+    --section: clamp(64px, 8vh, 80px);
+    --gutter: 20px;
+    --nav-h: 64px;
+  }
+}
+
+/* The original's global CSS sets `* { overflow-x: hidden }` (which also turns overflow-y into
+   auto): every block becomes a scroll container that clips focus rings and transforms. Undo it
+   inside V8 at zero specificity, so any class that sets overflow still wins. Replaced
+   elements and form controls keep their UA clipping (an <img> with object-fit: cover would
+   otherwise paint outside its box). */
+:where(.root) :where(:not(img, video, canvas, svg, iframe, embed, object, textarea, select, input)) {
+  overflow: visible;
+}
+
+/* The same leak on V8's ancestors: with `overflow-x: hidden` (→ overflow-y: auto) <body> and
+   #root are scroll containers that never scroll, and a sticky element sticks to them instead
+   of the viewport (i.e. never). While V8 is mounted they are plain boxes; <html> keeps the
+   original's `overflow-x: clip`, which still stops sideways scrolling at the viewport. */
+:global(body):has(> :global(#root) [data-v8-root]),
+:global(#root):has([data-v8-root]) {
+  overflow: visible;
+}
+
+/* V8's own cursor (chrome/Cursor.jsx, fine pointers only): the native one is hidden everywhere
+   inside V8 except text fields, which keep the I-beam (the custom cursor hides over them).
+   (0,3,0) + !important: beats the archive kit's `.imm-archive-canvas.is-dragging { cursor:
+   grabbing !important }` and the inline cursor its engine sets on the canvas. The hub switcher
+   is outside .root and keeps the native cursor (the custom one hides over it). */
+.root[data-cursor="custom"],
+.root[data-cursor="custom"] *:not(input, textarea, select, [contenteditable="true"], [contenteditable=""]) {
+  cursor: none !important;
+}
+
+/* One focus ring for the whole variant. */
+:where(.root) :focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+}
+:where(.root) ::selection {
+  background: rgba(69, 230, 255, 0.3);
+  color: var(--ink);
+}
+
+/* Everything the routes render sits above the fixed room layers (grid + light, z 0). One
+   wrapper instead of a z-index on every section, so no section can forget it. */
+.pages {
+  position: relative;
+  z-index: 1;
+}
+/* After an in-app navigation the shell focuses the new page's heading (index.jsx) so keyboard
+   and screen-reader visitors keep their place; a heading is not a control, so no ring on it. */
+.pages h1[tabindex="-1"]:focus {
+  outline: none;
+}
+
+/* The swipe panel carries a thin teal line: the light passing over the cut. */
+.panel {
+  background: var(--bg);
+  box-shadow: inset 0 1px 0 rgba(69, 230, 255, 0.35);
+}

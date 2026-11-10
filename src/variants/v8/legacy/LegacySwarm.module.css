@@ -1,0 +1,8 @@
+/* Behind the graph and the head (z 1) of the Legacy section. */
+.layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}

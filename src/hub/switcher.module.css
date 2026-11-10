@@ -190,3 +190,55 @@
     min-width: min(280px, calc(100vw - 20px));
   }
 }
+
+/* ---- /v/v8: Hub (and on /v/v8/team, the team page's version: A · Wall … Current; pressed = current) */
+.label {
+  padding: 0 4px 0 8px;
+  color: rgba(207, 232, 255, 0.5);
+  white-space: nowrap;
+}
+
+.set {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.v8 .set .item {
+  min-width: 28px;
+  justify-content: center;
+  padding: 0 8px;
+}
+
+.item[aria-pressed='true'] {
+  background: #45e6ff;
+  color: #031417;
+}
+
+@media (max-width: 760px) {
+  .label {
+    padding: 0 2px 0 6px;
+  }
+
+  .v8 .set .item {
+    min-width: 26px;
+    padding: 0 6px;
+  }
+}
+
+/* ---- /v/v8/team adds the team page's versions: a label and its set never part across a wrap */
+.cluster {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* phones: the strip may take a second line rather than run off-screen (one line stays a pill) */
+@media (max-width: 760px) {
+  .v8 {
+    flex-wrap: wrap;
+    row-gap: 2px;
+    max-width: calc(100vw - 20px);
+    border-radius: 20px;
+  }
+}

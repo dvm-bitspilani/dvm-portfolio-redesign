@@ -18,6 +18,12 @@ export interface SwarmFieldProps extends SwarmShowOptions {
   interactive?: boolean
   /** Press and hold (mouse/pen) on empty space to pull the swarm into a black hole. Default true. */
   holdToAttract?: boolean
+  /**
+   * Opt-in: while true the cursor leaves the swarm alone (no repel, vortex, wake or black hole), so
+   * a formation such as a hover name reads cleanly; the field eases back in when it turns false.
+   * Parallax is unaffected. Default false.
+   */
+  ignoreCursor?: boolean
   /** 'transparent' or any CSS colour. Default '#050506'. */
   background?: 'transparent' | (string & {})
   /** Bloom post-processing. Default true. */
@@ -84,6 +90,7 @@ export function SwarmField(props: SwarmFieldProps) {
     quality = 'auto',
     interactive = true,
     holdToAttract = true,
+    ignoreCursor = false,
     background = '#050506',
     bloom = true,
     parallax = 0.35,
@@ -118,6 +125,7 @@ export function SwarmField(props: SwarmFieldProps) {
     bloom,
     interactive,
     holdToAttract,
+    ignoreCursor,
     parallax,
     brightness,
     paused,
@@ -149,7 +157,7 @@ export function SwarmField(props: SwarmFieldProps) {
     settingsRef.current = settings
     engineRef.current?.update(settings)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paletteSig, background, bloom, interactive, holdToAttract, parallax, brightness, paused, pSig, morphDuration, kick, burst])
+  }, [paletteSig, background, bloom, interactive, holdToAttract, ignoreCursor, parallax, brightness, paused, pSig, morphDuration, kick, burst])
 
   // Declarative target.
   const tSig = targetSig(target)

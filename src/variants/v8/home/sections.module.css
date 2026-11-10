@@ -1,0 +1,144 @@
+/* ===================== About + Selected work (layout only; components in ui.module.css, the
+   film strip in strip.module.css) */
+
+/* About: the chapter head (title left, "More about DVM" right), then the copy in columns 1–6 and
+   the three numbers stacked in 8–12 as a ledger: each number with its label beside it on the
+   same hairline, so the stack is no taller than the copy. It follows the hero, whose stage
+   dissolves into the room over its last rows (hero.module.css). */
+.aboutCopy {
+  grid-column: 1 / span 6;
+}
+.aboutStats.aboutStats {
+  grid-column: 8 / -1;
+  align-self: start;
+  grid-template-columns: max-content minmax(0, 1fr);
+  /* (each label comes before its number in the markup: dense puts them on one row) */
+  grid-auto-flow: row dense;
+  align-items: baseline;
+  gap: 0;
+}
+/* one ledger: every number in one column, every label in the next, a hairline over each row */
+.aboutStats.aboutStats > div {
+  display: contents;
+}
+.aboutStats.aboutStats dd,
+.aboutStats.aboutStats dt {
+  padding: var(--s-3) 0;
+  border-top: 1px solid var(--line);
+}
+.aboutStats.aboutStats dd {
+  grid-column: 1;
+  padding-right: var(--s-6);
+}
+.aboutStats.aboutStats dt {
+  grid-column: 2;
+  align-self: stretch;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: calc(var(--s-3) + 0.35em);
+}
+
+/* Selected work, on the film strip (strip.module.css is the film; this is the frames): covers in
+   the open, the round-9 grid's cards on one strip. The feature is the larger frame (16:9, its
+   summary under the title in the stage's register); the others 16:10. Each card is centred in the
+   film's slot, so the feature sits beside the others like the old grid's hierarchy. */
+.workFrame {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+.workFeature {
+  width: 44vw;
+  min-width: 560px;
+}
+.workStd {
+  width: 32vw;
+  min-width: 420px;
+}
+.workStill.workStill {
+  aspect-ratio: 16 / 10;
+}
+.workFeature .workStill.workStill {
+  aspect-ratio: 16 / 9;
+}
+.workCopy {
+  display: block;
+  min-width: 0;
+}
+.workFeatureTitle.workFeatureTitle {
+  font: var(--t-sub) var(--f-display);
+  font-variation-settings: var(--fvs-display);
+  text-transform: var(--tt-display);
+  letter-spacing: var(--ls-sub);
+}
+.workLine.workLine {
+  max-width: 40rem;
+}
+/* a project without a cover: its title and meta centred on the frame fill (never an initial) */
+.workBlank {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-5);
+  text-align: center;
+}
+.workBlankTitle {
+  font: var(--t-sub) var(--f-display);
+  font-variation-settings: var(--fvs-display);
+  text-transform: var(--tt-display);
+  letter-spacing: var(--ls-sub);
+  color: var(--ink-2);
+}
+
+/* stacked at full width (reduced motion, tablets): each card a row, the copy left and the still
+   right, a hairline between rows */
+@media (min-width: 760px) {
+  .workStack .workFrame {
+    width: 100%;
+    min-width: 0;
+    padding-top: var(--s-6);
+    border-top: 1px solid var(--line);
+  }
+  .workStack .workFrame:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+  .workStack .workCard {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--s-6);
+  }
+  .workStack .workStill.workStill {
+    order: 1;
+  }
+  .workStack .workCopy > :first-child {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 759px) {
+  .aboutCopy,
+  .aboutStats.aboutStats {
+    grid-column: 1 / -1;
+    margin-top: 0;
+  }
+  /* phones: one card per snap on the swiped strip (strip.module.css), every still 16:9 */
+  .workStack .workFrame {
+    flex: none;
+    width: 80vw;
+    min-width: 0;
+    max-width: 420px;
+    justify-content: flex-start;
+    scroll-snap-align: start;
+  }
+  .workStill.workStill,
+  .workFeature .workStill.workStill {
+    aspect-ratio: 16 / 9;
+  }
+}

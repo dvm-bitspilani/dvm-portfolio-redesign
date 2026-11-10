@@ -1,0 +1,151 @@
+/* A company's disc. --node: its size (Legacy.module.css sets it per use: slide 36, chip 30, screen 48).
+   At rest every disc is the room's grey; lit (.lit, or the button around it hovered / focused) it
+   shows the company's colours and its ring brightens. */
+.circle {
+  --k: 1;
+  --rest: rgb(169 178 184 / 0.78);
+  position: relative;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--node, 36px) * var(--k));
+  height: calc(var(--node, 36px) * var(--k));
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--bg-2);
+  border: 1px solid var(--line-2);
+  transition: border-color 150ms ease;
+}
+
+/* full-colour image on a transparent ground */
+.img {
+  width: 62%;
+  height: 62%;
+  object-fit: contain;
+  filter: grayscale(1) opacity(0.72);
+  transition: filter 240ms ease;
+}
+/* a square app icon: fills the disc */
+.tile {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) brightness(0.5) contrast(1.15) opacity(0.75);
+  transition: filter 240ms ease;
+}
+/* a one-colour glyph, drawn as a mask over a fill: grey at rest, the brand's colour when lit */
+.glyph {
+  /* contain: square glyphs are held by the height, wordmarks get the extra width (a use can
+     widen the box for wordmarks: --glyph-w / --glyph-h) */
+  width: var(--glyph-w, 70%);
+  height: var(--glyph-h, 56%);
+  background-color: var(--rest);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  transition: background-color 240ms ease;
+}
+/* no logo: the initials, set like the site's UI type */
+.mono {
+  font: var(--t-ui) var(--f-display);
+  font-size: calc(var(--node, 36px) * var(--k) * 0.36);
+  font-variation-settings: var(--fvs-h3);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--ink-2);
+  transition: color 240ms ease;
+  user-select: none;
+}
+
+/* tinted rest (the home fan): the logo's own colours, dimmed — recognisable before it is lit.
+   (:where keeps these at the base rules' weight, so every lit rule below still wins) */
+:where(.circle[data-rest="tinted"]) .img {
+  filter: saturate(0.7) brightness(0.86);
+}
+:where(.circle[data-rest="tinted"]) .tile {
+  filter: saturate(0.7) brightness(0.8);
+}
+:where(.circle[data-rest="tinted"]) .glyph {
+  background-color: color-mix(in srgb, var(--brand, var(--ink-2)) 62%, var(--ink-3));
+}
+:where(.circle[data-rest="tinted"]) .mono {
+  color: var(--ink-2);
+}
+
+/* vivid rest (the home constellation): every logo in its own colours at full strength, on a plate
+   a few steps lighter than the room so dark marks (D. E. Shaw, Barclays, a brown tile) still read;
+   the ring a hair brighter. Lit adds nothing here but the use's own lift (Legacy.module.css). */
+.circle[data-rest="vivid"] {
+  background:
+    radial-gradient(circle at 50% 28%, rgb(255 255 255 / 0.07), transparent 62%),
+    #1a2025;
+  border-color: rgb(255 255 255 / 0.24);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.35);
+}
+:where(.circle[data-rest="vivid"]) .img,
+:where(.circle[data-rest="vivid"]) .tile {
+  filter: none;
+}
+/* a mark on its own ground fills a little more of the disc */
+:where(.circle[data-rest="vivid"]) .img {
+  width: 64%;
+  height: 64%;
+}
+:where(.circle[data-rest="vivid"]) .glyph {
+  background-color: var(--brand, var(--ink));
+}
+:where(.circle[data-rest="vivid"]) .mono {
+  color: var(--ink);
+  font-size: calc(var(--node, 36px) * var(--k) * 0.34);
+}
+
+/* lit: selected, or the control around the disc hovered / focused */
+.lit,
+:focus-visible > .circle {
+  border-color: var(--ink-2);
+}
+.lit .img,
+.lit .tile,
+:focus-visible > .circle .img,
+:focus-visible > .circle .tile {
+  filter: none;
+}
+.lit .glyph,
+:focus-visible > .circle .glyph {
+  background-color: var(--brand, var(--ink));
+}
+.lit .mono,
+:focus-visible > .circle .mono {
+  color: var(--ink);
+}
+@media (hover: hover) {
+  :hover > .circle {
+    border-color: var(--ink-2);
+  }
+  :hover > .circle .img,
+  :hover > .circle .tile {
+    filter: none;
+  }
+  :hover > .circle .glyph {
+    background-color: var(--brand, var(--ink));
+  }
+  :hover > .circle .mono {
+    color: var(--ink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .circle,
+  .img,
+  .tile,
+  .glyph,
+  .mono {
+    transition: none;
+  }
+}

@@ -1,0 +1,109 @@
+/* ===================== The archive: line → wall ===================== */
+/* 60vh of pin (draw, wall, copy, a short hold), then the stage scrolls away with Contact below */
+.track {
+  position: relative;
+  height: 160vh;
+}
+/* transparent: the room's pool is the wall's texture. On the desktop home the stage rises over
+   the end of Year by year (Story.jsx), so it lets the pointer through; only the copy takes it. */
+.stage {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+  background: transparent;
+  pointer-events: none;
+}
+/* Wall and scrim dissolve over the stage's lower half (eased stops), so when the stage scrolls
+   up the last rows of tiles sink into the room instead of ending in a cut strip and a hard line
+   (and no darkened band of the room's grid) against Contact below. The wall's centre mark (43%)
+   stays whole; the copy sits over the faded part. */
+.wall,
+.scrim {
+  --wall-fade: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 50%,
+    rgba(0, 0, 0, 0.72) 60%,
+    rgba(0, 0, 0, 0.42) 71%,
+    rgba(0, 0, 0, 0.18) 83%,
+    rgba(0, 0, 0, 0.05) 93%,
+    transparent 100%
+  );
+  -webkit-mask-image: var(--wall-fade);
+  mask-image: var(--wall-fade);
+}
+.wall {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+}
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    linear-gradient(to top, rgba(5, 5, 6, 0.92) 0%, rgba(5, 5, 6, 0.55) 26%, transparent 52%),
+    linear-gradient(to right, rgba(5, 5, 6, 0.6), transparent 40%);
+}
+
+/* the outlined mark that hands the page over to the wall: V3's measured centre of the wall */
+.bridge {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 43.1%;
+  height: 31.7vh;
+  width: auto;
+  aspect-ratio: 250.53 / 326.78;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  overflow: visible;
+  pointer-events: none;
+  --draw: 1;
+}
+.bridge path {
+  fill: none;
+  stroke: var(--teal);
+  stroke-width: 1.6;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  stroke-dashoffset: var(--draw);
+}
+
+.copy {
+  position: absolute;
+  z-index: 4;
+  left: var(--gutter);
+  bottom: 12vh;
+  max-width: 34rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: auto;
+}
+.action {
+  margin: var(--s-6) 0 0;
+}
+
+/* reduced motion: one still screen in the flow, wall and copy already in */
+.track.still {
+  height: auto;
+}
+.still .wall,
+.still .scrim,
+.still .copy {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (max-width: 759px) {
+  .track:not(.still) {
+    height: 150vh;
+  }
+  .copy {
+    right: var(--gutter);
+  }
+}

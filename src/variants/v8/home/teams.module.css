@@ -1,0 +1,89 @@
+/* ===================== Five teams: the frames on the strip (the film itself — the pinned
+   section, rails, beam, track, lead and tail — is strip.module.css). `.stack` here is the Teams
+   section's own modifier, set beside the strip's `.stack` (CSS modules scope each file). */
+
+/* ---- frames: the gate is the shared panel (ui.module.css .panel: translucent, the room shows
+   through it), the still on top at the frame treatment's 16:10, never cropped to a sliver, and
+   the copy under it. Every gate is the same height, centred in the film's slot. */
+.frame {
+  flex: none;
+  width: 38vw;
+  min-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.stack .frame {
+  width: 100%;
+  min-width: 0;
+}
+.gate.gate {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  gap: var(--s-5);
+  /* one height for every gate that fits it (all five at 1440 × 900); a longer one may grow to
+     the slot */
+  min-height: min(100%, 640px);
+  max-height: 100%;
+}
+.stack .gate.gate {
+  min-height: 0;
+  max-height: none;
+}
+.frameCopy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 0 var(--s-2);
+}
+.desc {
+  margin: var(--s-4) 0 0;
+  max-width: 32rem;
+  font: var(--t-body) var(--f-sans);
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+.meta {
+  margin: var(--s-4) 0 var(--s-5);
+  font: var(--t-meta) var(--f-mono);
+  letter-spacing: var(--ls-meta);
+  text-transform: var(--tt-meta);
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--ink-3);
+}
+.still.still {
+  aspect-ratio: 16 / 10;
+}
+
+/* stacked at full width (reduced motion, tablets): the still beside the copy, as there is room */
+@media (min-width: 760px) {
+  .stack .gate.gate {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--s-6);
+  }
+  .stack .still.still {
+    order: 1;
+  }
+}
+/* phones: one frame per snap on the swiped strip (strip.module.css), the next one at the edge */
+@media (max-width: 759px) {
+  .stack .frame {
+    flex: none;
+    width: 80vw;
+    max-width: 420px;
+    justify-content: stretch;
+    scroll-snap-align: start;
+  }
+  .stack .gate.gate {
+    height: 100%;
+  }
+  .still.still {
+    aspect-ratio: 16 / 9;
+  }
+  .frameCopy {
+    padding: 0;
+  }
+}

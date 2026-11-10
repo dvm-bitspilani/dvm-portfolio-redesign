@@ -75,7 +75,16 @@ vec3 curlFlow(vec3 p){
 }
 `
 
+/** Inf / NaN test on the bits (fast-math GPU compilers, e.g. Apple's Metal, may fold away
+ *  isnan() and x != x). One bad value would otherwise live in the simulation forever, and the
+ *  bloom pass spreads a NaN pixel into a black patch over the whole page. */
+const BAD = /* glsl */ `
+bool badf(float x){ return (floatBitsToUint(x) & 0x7f800000u) == 0x7f800000u; }
+bool bad3(vec3 v){ return badf(v.x) || badf(v.y) || badf(v.z); }
+`
+
 const COMMON = /* glsl */ `
+${BAD}
 uniform float uTime;
 uniform float uDt;
 uniform float uSnap;
@@ -174,9 +183,11 @@ void main(){
     V.xyz += (h * 0.8 + away) * uBurst * (0.35 + fract(seed * 31.1)) * (1.0 - dust);
   }
 
+  if (bad3(V.xyz)) V.xyz = vec3(0.0);
   float sp = length(V.xyz);
   if (sp > uMaxSpeed) V.xyz *= uMaxSpeed / sp;
   if (uSnap > 0.5) V.xyz *= dust;
+  if (bad3(V.xyz) || badf(bright)) { V.xyz = vec3(0.0); bright = 0.0; }
 
   gl_FragColor = vec4(V.xyz, bright);
 }
@@ -193,11 +204,14 @@ void main(){
     vec4 S = texture2D(uSnapTex, uv);
     if (S.w > -0.5) p = S.xyz;
   }
+  // a lost particle restarts at the centre and springs back to the formation
+  if (bad3(p)) p = vec3(0.0);
   gl_FragColor = vec4(p, P.w);
 }
 `
 
 export const renderVertex = /* glsl */ `
+${BAD}
 attribute vec2 aRef;
 uniform sampler2D uPos;
 uniform sampler2D uVel;
@@ -217,6 +231,13 @@ varying vec3 vCol;
 void main(){
   vec4 P = texture2D(uPos, aRef);
   vec4 V = texture2D(uVel, aRef);
+  if (bad3(P.xyz) || bad3(V.xyz) || badf(V.w)) {
+    // never draw a bad particle (its colour would be NaN: bloom spreads it into a black patch)
+    gl_Position = vec4(2.0, 2.0, 2.0, 1.0);
+    gl_PointSize = 0.0;
+    vCol = vec3(0.0);
+    return;
+  }
   vec4 mv = modelViewMatrix * vec4(P.xyz, 1.0);
   gl_Position = projectionMatrix * mv;
   float depth = max(-mv.z, 0.1);
